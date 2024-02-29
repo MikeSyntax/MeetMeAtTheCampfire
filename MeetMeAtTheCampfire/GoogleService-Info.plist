@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyCKa_LLN4UbpL71xxSyzUIhyILZFvUeGQI</string>
+	<key>GCM_SENDER_ID</key>
+	<string>431669485460</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>mikeSyntax.MeetMeAtTheCampfire</string>
+	<key>PROJECT_ID</key>
+	<string>meetmeatthecampfireapp</string>
+	<key>STORAGE_BUCKET</key>
+	<string>meetmeatthecampfireapp.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:431669485460:ios:e6cf779ad56bd45c18b981</string>
+</dict>
+</plist>

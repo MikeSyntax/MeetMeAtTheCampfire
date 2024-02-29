@@ -6,12 +6,29 @@
 //
 
 import SwiftUI
+import Firebase
+
 
 @main
 struct MeetMeAtTheCampfireApp: App {
+    
+    @StateObject var authVm = AuthViewModel()
+    
+    init(){
+        FirebaseConfiguration.shared.setLoggerLevel(.min)
+        FirebaseApp.configure()
+    }
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            if authVm.userLoggedIn {
+                ContentView()
+                    .environmentObject(authVm)
+            } else {
+                LoginView()
+                    .environmentObject(authVm)
+            }
+           
         }
     }
 }
