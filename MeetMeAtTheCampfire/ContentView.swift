@@ -6,13 +6,18 @@
 //
 
 import SwiftUI
-
 struct ContentView: View {
+    
+    @EnvironmentObject var authVm: AuthViewModel
+    
     var body: some View {
-       Text("Start View")
+        ButtonTextAction(iconName: "rectangle.portrait.and.arrow.right", text: "Logout"){
+            authVm.logout()
+        }
     }
 }
 
 #Preview {
     ContentView()
+        .environmentObject(AuthViewModel())
 }

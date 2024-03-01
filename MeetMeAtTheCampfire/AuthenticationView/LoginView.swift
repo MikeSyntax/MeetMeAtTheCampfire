@@ -14,39 +14,44 @@ struct LoginView: View {
     
     var body: some View {
         VStack{
-            Text("Login")
+            
+            Text("Camper Manager")
                 .padding(4)
-                .font(.largeTitle)
+                .font(.headline)
                 .italic()
                 .bold()
-                .foregroundStyle(.gray)
+                .foregroundStyle(.cyan)
+                .background(Color.white.opacity(0.7))
+                .cornerRadius(10)
             Image("logo")
                 .resizable()
                 .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
                 .scaledToFit()
                 .frame(width: 250, height: 250)
                 .shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
+                .padding()
             Text("Meet me at the campfire")
-                .padding(4)
+                .padding(8)
                 .font(.title)
                 .bold()
-                .foregroundStyle(.gray)
-            Spacer()
+                .foregroundStyle(.cyan)
+                .background(Color.white.opacity(0.8))
+                .cornerRadius(10)
             RoundedRectangle(cornerRadius: 10)
                 .fill(Color.white).opacity(0.7)
-                .padding(12)
+                .padding()
                 .overlay(
                     VStack {
-                        TextField("Email eingeben", text: $authVM.email)
-                            .textFieldStyle(.roundedBorder)
-                            .textInputAutocapitalization(.never)
-                            .autocorrectionDisabled()
-                            .padding()
+                            TextField("Email eingeben", text: $authVM.email)
+                                .textFieldStyle(.roundedBorder)
+                                .textInputAutocapitalization(.never)
+                                .autocorrectionDisabled()
+                                .padding()
                         SecureField("Passwort eingeben", text: $authVM.password)
                             .textFieldStyle(.roundedBorder)
                             .padding()
                         ButtonTextAction(iconName: "paperplane.fill", text: "Login"){
-                            //Todo Login Action
+                            authVM.login()
                         }
                         Divider()
                             .padding()
@@ -60,9 +65,6 @@ struct LoginView: View {
                                 RegisterView(showRegisterSheet: $showRegisterSheet)
                                     .presentationDetents([.medium, .large])
                             }
-                            
-                            // NavigationLink("Jetzt registrieren", destination: RegisterView())
-                            //     .foregroundColor(.blue)
                         }
                     }
                         .padding()
@@ -73,7 +75,6 @@ struct LoginView: View {
             Image("background")
                 .resizable()
                 .scaledToFill()
-            //.opacity(0.2)
                 .ignoresSafeArea())
     }
 }

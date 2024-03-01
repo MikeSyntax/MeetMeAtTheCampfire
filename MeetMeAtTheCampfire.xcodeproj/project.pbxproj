@@ -45,6 +45,7 @@
 		2B2779052B907EBF00779FB5 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2779042B907EBF00779FB5 /* AuthViewModel.swift */; };
 		2B2779082B90810300779FB5 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2779072B90810300779FB5 /* UserModel.swift */; };
 		2B2A3E472B90B176007E5E7F /* ButtonTextAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2A3E462B90B176007E5E7F /* ButtonTextAction.swift */; };
+		2B5D19402B91DD3D004DB072 /* AuthenticationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5D193F2B91DD3D004DB072 /* AuthenticationRepository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		2B2779042B907EBF00779FB5 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		2B2779072B90810300779FB5 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		2B2A3E462B90B176007E5E7F /* ButtonTextAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTextAction.swift; sourceTree = "<group>"; };
+		2B5D193F2B91DD3D004DB072 /* AuthenticationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +122,7 @@
 		2B2778B02B8F5C9B00779FB5 /* MeetMeAtTheCampfire */ = {
 			isa = PBXGroup;
 			children = (
+				2B5D193E2B91DD0C004DB072 /* AuthenticationRepository */,
 				2B2A3E452B90B147007E5E7F /* Buttons */,
 				2B2779062B9080F000779FB5 /* Models */,
 				2B2779032B907E9600779FB5 /* AuthenticatonViewModel */,
@@ -188,6 +191,14 @@
 				2B2A3E462B90B176007E5E7F /* ButtonTextAction.swift */,
 			);
 			path = Buttons;
+			sourceTree = "<group>";
+		};
+		2B5D193E2B91DD0C004DB072 /* AuthenticationRepository */ = {
+			isa = PBXGroup;
+			children = (
+				2B5D193F2B91DD3D004DB072 /* AuthenticationRepository.swift */,
+			);
+			path = AuthenticationRepository;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -323,6 +334,7 @@
 				2B2A3E472B90B176007E5E7F /* ButtonTextAction.swift in Sources */,
 				2B2778FD2B9079F200779FB5 /* FirebaseManager.swift in Sources */,
 				2B2779082B90810300779FB5 /* UserModel.swift in Sources */,
+				2B5D19402B91DD3D004DB072 /* AuthenticationRepository.swift in Sources */,
 				2B2779022B907E8800779FB5 /* RegisterView.swift in Sources */,
 				2B2779052B907EBF00779FB5 /* AuthViewModel.swift in Sources */,
 				2B2778B42B8F5C9B00779FB5 /* ContentView.swift in Sources */,
