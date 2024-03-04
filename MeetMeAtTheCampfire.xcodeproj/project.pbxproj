@@ -46,6 +46,8 @@
 		2B2779082B90810300779FB5 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2779072B90810300779FB5 /* UserModel.swift */; };
 		2B2A3E472B90B176007E5E7F /* ButtonTextAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2A3E462B90B176007E5E7F /* ButtonTextAction.swift */; };
 		2B5D19402B91DD3D004DB072 /* AuthenticationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5D193F2B91DD3D004DB072 /* AuthenticationRepository.swift */; };
+		2BCC09AC2B95C05B005BFC95 /* RightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCC09AB2B95C05B005BFC95 /* RightView.swift */; };
+		2BCC09AE2B95C066005BFC95 /* FalseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCC09AD2B95C066005BFC95 /* FalseView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +64,8 @@
 		2B2779072B90810300779FB5 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		2B2A3E462B90B176007E5E7F /* ButtonTextAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTextAction.swift; sourceTree = "<group>"; };
 		2B5D193F2B91DD3D004DB072 /* AuthenticationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationRepository.swift; sourceTree = "<group>"; };
+		2BCC09AB2B95C05B005BFC95 /* RightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightView.swift; sourceTree = "<group>"; };
+		2BCC09AD2B95C066005BFC95 /* FalseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FalseView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +126,7 @@
 		2B2778B02B8F5C9B00779FB5 /* MeetMeAtTheCampfire */ = {
 			isa = PBXGroup;
 			children = (
+				2BCC09AA2B95C011005BFC95 /* FalseRightView */,
 				2B5D193E2B91DD0C004DB072 /* AuthenticationRepository */,
 				2B2A3E452B90B147007E5E7F /* Buttons */,
 				2B2779062B9080F000779FB5 /* Models */,
@@ -199,6 +204,15 @@
 				2B5D193F2B91DD3D004DB072 /* AuthenticationRepository.swift */,
 			);
 			path = AuthenticationRepository;
+			sourceTree = "<group>";
+		};
+		2BCC09AA2B95C011005BFC95 /* FalseRightView */ = {
+			isa = PBXGroup;
+			children = (
+				2BCC09AB2B95C05B005BFC95 /* RightView.swift */,
+				2BCC09AD2B95C066005BFC95 /* FalseView.swift */,
+			);
+			path = FalseRightView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -338,8 +352,10 @@
 				2B2779022B907E8800779FB5 /* RegisterView.swift in Sources */,
 				2B2779052B907EBF00779FB5 /* AuthViewModel.swift in Sources */,
 				2B2778B42B8F5C9B00779FB5 /* ContentView.swift in Sources */,
+				2BCC09AC2B95C05B005BFC95 /* RightView.swift in Sources */,
 				2B2779002B907E7B00779FB5 /* LoginView.swift in Sources */,
 				2B2778B22B8F5C9B00779FB5 /* MeetMeAtTheCampfireApp.swift in Sources */,
+				2BCC09AE2B95C066005BFC95 /* FalseView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

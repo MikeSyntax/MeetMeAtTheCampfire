@@ -14,9 +14,9 @@ struct LoginView: View {
     
     var body: some View {
         VStack{
-            
-            Text("Camper Manager")
-                .padding(4)
+            Spacer()
+            Text("Der Weg ist das Ziel")
+                .padding(8)
                 .font(.headline)
                 .italic()
                 .bold()
@@ -32,7 +32,7 @@ struct LoginView: View {
                 .padding()
             Text("Meet me at the campfire")
                 .padding(8)
-                .font(.title)
+                .font(.headline)
                 .bold()
                 .foregroundStyle(.cyan)
                 .background(Color.white.opacity(0.8))
@@ -42,14 +42,35 @@ struct LoginView: View {
                 .padding()
                 .overlay(
                     VStack {
+                        
+                        ZStack(alignment: .trailing){
                             TextField("Email eingeben", text: $authVM.email)
                                 .textFieldStyle(.roundedBorder)
                                 .textInputAutocapitalization(.never)
                                 .autocorrectionDisabled()
                                 .padding()
+                            if !authVM.email.isEmpty {
+                                if authVM.email.count >= 2 {
+                                    RightView()
+                                } else {
+                                    FalseView()
+                                }
+                            }
+                        }
+                        
+                        ZStack(alignment: .trailing){
                         SecureField("Passwort eingeben", text: $authVM.password)
                             .textFieldStyle(.roundedBorder)
                             .padding()
+                            if !authVM.password.isEmpty {
+                                if authVM.password.count >= 6 {
+                                    RightView()
+                                } else {
+                                    FalseView()
+                                }
+                            }
+                        }
+                            
                         ButtonTextAction(iconName: "paperplane.fill", text: "Login"){
                             authVM.login()
                         }
@@ -63,7 +84,7 @@ struct LoginView: View {
                             }
                             .sheet(isPresented: $showRegisterSheet) {
                                 RegisterView(showRegisterSheet: $showRegisterSheet)
-                                    .presentationDetents([.medium, .large])
+                                    .presentationDetents([.medium])
                             }
                         }
                     }

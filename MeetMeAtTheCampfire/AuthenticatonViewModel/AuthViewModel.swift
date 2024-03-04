@@ -57,6 +57,10 @@ class AuthViewModel: ObservableObject{
         do{
             try FirebaseManager.shared.authentication.signOut()
             self.user = nil
+            userName = ""
+            email = ""
+            password = ""
+            confirmPassword = ""
             print("User wurde erfolgreich abgemeldet")
         } catch {
             print("Error signing out \(error)")
