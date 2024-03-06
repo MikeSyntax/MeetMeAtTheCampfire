@@ -21,12 +21,16 @@ struct CategorieFilledView: View {
                     Text(categorieVm.categorie)
                         .multilineTextAlignment(.center)
                         .foregroundColor(.gray)
+                        .padding(.leading)
+                        .padding(.trailing)
                     Text(String(categorieVm.tasksInCategorie))
-                } 
-//                    .badge(categorieVm.tasksInCategorie)
-//                    .tag(4)
+                        .padding(8)
+                        .background(.red)
+                        .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
+                        
+                }
             )
-            .background(.gray)
+            .shadow(radius: 10)
     }
 }
 

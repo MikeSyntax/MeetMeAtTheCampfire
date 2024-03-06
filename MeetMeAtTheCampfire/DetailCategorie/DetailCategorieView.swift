@@ -8,18 +8,24 @@
 import SwiftUI
 
 struct DetailCategorieView: View {
-    let categorie: CategorieModel
+    let categorieVm: CategorieViewModel
        
        var body: some View {
            VStack {
-               Text("Kategorie: \(categorie.categorieName)")
-               Text("Anzahl der Aufgaben: \(categorie.tasksInCategorie)")
+               Text("Kategorie: \(categorieVm.categorie)")
+               Text("Anzahl der Aufgaben: \(categorieVm.tasksInCategorie)")
                Spacer()
            }
-           .padding()
+           .background(
+               Image("background")
+                   .resizable()
+                   .scaledToFill()
+                   .opacity(0.2)
+                   .ignoresSafeArea())
+           
            .navigationBarTitle("Kategorie Details", displayMode: .inline)
        }
    }
 //#Preview {
-//    DetailCategorieView(categorie: CategorieModel(from: categorie))
+//    DetailCategorieView(categorie: CategorieModel(from: CategorieModel))
 //}

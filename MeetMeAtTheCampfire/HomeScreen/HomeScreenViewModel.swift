@@ -11,7 +11,7 @@ import FirebaseFirestore
 class HomeScreenViewModel: ObservableObject {
     
     //Leere Liste an Kategorien
-    @Published var categories: [CategorieModel] = []
+    @Published var categorieViewModels: [CategorieViewModel] = []
     //der Listener muss beim Logout auch wieder auf nil gesetzt werden
     private var listener: ListenerRegistration? = nil
     
@@ -24,7 +24,7 @@ class HomeScreenViewModel: ObservableObject {
             return
         }
         
-        let categorie = CategorieModel(userId: userId, categorieName: categorieName, isDone: false, tasksInCategorie: 0)
+        let categorie = CategorieModel(userId: userId, categorieName: categorieName, isDone: false, tasksInCategorie: tasksInCategorie)
         
         do{
             //versuche im Firestore eine neue Kategorie anzulegen
@@ -56,24 +56,24 @@ class HomeScreenViewModel: ObservableObject {
                 try? document.data(as: CategorieModel.self)
             }
             
-            self.categories = categories
-        }
+            let categorieViewModels = categories.map { CategorieViewModel(categorieDesign: $0) }
+            self.categorieViewModels = categorieViewModels }
     }
     
     //Zurücksetzen des Listeners und leeren des categorie Arrays bei Logout, umso zu gewährleisten, falls sich ein anderer User einloggt nicht die selbe Liste zu sehen.
     func removeListener(){
         self.listener = nil
-        self.categories = []
+        //   self.categories = []
     }
     
     //Änderungen an der Kategorie vornehmen, in diesem Fall Kategorie ist erledigt
-    func updateCategorie(categorie: CategorieModel){
-        guard let categorieId = categorie.id else {
+    func updateCategorie(categorieVm: CategorieViewModel){
+        guard let categorieId = categorieVm.categorieViewModel.id else {
             return
         }
         
         let updatedCategorie = [
-            "isDone" : categorie.isDone ? false : true]
+            "isDone" : categorieVm.isDone ? false : true]
         
         FirebaseManager.shared.firestore.collection("categories").document(categorieId).setData(updatedCategorie, merge: true) {
             error in
@@ -86,8 +86,8 @@ class HomeScreenViewModel: ObservableObject {
     }
     
     //Löschen einer Kategorie
-    func deleteCategorie(categorie: CategorieModel){
-        guard let categorieId = categorie.id else {
+    func deleteCategorie(categorieVm: CategorieViewModel){
+        guard let categorieId = categorieVm.categorieViewModel.id else {
             return
         }
         

@@ -27,7 +27,7 @@ struct CategorieAddView: View {
                         .foregroundColor(.gray)
                 }
             )
-            .background(.gray)
+            .shadow(radius: 10)
     }
 }
 

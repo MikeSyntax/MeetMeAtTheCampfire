@@ -13,12 +13,14 @@ class CategorieViewModel: ObservableObject, Identifiable {
     @Published var tasksInCategorie = 4
     @Published var isDone = false
     
-    let categorieView: CategorieModel
+    
+    let categorieViewModel: CategorieModel
     
     init(categorieDesign: CategorieModel){
-        self.categorieView = categorieDesign.self
+        self.categorieViewModel = categorieDesign.self
         self.categorie = categorieDesign.categorieName
         self.isDone = categorieDesign.isDone
         self.tasksInCategorie = categorieDesign.tasksInCategorie
+     
     }
 }

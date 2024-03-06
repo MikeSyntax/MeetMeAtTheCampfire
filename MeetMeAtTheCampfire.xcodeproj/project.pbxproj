@@ -54,6 +54,10 @@
 		2BAB62552B95E04900C7839E /* CategorieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAB62542B95E04900C7839E /* CategorieModel.swift */; };
 		2BCC09AC2B95C05B005BFC95 /* RightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCC09AB2B95C05B005BFC95 /* RightView.swift */; };
 		2BCC09AE2B95C066005BFC95 /* FalseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCC09AD2B95C066005BFC95 /* FalseView.swift */; };
+		2BF4B9772B9874BC00C1AF1A /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF4B9762B9874BC00C1AF1A /* MainScreenView.swift */; };
+		2BF4B97A2B98764300C1AF1A /* ProfileScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF4B9792B98764300C1AF1A /* ProfileScreenView.swift */; };
+		2BF4B97D2B9877D900C1AF1A /* ChatScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF4B97C2B9877D900C1AF1A /* ChatScreenView.swift */; };
+		2BF4B9802B98A24C00C1AF1A /* SettingsScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF4B97F2B98A24C00C1AF1A /* SettingsScreenView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +82,10 @@
 		2BAB62542B95E04900C7839E /* CategorieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorieModel.swift; sourceTree = "<group>"; };
 		2BCC09AB2B95C05B005BFC95 /* RightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightView.swift; sourceTree = "<group>"; };
 		2BCC09AD2B95C066005BFC95 /* FalseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FalseView.swift; sourceTree = "<group>"; };
+		2BF4B9762B9874BC00C1AF1A /* MainScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
+		2BF4B9792B98764300C1AF1A /* ProfileScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreenView.swift; sourceTree = "<group>"; };
+		2BF4B97C2B9877D900C1AF1A /* ChatScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatScreenView.swift; sourceTree = "<group>"; };
+		2BF4B97F2B98A24C00C1AF1A /* SettingsScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +154,10 @@
 		2B2778B02B8F5C9B00779FB5 /* MeetMeAtTheCampfire */ = {
 			isa = PBXGroup;
 			children = (
+				2BF4B97E2B98A23000C1AF1A /* SettingsScreen */,
+				2BF4B97B2B9877C200C1AF1A /* ChatScreen */,
+				2BF4B9782B98762A00C1AF1A /* ProfileScreen */,
+				2BF4B9752B98748E00C1AF1A /* MainScreen */,
 				2B0158652B9789D30026CA84 /* DetailCategorie */,
 				2BAB62512B95D8CC00C7839E /* CategorieScreen */,
 				2BAB62482B95D5F100C7839E /* HomeScreen */,
@@ -255,6 +267,38 @@
 				2BCC09AD2B95C066005BFC95 /* FalseView.swift */,
 			);
 			path = FalseRightView;
+			sourceTree = "<group>";
+		};
+		2BF4B9752B98748E00C1AF1A /* MainScreen */ = {
+			isa = PBXGroup;
+			children = (
+				2BF4B9762B9874BC00C1AF1A /* MainScreenView.swift */,
+			);
+			path = MainScreen;
+			sourceTree = "<group>";
+		};
+		2BF4B9782B98762A00C1AF1A /* ProfileScreen */ = {
+			isa = PBXGroup;
+			children = (
+				2BF4B9792B98764300C1AF1A /* ProfileScreenView.swift */,
+			);
+			path = ProfileScreen;
+			sourceTree = "<group>";
+		};
+		2BF4B97B2B9877C200C1AF1A /* ChatScreen */ = {
+			isa = PBXGroup;
+			children = (
+				2BF4B97C2B9877D900C1AF1A /* ChatScreenView.swift */,
+			);
+			path = ChatScreen;
+			sourceTree = "<group>";
+		};
+		2BF4B97E2B98A23000C1AF1A /* SettingsScreen */ = {
+			isa = PBXGroup;
+			children = (
+				2BF4B97F2B98A24C00C1AF1A /* SettingsScreenView.swift */,
+			);
+			path = SettingsScreen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -387,19 +431,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2BF4B97A2B98764300C1AF1A /* ProfileScreenView.swift in Sources */,
 				2B2A3E472B90B176007E5E7F /* ButtonTextAction.swift in Sources */,
 				2B2778FD2B9079F200779FB5 /* FirebaseManager.swift in Sources */,
 				2BAB62532B95DDC600C7839E /* CategorieFilledView.swift in Sources */,
 				2B0158672B9789F20026CA84 /* DetailCategorieView.swift in Sources */,
 				2B2779082B90810300779FB5 /* UserModel.swift in Sources */,
+				2BF4B97D2B9877D900C1AF1A /* ChatScreenView.swift in Sources */,
 				2BAB62502B95D79800C7839E /* CategorieViewModel.swift in Sources */,
 				2BAB624A2B95D60B00C7839E /* HomeScreenView.swift in Sources */,
 				2B5D19402B91DD3D004DB072 /* AuthenticationRepository.swift in Sources */,
 				2B2779022B907E8800779FB5 /* RegisterView.swift in Sources */,
 				2BAB624E2B95D64300C7839E /* CategorieAddView.swift in Sources */,
+				2BF4B9802B98A24C00C1AF1A /* SettingsScreenView.swift in Sources */,
 				2B2779052B907EBF00779FB5 /* AuthViewModel.swift in Sources */,
 				2BCC09AC2B95C05B005BFC95 /* RightView.swift in Sources */,
 				2BAB62552B95E04900C7839E /* CategorieModel.swift in Sources */,
+				2BF4B9772B9874BC00C1AF1A /* MainScreenView.swift in Sources */,
 				2BAB624C2B95D61B00C7839E /* HomeScreenViewModel.swift in Sources */,
 				2B2779002B907E7B00779FB5 /* LoginView.swift in Sources */,
 				2B2778B22B8F5C9B00779FB5 /* MeetMeAtTheCampfireApp.swift in Sources */,
