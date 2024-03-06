@@ -19,24 +19,27 @@ struct HomeScreenView: View {
         NavigationStack {
             VStack {
                 Spacer()
-                ScrollView(.horizontal) { // Horizontale Scroll-Ansicht
-                    HStack(spacing: 20) { // HStack für horizontales Layout
+                ScrollView {
+                    LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 20), count: 3), spacing: 20) {
                         ForEach(homeVm.categorieViewModels) { categorieViewModel in
-                            NavigationLink(destination: DetailCategorieView(categorieVm: categorieViewModel)) {
+                            NavigationLink(destination: DetailCategorieView(categorieVm: categorieViewModel, homeVm: homeVm)) {
                                 CategorieFilledView(categorieVm: categorieViewModel)
                             }
-                            .swipeActions(edge: .trailing) {
-                                Button(role: .destructive) {
-                                    homeVm.deleteCategorie(categorieVm: categorieViewModel)
-                                } label: {
-                                    Image(systemName: "trash")
-                                }
-                            }
+//                            .swipeActions(edge: .trailing) {
+//                                Button(role: .destructive) {
+//                                    homeVm.deleteCategorie(categorieVm: categorieViewModel)
+//                                } label: {
+//                                    Image(systemName: "trash")
+//                                }
+//                            }
+//                            .padding(.horizontal, 5)
                         }
                     }
                     .padding(.horizontal, 20)
                 }
-                .frame(height: 200) // Höhe der horizontalen Liste
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .padding(.vertical, 20)
+                
                 Button(action: {
                     showNewCategorieAlert.toggle()
                 }, label: {
@@ -57,7 +60,7 @@ struct HomeScreenView: View {
                     .scaledToFill()
                     .opacity(0.2)
                     .ignoresSafeArea())
-            .navigationBarTitle("Home") // Optional: Setzt den Titel der Navigationsleiste
+            .navigationBarTitle("Home")
         }
         .alert("Neue Kategorie", isPresented: $showNewCategorieAlert) {
             TextField("Name", text: $newCategorie)
@@ -69,7 +72,6 @@ struct HomeScreenView: View {
             }
             Button("Speichern") {
                 homeVm.createCategorie(categorieName: newCategorie, tasksInCategorie: Int(tasksInCategorie) ?? 4)
-                //Alle Variablen wieder leeren
                 newCategorie = ""
             }
         }
@@ -81,6 +83,7 @@ struct HomeScreenView: View {
         }
     }
 }
+
 
 #Preview {
     HomeScreenView()
