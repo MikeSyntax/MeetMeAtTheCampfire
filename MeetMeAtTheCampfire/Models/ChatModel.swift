@@ -14,8 +14,7 @@ struct ChatModel: Codable, Identifiable {
     let userId: String
     let userName: String
     let messageText: String
-   // let timeStamp: Date
-    let isCurrentUser: Bool
+    let timeStamp: Date
     
 }
 

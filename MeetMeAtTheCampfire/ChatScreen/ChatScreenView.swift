@@ -10,48 +10,58 @@ import SwiftUI
 struct ChatScreenView: View {
     
     @ObservedObject var chatVm = ChatScreenViewModel()
+    @EnvironmentObject var authVm: AuthViewModel
     @State private var newMessage: String = ""
     
     var body: some View {
-        NavigationStack{
-            VStack{
-              
-                ScrollView{
-                    ForEach(chatVm.chatSenderViewModels) {
-                        chatSenderViewModel in
-                        ChatSenderView(chatSenderVm: chatSenderViewModel)
+        let userName = authVm.user?.userName ?? "User unbekannt"
+        
+        NavigationView {
+            VStack {
+                ScrollView {
+                    ScrollViewReader { scrollView in
+                        LazyVStack {
+                            ForEach(chatVm.chatSenderViewModels) { chatSenderViewModel in
+                                ChatSenderView(chatSenderVm: chatSenderViewModel)
+                                    .id(chatSenderViewModel.id)
+                            }
+                        }
+                        .onChange(of: chatVm.chatSenderViewModels) { _ in
+                            if let lastMessageId = chatVm.chatSenderViewModels.last?.id {
+                                scrollView.scrollTo(lastMessageId, anchor: .bottom)
+                            }
+                        }
                     }
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .padding()
-                Spacer()
-                HStack{
+                
+                HStack {
                     TextField("Neue Nachricht", text: $newMessage)
                         .textFieldStyle(.roundedBorder)
                         .autocorrectionDisabled()
                         .padding()
-                    ButtonTextAction(iconName: "plus", text: "Neu"){
-                        //todo AddNewMessage
+                    
+                    ButtonTextAction(iconName: "plus", text: "Neu") {
+                        chatVm.createNewMessage(userName: userName, messageText: newMessage)
+                        newMessage = ""
                     }
                 }
-                .padding(.leading)
-                .padding(.trailing)
-            }
-            .toolbar {
-                Button{
-                    //todo Search
-                } label: {
-                    Text("Suche")
-                    Image(systemName: "magnifyingglass")
-                }
+                .padding(.horizontal)
             }
             .navigationTitle("Chat")
-            .background(
-                Image("background")
-                    .resizable()
-                    .scaledToFill()
-                    .opacity(0.2)
-                    .ignoresSafeArea())
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        //todo Search
+                    }) {
+                        Image(systemName: "magnifyingglass")
+                    }
+                }
+            }
+        }
+        .onAppear {
+            chatVm.readMessages()
         }
     }
 }
@@ -59,4 +69,5 @@ struct ChatScreenView: View {
 
 #Preview {
     ChatScreenView(chatVm: ChatScreenViewModel())
+        .environmentObject(AuthViewModel())
 }

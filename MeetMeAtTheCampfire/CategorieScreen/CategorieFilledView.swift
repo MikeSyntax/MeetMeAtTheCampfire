@@ -15,7 +15,7 @@ struct CategorieFilledView: View {
     
     var body: some View {
         
-        var color = bgColor.randomElement()
+        let color = bgColor.randomElement()
         RoundedRectangle(cornerRadius: 10)
             .fill(color ?? .white).opacity(0.7)
             .frame(width: 100, height: 100)

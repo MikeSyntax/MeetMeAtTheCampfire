@@ -63,7 +63,7 @@ class HomeScreenViewModel: ObservableObject {
     //Zurücksetzen des Listeners und leeren des categorie Arrays bei Logout, umso zu gewährleisten, falls sich ein anderer User einloggt nicht die selbe Liste zu sehen.
     func removeListener(){
         self.listener = nil
-        //   self.categories = []
+        self.categorieViewModels = []
     }
     
     //Änderungen an der Kategorie vornehmen, in diesem Fall Kategorie ist erledigt

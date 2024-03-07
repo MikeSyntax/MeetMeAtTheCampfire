@@ -7,21 +7,33 @@
 
 import Foundation
 
-class ChatSenderViewModel: ObservableObject, Identifiable {
+class ChatSenderViewModel: ObservableObject, Identifiable, Equatable {
+    
+    static func == (lhs: ChatSenderViewModel, rhs: ChatSenderViewModel) -> Bool {
+        return lhs.id == rhs.id
+    }
     
     @Published var userName: String = ""
-    @Published var timeStamp = Date()
     @Published var messageText: String = ""
+    @Published var dateString: String = ""
     @Published var isCurrentUser: Bool = false
+    private var timeStamp = Date()
     
     let chatSenderVm: ChatModel
     
-    init(chatDesign: ChatModel){
-        self.chatSenderVm = chatDesign.self
+    init(chatDesign: ChatModel, isCurrentUser: Bool = false) {
+        self.chatSenderVm = chatDesign
         self.userName = chatDesign.userName
-     //   self.timeStamp = chatDesign.timeStamp
+        self.timeStamp = chatDesign.timeStamp
         self.messageText = chatDesign.messageText
-        self.isCurrentUser = chatDesign.isCurrentUser
+        self.isCurrentUser = isCurrentUser
         
+        updateDate()
+    }
+    
+    func updateDate() {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        self.dateString = formatter.string(from: timeStamp)
     }
 }

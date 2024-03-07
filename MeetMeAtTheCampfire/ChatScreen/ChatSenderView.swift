@@ -28,6 +28,12 @@ struct ChatSenderView: View {
                         .padding(.leading)
                         .padding(.trailing)
                     Spacer()
+                    Text(chatSenderVm.dateString)
+                        .font(.caption)
+                        .frame(maxWidth: .infinity, alignment: chatSenderVm.isCurrentUser ? .trailing : .leading)
+                        .padding(.trailing)
+                        .padding(.leading)
+                    
                 }
                     
                     .padding(2)
@@ -38,7 +44,7 @@ struct ChatSenderView: View {
 }
 
 #Preview {
-    let chat = ChatModel(userId: "1", userName: "Fettes Brot", messageText: "Heute gehen wir campen", isCurrentUser: false )
+    let chat = ChatModel(userId: "1", userName: "Fettes Brot", messageText: "Heute gehen wir campen", timeStamp: Date())
     let chatVm = ChatSenderViewModel(chatDesign: chat)
     return ChatSenderView(chatSenderVm: chatVm)
 }
