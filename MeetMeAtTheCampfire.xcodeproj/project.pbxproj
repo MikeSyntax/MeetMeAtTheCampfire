@@ -46,6 +46,10 @@
 		2B2779082B90810300779FB5 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2779072B90810300779FB5 /* UserModel.swift */; };
 		2B2A3E472B90B176007E5E7F /* ButtonTextAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2A3E462B90B176007E5E7F /* ButtonTextAction.swift */; };
 		2B5D19402B91DD3D004DB072 /* AuthenticationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5D193F2B91DD3D004DB072 /* AuthenticationRepository.swift */; };
+		2B5DF1852B99B46E00FA285C /* ChatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5DF1842B99B46E00FA285C /* ChatModel.swift */; };
+		2B5DF1872B99B55500FA285C /* ChatScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5DF1862B99B55500FA285C /* ChatScreenViewModel.swift */; };
+		2B5DF1892B99B68900FA285C /* ChatSenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5DF1882B99B68900FA285C /* ChatSenderView.swift */; };
+		2B5DF18B2B99B7B900FA285C /* ChatSenderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5DF18A2B99B7B900FA285C /* ChatSenderViewModel.swift */; };
 		2BAB624A2B95D60B00C7839E /* HomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAB62492B95D60B00C7839E /* HomeScreenView.swift */; };
 		2BAB624C2B95D61B00C7839E /* HomeScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAB624B2B95D61B00C7839E /* HomeScreenViewModel.swift */; };
 		2BAB624E2B95D64300C7839E /* CategorieAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAB624D2B95D64300C7839E /* CategorieAddView.swift */; };
@@ -74,6 +78,10 @@
 		2B2779072B90810300779FB5 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		2B2A3E462B90B176007E5E7F /* ButtonTextAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTextAction.swift; sourceTree = "<group>"; };
 		2B5D193F2B91DD3D004DB072 /* AuthenticationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationRepository.swift; sourceTree = "<group>"; };
+		2B5DF1842B99B46E00FA285C /* ChatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatModel.swift; sourceTree = "<group>"; };
+		2B5DF1862B99B55500FA285C /* ChatScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatScreenViewModel.swift; sourceTree = "<group>"; };
+		2B5DF1882B99B68900FA285C /* ChatSenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatSenderView.swift; sourceTree = "<group>"; };
+		2B5DF18A2B99B7B900FA285C /* ChatSenderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatSenderViewModel.swift; sourceTree = "<group>"; };
 		2BAB62492B95D60B00C7839E /* HomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenView.swift; sourceTree = "<group>"; };
 		2BAB624B2B95D61B00C7839E /* HomeScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewModel.swift; sourceTree = "<group>"; };
 		2BAB624D2B95D64300C7839E /* CategorieAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorieAddView.swift; sourceTree = "<group>"; };
@@ -221,6 +229,7 @@
 			children = (
 				2B2779072B90810300779FB5 /* UserModel.swift */,
 				2BAB62542B95E04900C7839E /* CategorieModel.swift */,
+				2B5DF1842B99B46E00FA285C /* ChatModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -289,6 +298,9 @@
 			isa = PBXGroup;
 			children = (
 				2BF4B97C2B9877D900C1AF1A /* ChatScreenView.swift */,
+				2B5DF1862B99B55500FA285C /* ChatScreenViewModel.swift */,
+				2B5DF1882B99B68900FA285C /* ChatSenderView.swift */,
+				2B5DF18A2B99B7B900FA285C /* ChatSenderViewModel.swift */,
 			);
 			path = ChatScreen;
 			sourceTree = "<group>";
@@ -434,6 +446,7 @@
 				2BF4B97A2B98764300C1AF1A /* ProfileScreenView.swift in Sources */,
 				2B2A3E472B90B176007E5E7F /* ButtonTextAction.swift in Sources */,
 				2B2778FD2B9079F200779FB5 /* FirebaseManager.swift in Sources */,
+				2B5DF1892B99B68900FA285C /* ChatSenderView.swift in Sources */,
 				2BAB62532B95DDC600C7839E /* CategorieFilledView.swift in Sources */,
 				2B0158672B9789F20026CA84 /* DetailCategorieView.swift in Sources */,
 				2B2779082B90810300779FB5 /* UserModel.swift in Sources */,
@@ -443,12 +456,15 @@
 				2B5D19402B91DD3D004DB072 /* AuthenticationRepository.swift in Sources */,
 				2B2779022B907E8800779FB5 /* RegisterView.swift in Sources */,
 				2BAB624E2B95D64300C7839E /* CategorieAddView.swift in Sources */,
+				2B5DF1872B99B55500FA285C /* ChatScreenViewModel.swift in Sources */,
 				2BF4B9802B98A24C00C1AF1A /* SettingsScreenView.swift in Sources */,
+				2B5DF1852B99B46E00FA285C /* ChatModel.swift in Sources */,
 				2B2779052B907EBF00779FB5 /* AuthViewModel.swift in Sources */,
 				2BCC09AC2B95C05B005BFC95 /* RightView.swift in Sources */,
 				2BAB62552B95E04900C7839E /* CategorieModel.swift in Sources */,
 				2BF4B9772B9874BC00C1AF1A /* MainScreenView.swift in Sources */,
 				2BAB624C2B95D61B00C7839E /* HomeScreenViewModel.swift in Sources */,
+				2B5DF18B2B99B7B900FA285C /* ChatSenderViewModel.swift in Sources */,
 				2B2779002B907E7B00779FB5 /* LoginView.swift in Sources */,
 				2B2778B22B8F5C9B00779FB5 /* MeetMeAtTheCampfireApp.swift in Sources */,
 				2BCC09AE2B95C066005BFC95 /* FalseView.swift in Sources */,

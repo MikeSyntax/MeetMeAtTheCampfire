@@ -9,6 +9,8 @@ import SwiftUI
 
 struct MainScreenView: View {
     
+    @StateObject var chatVm = ChatScreenViewModel()
+    
     var body: some View {
         TabView{
             HomeScreenView()
@@ -17,7 +19,7 @@ struct MainScreenView: View {
                     Text("Home")
                 }.tag(0)
             
-            ChatScreenView()
+            ChatScreenView(chatVm: chatVm)
                 .tabItem {
                     Image(systemName: "message.fill")
                     Text("Chat")

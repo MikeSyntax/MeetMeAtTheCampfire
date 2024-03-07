@@ -15,7 +15,7 @@ import SwiftUI
             NavigationView {
                 VStack {
                     // Hier kannst du den Inhalt deiner Profilansicht einfügen
-                    Text("Profilansicht!")
+                    Text("Profil Ansicht!")
                     Spacer()
                 }
                 .toolbar {

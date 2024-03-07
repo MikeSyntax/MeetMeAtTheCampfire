@@ -8,18 +8,41 @@
 import SwiftUI
 
 struct ChatScreenView: View {
+    
+    @ObservedObject var chatVm = ChatScreenViewModel()
+    @State private var newMessage: String = ""
+    
     var body: some View {
         NavigationStack{
             VStack{
-                Text("Chat Ansicht!")
+              
+                ScrollView{
+                    ForEach(chatVm.chatSenderViewModels) {
+                        chatSenderViewModel in
+                        ChatSenderView(chatSenderVm: chatSenderViewModel)
+                    }
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .padding()
                 Spacer()
+                HStack{
+                    TextField("Neue Nachricht", text: $newMessage)
+                        .textFieldStyle(.roundedBorder)
+                        .autocorrectionDisabled()
+                        .padding()
+                    ButtonTextAction(iconName: "plus", text: "Neu"){
+                        //todo AddNewMessage
+                    }
+                }
+                .padding(.leading)
+                .padding(.trailing)
             }
             .toolbar {
                 Button{
-                    //todo
+                    //todo Search
                 } label: {
-                    Text("New")
-                    Image(systemName: "plus.circle")
+                    Text("Suche")
+                    Image(systemName: "magnifyingglass")
                 }
             }
             .navigationTitle("Chat")
@@ -33,6 +56,7 @@ struct ChatScreenView: View {
     }
 }
 
+
 #Preview {
-    ChatScreenView()
+    ChatScreenView(chatVm: ChatScreenViewModel())
 }

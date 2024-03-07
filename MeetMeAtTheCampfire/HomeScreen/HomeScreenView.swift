@@ -15,6 +15,7 @@ struct HomeScreenView: View {
     @State private var showSettingsSheet: Bool = false
     @Environment(\.dismiss) private var dismiss
     
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -25,14 +26,6 @@ struct HomeScreenView: View {
                             NavigationLink(destination: DetailCategorieView(categorieVm: categorieViewModel, homeVm: homeVm)) {
                                 CategorieFilledView(categorieVm: categorieViewModel)
                             }
-//                            .swipeActions(edge: .trailing) {
-//                                Button(role: .destructive) {
-//                                    homeVm.deleteCategorie(categorieVm: categorieViewModel)
-//                                } label: {
-//                                    Image(systemName: "trash")
-//                                }
-//                            }
-//                            .padding(.horizontal, 5)
                         }
                     }
                     .padding(.horizontal, 20)
@@ -73,6 +66,7 @@ struct HomeScreenView: View {
             Button("Speichern") {
                 homeVm.createCategorie(categorieName: newCategorie, tasksInCategorie: Int(tasksInCategorie) ?? 4)
                 newCategorie = ""
+                tasksInCategorie = ""
             }
         }
         .sheet(isPresented: $showSettingsSheet) {

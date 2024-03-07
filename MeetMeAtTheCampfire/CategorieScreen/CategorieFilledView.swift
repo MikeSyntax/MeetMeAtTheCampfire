@@ -10,17 +10,21 @@ import SwiftUI
 struct CategorieFilledView: View {
     
     @ObservedObject var categorieVm: CategorieViewModel
+    @State private var bgColor: [Color] = [.blue, .green, .yellow, .red, .pink, .brown]
+    
     
     var body: some View {
+        
+        var color = bgColor.randomElement()
         RoundedRectangle(cornerRadius: 10)
-            .fill(Color.white).opacity(0.7)
+            .fill(color ?? .white).opacity(0.7)
             .frame(width: 100, height: 100)
             .overlay(
                 VStack{
                     Text(categorieVm.categorie)
                         .lineLimit(2)
                         .multilineTextAlignment(.center)
-                        .foregroundColor(.gray)
+                        .foregroundColor(.black)
                         .padding(EdgeInsets(top: 0, leading: 2, bottom: 0, trailing: 2))
                     Spacer() // Fügt den verbleibenden Platz ein
                     Divider()
