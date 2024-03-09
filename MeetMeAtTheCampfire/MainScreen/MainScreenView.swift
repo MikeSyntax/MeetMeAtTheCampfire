@@ -11,7 +11,6 @@ struct MainScreenView: View {
     
     @StateObject var chatVm = ChatScreenViewModel()
     @StateObject var languageVm = LanguageScreenViewModel(languageChoice: Language(code: "en", name: "Englisch"))
-    @StateObject var translatorVm = TranslatorScreenViewModel(languageChoice: Language(code: "", name: ""))
     
     var body: some View {
         TabView{

@@ -43,3 +43,4 @@ import Foundation
 //    private func checkForNewMessages(from chatSenderViewModels: [ChatSenderViewModel]) -> Int {
 //        return chatSenderViewModels.filter { !$0.isRead }.count
 //    }
+

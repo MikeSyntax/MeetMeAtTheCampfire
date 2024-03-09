@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 class LanguageScreenViewModel: ObservableObject {
     
     private let translatorRepo: TranslatorRepository
@@ -15,7 +16,7 @@ class LanguageScreenViewModel: ObservableObject {
     @Published var textToTranslate: String = ""
     @Published var translatedText: String = ""
     
-    let languageChoice: Language
+    var languageChoice: Language
     
     init(languageChoice: Language) {
         self.translatorRepo = TranslatorRepository()

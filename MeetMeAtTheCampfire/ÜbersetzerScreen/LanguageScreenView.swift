@@ -11,24 +11,20 @@ struct LanguageScreenView: View {
     
     @ObservedObject var languageVm: LanguageScreenViewModel
     
-    @State var selectedLanguage: Language?
-    
     var body: some View {
         NavigationStack {
             VStack {
                 Form {
-                    Section(header: Text("Sprache wählen")) {
-                        Picker("Übersetze nach", selection: $selectedLanguage) {
+                    Section(header: Text("Wähle hier Deine Zielsprache aus")){
+                        Picker("Übersetze nach", selection: $languageVm.languageChoice) {
                             ForEach(languageVm.languages, id: \.code) { language in
-                                NavigationLink(language.name){
-                                    TranslatorScreenView(translatorVm: TranslatorScreenViewModel(languageChoice: language/* selectedLanguage ?? Language(code: "de", name: "Deutsch")*/))
-                                }
-                                .tag(language)
+                                Text(language.name)
+                                    .tag(language)
                             }
                         }
-                        .pickerStyle(.wheel)
+                        .pickerStyle(.menu)
                     }
-                    
+                
                     Section(header: Text("Text eingeben")){
                         TextField("Texteingabe für die Übersetzung", text: $languageVm.textToTranslate)
                             .textInputAutocapitalization(.never)
@@ -56,11 +52,9 @@ struct LanguageScreenView: View {
                             .lineLimit(5, reservesSpace: true)
                             .textFieldStyle(.roundedBorder)
                     }
-                    
-                    
                 }
             }
-            .navigationTitle(Text("So klein ist die Welt"))
+            .navigationTitle(Text("Translator"))
         }
         .onAppear {
             languageVm.loadLanguages()
