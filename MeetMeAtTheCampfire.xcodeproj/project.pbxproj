@@ -57,12 +57,10 @@
 		2BAB62532B95DDC600C7839E /* CategorieFilledView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAB62522B95DDC600C7839E /* CategorieFilledView.swift */; };
 		2BAB62552B95E04900C7839E /* CategorieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAB62542B95E04900C7839E /* CategorieModel.swift */; };
 		2BBC150A2B9B5BF400305504 /* Codeschnippsel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBC15092B9B5BF400305504 /* Codeschnippsel.swift */; };
-		2BBC150D2B9B66C400305504 /* TranslatorScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBC150C2B9B66C400305504 /* TranslatorScreenViewModel.swift */; };
-		2BBC150F2B9B66DD00305504 /* TranslatorRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBC150E2B9B66DD00305504 /* TranslatorRepository.swift */; };
-		2BBC15112B9B66F200305504 /* TranslatorScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBC15102B9B66F200305504 /* TranslatorScreenView.swift */; };
+		2BBC150F2B9B66DD00305504 /* LanguageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBC150E2B9B66DD00305504 /* LanguageRepository.swift */; };
 		2BBC15132B9B719A00305504 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBC15122B9B719A00305504 /* Language.swift */; };
-		2BBC15152B9B746000305504 /* TranslatorError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBC15142B9B746000305504 /* TranslatorError.swift */; };
-		2BBC15172B9B754D00305504 /* TranslatorApiKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBC15162B9B754D00305504 /* TranslatorApiKey.swift */; };
+		2BBC15152B9B746000305504 /* LanguageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBC15142B9B746000305504 /* LanguageError.swift */; };
+		2BBC15172B9B754D00305504 /* LanguageApiKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBC15162B9B754D00305504 /* LanguageApiKey.swift */; };
 		2BBC15192B9C614900305504 /* Translation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBC15182B9C614900305504 /* Translation.swift */; };
 		2BBC151B2B9C6B2600305504 /* LanguageScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBC151A2B9C6B2600305504 /* LanguageScreenViewModel.swift */; };
 		2BBC151D2B9C6B3C00305504 /* LanguageScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBC151C2B9C6B3C00305504 /* LanguageScreenView.swift */; };
@@ -99,12 +97,10 @@
 		2BAB62522B95DDC600C7839E /* CategorieFilledView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorieFilledView.swift; sourceTree = "<group>"; };
 		2BAB62542B95E04900C7839E /* CategorieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorieModel.swift; sourceTree = "<group>"; };
 		2BBC15092B9B5BF400305504 /* Codeschnippsel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Codeschnippsel.swift; sourceTree = "<group>"; };
-		2BBC150C2B9B66C400305504 /* TranslatorScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslatorScreenViewModel.swift; sourceTree = "<group>"; };
-		2BBC150E2B9B66DD00305504 /* TranslatorRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslatorRepository.swift; sourceTree = "<group>"; };
-		2BBC15102B9B66F200305504 /* TranslatorScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslatorScreenView.swift; sourceTree = "<group>"; };
+		2BBC150E2B9B66DD00305504 /* LanguageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageRepository.swift; sourceTree = "<group>"; };
 		2BBC15122B9B719A00305504 /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
-		2BBC15142B9B746000305504 /* TranslatorError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslatorError.swift; sourceTree = "<group>"; };
-		2BBC15162B9B754D00305504 /* TranslatorApiKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslatorApiKey.swift; sourceTree = "<group>"; };
+		2BBC15142B9B746000305504 /* LanguageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageError.swift; sourceTree = "<group>"; };
+		2BBC15162B9B754D00305504 /* LanguageApiKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageApiKey.swift; sourceTree = "<group>"; };
 		2BBC15182B9C614900305504 /* Translation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translation.swift; sourceTree = "<group>"; };
 		2BBC151A2B9C6B2600305504 /* LanguageScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageScreenViewModel.swift; sourceTree = "<group>"; };
 		2BBC151C2B9C6B3C00305504 /* LanguageScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageScreenView.swift; sourceTree = "<group>"; };
@@ -304,11 +300,9 @@
 		2BBC150B2B9B669800305504 /* TranslatorScreen */ = {
 			isa = PBXGroup;
 			children = (
-				2BBC150C2B9B66C400305504 /* TranslatorScreenViewModel.swift */,
-				2BBC150E2B9B66DD00305504 /* TranslatorRepository.swift */,
-				2BBC15102B9B66F200305504 /* TranslatorScreenView.swift */,
-				2BBC15142B9B746000305504 /* TranslatorError.swift */,
-				2BBC15162B9B754D00305504 /* TranslatorApiKey.swift */,
+				2BBC15142B9B746000305504 /* LanguageError.swift */,
+				2BBC15162B9B754D00305504 /* LanguageApiKey.swift */,
+				2BBC150E2B9B66DD00305504 /* LanguageRepository.swift */,
 				2BBC151A2B9C6B2600305504 /* LanguageScreenViewModel.swift */,
 				2BBC151C2B9C6B3C00305504 /* LanguageScreenView.swift */,
 			);
@@ -497,13 +491,12 @@
 				2B2A3E472B90B176007E5E7F /* ButtonTextAction.swift in Sources */,
 				2B2778FD2B9079F200779FB5 /* FirebaseManager.swift in Sources */,
 				2B5DF1892B99B68900FA285C /* ChatSenderView.swift in Sources */,
-				2BBC150F2B9B66DD00305504 /* TranslatorRepository.swift in Sources */,
+				2BBC150F2B9B66DD00305504 /* LanguageRepository.swift in Sources */,
 				2BAB62532B95DDC600C7839E /* CategorieFilledView.swift in Sources */,
 				2B0158672B9789F20026CA84 /* DetailCategorieView.swift in Sources */,
-				2BBC15112B9B66F200305504 /* TranslatorScreenView.swift in Sources */,
 				2B2779082B90810300779FB5 /* UserModel.swift in Sources */,
 				2BF4B97D2B9877D900C1AF1A /* ChatScreenView.swift in Sources */,
-				2BBC15152B9B746000305504 /* TranslatorError.swift in Sources */,
+				2BBC15152B9B746000305504 /* LanguageError.swift in Sources */,
 				2BAB62502B95D79800C7839E /* CategorieViewModel.swift in Sources */,
 				2BAB624A2B95D60B00C7839E /* HomeScreenView.swift in Sources */,
 				2BBC15192B9C614900305504 /* Translation.swift in Sources */,
@@ -513,7 +506,6 @@
 				2B5DF1872B99B55500FA285C /* ChatScreenViewModel.swift in Sources */,
 				2BF4B9802B98A24C00C1AF1A /* SettingsScreenView.swift in Sources */,
 				2B5DF1852B99B46E00FA285C /* ChatModel.swift in Sources */,
-				2BBC150D2B9B66C400305504 /* TranslatorScreenViewModel.swift in Sources */,
 				2B2779052B907EBF00779FB5 /* AuthViewModel.swift in Sources */,
 				2BBC15132B9B719A00305504 /* Language.swift in Sources */,
 				2BCC09AC2B95C05B005BFC95 /* RightView.swift in Sources */,
@@ -523,7 +515,7 @@
 				2B5DF18B2B99B7B900FA285C /* ChatSenderViewModel.swift in Sources */,
 				2B2779002B907E7B00779FB5 /* LoginView.swift in Sources */,
 				2B2778B22B8F5C9B00779FB5 /* MeetMeAtTheCampfireApp.swift in Sources */,
-				2BBC15172B9B754D00305504 /* TranslatorApiKey.swift in Sources */,
+				2BBC15172B9B754D00305504 /* LanguageApiKey.swift in Sources */,
 				2BCC09AE2B95C066005BFC95 /* FalseView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

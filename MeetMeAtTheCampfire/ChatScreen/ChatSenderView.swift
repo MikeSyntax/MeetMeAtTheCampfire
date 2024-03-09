@@ -14,7 +14,7 @@ struct ChatSenderView: View {
     var body: some View {
         RoundedRectangle(cornerRadius: 10)
             .fill(chatSenderVm.isCurrentUser ? Color.cyan.opacity(0.6) : Color.green.opacity(0.6))
-            .frame(width: 300, height: 100)
+            .frame(minWidth: 200, maxWidth: 300, minHeight: 100, maxHeight: 500)
             .overlay(
                 VStack{
                     Text(chatSenderVm.userName)

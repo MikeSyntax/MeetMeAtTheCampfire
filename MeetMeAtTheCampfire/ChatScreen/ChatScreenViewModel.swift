@@ -26,6 +26,10 @@ class ChatScreenViewModel: ObservableObject {
         ]
     }
     
+    deinit{
+        removeListener()
+    }
+    
     //der Listener muss beim Logout auch wieder auf nil gesetzt werden
     private var listener: ListenerRegistration? = nil
     
@@ -77,7 +81,7 @@ class ChatScreenViewModel: ObservableObject {
             }
     }
     
-    private func removeListener(){
+    func removeListener(){
         self.listener = nil
         self.chatSenderViewModels = []
     }

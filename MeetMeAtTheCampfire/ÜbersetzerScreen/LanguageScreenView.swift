@@ -24,20 +24,22 @@ struct LanguageScreenView: View {
                         }
                         .pickerStyle(.menu)
                     }
-                
                     Section(header: Text("Text eingeben")){
                         TextField("Texteingabe für die Übersetzung", text: $languageVm.textToTranslate)
+                           
+                            
+                            .shadow(color: .red, radius: 2)
                             .textInputAutocapitalization(.never)
                             .autocorrectionDisabled()
                             .lineLimit(5, reservesSpace: true)
                             .textFieldStyle(.roundedBorder)
-                           
+                            .frame(minHeight: 100)
                     }
                     Section(header: Text("Es wird übersetzt von")){
                         HStack{
                             Text("Deutsch")
                             Spacer()
-                            ButtonTextAction(iconName: "network", text: "Übersetzen"){
+                            ButtonTextAction(iconName: "network", text: "Übersetzen ->"){
                                 languageVm.translate()
                             }
                             Spacer()
@@ -47,22 +49,33 @@ struct LanguageScreenView: View {
                     }
                     Section(header: Text("Übersetzung")){
                         TextField("Übersetzung", text: $languageVm.translatedText)
+                            .shadow(color: .green, radius:2)
                             .textInputAutocapitalization(.never)
                             .autocorrectionDisabled()
                             .lineLimit(5, reservesSpace: true)
                             .textFieldStyle(.roundedBorder)
+                            .frame(minHeight: 100)
                     }
                 }
             }
+            .background(
+                Image("background")
+                    .resizable()
+                    .scaledToFill()
+                    .opacity(0.2)
+                    .ignoresSafeArea())
             .navigationTitle(Text("Translator"))
         }
         .onAppear {
             languageVm.loadLanguages()
+        }
+        .onDisappear{
+            languageVm.clearTextFields()
         }
     }
 }
 
 
 #Preview {
-    LanguageScreenView(languageVm: LanguageScreenViewModel(languageChoice: Language(code: "de", name: "Englisch")))
+    LanguageScreenView(languageVm: LanguageScreenViewModel(languageChoice: Language(code: "de", name: "Afrikaans"), languageSource: Language(code: "af", name: "Afrikaans")))
 }

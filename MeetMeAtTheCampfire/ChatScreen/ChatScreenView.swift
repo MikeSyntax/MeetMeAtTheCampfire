@@ -69,6 +69,9 @@ struct ChatScreenView: View {
         .onAppear {
             chatVm.readMessages()
         }
+        .onDisappear{
+            chatVm.removeListener()
+        }
     }
 }
 

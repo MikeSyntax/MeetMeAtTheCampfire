@@ -10,7 +10,7 @@ import SwiftUI
 struct MainScreenView: View {
     
     @StateObject var chatVm = ChatScreenViewModel()
-    @StateObject var languageVm = LanguageScreenViewModel(languageChoice: Language(code: "en", name: "Englisch"))
+    @StateObject var languageVm = LanguageScreenViewModel(languageChoice: Language(code: "af", name: "Afrikaans"), languageSource: Language(code: "de", name: "Deutsch"))
     
     var body: some View {
         TabView{
