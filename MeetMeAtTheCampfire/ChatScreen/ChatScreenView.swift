@@ -12,11 +12,11 @@ struct ChatScreenView: View {
     @ObservedObject var chatVm = ChatScreenViewModel()
     @EnvironmentObject var authVm: AuthViewModel
     @State private var newMessage: String = ""
+    @State private var isRead: Bool = false
     
     var body: some View {
         let userName = authVm.user?.userName ?? "User unbekannt"
-        
-        NavigationView {
+        NavigationStack {
             VStack {
                 ScrollView {
                     ScrollViewReader { scrollView in
@@ -26,13 +26,14 @@ struct ChatScreenView: View {
                                     .id(chatSenderViewModel.id)
                             }
                         }
-                        .onChange(of: chatVm.chatSenderViewModels) { _ in
+                        .onChange(of: chatVm.chatSenderViewModels) {
                             if let lastMessageId = chatVm.chatSenderViewModels.last?.id {
                                 scrollView.scrollTo(lastMessageId, anchor: .bottom)
                             }
                         }
                     }
                 }
+                
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .padding()
                 
@@ -43,7 +44,7 @@ struct ChatScreenView: View {
                         .padding()
                     
                     ButtonTextAction(iconName: "plus", text: "Neu") {
-                        chatVm.createNewMessage(userName: userName, messageText: newMessage)
+                        chatVm.createNewMessage(userName: userName, messageText: newMessage, isRead: isRead)
                         newMessage = ""
                     }
                 }
@@ -51,14 +52,19 @@ struct ChatScreenView: View {
             }
             .navigationTitle("Chat")
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        //todo Search
-                    }) {
-                        Image(systemName: "magnifyingglass")
-                    }
+                Button{
+                    //todo Search
+                } label: {
+                    Text("Suche")
+                    Image(systemName: "magnifyingglass")
                 }
             }
+            .background(
+                Image("background")
+                    .resizable()
+                    .scaledToFill()
+                    .opacity(0.2)
+                    .ignoresSafeArea())
         }
         .onAppear {
             chatVm.readMessages()

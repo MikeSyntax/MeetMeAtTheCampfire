@@ -44,7 +44,7 @@ struct ChatSenderView: View {
 }
 
 #Preview {
-    let chat = ChatModel(userId: "1", userName: "Fettes Brot", messageText: "Heute gehen wir campen", timeStamp: Date())
+    let chat = ChatModel(userId: "1", userName: "Fettes Brot", messageText: "Heute gehen wir campen", timeStamp: Date(), isRead: false)
     let chatVm = ChatSenderViewModel(chatDesign: chat)
     return ChatSenderView(chatSenderVm: chatVm)
 }

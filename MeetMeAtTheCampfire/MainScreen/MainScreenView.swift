@@ -10,6 +10,8 @@ import SwiftUI
 struct MainScreenView: View {
     
     @StateObject var chatVm = ChatScreenViewModel()
+    @StateObject var languageVm = LanguageScreenViewModel(languageChoice: Language(code: "en", name: "Englisch"))
+    @StateObject var translatorVm = TranslatorScreenViewModel(languageChoice: Language(code: "", name: ""))
     
     var body: some View {
         TabView{
@@ -19,17 +21,25 @@ struct MainScreenView: View {
                     Text("Home")
                 }.tag(0)
             
-            ChatScreenView(chatVm: chatVm)
+            ChatScreenView(chatVm: self.chatVm)
                 .tabItem {
-                    Image(systemName: "message.fill")
+                    Image(systemName: "message")
                     Text("Chat")
-                }.tag(1)
+                }
+                .badge(self.chatVm.newMessagesCount)
+                .tag(1)
+            
+            LanguageScreenView(languageVm: languageVm)
+                .tabItem {
+                    Image(systemName: "network")
+                    Text("Übersetzer")
+                }.tag(2)
             
             ProfileScreenView()
                 .tabItem {
                     Image(systemName: "person")
                     Text("Profil")
-                }.tag(2)
+                }.tag(3)
         }
     }
 }

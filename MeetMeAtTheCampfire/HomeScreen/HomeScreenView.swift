@@ -15,7 +15,6 @@ struct HomeScreenView: View {
     @State private var showSettingsSheet: Bool = false
     @Environment(\.dismiss) private var dismiss
     
-    
     var body: some View {
         NavigationStack {
             VStack {
@@ -53,7 +52,7 @@ struct HomeScreenView: View {
                     .scaledToFill()
                     .opacity(0.2)
                     .ignoresSafeArea())
-            .navigationBarTitle("Home")
+            .navigationBarTitle("Meine Kategorien")
         }
         .alert("Neue Kategorie", isPresented: $showNewCategorieAlert) {
             TextField("Name", text: $newCategorie)

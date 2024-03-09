@@ -33,10 +33,14 @@ struct DetailCategorieView: View {
                 .scaledToFill()
                 .opacity(0.2)
                 .ignoresSafeArea())
-    
+        
         .navigationBarTitle("Kategorie Details", displayMode: .inline)
+    }
 }
-}
+
+
+
+
 //#Preview {
 //    DetailCategorieView(categorie: CategorieModel(from: CategorieModel))
 //}

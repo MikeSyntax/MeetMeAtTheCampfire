@@ -12,14 +12,18 @@ class ChatScreenViewModel: ObservableObject {
     
     //Leere Liste erzeugt
     @Published var chatSenderViewModels: [ChatSenderViewModel] = []
-    
+    @Published var newMessagesCount: Int = 0
     
     init(){
         // Liste mit DummyDaten an Nachrichten für die erste Anzeige
         chatSenderViewModels = [
-            ChatSenderViewModel(chatDesign: ChatModel(userId: "1", userName: "Dieter", messageText: "Huhu", timeStamp: Date())),
-            ChatSenderViewModel(chatDesign: ChatModel(userId: "2", userName: "Tamara", messageText: "Wieviel Geld sollte ich mitnehmen", timeStamp: Date())),
-            ChatSenderViewModel(chatDesign: ChatModel(userId: "3", userName: "Klaus", messageText: "Das kommt ganz darauf an, wie lange du bleiben willst", timeStamp: Date()))]
+            ChatSenderViewModel(chatDesign:
+                                    ChatModel(userId: "1", userName: "Dieter", messageText: "Huhu", timeStamp: Date(), isRead: false)),
+            ChatSenderViewModel(chatDesign:
+                                    ChatModel(userId: "2", userName: "Tamara", messageText: "Wieviel Geld sollte ich mitnehmen", timeStamp: Date(), isRead: false)),
+            ChatSenderViewModel(chatDesign:
+                                    ChatModel(userId: "3", userName: "Klaus", messageText: "Das kommt ganz darauf an, wie lange du bleiben willst", timeStamp: Date(), isRead: false))
+        ]
     }
     
     //der Listener muss beim Logout auch wieder auf nil gesetzt werden
@@ -28,12 +32,12 @@ class ChatScreenViewModel: ObservableObject {
     //MARK Anlegen aller 4 CRUD Operationen Create Read Update und Delete ------------------------------------------------------------------
     
     //Neue ChatNachricht im Firestore anlegen
-    func createNewMessage(userName: String, messageText: String){
+    func createNewMessage(userName: String, messageText: String, isRead: Bool){
         guard let userId = FirebaseManager.shared.userId else {
             return
         }
         
-        let message = ChatModel(userId: userId, userName: userName, messageText: messageText, timeStamp: Date())
+        let message = ChatModel(userId: userId, userName: userName, messageText: messageText, timeStamp: Date(), isRead: isRead)
         
         do{
             try FirebaseManager.shared.firestore.collection("messages").addDocument(from: message)
@@ -73,10 +77,9 @@ class ChatScreenViewModel: ObservableObject {
             }
     }
     
-    func removeListener(){
+    private func removeListener(){
         self.listener = nil
         self.chatSenderViewModels = []
     }
 }
-
 
