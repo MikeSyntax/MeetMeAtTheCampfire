@@ -18,5 +18,4 @@ struct LanguageData: Codable, Hashable {
 struct Language: Codable, Hashable {
     let code: String
     var name: String
-    
 }

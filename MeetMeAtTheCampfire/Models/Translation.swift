@@ -8,7 +8,6 @@
 import Foundation
 
 struct Translation: Codable {
-    let status: String
     let data: GetTranslation
 }
 

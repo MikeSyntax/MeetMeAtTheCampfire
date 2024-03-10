@@ -45,6 +45,8 @@
 		2B2779052B907EBF00779FB5 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2779042B907EBF00779FB5 /* AuthViewModel.swift */; };
 		2B2779082B90810300779FB5 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2779072B90810300779FB5 /* UserModel.swift */; };
 		2B2A3E472B90B176007E5E7F /* ButtonTextAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2A3E462B90B176007E5E7F /* ButtonTextAction.swift */; };
+		2B36879C2B9E039400F2E944 /* CheckmarkIsRead.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B36879B2B9E039400F2E944 /* CheckmarkIsRead.swift */; };
+		2B36879E2B9E03A700F2E944 /* CheckmarkNotRead.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B36879D2B9E03A700F2E944 /* CheckmarkNotRead.swift */; };
 		2B5D19402B91DD3D004DB072 /* AuthenticationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5D193F2B91DD3D004DB072 /* AuthenticationRepository.swift */; };
 		2B5DF1852B99B46E00FA285C /* ChatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5DF1842B99B46E00FA285C /* ChatModel.swift */; };
 		2B5DF1872B99B55500FA285C /* ChatScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5DF1862B99B55500FA285C /* ChatScreenViewModel.swift */; };
@@ -85,6 +87,8 @@
 		2B2779042B907EBF00779FB5 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		2B2779072B90810300779FB5 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		2B2A3E462B90B176007E5E7F /* ButtonTextAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTextAction.swift; sourceTree = "<group>"; };
+		2B36879B2B9E039400F2E944 /* CheckmarkIsRead.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckmarkIsRead.swift; sourceTree = "<group>"; };
+		2B36879D2B9E03A700F2E944 /* CheckmarkNotRead.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckmarkNotRead.swift; sourceTree = "<group>"; };
 		2B5D193F2B91DD3D004DB072 /* AuthenticationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationRepository.swift; sourceTree = "<group>"; };
 		2B5DF1842B99B46E00FA285C /* ChatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatModel.swift; sourceTree = "<group>"; };
 		2B5DF1862B99B55500FA285C /* ChatScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatScreenViewModel.swift; sourceTree = "<group>"; };
@@ -178,18 +182,19 @@
 		2B2778B02B8F5C9B00779FB5 /* MeetMeAtTheCampfire */ = {
 			isa = PBXGroup;
 			children = (
+				2BF4B9782B98762A00C1AF1A /* ProfileScreen */,
+				2B2A3E452B90B147007E5E7F /* Buttons */,
+				2B36879A2B9E036C00F2E944 /* Checkmarks */,
 				2BBC150B2B9B669800305504 /* TranslatorScreen */,
 				2BBC15082B9B5BC100305504 /* Codeschnippsel */,
 				2BF4B97E2B98A23000C1AF1A /* SettingsScreen */,
 				2BF4B97B2B9877C200C1AF1A /* ChatScreen */,
-				2BF4B9782B98762A00C1AF1A /* ProfileScreen */,
 				2BF4B9752B98748E00C1AF1A /* MainScreen */,
 				2B0158652B9789D30026CA84 /* DetailCategorie */,
 				2BAB62512B95D8CC00C7839E /* CategorieScreen */,
 				2BAB62482B95D5F100C7839E /* HomeScreen */,
 				2BCC09AA2B95C011005BFC95 /* FalseRightView */,
 				2B5D193E2B91DD0C004DB072 /* AuthenticationRepository */,
-				2B2A3E452B90B147007E5E7F /* Buttons */,
 				2B2779062B9080F000779FB5 /* Models */,
 				2B2779032B907E9600779FB5 /* AuthenticatonViewModel */,
 				2B2778FE2B907B7C00779FB5 /* AuthenticationView */,
@@ -260,6 +265,15 @@
 				2B2A3E462B90B176007E5E7F /* ButtonTextAction.swift */,
 			);
 			path = Buttons;
+			sourceTree = "<group>";
+		};
+		2B36879A2B9E036C00F2E944 /* Checkmarks */ = {
+			isa = PBXGroup;
+			children = (
+				2B36879B2B9E039400F2E944 /* CheckmarkIsRead.swift */,
+				2B36879D2B9E03A700F2E944 /* CheckmarkNotRead.swift */,
+			);
+			path = Checkmarks;
 			sourceTree = "<group>";
 		};
 		2B5D193E2B91DD0C004DB072 /* AuthenticationRepository */ = {
@@ -490,7 +504,9 @@
 				2BBC150A2B9B5BF400305504 /* Codeschnippsel.swift in Sources */,
 				2B2A3E472B90B176007E5E7F /* ButtonTextAction.swift in Sources */,
 				2B2778FD2B9079F200779FB5 /* FirebaseManager.swift in Sources */,
+				2B36879E2B9E03A700F2E944 /* CheckmarkNotRead.swift in Sources */,
 				2B5DF1892B99B68900FA285C /* ChatSenderView.swift in Sources */,
+				2B36879C2B9E039400F2E944 /* CheckmarkIsRead.swift in Sources */,
 				2BBC150F2B9B66DD00305504 /* LanguageRepository.swift in Sources */,
 				2BAB62532B95DDC600C7839E /* CategorieFilledView.swift in Sources */,
 				2B0158672B9789F20026CA84 /* DetailCategorieView.swift in Sources */,

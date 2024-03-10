@@ -17,6 +17,9 @@ class HomeScreenViewModel: ObservableObject {
     
     //MARK Anlegen aller 4 CRUD Operationen Create Read Update und Delete ------------------------------------------------------------------
     
+    deinit{
+        removeListener()
+    }
     //Anlegen einer neuen Kategorie im Firebase Firestore
     func createCategorie(categorieName: String, tasksInCategorie: Int){
         //wenn die userId leer ist mache nichts

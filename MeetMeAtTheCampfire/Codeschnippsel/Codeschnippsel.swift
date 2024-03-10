@@ -7,6 +7,10 @@
 
 import Foundation
 
+//Beim Chat die Box automatisch der Nachricht anpassen
+//Beim Einloggen muss man manchmal erst zwischen den Screen wechseln bevor sich die Ansicht aktualisiert
+//Die Sprache aus dem Picker wird nicht geändert. ERLEDIGT
+
 // self.newMessagesCount = self.checkForNewMessages(from: chatSenderViewModels)
 
 //    func updateReadStatus(chatSenderVm: ChatSenderViewModel){

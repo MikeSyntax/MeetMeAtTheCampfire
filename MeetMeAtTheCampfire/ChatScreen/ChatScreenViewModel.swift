@@ -34,7 +34,6 @@ class ChatScreenViewModel: ObservableObject {
     private var listener: ListenerRegistration? = nil
     
     //MARK Anlegen aller 4 CRUD Operationen Create Read Update und Delete ------------------------------------------------------------------
-    
     //Neue ChatNachricht im Firestore anlegen
     func createNewMessage(userName: String, messageText: String, isRead: Bool){
         guard let userId = FirebaseManager.shared.userId else {
@@ -79,6 +78,24 @@ class ChatScreenViewModel: ObservableObject {
                 }
                 self.chatSenderViewModels = chatSenderViewModels
             }
+    }
+    
+    func updateReadStatus(chatSenderVm: ChatSenderViewModel){
+        guard let messageId = chatSenderVm.chatSenderVm.id else {
+            return
+        }
+        
+        let updatedReadStatus = [
+            "isRead" : chatSenderVm.chatSenderVm.isRead ? false : true]
+        
+        FirebaseManager.shared.firestore.collection("messages").document(messageId).setData(updatedReadStatus, merge: true){
+            error in
+            if let error {
+                print("updating isRead - Status failed: \(error)")
+            } else {
+                print("update succeeded")
+            }
+        }
     }
     
     func removeListener(){

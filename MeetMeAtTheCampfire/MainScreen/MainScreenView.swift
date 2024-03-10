@@ -11,6 +11,10 @@ struct MainScreenView: View {
     
     @StateObject var chatVm = ChatScreenViewModel()
     @StateObject var languageVm = LanguageScreenViewModel(languageChoice: Language(code: "af", name: "Afrikaans"), languageSource: Language(code: "de", name: "Deutsch"))
+    @StateObject var chatSenderVm = ChatSenderViewModel(chatDesign: ChatModel(userId: "2", userName: "Dieter", messageText: "Danke", timeStamp: Date(), isRead: false))
+    //Immer mit der HomeScreenView anfangen
+    @State private var selectedTab = 0
+    
     
     var body: some View {
         TabView{
@@ -20,7 +24,7 @@ struct MainScreenView: View {
                     Text("Home")
                 }.tag(0)
             
-            ChatScreenView(chatVm: self.chatVm)
+            ChatScreenView(chatVm: self.chatVm, chatSenderVm: chatSenderVm)
                 .tabItem {
                     Image(systemName: "message")
                     Text("Chat")
@@ -39,6 +43,9 @@ struct MainScreenView: View {
                     Image(systemName: "person")
                     Text("Profil")
                 }.tag(3)
+        }
+        .onAppear{
+            selectedTab = 0
         }
     }
 }

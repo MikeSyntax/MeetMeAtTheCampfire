@@ -74,6 +74,9 @@ struct HomeScreenView: View {
         .onAppear {
             homeVm.readCategories()
         }
+        .onDisappear{
+            homeVm.removeListener()
+        }
     }
 }
 

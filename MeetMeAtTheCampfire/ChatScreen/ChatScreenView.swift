@@ -13,6 +13,7 @@ struct ChatScreenView: View {
     @EnvironmentObject var authVm: AuthViewModel
     @State private var newMessage: String = ""
     @State private var isRead: Bool = false
+    let chatSenderVm: ChatSenderViewModel
     
     var body: some View {
         let userName = authVm.user?.userName ?? "User unbekannt"
@@ -33,7 +34,12 @@ struct ChatScreenView: View {
                         }
                     }
                 }
-                
+                //Alle Nachrichten als gelesen markieren, allerdings erstmal nur onTap
+                .onTapGesture {
+                    for chatSenderViewModel in chatVm.chatSenderViewModels {
+                        chatVm.updateReadStatus(chatSenderVm: chatSenderViewModel)
+                    }
+                }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .padding()
                 
@@ -68,6 +74,7 @@ struct ChatScreenView: View {
         }
         .onAppear {
             chatVm.readMessages()
+            //chatVm.updateReadStatus(chatSenderVm: chatSenderVm)
         }
         .onDisappear{
             chatVm.removeListener()
@@ -75,8 +82,7 @@ struct ChatScreenView: View {
     }
 }
 
-
 #Preview {
-    ChatScreenView(chatVm: ChatScreenViewModel())
+    ChatScreenView(chatSenderVm: ChatSenderViewModel(chatDesign: ChatModel(userId: "2", userName: "Dieter", messageText: "Danke", timeStamp: Date(), isRead: false)))
         .environmentObject(AuthViewModel())
 }

@@ -22,20 +22,27 @@ struct ChatSenderView: View {
                         .frame(maxWidth: .infinity, alignment: chatSenderVm.isCurrentUser ? .trailing : .leading)
                         .padding(.trailing)
                         .padding(.leading)
-                    Text(chatSenderVm.messageText)
-                        .font(.headline)
-                        .frame(maxWidth: .infinity, alignment: chatSenderVm.isCurrentUser ? .leading : .trailing)
-                        .padding(.leading)
-                        .padding(.trailing)
+                  
+                        Text(chatSenderVm.messageText)
+                            .font(.headline)
+                            .frame(maxWidth: .infinity, alignment: chatSenderVm.isCurrentUser ? .leading : .trailing)
+                            .padding(.leading)
+                            .padding(.trailing)
+                       
                     Spacer()
+                    HStack{
                     Text(chatSenderVm.dateString)
                         .font(.caption)
                         .frame(maxWidth: .infinity, alignment: chatSenderVm.isCurrentUser ? .trailing : .leading)
                         .padding(.trailing)
                         .padding(.leading)
-                    
+                        if chatSenderVm.isRead {
+                            CheckmarkIsRead()
+                        } else {
+                            CheckmarkNotRead()
+                        }
+                    }
                 }
-                    
                     .padding(2)
             )
             .frame(maxWidth: .infinity, alignment: chatSenderVm.isCurrentUser ? .trailing : .leading)
