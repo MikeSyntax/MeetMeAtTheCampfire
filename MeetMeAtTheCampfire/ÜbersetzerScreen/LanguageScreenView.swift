@@ -42,7 +42,7 @@ struct LanguageScreenView: View {
                             Text("Deutsch")
                             Spacer()
                             ButtonTextAction(iconName: "network", text: "Übersetzen ->"){
-                                languageVm.translate()
+                                languageVm.translateLanguage()
                             }
                             Spacer()
                             Text("\(selectionLanguage.name)")

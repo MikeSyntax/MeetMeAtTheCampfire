@@ -83,7 +83,7 @@ class HomeScreenViewModel: ObservableObject {
             if let error {
                 print("update categorie failed: \(error)")
             } else {
-                print("update succeeded")
+                print("update done")
             }
         }
     }

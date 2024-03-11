@@ -44,19 +44,19 @@ class LanguageScreenViewModel: ObservableObject {
                 let languages = try await self.languageRepo.languages()
                 self.languages = languages
             } catch {
-                print("Error: \(error)")
+                print("Error loading languagge: \(error)")
             }
         }
     }
     
     //Übersetzung laden im Hauptthread durch MainActor und da dort keine await Funktionen laufen muss ein Task darum gebaut werden
     @MainActor
-    func translate(){
+    func translateLanguage(){
         Task{
             do{
                 self.translatedText = try await self.languageRepo.translate(languageSource: "de", languageChoice: self.languageChoice.code, textToTranslate: textToTranslate)
             } catch {
-                print("Error: \(error)")
+                print("Error translating language: \(error)")
             }
         }
     }

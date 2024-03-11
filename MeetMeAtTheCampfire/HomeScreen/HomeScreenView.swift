@@ -20,6 +20,7 @@ struct HomeScreenView: View {
             VStack {
                 Spacer()
                 ScrollView {
+                    // Hier wird ein LazyVGrid (Lazy deshalb, da nur sichtbare Ansichten erstellt werden, um Speicher zu sparen), das eine Gitteransicht mit variabler Breite für die Spalten und einem Abstand zwischen den Elementen erstellt.
                     LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 20), count: 3), spacing: 20) {
                         ForEach(homeVm.categorieViewModels) { categorieViewModel in
                             NavigationLink(destination: DetailCategorieView(categorieVm: categorieViewModel, homeVm: homeVm)) {

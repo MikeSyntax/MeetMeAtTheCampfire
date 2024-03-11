@@ -24,12 +24,12 @@ struct MainScreenView: View {
                     Text("Home")
                 }.tag(0)
             
-            ChatScreenView(chatVm: self.chatVm, chatSenderVm: chatSenderVm)
+            ChatScreenView(chatVm: self.chatVm)
                 .tabItem {
                     Image(systemName: "message")
                     Text("Chat")
                 }
-                .badge(self.chatVm.newMessagesCount)
+                .badge(self.chatVm.messagesCountResult)
                 .tag(1)
             
             LanguageScreenView(languageVm: languageVm)
@@ -46,6 +46,10 @@ struct MainScreenView: View {
         }
         .onAppear{
             selectedTab = 0
+            
+//            print("Funktion readMessageCount \( chatVm.readMessageCount())")
+//            print("Funktion setMessageCountNew \(chatVm.setMessageCountNew())")
+//            print("Funktion getNewMessageCount \( chatVm.getNewMessageCount())")
         }
     }
 }
