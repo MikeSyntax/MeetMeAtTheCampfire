@@ -6,10 +6,8 @@
 //
 
 import Foundation
-import Firebase
 import FirebaseAuth
-import FirebaseFirestore
-import FirebaseStorage
+
 
 class AuthViewModel: ObservableObject{
     
@@ -55,6 +53,7 @@ class AuthViewModel: ObservableObject{
     
     func logout(){
         do{
+            updateUser()
             try FirebaseManager.shared.authentication.signOut()
             self.user = nil
             userName = ""
@@ -117,12 +116,33 @@ class AuthViewModel: ObservableObject{
     
     func createUser(withId id: String, email: String, userName: String){
         //Kreire einen neuen appUser gemäß UserModel
-        let appUser = UserModel(id: id, email: email, registeredTime: Date(), userName: userName)
+        let appUser = UserModel(id: id, email: email, registeredTime: Date(), userName: userName, timeStampLastVisitChat: Date.now)
         do{
             //Gehe in den Firestore, erstelle dort eine Col. appUser mit doc id und den Daten gemäß UserModel
             try FirebaseManager.shared.firestore.collection("appUser").document(id).setData(from: appUser)
         } catch {
             print("Could not create new appUser: \(error)")
+        }
+    }
+    
+    //Hier wird nur der timeStamp für den letzen ChatBesuch aktualisiert
+    func updateUser(){
+        
+        guard var currentUser = user else {
+            return
+        }
+        
+        guard let currentUserId = FirebaseManager.shared.userId else {
+            return
+        }
+        
+        currentUser.timeStampLastVisitChat = Date.now
+        
+        do{
+            try FirebaseManager.shared.firestore.collection("appUser").document(currentUserId).setData(from: currentUser)
+            print("Update appUser succeeded")
+        } catch {
+            print("Could not update appUser: \(error)")
         }
     }
 }

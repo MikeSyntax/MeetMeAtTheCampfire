@@ -59,9 +59,9 @@ struct LoginView: View {
                         }
                         
                         ZStack(alignment: .trailing){
-                        SecureField("Passwort eingeben", text: $authVM.password)
-                            .textFieldStyle(.roundedBorder)
-                            .padding()
+                            SecureField("Passwort eingeben", text: $authVM.password)
+                                .textFieldStyle(.roundedBorder)
+                                .padding()
                             if !authVM.password.isEmpty {
                                 if authVM.password.count >= 6 {
                                     RightView()
@@ -70,7 +70,7 @@ struct LoginView: View {
                                 }
                             }
                         }
-                            
+                        
                         ButtonTextAction(iconName: "paperplane.fill", text: "Login"){
                             authVM.login()
                         }

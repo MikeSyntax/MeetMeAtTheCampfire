@@ -15,7 +15,7 @@ struct ChatModel: Codable, Identifiable {
     let userName: String
     let messageText: String
     let timeStamp: Date
-    let isRead: Bool
+    let isReadbyUser: [String]
     
     //um den TimeStamp überall zugänglich zu machen
     func getTimeStamp() -> Date {

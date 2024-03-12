@@ -9,9 +9,9 @@ import Foundation
 
 struct UserModel: Codable, Identifiable {
     
-    let id: String
+    let id: String?
     let email: String
     let registeredTime: Date
     let userName: String
-    
+    var timeStampLastVisitChat: Date
 }

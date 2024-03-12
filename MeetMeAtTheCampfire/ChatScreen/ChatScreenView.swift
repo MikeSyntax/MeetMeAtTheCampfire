@@ -9,13 +9,13 @@ import SwiftUI
 
 struct ChatScreenView: View {
     
-    @ObservedObject var chatVm = ChatScreenViewModel()
+    @ObservedObject var chatVm: ChatScreenViewModel
     @EnvironmentObject var authVm: AuthViewModel
     @State private var newMessage: String = ""
-    @State private var isRead: Bool = false
     
     var body: some View {
-        let userName = authVm.user?.userName ?? "User unbekannt"
+        let userName = authVm.user?.userName ?? "User name unknown"
+        let currentUser = authVm.user?.id ?? "No current user"
         NavigationStack {
             VStack {
                 ScrollView {
@@ -25,7 +25,7 @@ struct ChatScreenView: View {
                                 ChatSenderView(chatSenderVm: chatSenderViewModel)
                                     .id(chatSenderViewModel.id)
                                     .onAppear {
-                                        if !chatSenderViewModel.isRead {
+                                        if !chatSenderViewModel.isReadbyUser.contains(currentUser) {
                                             chatVm.updateisReadStatus(chatSenderVm: chatSenderViewModel)
                                         }
                                     }
@@ -35,19 +35,10 @@ struct ChatScreenView: View {
                             if let lastMessageId = chatVm.chatSenderViewModels.last?.id {
                                 scrollView.scrollTo(lastMessageId, anchor: .bottom)
                             }
+                            authVm.user?.timeStampLastVisitChat = Date.now
                         }
                     }
                 }
-                //                //Die letzte Nachricht als gelesen markieren, allerdings erstmal nur onTap
-                //                .onTapGesture {
-                //                    chatVm.updateisReadStatus(chatSenderVm: chatVm.chatSenderViewModels.last ?? ChatSenderViewModel(chatDesign: ChatModel(userId: "1", userName: "12345", messageText: "danke", timeStamp: Date(), isRead: false))
-                //                    )
-                //                }
-                
-                //Alle Nachrichten als gelesen markieren, allerdings erstmal nur onTap obwohl es mit onAppear besser wäre
-                
-                
-                
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .padding()
                 
@@ -58,7 +49,7 @@ struct ChatScreenView: View {
                         .padding()
                     
                     ButtonTextAction(iconName: "plus", text: "Neu") {
-                        chatVm.createNewMessage(userName: userName, messageText: newMessage, isRead: isRead)
+                        chatVm.createNewMessage(userName: userName, messageText: newMessage)
                         newMessage = ""
                     }
                 }
@@ -82,17 +73,15 @@ struct ChatScreenView: View {
         }
         .onAppear {
             chatVm.readMessages()
+            authVm.user?.timeStampLastVisitChat = Date.now
         }
         .onDisappear{
             chatVm.removeListener()
-            
-            //            chatVm.createMessageCountOld()
-            //            chatVm.messagesCountResult = 0
         }
     }
 }
 
 #Preview {
-    ChatScreenView()
+    ChatScreenView(chatVm: ChatScreenViewModel(user: UserModel(id: "1", email: "1", registeredTime: Date(), userName: "hallo", timeStampLastVisitChat: Date.now)))
         .environmentObject(AuthViewModel())
 }

@@ -37,7 +37,7 @@ struct ProfileScreenView: View {
                     Image(systemName: "door.left.hand.open")
                 }
             }
-            .navigationBarTitle("Profil") // Optional: Setzt den Titel der Navigationsleiste
+            .navigationBarTitle("Profil")
             .background(
                 Image("background")
                     .resizable()

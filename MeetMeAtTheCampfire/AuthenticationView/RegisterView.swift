@@ -24,12 +24,12 @@ struct RegisterView: View {
                     .foregroundStyle(.gray)
                 
                 ZStack(alignment: .trailing){
-                TextField("Benutzernamen eingeben", text: $authVM.userName)
-                    .textFieldStyle(.roundedBorder)
-                    .textInputAutocapitalization(.never)
-                    .autocorrectionDisabled()
-                    .padding(.leading)
-                    .padding(.trailing)
+                    TextField("Benutzernamen eingeben", text: $authVM.userName)
+                        .textFieldStyle(.roundedBorder)
+                        .textInputAutocapitalization(.never)
+                        .autocorrectionDisabled()
+                        .padding(.leading)
+                        .padding(.trailing)
                     if !authVM.userName.isEmpty {
                         if authVM.userName.count >= 2 {
                             RightView()
@@ -38,14 +38,14 @@ struct RegisterView: View {
                         }
                     }
                 }
-                    
+                
                 ZStack(alignment: .trailing){
-                TextField("Email eingeben", text: $authVM.email)
-                    .textFieldStyle(.roundedBorder)
-                    .textInputAutocapitalization(.never)
-                    .autocorrectionDisabled()
-                    .padding(.leading)
-                    .padding(.trailing)
+                    TextField("Email eingeben", text: $authVM.email)
+                        .textFieldStyle(.roundedBorder)
+                        .textInputAutocapitalization(.never)
+                        .autocorrectionDisabled()
+                        .padding(.leading)
+                        .padding(.trailing)
                     if !authVM.email.isEmpty {
                         if authVM.email.count >= 2 {
                             RightView()
@@ -59,18 +59,18 @@ struct RegisterView: View {
                     .padding()
                 
                 ZStack(alignment: .trailing){
-                SecureField("Passwort eingeben", text: $authVM.password)
-                    .textFieldStyle(.roundedBorder)
-                    .padding(.leading)
-                    .padding(.trailing)
-                if !authVM.password.isEmpty {
-                    if authVM.password.count >= 6 {
-                        RightView()
-                    } else {
-                        FalseView()
+                    SecureField("Passwort eingeben", text: $authVM.password)
+                        .textFieldStyle(.roundedBorder)
+                        .padding(.leading)
+                        .padding(.trailing)
+                    if !authVM.password.isEmpty {
+                        if authVM.password.count >= 6 {
+                            RightView()
+                        } else {
+                            FalseView()
+                        }
                     }
                 }
-            }
                 
                 ZStack(alignment: .trailing){
                     SecureField("Passwort wiederholen", text: $authVM.confirmPassword)

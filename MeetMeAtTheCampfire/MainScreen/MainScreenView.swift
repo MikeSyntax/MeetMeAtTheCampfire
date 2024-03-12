@@ -8,13 +8,23 @@
 import SwiftUI
 
 struct MainScreenView: View {
-    
-    @StateObject var chatVm = ChatScreenViewModel()
+    let authVm: AuthViewModel
+    @StateObject var chatVm: ChatScreenViewModel
     @StateObject var languageVm = LanguageScreenViewModel(languageChoice: Language(code: "af", name: "Afrikaans"), languageSource: Language(code: "de", name: "Deutsch"))
-    @StateObject var chatSenderVm = ChatSenderViewModel(chatDesign: ChatModel(userId: "2", userName: "Dieter", messageText: "Danke", timeStamp: Date(), isRead: false))
+    @StateObject var chatSenderVm = ChatSenderViewModel(chatDesign: ChatModel(userId: "2", userName: "Dieter", messageText: "Danke", timeStamp: Date(), isReadbyUser: []))
     //Immer mit der HomeScreenView anfangen
     @State private var selectedTab = 0
+    //Ungelesenen Nachrichten filtern nach dem TimeStamp des einloggens im Vergleich zum letzten Besuch des Chats
+//    var unreadedMessages: Int {
+//        chatVm.chatSenderViewModels.filter ({ $0.timeStamp > authVm.user!.timeStampLastVisitChat}).count
+//    }
     
+    
+    
+    init(authVm: AuthViewModel){
+        _chatVm = StateObject(wrappedValue: ChatScreenViewModel(user: authVm.user!))
+        self.authVm = authVm
+    }
     
     var body: some View {
         TabView{
@@ -29,10 +39,11 @@ struct MainScreenView: View {
                     Image(systemName: "message")
                     Text("Chat")
                 }
-                .badge(self.chatVm.messagesCountResult)
+                .badge(/*unreadedMessages*/ chatVm.messageCountResult)
+            
                 .tag(1)
             
-            LanguageScreenView(languageVm: languageVm)
+            LanguageScreenView(languageVm: self.languageVm)
                 .tabItem {
                     Image(systemName: "network")
                     Text("Übersetzer")
@@ -46,14 +57,19 @@ struct MainScreenView: View {
         }
         .onAppear{
             selectedTab = 0
-            
-//            print("Funktion readMessageCount \( chatVm.readMessageCount())")
-//            print("Funktion setMessageCountNew \(chatVm.setMessageCountNew())")
-//            print("Funktion getNewMessageCount \( chatVm.getNewMessageCount())")
+            chatVm.readMessages()
+        }
+        .onChange(of: selectedTab){
+            if selectedTab == 1 {
+                authVm.user!.timeStampLastVisitChat = Date.now
+            }
+      }
+        .onDisappear{
+            authVm.updateUser()
         }
     }
 }
 
 #Preview {
-    MainScreenView()
+    MainScreenView(authVm: AuthViewModel())
 }

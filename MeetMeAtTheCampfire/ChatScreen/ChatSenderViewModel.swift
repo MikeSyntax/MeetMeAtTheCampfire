@@ -18,10 +18,11 @@ class ChatSenderViewModel: ObservableObject, Identifiable, Equatable {
     @Published var messageText: String = ""
     @Published var dateString: String = ""
     @Published var isCurrentUser: Bool = false
-    @Published var isRead: Bool = false
+    @Published var isReadbyUser: [String] = []
+    @Published var userId: String = ""
     
-    // Private Variable 'timeStamp', die das Datum und die Uhrzeit des Chatnachrichtenzeitstempels speichert.
-    private var timeStamp = Date()
+    // Variable 'timeStamp', die das Datum und die Uhrzeit des Chatnachrichtenzeitstempels speichert.
+    @Published var timeStamp = Date()
 
     // Eine Konstante 'chatSenderVm' vom Typ 'ChatModel', die die Daten des Chatmodells enthält.
     let chatSenderVm: ChatModel
@@ -34,7 +35,8 @@ class ChatSenderViewModel: ObservableObject, Identifiable, Equatable {
         self.userName = chatDesign.userName
         self.timeStamp = chatDesign.timeStamp
         self.messageText = chatDesign.messageText
-        self.isRead = chatDesign.isRead
+        self.isReadbyUser = chatDesign.isReadbyUser
+        self.userId = chatDesign.userId
         
         self.isCurrentUser = isCurrentUser
         

@@ -36,7 +36,7 @@ struct ChatSenderView: View {
                         .frame(maxWidth: .infinity, alignment: chatSenderVm.isCurrentUser ? .trailing : .leading)
                         .padding(.trailing)
                         .padding(.leading)
-                        if chatSenderVm.isRead {
+                        if chatSenderVm.isReadbyUser.contains(chatSenderVm.userId) {
                             CheckmarkIsRead()
                         } else {
                             CheckmarkNotRead()
@@ -51,7 +51,7 @@ struct ChatSenderView: View {
 }
 
 #Preview {
-    let chat = ChatModel(userId: "1", userName: "Fettes Brot", messageText: "Heute gehen wir campen", timeStamp: Date(), isRead: false)
+    let chat = ChatModel(userId: "1", userName: "Fettes Brot", messageText: "Heute gehen wir campen", timeStamp: Date(), isReadbyUser: [])
     let chatVm = ChatSenderViewModel(chatDesign: chat)
     return ChatSenderView(chatSenderVm: chatVm)
 }

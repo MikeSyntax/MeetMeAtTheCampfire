@@ -22,13 +22,13 @@ struct MeetMeAtTheCampfireApp: App {
     var body: some Scene {
         WindowGroup {
             if authVm.userLoggedIn {
-                MainScreenView()
+                MainScreenView(authVm: authVm)
                     .environmentObject(authVm)
             } else {
                 LoginView()
                     .environmentObject(authVm)
             }
-           
+            
         }
     }
 }
