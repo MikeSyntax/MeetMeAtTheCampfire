@@ -16,6 +16,10 @@ struct ProfileScreenView: View {
         let userEmail = authVm.user?.email ?? "Email unbekannt"
         NavigationStack {
             VStack {
+                Image(.logo)
+                    .resizable()
+                    .clipShape(Circle())
+                    .frame(width: 250, height: 250)
                 // Hier kannst du den Inhalt deiner Profilansicht einfügen
                 Text("Profil Ansicht!")
                 Spacer()

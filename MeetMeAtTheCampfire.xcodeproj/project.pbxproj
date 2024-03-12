@@ -183,9 +183,8 @@
 			isa = PBXGroup;
 			children = (
 				2BBC15082B9B5BC100305504 /* ToDoListe */,
-				2BCC09AA2B95C011005BFC95 /* FalseRight */,
-				2B36879A2B9E036C00F2E944 /* Checkmarks */,
-				2B2A3E452B90B147007E5E7F /* Buttons */,
+				2BD8D4352BA0A5FC0050CB64 /* Components */,
+				2BD8D4362BA0A6480050CB64 /* Authentication */,
 				2BF4B9782B98762A00C1AF1A /* ProfileScreen */,
 				2BBC150B2B9B669800305504 /* TranslatorScreen */,
 				2BF4B97E2B98A23000C1AF1A /* SettingsScreen */,
@@ -194,11 +193,6 @@
 				2B0158652B9789D30026CA84 /* DetailCategorie */,
 				2BAB62512B95D8CC00C7839E /* CategorieScreen */,
 				2BAB62482B95D5F100C7839E /* HomeScreen */,
-				2B5D193E2B91DD0C004DB072 /* AuthenticationRepository */,
-				2B2779062B9080F000779FB5 /* Models */,
-				2B2779032B907E9600779FB5 /* AuthenticatonViewModel */,
-				2B2778FE2B907B7C00779FB5 /* AuthenticationView */,
-				2B2778FA2B9079CA00779FB5 /* Firebase */,
 				2B2778B12B8F5C9B00779FB5 /* MeetMeAtTheCampfireApp.swift */,
 				2B2778B52B8F5C9C00779FB5 /* Assets.xcassets */,
 				2B2778BF2B8FA74B00779FB5 /* GoogleService-Info.plist */,
@@ -331,6 +325,28 @@
 				2BCC09AD2B95C066005BFC95 /* FalseView.swift */,
 			);
 			path = FalseRight;
+			sourceTree = "<group>";
+		};
+		2BD8D4352BA0A5FC0050CB64 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				2B2778FA2B9079CA00779FB5 /* Firebase */,
+				2B2779062B9080F000779FB5 /* Models */,
+				2B2A3E452B90B147007E5E7F /* Buttons */,
+				2B36879A2B9E036C00F2E944 /* Checkmarks */,
+				2BCC09AA2B95C011005BFC95 /* FalseRight */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		2BD8D4362BA0A6480050CB64 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				2B2778FE2B907B7C00779FB5 /* AuthenticationView */,
+				2B2779032B907E9600779FB5 /* AuthenticatonViewModel */,
+				2B5D193E2B91DD0C004DB072 /* AuthenticationRepository */,
+			);
+			path = Authentication;
 			sourceTree = "<group>";
 		};
 		2BF4B9752B98748E00C1AF1A /* MainScreen */ = {
