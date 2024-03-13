@@ -11,13 +11,14 @@ struct LanguageScreenView: View {
     
     @ObservedObject var languageVm: LanguageScreenViewModel
     @State private var selectionLanguage: Language = Language(code: "af", name: "Afrikaans")
+    @State private var selectionSourceLanguage: Language = Language(code: "de", name: "Deutsch")
     
     var body: some View {
         NavigationStack {
             VStack {
                 ZStack{
                     Form {
-                        Section(header: Text("Wähle hier Deine Zielsprache aus")){
+                        Section(header: Text("Wähle hier Deine Zielsprache aus").foregroundStyle(.black)){
                             Picker("Übersetze nach", selection: $selectionLanguage) {
                                 ForEach(languageVm.languages, id: \.code) { language in
                                     Text(language.name)
@@ -27,22 +28,20 @@ struct LanguageScreenView: View {
                             .pickerStyle(.menu)
                             .onChange(of: selectionLanguage) { languageVm.languageChoice = selectionLanguage }
                         }
-                        Section(header: Text("Text eingeben")){
+                        Section(header: Text("Text eingeben").foregroundStyle(.black)){
                             TextField("Texteingabe für die Übersetzung", text: $languageVm.textToTranslate)
-                            
-                            
-                                .shadow(color: .red, radius: 3)
+                                .shadow(color: .red, radius: 8)
                                 .textInputAutocapitalization(.never)
                                 .autocorrectionDisabled()
                                 .lineLimit(5, reservesSpace: true)
                                 .textFieldStyle(.roundedBorder)
-                                .frame(minHeight: 60)
+                                .frame(minHeight: 40)
                                 .scrollContentBackground(.hidden)
                         }
                         
-                        Section(header: Text("Es wird übersetzt von")){
+                        Section(header: Text("Es wird übersetzt von").foregroundStyle(.black)){
                             HStack{
-                                Text("Deutsch")
+                                Text("\(selectionSourceLanguage.name)")
                                 Spacer()
                                 ButtonTextAction(iconName: "network", text: "Übersetzen ->"){
                                     languageVm.translateLanguage()
@@ -52,14 +51,14 @@ struct LanguageScreenView: View {
                             }
                             .frame(maxWidth: .infinity, alignment: .center)
                         }
-                        Section(header: Text("Übersetzung")){
+                        Section(header: Text("Übersetzung").foregroundStyle(.black)){
                             TextField("Übersetzung", text: $languageVm.translatedText)
-                                .shadow(color: .green, radius: 3)
+                                .shadow(color: .green, radius: 8)
                                 .textInputAutocapitalization(.never)
                                 .autocorrectionDisabled()
                                 .lineLimit(5, reservesSpace: true)
                                 .textFieldStyle(.roundedBorder)
-                                .frame(minHeight: 60)
+                                .frame(minHeight: 40)
                         }
                     }
                 }

@@ -21,6 +21,5 @@ class CategorieViewModel: ObservableObject, Identifiable {
         self.categorie = categorieDesign.categorieName
         self.isDone = categorieDesign.isDone
         self.tasksInCategorie = categorieDesign.tasksInCategorie
-     
     }
 }

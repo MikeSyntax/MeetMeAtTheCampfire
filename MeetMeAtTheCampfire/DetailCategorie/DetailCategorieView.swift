@@ -12,13 +12,28 @@ struct DetailCategorieView: View {
     let categorieVm: CategorieViewModel
     
     @ObservedObject var homeVm: HomeScreenViewModel
+    @ObservedObject var detailCategorieVm: DetailCategorieViewModel
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
+        var tasksCounter = detailCategorieVm.detailCategorieItemViewModels.count
+        
         VStack {
-            Text("Kategorie: \(categorieVm.categorie)")
-            Text("Anzahl der Aufgaben: \(categorieVm.tasksInCategorie)")
+            Text(categorieVm.categorie)
+                .font(.title)
+            Text("Anzahl der Aufgaben: \(tasksCounter)")
+                .font(.callout)
+                .bold()
+            
             Spacer()
+            
+            ForEach(detailCategorieVm.detailCategorieItemViewModels, id: \.taskName){
+                detailCategorieViewModel in
+                DetailCategorieItemFilledView(detailCategorieItemVm: detailCategorieViewModel)
+            }
+            
+            Spacer()
+            
             Button {
                 homeVm.deleteCategorie(categorieVm: categorieVm)
                 dismiss()
@@ -34,7 +49,7 @@ struct DetailCategorieView: View {
                 .opacity(0.2)
                 .ignoresSafeArea())
         
-        .navigationBarTitle("Kategorie Details", displayMode: .inline)
+        .navigationBarTitle("Kategorie ToDo´s", displayMode: .inline)
     }
 }
 

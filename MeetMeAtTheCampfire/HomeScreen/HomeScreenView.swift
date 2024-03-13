@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HomeScreenView: View {
     @StateObject private var homeVm = HomeScreenViewModel()
+    @StateObject private var detailCategorieVm = DetailCategorieViewModel()
     @State private var showNewCategorieAlert: Bool = false
     @State private var newCategorie: String = ""
     @State private var tasksInCategorie: String = ""
@@ -23,7 +24,7 @@ struct HomeScreenView: View {
                     // Hier wird ein LazyVGrid (Lazy deshalb, da nur sichtbare Ansichten erstellt werden, um Speicher zu sparen), das eine Gitteransicht mit variabler Breite für die Spalten und einem Abstand zwischen den Elementen erstellt.
                     LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 20), count: 3), spacing: 20) {
                         ForEach(homeVm.categorieViewModels) { categorieViewModel in
-                            NavigationLink(destination: DetailCategorieView(categorieVm: categorieViewModel, homeVm: homeVm)) {
+                            NavigationLink(destination: DetailCategorieView(categorieVm: categorieViewModel, homeVm: homeVm, detailCategorieVm: detailCategorieVm)) {
                                 CategorieFilledView(categorieVm: categorieViewModel)
                             }
                         }
