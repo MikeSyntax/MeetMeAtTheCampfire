@@ -9,11 +9,13 @@ import SwiftUI
 
 struct HomeScreenView: View {
     @StateObject private var homeVm = HomeScreenViewModel()
-    @StateObject private var detailCategorieVm = DetailCategorieViewModel()
+    @StateObject private var detailCategorieVm = DetailCategorieViewModel(categorieVm: CategorieViewModel(categorieDesign: CategorieModel(userId: "1", categorieName: "1", isDone: false, tasksInCategorie: 2)))
+    
     @State private var showNewCategorieAlert: Bool = false
     @State private var newCategorie: String = ""
     @State private var tasksInCategorie: String = ""
     @State private var showSettingsSheet: Bool = false
+    
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {

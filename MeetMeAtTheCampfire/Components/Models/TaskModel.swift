@@ -11,8 +11,7 @@ import FirebaseFirestoreSwift
 struct TaskModel: Codable, Identifiable {
     @DocumentID var id: String?
     
-    let userId: String
-    
+    let categorieId: String
     let taskName: String
     let taskIsDone: Bool
     

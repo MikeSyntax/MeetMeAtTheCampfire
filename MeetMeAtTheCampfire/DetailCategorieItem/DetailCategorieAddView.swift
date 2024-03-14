@@ -11,7 +11,6 @@ struct DetailCategorieItemAddView: View {
     var body: some View {
         RoundedRectangle(cornerRadius: 10)
             .fill(Color.white).opacity(0.7)
-            .frame(width: .infinity, height: 40)
             .padding(4)
             .overlay(
                 HStack{
@@ -27,10 +26,10 @@ struct DetailCategorieItemAddView: View {
                 }
                     .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
             )
-            .background(.green)
-            .padding(5)
+            .frame(maxWidth: .infinity, maxHeight: 40)
+            .background(.white)
+            .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
             .shadow(radius: 10)
-            
     }
 }
 #Preview {
