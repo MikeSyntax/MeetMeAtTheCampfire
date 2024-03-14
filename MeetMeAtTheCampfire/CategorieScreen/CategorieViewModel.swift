@@ -10,7 +10,7 @@ import Foundation
 class CategorieViewModel: ObservableObject, Identifiable {
     
     @Published var categorie = "Tasks"
-    @Published var tasksInCategorie = 4
+    @Published var tasksInCategorie = 0
     @Published var isDone = false
     
     
@@ -21,5 +21,9 @@ class CategorieViewModel: ObservableObject, Identifiable {
         self.categorie = categorieDesign.categorieName
         self.isDone = categorieDesign.isDone
         self.tasksInCategorie = categorieDesign.tasksInCategorie
+    }
+    
+    func updateTaskCounter(tasksInCategorie: Int){
+        self.tasksInCategorie = tasksInCategorie
     }
 }

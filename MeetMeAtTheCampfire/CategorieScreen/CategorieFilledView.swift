@@ -10,8 +10,8 @@ import SwiftUI
 struct CategorieFilledView: View {
     
     @ObservedObject var categorieVm: CategorieViewModel
+    @ObservedObject var detailCategorieVm: DetailCategorieViewModel
     @State private var bgColor: [Color] = [.blue, .green, .yellow, .red, .pink, .brown]
-    
     
     var body: some View {
         
@@ -44,5 +44,5 @@ struct CategorieFilledView: View {
 #Preview {
     let categorie = CategorieModel(userId: "1", categorieName: "Preview", isDone: false, tasksInCategorie: 6)
     
-    return CategorieFilledView(categorieVm: CategorieViewModel(categorieDesign: categorie))
+    return CategorieFilledView(categorieVm: CategorieViewModel(categorieDesign: categorie), detailCategorieVm: DetailCategorieViewModel())
 }

@@ -72,7 +72,7 @@ class ChatScreenViewModel: ObservableObject {
                 self.chatSenderViewModels = chatSenderViewModels
                 //Anzahl ungelesener Nachrichten ermitteln um den .badge anzuzeigen
                 let counter = chatSenderViewModels.filter { !$0.chatSenderVm.isReadbyUser.contains(userId) }.count
-                 print("counter \(counter)")
+                 print("new email counter \(counter)")
                 self.messageCountResult = counter
             }
     }
@@ -90,7 +90,6 @@ class ChatScreenViewModel: ObservableObject {
         chatSenderVm.isReadbyUser.append(userId)
         //hier dann nur die neue Liste übergeben
         let newData = ["isReadbyUser": chatSenderVm.isReadbyUser]
-        
         
         FirebaseManager.shared.firestore.collection("messages").document(messageId).updateData(newData) { error in
             if let error = error {

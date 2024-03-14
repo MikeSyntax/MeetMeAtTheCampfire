@@ -8,8 +8,8 @@
 import Foundation
 
 class DetailCategorieItemViewModel: ObservableObject {
-    @Published var taskName: String = "Essen besstellen"
-    @Published var taskIsDone: Bool = true
+    @Published var taskName: String = ""
+    @Published var taskIsDone: Bool = false
     
     let detailCategorieItemModel: TaskModel
     

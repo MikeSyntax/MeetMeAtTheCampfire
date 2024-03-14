@@ -13,6 +13,7 @@ struct DetailCategorieView: View {
     
     @ObservedObject var homeVm: HomeScreenViewModel
     @ObservedObject var detailCategorieVm: DetailCategorieViewModel
+    @ObservedObject var detailCategorieItemVm: DetailCategorieItemViewModel
     
     @State private var showNewTaskAlert: Bool = false
     @State private var newTask: String = ""
@@ -26,30 +27,34 @@ struct DetailCategorieView: View {
             Text("Anzahl der Aufgaben: \(detailCategorieVm.detailCategorieItemViewModels.count)")
                 .font(.callout)
                 .bold()
-            VStack {
-                ForEach(detailCategorieVm.detailCategorieItemViewModels, id: \.taskName) { detailCategorieViewModel in
-                    DetailCategorieItemFilledView(detailCategorieItemVm: detailCategorieViewModel)
-                        .swipeActions(edge: .trailing) {
-                            Button(role: .destructive) {
-                                detailCategorieVm.deleteTask()
-                            } label: {
-                                Image(systemName: "trash")
-                            }
-                        }
-                        .onTapGesture {
-                            detailCategorieVm.updateTask()
-                        }
-                }
-            }
-            Spacer()
             Button(action: {
                 showNewTaskAlert.toggle()
             }, label: {
                 DetailCategorieItemAddView()
             })
+            VStack {
+                ForEach(detailCategorieVm.detailCategorieItemViewModels, id: \.taskName) { detailCategorieViewModel in
+                    DetailCategorieItemFilledView(detailCategorieItemVm: detailCategorieViewModel)
+                        .onTapGesture {
+                            detailCategorieVm.updateTask(detailCategorieItemVm: detailCategorieItemVm, taskId: detailCategorieViewModel.detailCategorieItemModel.id)
+                        }
+                }
+                //Löschen der aller Tasks in dieser Kategorie
+                Button(role: .destructive) {
+                    detailCategorieVm.deleteTask(categorieId: categorieVm.categorieViewModel.id)
+                } label: {
+                    Text("Erledigte Tasks löschen")
+                    Image(systemName: "trash")
+                }
+                .buttonStyle(.borderedProminent)
             
-            ButtonTextAction(iconName: "trash", text: "Kategorie löschen"){
+            }
+            Spacer()
+            
+            //Beim Löschen der Kategorie werden auch alle Tasks gelöscht!!
+            ButtonTextAction(iconName: "trash", text: "Gesamte Kategorie löschen"){
                 homeVm.deleteCategorie(categorieVm: categorieVm)
+                detailCategorieVm.deleteTask(categorieId: categorieVm.categorieViewModel.id)
                 dismiss()
             }
             .padding()
