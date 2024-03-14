@@ -13,19 +13,6 @@ class DetailCategorieViewModel: ObservableObject {
     @Published var detailCategorieItemViewModels: [DetailCategorieItemViewModel] = []
     @Published var tasksInCategorieCounter: Int = 0
     private var listener: ListenerRegistration? = nil
-    let categorieVm: CategorieViewModel
-    
-    init(categorieVm: CategorieViewModel){
-        self.categorieVm = CategorieViewModel(categorieDesign: CategorieModel(userId: "1", categorieName: "Putzen", isDone: false, tasksInCategorie: 2))
-        
-//        self.detailCategorieItemViewModels = [
-//        DetailCategorieItemViewModel(detailCategorieItemModel: TaskModel(categorieId: "1", taskName: "Essen", taskIsDone:  false)),
-//        DetailCategorieItemViewModel(detailCategorieItemModel: TaskModel(categorieId: "1", taskName: "Trinken", taskIsDone:  false)),
-//        DetailCategorieItemViewModel(detailCategorieItemModel: TaskModel(categorieId: "1", taskName: "Tanzen", taskIsDone:  true))
-//        ]
-        
-        self.tasksInCategorieCounter = detailCategorieItemViewModels.count
-    }
     
     deinit{
         removeListener()
@@ -81,7 +68,8 @@ class DetailCategorieViewModel: ObservableObject {
     }
     
     func removeListener(){
-        
+        self.listener = nil
+        self.detailCategorieItemViewModels = []
         
     }
 }

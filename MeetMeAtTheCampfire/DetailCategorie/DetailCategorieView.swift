@@ -26,19 +26,19 @@ struct DetailCategorieView: View {
             Text("Anzahl der Aufgaben: \(detailCategorieVm.detailCategorieItemViewModels.count)")
                 .font(.callout)
                 .bold()
-                VStack {
-                    ForEach(detailCategorieVm.detailCategorieItemViewModels, id: \.taskName) { detailCategorieViewModel in
-                        DetailCategorieItemFilledView(detailCategorieItemVm: detailCategorieViewModel)
-                            .swipeActions(edge: .trailing) {
-                                Button(role: .destructive) {
-                                    detailCategorieVm.deleteTask()
-                                } label: {
-                                    Image(systemName: "trash")
-                                }
+            VStack {
+                ForEach(detailCategorieVm.detailCategorieItemViewModels, id: \.taskName) { detailCategorieViewModel in
+                    DetailCategorieItemFilledView(detailCategorieItemVm: detailCategorieViewModel)
+                        .swipeActions(edge: .trailing) {
+                            Button(role: .destructive) {
+                                detailCategorieVm.deleteTask()
+                            } label: {
+                                Image(systemName: "trash")
                             }
-                            .onTapGesture {
-                                detailCategorieVm.updateTask()
-                            }
+                        }
+                        .onTapGesture {
+                            detailCategorieVm.updateTask()
+                        }
                 }
             }
             Spacer()
@@ -76,6 +76,9 @@ struct DetailCategorieView: View {
         }
         .onAppear{
             detailCategorieVm.readTasks(categorieId: categorieVm.categorieViewModel.id)
+        }
+        .onDisappear{
+            detailCategorieVm.removeListener()
         }
     }
 }
