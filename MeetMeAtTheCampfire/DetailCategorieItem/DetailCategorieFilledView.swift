@@ -32,7 +32,6 @@ struct DetailCategorieItemFilledView: View {
                 }
                     .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
             )
-            .frame(maxWidth: .infinity, maxHeight: 40)
             .lineLimit(1)
             .background(color)
             .shadow(radius: 10)

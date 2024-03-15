@@ -32,12 +32,15 @@ struct DetailCategorieView: View {
             }, label: {
                 DetailCategorieItemAddView()
             })
-            VStack {
-                ForEach(detailCategorieVm.detailCategorieItemViewModels, id: \.taskName) { detailCategorieViewModel in
-                    DetailCategorieItemFilledView(detailCategorieItemVm: detailCategorieViewModel)
-                        .onTapGesture {
-                            detailCategorieVm.updateTask(detailCategorieItemVm: detailCategorieItemVm, taskId: detailCategorieViewModel.detailCategorieItemModel.id)
-                        }
+            ScrollView{
+                VStack {
+                    ForEach(detailCategorieVm.detailCategorieItemViewModels, id: \.taskName) { detailCategorieViewModel in
+                        DetailCategorieItemFilledView(detailCategorieItemVm: detailCategorieViewModel)
+                            .frame(height: 40)
+                            .onTapGesture {
+                                detailCategorieVm.updateTask(detailCategorieItemVm: detailCategorieItemVm, taskId: detailCategorieViewModel.detailCategorieItemModel.id)
+                            }
+                    }
                 }
                 //Löschen der aller Tasks in dieser Kategorie
                 Button(role: .destructive) {
@@ -47,7 +50,7 @@ struct DetailCategorieView: View {
                     Image(systemName: "trash")
                 }
                 .buttonStyle(.borderedProminent)
-            
+                
             }
             Spacer()
             

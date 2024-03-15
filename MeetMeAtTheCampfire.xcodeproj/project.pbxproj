@@ -192,15 +192,15 @@
 		2B2778B02B8F5C9B00779FB5 /* MeetMeAtTheCampfire */ = {
 			isa = PBXGroup;
 			children = (
-				2B2778B52B8F5C9C00779FB5 /* Assets.xcassets */,
-				2B2778BF2B8FA74B00779FB5 /* GoogleService-Info.plist */,
 				2B2778B12B8F5C9B00779FB5 /* MeetMeAtTheCampfireApp.swift */,
-				2BBE466B2BA1E231002A11A2 /* DetailCategorieItem */,
+				2B2778BF2B8FA74B00779FB5 /* GoogleService-Info.plist */,
+				2B2778B52B8F5C9C00779FB5 /* Assets.xcassets */,
 				2BD8D4362BA0A6480050CB64 /* Authentication */,
 				2BAB62512B95D8CC00C7839E /* CategorieScreen */,
 				2BF4B97B2B9877C200C1AF1A /* ChatScreen */,
 				2BD8D4352BA0A5FC0050CB64 /* Components */,
 				2B0158652B9789D30026CA84 /* DetailCategorie */,
+				2BBE466B2BA1E231002A11A2 /* DetailCategorieItem */,
 				2BAB62482B95D5F100C7839E /* HomeScreen */,
 				2BF4B9752B98748E00C1AF1A /* MainScreen */,
 				2B2778B72B8F5C9C00779FB5 /* Preview Content */,
