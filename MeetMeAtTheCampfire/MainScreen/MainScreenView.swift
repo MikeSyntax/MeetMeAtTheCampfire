@@ -40,20 +40,25 @@ struct MainScreenView: View {
                     Text("Chat")
                 }
                 .badge(/*unreadedMessages*/ chatVm.messageCountResult)
-            
                 .tag(1)
+            
+            CalendarYearlyView()
+                .tabItem {
+                    Image(systemName: "book")
+                    Text("Tagebuch")
+                }.tag(2)
             
             LanguageScreenView(languageVm: self.languageVm)
                 .tabItem {
                     Image(systemName: "network")
                     Text("Übersetzer")
-                }.tag(2)
+                }.tag(3)
             
             ProfileScreenView()
                 .tabItem {
                     Image(systemName: "person")
                     Text("Profil")
-                }.tag(3)
+                }.tag(4)
         }
         .onAppear{
             selectedTab = 0
@@ -70,6 +75,6 @@ struct MainScreenView: View {
     }
 }
 
-#Preview {
-    MainScreenView(authVm: AuthViewModel())
-}
+//#Preview {
+//    MainScreenView(authVm: AuthViewModel())
+//}
