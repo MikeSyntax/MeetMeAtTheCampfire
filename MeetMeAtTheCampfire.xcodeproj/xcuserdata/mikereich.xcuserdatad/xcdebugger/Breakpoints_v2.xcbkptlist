@@ -34,6 +34,38 @@
             endingLineNumber = "59"
             landmarkName = "getAllDaysToNextMonth()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "66242E53-6F9C-46C3-AAEC-A5BF51C64CA7 - a3ece8b3bf433a18"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Foundation.Date.getAllDaysToNextMonth() -&gt; Swift.Array&lt;Foundation.Date&gt;"
+                  moduleName = "MeetMeAtTheCampfire"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mikereich/MeetMeAtTheCampfire/MeetMeAtTheCampfire/CalendarLogBook/CalendarDateExtension.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "59"
+                  endingLineNumber = "59"
+                  offsetFromSymbolStart = "772">
+               </Location>
+               <Location
+                  uuid = "66242E53-6F9C-46C3-AAEC-A5BF51C64CA7 - a3ece8b3bf433a18"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Foundation.Date.getAllDaysToNextMonth() -&gt; Swift.Array&lt;Foundation.Date&gt;"
+                  moduleName = "MeetMeAtTheCampfire"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mikereich/MeetMeAtTheCampfire/MeetMeAtTheCampfire/CalendarLogBook/CalendarDateExtension.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "59"
+                  endingLineNumber = "59"
+                  offsetFromSymbolStart = "780">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

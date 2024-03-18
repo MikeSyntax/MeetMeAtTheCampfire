@@ -12,6 +12,7 @@ struct MainScreenView: View {
     @StateObject var chatVm: ChatScreenViewModel
     @StateObject var languageVm = LanguageScreenViewModel(languageChoice: Language(code: "af", name: "Afrikaans"), languageSource: Language(code: "de", name: "Deutsch"))
     @StateObject var chatSenderVm = ChatSenderViewModel(chatDesign: ChatModel(userId: "2", userName: "Dieter", messageText: "Danke", timeStamp: Date(), isReadbyUser: []))
+   // @StateObject var dateVm = DateViewModel()
     //Immer mit der HomeScreenView anfangen
     @State private var selectedTab = 0
     //Ungelesenen Nachrichten filtern nach dem TimeStamp des einloggens im Vergleich zum letzten Besuch des Chats

@@ -9,6 +9,7 @@ import Foundation
 
 class CalendarUtils {
     
+    //Monats Formatter
     private static var monthFormatter = createMonthFormatter()
     
     
@@ -23,7 +24,7 @@ class CalendarUtils {
     }
     
     
-    
+    //Jahr Formatter
     private static var yearFormatter = createYearFormatter()
     
     static func getYearCaption(_ date: Date) -> String {

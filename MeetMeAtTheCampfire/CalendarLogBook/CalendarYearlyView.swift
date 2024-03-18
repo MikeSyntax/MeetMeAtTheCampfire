@@ -16,7 +16,7 @@ struct CalendarYearlyView: View {
         NavigationStack{
             ScrollView {
                 VStack{
-                    WeekdayHeaderView()
+                    WeekdayHeader()
                         .padding(.bottom)
                         .padding(.top)
                     ForEach(year.getAllMonths(), id: \.self) {
@@ -43,21 +43,53 @@ struct CalendarYearlyView: View {
     }
 }
 
-private struct WeekdayHeaderView: View {
-    private var weekdays = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]
-    
-    var body: some View {
-        LazyVGrid(columns: columns, spacing: 25) {
-            ForEach(weekdays, id: \.self) {
-                weekday in
-                Text(weekday)
-            }
-        }
-    }
-}
-
-
-
 #Preview {
     CalendarYearlyView()
 }
+
+
+
+//import SwiftUI
+//
+//struct CalendarYearlyView: View {
+//    
+//    @ObservedObject var dateVm: DateViewModel
+//    @State var year: Date
+//    @State private var scrollPosition: Int?
+//    
+//    var body: some View {
+//        NavigationView {
+//            ScrollView {
+//                VStack {
+//                    WeekdayHeader()
+//                        .padding(.bottom)
+//                        .padding(.top)
+//                    ForEach(dateVm.getAllMonths(date: year), id: \.self) { month in
+//                        CalendarMonthlyView(dateVm: dateVm, month: month)
+//                            .padding(.bottom, 50)
+//                            .id(month)
+//                        Divider()
+//                    }
+//                }
+//            }
+//            .onAppear {
+//                scrollPosition = Calendar.current.component(.month, from: Date())
+//            }
+//            .scrollPosition(id: $scrollPosition)
+//            .navigationTitle("Tagebuch \(CalendarUtils.getYearCaption(year))")
+//                        .toolbar {
+//                            ToolbarItem(placement: .topBarTrailing) {
+//                                CalendarYearSwitcher(year: $year)
+//                            }
+//        }
+//    }
+//}
+//}
+//
+//struct CalendarYearlyView_Previews: PreviewProvider {
+//    @State static var year = Date()
+//    
+//    static var previews: some View {
+//        CalendarYearlyView(dateVm: DateViewModel(), year: year)
+//    }
+//}
