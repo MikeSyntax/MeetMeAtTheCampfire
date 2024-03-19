@@ -10,7 +10,6 @@ import Foundation
 
 struct CalendarYearSwitcherView: View {
     @ObservedObject var dateVm: CalendarViewModel
-    //@Binding var year: Date
     
     var body: some View {
         HStack {

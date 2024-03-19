@@ -47,6 +47,7 @@
 		2B2A3E472B90B176007E5E7F /* ButtonTextAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2A3E462B90B176007E5E7F /* ButtonTextAction.swift */; };
 		2B36879C2B9E039400F2E944 /* CheckmarkIsRead.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B36879B2B9E039400F2E944 /* CheckmarkIsRead.swift */; };
 		2B36879E2B9E03A700F2E944 /* CheckmarkNotRead.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B36879D2B9E03A700F2E944 /* CheckmarkNotRead.swift */; };
+		2B511B302BA9D9A5004AEAD6 /* CalenderDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B511B2F2BA9D9A5004AEAD6 /* CalenderDetailView.swift */; };
 		2B5D19402B91DD3D004DB072 /* AuthenticationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5D193F2B91DD3D004DB072 /* AuthenticationRepository.swift */; };
 		2B5DF1852B99B46E00FA285C /* ChatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5DF1842B99B46E00FA285C /* ChatModel.swift */; };
 		2B5DF1892B99B68900FA285C /* ChatSenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5DF1882B99B68900FA285C /* ChatSenderView.swift */; };
@@ -102,6 +103,7 @@
 		2B2A3E462B90B176007E5E7F /* ButtonTextAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTextAction.swift; sourceTree = "<group>"; };
 		2B36879B2B9E039400F2E944 /* CheckmarkIsRead.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckmarkIsRead.swift; sourceTree = "<group>"; };
 		2B36879D2B9E03A700F2E944 /* CheckmarkNotRead.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckmarkNotRead.swift; sourceTree = "<group>"; };
+		2B511B2F2BA9D9A5004AEAD6 /* CalenderDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderDetailView.swift; sourceTree = "<group>"; };
 		2B5D193F2B91DD3D004DB072 /* AuthenticationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationRepository.swift; sourceTree = "<group>"; };
 		2B5DF1842B99B46E00FA285C /* ChatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatModel.swift; sourceTree = "<group>"; };
 		2B5DF1882B99B68900FA285C /* ChatSenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatSenderView.swift; sourceTree = "<group>"; };
@@ -322,6 +324,7 @@
 		2BB2B02F2BA8395B0003CFE2 /* CalendarLogBook */ = {
 			isa = PBXGroup;
 			children = (
+				2B511B2F2BA9D9A5004AEAD6 /* CalenderDetailView.swift */,
 				2BB2B0302BA839930003CFE2 /* CalendarDailyView.swift */,
 				2BB2B0362BA841D50003CFE2 /* CalendarMonthlyView.swift */,
 				2BB2B03A2BA84BA20003CFE2 /* CalendarYearlyView.swift */,
@@ -597,6 +600,7 @@
 				2B5D19402B91DD3D004DB072 /* AuthenticationRepository.swift in Sources */,
 				2BB2B03F2BA85A5F0003CFE2 /* CalendarYearSwitcherView.swift in Sources */,
 				2BB2B0372BA841D50003CFE2 /* CalendarMonthlyView.swift in Sources */,
+				2B511B302BA9D9A5004AEAD6 /* CalenderDetailView.swift in Sources */,
 				2BBE46642BA1E032002A11A2 /* DetailCategorieViewModel.swift in Sources */,
 				2BBE46682BA1E1B7002A11A2 /* DetailCategorieFilledView.swift in Sources */,
 				2BBE466F2BA1E360002A11A2 /* TaskModel.swift in Sources */,

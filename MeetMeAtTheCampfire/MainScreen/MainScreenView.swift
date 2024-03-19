@@ -46,7 +46,7 @@ struct MainScreenView: View {
             CalendarYearlyView(dateVm: dateVm)
                 .tabItem {
                     Image(systemName: "book")
-                    Text("Tagebuch")
+                    Text("Logbuch")
                 }.tag(2)
             
             LanguageScreenView(languageVm: self.languageVm)
