@@ -6,90 +6,75 @@
 //
 
 import SwiftUI
+//struct CalendarYearlyView: View {
+//
+//    @State private var year = Date().getFirstDateOfYear()
+//    @State private var scrollPosition: Int? = nil
+//
+//    var body: some View {
+//        NavigationStack{
+//            ScrollView {
+//                VStack{
+//                    WeekdayHeaderView()
+//                        .padding(.bottom)
+//                        .padding(.top)
+//                    ForEach(year.getAllMonths(), id: \.self) {
+//                        month in
+//                        CalendarMonthlyView(month: month)
+//                            .padding(.bottom, 50)
+//                        //jedem Monat eine eindeutige Id zuweisen für die scrollPosition
+//                            .id(month.get(.month))
+//                        Divider()
+//                    }
+//                }
+//            }
+//            .onAppear{
+//                scrollPosition = Int(Date().get(.month))
+//            }
+//            .scrollPosition(id: $scrollPosition)
+//            .navigationTitle("Tagebuch \(CalendarUtils.getYearCaption(year))")
+//            .toolbar {
+//                ToolbarItem(placement: .topBarTrailing){
+//                    CalendarYearSwitcherView(year: $year)
+//                }
+//            }
+//        }
+//    }
+//}
+//
+//#Preview {
+//    CalendarYearlyView()
+//}
+
 
 struct CalendarYearlyView: View {
-
-    @State private var year = Date().getFirstDateOfYear()
-    @State private var scrollPosition: Int? = nil
+    @ObservedObject var dateVm: CalendarViewModel
     
     var body: some View {
-        NavigationStack{
+        NavigationView {
             ScrollView {
-                VStack{
-                    WeekdayHeader()
+                VStack {
+                    WeekdayHeaderView(dateVm: dateVm)
                         .padding(.bottom)
                         .padding(.top)
-                    ForEach(year.getAllMonths(), id: \.self) {
-                        month in
-                        CalendarMonthlyView(month: month)
+                    ForEach(dateVm.getAllMonths(date: dateVm.date), id: \.self) { month in
+                        CalendarMonthlyView(dateVm: CalendarViewModel(date: month))
                             .padding(.bottom, 50)
-                        //jedem Monat eine eindeutige Id zuweisen für die scrollPosition
-                            .id(month.get(.month))
+                            .id(month)
                         Divider()
                     }
                 }
             }
-            .onAppear{
-                scrollPosition = Int(Date().get(.month))
+            .onAppear {
+                dateVm.scrollPosition = Calendar.current.component(.month, from: dateVm.date)
             }
-            .scrollPosition(id: $scrollPosition)
-            .navigationTitle("Tagebuch \(CalendarUtils.getYearCaption(year))")
+          .scrollPosition(id: $dateVm.scrollPosition)
+            .navigationTitle("Tagebuch \(CalendarUtils.getYearCaption(dateVm.date))")
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing){
-                    CalendarYearSwitcher(year: $year)
+                ToolbarItem(placement: .topBarTrailing) {
+                    CalendarYearSwitcherView(dateVm: dateVm)
                 }
             }
         }
     }
 }
-
-#Preview {
-    CalendarYearlyView()
-}
-
-
-
-//import SwiftUI
-//
-//struct CalendarYearlyView: View {
-//    
-//    @ObservedObject var dateVm: DateViewModel
-//    @State var year: Date
-//    @State private var scrollPosition: Int?
-//    
-//    var body: some View {
-//        NavigationView {
-//            ScrollView {
-//                VStack {
-//                    WeekdayHeader()
-//                        .padding(.bottom)
-//                        .padding(.top)
-//                    ForEach(dateVm.getAllMonths(date: year), id: \.self) { month in
-//                        CalendarMonthlyView(dateVm: dateVm, month: month)
-//                            .padding(.bottom, 50)
-//                            .id(month)
-//                        Divider()
-//                    }
-//                }
-//            }
-//            .onAppear {
-//                scrollPosition = Calendar.current.component(.month, from: Date())
-//            }
-//            .scrollPosition(id: $scrollPosition)
-//            .navigationTitle("Tagebuch \(CalendarUtils.getYearCaption(year))")
-//                        .toolbar {
-//                            ToolbarItem(placement: .topBarTrailing) {
-//                                CalendarYearSwitcher(year: $year)
-//                            }
-//        }
-//    }
-//}
-//}
-//
-//struct CalendarYearlyView_Previews: PreviewProvider {
-//    @State static var year = Date()
-//    
-//    static var previews: some View {
-//        CalendarYearlyView(dateVm: DateViewModel(), year: year)
-//    }
-//}

@@ -58,13 +58,13 @@
 		2BAB62532B95DDC600C7839E /* CategorieFilledView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAB62522B95DDC600C7839E /* CategorieFilledView.swift */; };
 		2BAB62552B95E04900C7839E /* CategorieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAB62542B95E04900C7839E /* CategorieModel.swift */; };
 		2BB2B0312BA839930003CFE2 /* CalendarDailyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB2B0302BA839930003CFE2 /* CalendarDailyView.swift */; };
-		2BB2B0332BA83A3A0003CFE2 /* DateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB2B0322BA83A3A0003CFE2 /* DateViewModel.swift */; };
+		2BB2B0332BA83A3A0003CFE2 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB2B0322BA83A3A0003CFE2 /* CalendarViewModel.swift */; };
 		2BB2B0372BA841D50003CFE2 /* CalendarMonthlyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB2B0362BA841D50003CFE2 /* CalendarMonthlyView.swift */; };
 		2BB2B0392BA843B60003CFE2 /* CalendarUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB2B0382BA843B60003CFE2 /* CalendarUtils.swift */; };
 		2BB2B03B2BA84BA20003CFE2 /* CalendarYearlyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB2B03A2BA84BA20003CFE2 /* CalendarYearlyView.swift */; };
 		2BB2B03D2BA84F1F0003CFE2 /* CalendarYearExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB2B03C2BA84F1F0003CFE2 /* CalendarYearExtensions.swift */; };
-		2BB2B03F2BA85A5F0003CFE2 /* CalendarYearSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB2B03E2BA85A5F0003CFE2 /* CalendarYearSwitcher.swift */; };
-		2BB2B0432BA865A30003CFE2 /* WeekdayHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB2B0422BA865A30003CFE2 /* WeekdayHeader.swift */; };
+		2BB2B03F2BA85A5F0003CFE2 /* CalendarYearSwitcherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB2B03E2BA85A5F0003CFE2 /* CalendarYearSwitcherView.swift */; };
+		2BB2B0432BA865A30003CFE2 /* WeekdayHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB2B0422BA865A30003CFE2 /* WeekdayHeaderView.swift */; };
 		2BBC150A2B9B5BF400305504 /* ToDoListe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBC15092B9B5BF400305504 /* ToDoListe.swift */; };
 		2BBC150F2B9B66DD00305504 /* LanguageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBC150E2B9B66DD00305504 /* LanguageRepository.swift */; };
 		2BBC15132B9B719A00305504 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBC15122B9B719A00305504 /* Language.swift */; };
@@ -113,13 +113,13 @@
 		2BAB62522B95DDC600C7839E /* CategorieFilledView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorieFilledView.swift; sourceTree = "<group>"; };
 		2BAB62542B95E04900C7839E /* CategorieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorieModel.swift; sourceTree = "<group>"; };
 		2BB2B0302BA839930003CFE2 /* CalendarDailyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDailyView.swift; sourceTree = "<group>"; };
-		2BB2B0322BA83A3A0003CFE2 /* DateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateViewModel.swift; sourceTree = "<group>"; };
+		2BB2B0322BA83A3A0003CFE2 /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
 		2BB2B0362BA841D50003CFE2 /* CalendarMonthlyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarMonthlyView.swift; sourceTree = "<group>"; };
 		2BB2B0382BA843B60003CFE2 /* CalendarUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarUtils.swift; sourceTree = "<group>"; };
 		2BB2B03A2BA84BA20003CFE2 /* CalendarYearlyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarYearlyView.swift; sourceTree = "<group>"; };
 		2BB2B03C2BA84F1F0003CFE2 /* CalendarYearExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarYearExtensions.swift; sourceTree = "<group>"; };
-		2BB2B03E2BA85A5F0003CFE2 /* CalendarYearSwitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarYearSwitcher.swift; sourceTree = "<group>"; };
-		2BB2B0422BA865A30003CFE2 /* WeekdayHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdayHeader.swift; sourceTree = "<group>"; };
+		2BB2B03E2BA85A5F0003CFE2 /* CalendarYearSwitcherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarYearSwitcherView.swift; sourceTree = "<group>"; };
+		2BB2B0422BA865A30003CFE2 /* WeekdayHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdayHeaderView.swift; sourceTree = "<group>"; };
 		2BBC15092B9B5BF400305504 /* ToDoListe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListe.swift; sourceTree = "<group>"; };
 		2BBC150E2B9B66DD00305504 /* LanguageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageRepository.swift; sourceTree = "<group>"; };
 		2BBC15122B9B719A00305504 /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
@@ -325,7 +325,6 @@
 				2BB2B0302BA839930003CFE2 /* CalendarDailyView.swift */,
 				2BB2B0362BA841D50003CFE2 /* CalendarMonthlyView.swift */,
 				2BB2B03A2BA84BA20003CFE2 /* CalendarYearlyView.swift */,
-				2BB2B0322BA83A3A0003CFE2 /* DateViewModel.swift */,
 				2BB2B0402BA864F40003CFE2 /* CalendarComponents */,
 			);
 			path = CalendarLogBook;
@@ -334,10 +333,11 @@
 		2BB2B0402BA864F40003CFE2 /* CalendarComponents */ = {
 			isa = PBXGroup;
 			children = (
-				2BB2B03E2BA85A5F0003CFE2 /* CalendarYearSwitcher.swift */,
+				2BB2B0322BA83A3A0003CFE2 /* CalendarViewModel.swift */,
+				2BB2B03E2BA85A5F0003CFE2 /* CalendarYearSwitcherView.swift */,
 				2BB2B03C2BA84F1F0003CFE2 /* CalendarYearExtensions.swift */,
 				2BB2B0382BA843B60003CFE2 /* CalendarUtils.swift */,
-				2BB2B0422BA865A30003CFE2 /* WeekdayHeader.swift */,
+				2BB2B0422BA865A30003CFE2 /* WeekdayHeaderView.swift */,
 			);
 			path = CalendarComponents;
 			sourceTree = "<group>";
@@ -574,7 +574,7 @@
 				2BF4B97A2B98764300C1AF1A /* ProfileScreenView.swift in Sources */,
 				2BBC150A2B9B5BF400305504 /* ToDoListe.swift in Sources */,
 				2B2A3E472B90B176007E5E7F /* ButtonTextAction.swift in Sources */,
-				2BB2B0432BA865A30003CFE2 /* WeekdayHeader.swift in Sources */,
+				2BB2B0432BA865A30003CFE2 /* WeekdayHeaderView.swift in Sources */,
 				2B2778FD2B9079F200779FB5 /* FirebaseManager.swift in Sources */,
 				2B36879E2B9E03A700F2E944 /* CheckmarkNotRead.swift in Sources */,
 				2B5DF1892B99B68900FA285C /* ChatSenderView.swift in Sources */,
@@ -586,7 +586,7 @@
 				2B0158672B9789F20026CA84 /* DetailCategorieView.swift in Sources */,
 				2BB2B0392BA843B60003CFE2 /* CalendarUtils.swift in Sources */,
 				2B2779082B90810300779FB5 /* UserModel.swift in Sources */,
-				2BB2B0332BA83A3A0003CFE2 /* DateViewModel.swift in Sources */,
+				2BB2B0332BA83A3A0003CFE2 /* CalendarViewModel.swift in Sources */,
 				2BB2B0312BA839930003CFE2 /* CalendarDailyView.swift in Sources */,
 				2BF4B97D2B9877D900C1AF1A /* ChatScreenView.swift in Sources */,
 				2BBC15152B9B746000305504 /* LanguageError.swift in Sources */,
@@ -595,7 +595,7 @@
 				2BBC15192B9C614900305504 /* Translation.swift in Sources */,
 				2BBE46662BA1E04F002A11A2 /* DetailCategorieAddView.swift in Sources */,
 				2B5D19402B91DD3D004DB072 /* AuthenticationRepository.swift in Sources */,
-				2BB2B03F2BA85A5F0003CFE2 /* CalendarYearSwitcher.swift in Sources */,
+				2BB2B03F2BA85A5F0003CFE2 /* CalendarYearSwitcherView.swift in Sources */,
 				2BB2B0372BA841D50003CFE2 /* CalendarMonthlyView.swift in Sources */,
 				2BBE46642BA1E032002A11A2 /* DetailCategorieViewModel.swift in Sources */,
 				2BBE46682BA1E1B7002A11A2 /* DetailCategorieFilledView.swift in Sources */,
