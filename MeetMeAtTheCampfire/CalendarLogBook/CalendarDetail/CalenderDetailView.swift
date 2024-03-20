@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct CalendarDetailView: View {
     let calendarVm: CalendarViewModel

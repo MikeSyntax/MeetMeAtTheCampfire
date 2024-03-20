@@ -21,7 +21,7 @@ struct CalendarMonthlyView: View {
                     Spacer()
                 }
                 ForEach(dateVm.getAllDaysToNextMonth(from: dateVm.date), id: \.self){ day in
-                    NavigationLink(destination: CalendarDetailView(calendarVm: CalendarViewModel(date: day))){
+                    NavigationLink(destination: CalendarDetailItemView(calendarDetailItemVm: CalendarDetailItemViewModel(calendarItemModel: LogBookModel(userId: "1", formattedDate: "1", logBookText: "", laditude: 52.0, longitude: 8.25), calendarVm: CalendarViewModel(date: day)))){
                         CalendarDailyView(dateVm: CalendarViewModel(date: day))
                     }
                 }

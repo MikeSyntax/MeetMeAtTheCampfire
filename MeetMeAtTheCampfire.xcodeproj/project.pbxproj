@@ -47,7 +47,11 @@
 		2B2A3E472B90B176007E5E7F /* ButtonTextAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2A3E462B90B176007E5E7F /* ButtonTextAction.swift */; };
 		2B36879C2B9E039400F2E944 /* CheckmarkIsRead.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B36879B2B9E039400F2E944 /* CheckmarkIsRead.swift */; };
 		2B36879E2B9E03A700F2E944 /* CheckmarkNotRead.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B36879D2B9E03A700F2E944 /* CheckmarkNotRead.swift */; };
+		2B43E1732BAACE8200375D58 /* CalendarDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B43E1722BAACE8200375D58 /* CalendarDetailViewModel.swift */; };
+		2B43E1752BAACED400375D58 /* LogBookModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B43E1742BAACED400375D58 /* LogBookModel.swift */; };
 		2B511B302BA9D9A5004AEAD6 /* CalenderDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B511B2F2BA9D9A5004AEAD6 /* CalenderDetailView.swift */; };
+		2B5561502BAB0A480028C6E5 /* CalendarDetailItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B55614F2BAB0A480028C6E5 /* CalendarDetailItemView.swift */; };
+		2B5561522BAB0A5A0028C6E5 /* CalendarDetailItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5561512BAB0A5A0028C6E5 /* CalendarDetailItemViewModel.swift */; };
 		2B5D19402B91DD3D004DB072 /* AuthenticationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5D193F2B91DD3D004DB072 /* AuthenticationRepository.swift */; };
 		2B5DF1852B99B46E00FA285C /* ChatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5DF1842B99B46E00FA285C /* ChatModel.swift */; };
 		2B5DF1892B99B68900FA285C /* ChatSenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5DF1882B99B68900FA285C /* ChatSenderView.swift */; };
@@ -103,7 +107,11 @@
 		2B2A3E462B90B176007E5E7F /* ButtonTextAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTextAction.swift; sourceTree = "<group>"; };
 		2B36879B2B9E039400F2E944 /* CheckmarkIsRead.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckmarkIsRead.swift; sourceTree = "<group>"; };
 		2B36879D2B9E03A700F2E944 /* CheckmarkNotRead.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckmarkNotRead.swift; sourceTree = "<group>"; };
+		2B43E1722BAACE8200375D58 /* CalendarDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDetailViewModel.swift; sourceTree = "<group>"; };
+		2B43E1742BAACED400375D58 /* LogBookModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogBookModel.swift; sourceTree = "<group>"; };
 		2B511B2F2BA9D9A5004AEAD6 /* CalenderDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderDetailView.swift; sourceTree = "<group>"; };
+		2B55614F2BAB0A480028C6E5 /* CalendarDetailItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDetailItemView.swift; sourceTree = "<group>"; };
+		2B5561512BAB0A5A0028C6E5 /* CalendarDetailItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDetailItemViewModel.swift; sourceTree = "<group>"; };
 		2B5D193F2B91DD3D004DB072 /* AuthenticationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationRepository.swift; sourceTree = "<group>"; };
 		2B5DF1842B99B46E00FA285C /* ChatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatModel.swift; sourceTree = "<group>"; };
 		2B5DF1882B99B68900FA285C /* ChatSenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatSenderView.swift; sourceTree = "<group>"; };
@@ -273,6 +281,7 @@
 				2BBC15122B9B719A00305504 /* Language.swift */,
 				2BBC15182B9C614900305504 /* Translation.swift */,
 				2BBE466E2BA1E360002A11A2 /* TaskModel.swift */,
+				2B43E1742BAACED400375D58 /* LogBookModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -292,6 +301,28 @@
 				2B36879D2B9E03A700F2E944 /* CheckmarkNotRead.swift */,
 			);
 			path = Checkmarks;
+			sourceTree = "<group>";
+		};
+		2B55614D2BAB09D60028C6E5 /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				2BB2B0302BA839930003CFE2 /* CalendarDailyView.swift */,
+				2BB2B0362BA841D50003CFE2 /* CalendarMonthlyView.swift */,
+				2BB2B03A2BA84BA20003CFE2 /* CalendarYearlyView.swift */,
+				2BB2B0402BA864F40003CFE2 /* CalendarComponents */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
+		2B55614E2BAB09E80028C6E5 /* CalendarDetail */ = {
+			isa = PBXGroup;
+			children = (
+				2B511B2F2BA9D9A5004AEAD6 /* CalenderDetailView.swift */,
+				2B43E1722BAACE8200375D58 /* CalendarDetailViewModel.swift */,
+				2B55614F2BAB0A480028C6E5 /* CalendarDetailItemView.swift */,
+				2B5561512BAB0A5A0028C6E5 /* CalendarDetailItemViewModel.swift */,
+			);
+			path = CalendarDetail;
 			sourceTree = "<group>";
 		};
 		2B5D193E2B91DD0C004DB072 /* AuthenticationRepository */ = {
@@ -324,11 +355,8 @@
 		2BB2B02F2BA8395B0003CFE2 /* CalendarLogBook */ = {
 			isa = PBXGroup;
 			children = (
-				2B511B2F2BA9D9A5004AEAD6 /* CalenderDetailView.swift */,
-				2BB2B0302BA839930003CFE2 /* CalendarDailyView.swift */,
-				2BB2B0362BA841D50003CFE2 /* CalendarMonthlyView.swift */,
-				2BB2B03A2BA84BA20003CFE2 /* CalendarYearlyView.swift */,
-				2BB2B0402BA864F40003CFE2 /* CalendarComponents */,
+				2B55614E2BAB09E80028C6E5 /* CalendarDetail */,
+				2B55614D2BAB09D60028C6E5 /* Calendar */,
 			);
 			path = CalendarLogBook;
 			sourceTree = "<group>";
@@ -590,6 +618,7 @@
 				2BB2B0392BA843B60003CFE2 /* CalendarUtils.swift in Sources */,
 				2B2779082B90810300779FB5 /* UserModel.swift in Sources */,
 				2BB2B0332BA83A3A0003CFE2 /* CalendarViewModel.swift in Sources */,
+				2B5561502BAB0A480028C6E5 /* CalendarDetailItemView.swift in Sources */,
 				2BB2B0312BA839930003CFE2 /* CalendarDailyView.swift in Sources */,
 				2BF4B97D2B9877D900C1AF1A /* ChatScreenView.swift in Sources */,
 				2BBC15152B9B746000305504 /* LanguageError.swift in Sources */,
@@ -608,9 +637,11 @@
 				2BAB624E2B95D64300C7839E /* CategorieAddView.swift in Sources */,
 				2BF4B9802B98A24C00C1AF1A /* SettingsScreenView.swift in Sources */,
 				2B5DF1852B99B46E00FA285C /* ChatModel.swift in Sources */,
+				2B43E1752BAACED400375D58 /* LogBookModel.swift in Sources */,
 				2BD8D4342B9F60C40050CB64 /* ChatScreenViewModel.swift in Sources */,
 				2B2779052B907EBF00779FB5 /* AuthViewModel.swift in Sources */,
 				2BBE466D2BA1E2BF002A11A2 /* DetailCategorieItemViewModel.swift in Sources */,
+				2B43E1732BAACE8200375D58 /* CalendarDetailViewModel.swift in Sources */,
 				2BBC15132B9B719A00305504 /* Language.swift in Sources */,
 				2BCC09AC2B95C05B005BFC95 /* RightView.swift in Sources */,
 				2BAB62552B95E04900C7839E /* CategorieModel.swift in Sources */,
@@ -620,6 +651,7 @@
 				2B2779002B907E7B00779FB5 /* LoginView.swift in Sources */,
 				2B2778B22B8F5C9B00779FB5 /* MeetMeAtTheCampfireApp.swift in Sources */,
 				2BBC15172B9B754D00305504 /* LanguageApiKey.swift in Sources */,
+				2B5561522BAB0A5A0028C6E5 /* CalendarDetailItemViewModel.swift in Sources */,
 				2BCC09AE2B95C066005BFC95 /* FalseView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
