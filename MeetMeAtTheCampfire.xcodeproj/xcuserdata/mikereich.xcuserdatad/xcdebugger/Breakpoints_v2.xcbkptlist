@@ -68,5 +68,69 @@
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DE6AC49B-E0E5-4E89-9483-F1BB9C711217"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MeetMeAtTheCampfire/CalendarLogBook/MapKit/MapKitViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "locationManager(_:didUpdateLocations:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "DE6AC49B-E0E5-4E89-9483-F1BB9C711217 - 33ccdcde5f5bb8fd"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MeetMeAtTheCampfire.MapKitViewModel.locationManager(_: __C.CLLocationManager, didUpdateLocations: Swift.Array&lt;__C.CLLocation&gt;) -&gt; ()"
+                  moduleName = "MeetMeAtTheCampfire"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mikereich/MeetMeAtTheCampfire/MeetMeAtTheCampfire/CalendarLogBook/MapKit/MapKitViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "33"
+                  endingLineNumber = "33"
+                  offsetFromSymbolStart = "360">
+               </Location>
+               <Location
+                  uuid = "DE6AC49B-E0E5-4E89-9483-F1BB9C711217 - 33ccdcde5f5bb8fd"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MeetMeAtTheCampfire.MapKitViewModel.locationManager(_: __C.CLLocationManager, didUpdateLocations: Swift.Array&lt;__C.CLLocation&gt;) -&gt; ()"
+                  moduleName = "MeetMeAtTheCampfire"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mikereich/MeetMeAtTheCampfire/MeetMeAtTheCampfire/CalendarLogBook/MapKit/MapKitViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "33"
+                  endingLineNumber = "33"
+                  offsetFromSymbolStart = "308">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F42269B7-A184-4496-8092-144AFC75FAD1"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MeetMeAtTheCampfire/CalendarLogBook/MapKit/MapKitViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "requestLocation()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

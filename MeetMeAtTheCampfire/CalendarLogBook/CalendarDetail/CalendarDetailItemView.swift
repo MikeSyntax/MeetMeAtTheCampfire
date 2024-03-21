@@ -12,52 +12,53 @@ struct CalendarDetailItemView: View {
     @ObservedObject var calendarDetailItemVm: CalendarDetailItemViewModel
     @State private var bgColor: [Color] = [.blue, .green, .yellow, .red, .pink, .brown]
     
+//    var user: UserModel
+//    
+//    init(user: UserModel, calendarDetailItemVm: CalendarDetailItemViewModel){
+//        self.user = user
+//        self.calendarDetailItemVm = calendarDetailItemVm.self
+//    }
+    
     var body: some View {
+        
+//        var userExiting: LogBookModel = LogBookModel(userId: user.id ?? "no user id" , formattedDate: calendarDetailItemVm.formattedDate, logBookText: calendarDetailItemVm.logBookText, laditude: calendarDetailItemVm.latitude, longitude: calendarDetailItemVm.longitude)
         let color = bgColor.randomElement()
-            VStack{
-                
-                        VStack{
-                            Map {
-                                Annotation("Mein Standort", coordinate: .init(latitude: calendarDetailItemVm.latitude, longitude: calendarDetailItemVm.longitude)){
-                                    Image(systemName: "beach.umbrella")
-                                }
-                            }
-                            .frame(width: 300, height: 300)
-                            .padding()
-                            Spacer()
-                            Text("Mein Logbuch")
-                                .font(.title)
-                                .bold()
-                            Text("Eintrag vom \(calendarDetailItemVm.formattedDate)")
-                                .font(.callout)
-                                .bold()
-                            Text(calendarDetailItemVm.logBookText)
-                                .font(.callout)
-                            Spacer()
-                            if calendarDetailItemVm.logBookText.isEmpty {
-                                ButtonTextAction(iconName: "plus", text: "Neuer Eintrag"){
-                                    calendarDetailItemVm.createlogBookText()
-                                }
-                                .padding()
-                            }
-                        }
-                    
-                    .background(color)
-                    .shadow(radius: 10)
-            }
+        VStack{
+            Text("Mein Logbuch")
+                .font(.title)
+                .bold()
+            Text("Eintrag vom \(calendarDetailItemVm.formattedDate)")
+                .font(.callout)
+                .bold()
+            MapKitView(/*mapKitVm: MapKitViewModel(), calenderDetailVm: CalendarDetailItemViewModel(calendarItemModel: userExiting, calendarVm: CalendarViewModel(date: calendarDetailItemVm.calendarVm.date))*/)
+            Spacer()
             
-            .toolbar{
-                Button{
-                    calendarDetailItemVm.updateLogBookText()
-                } label: {
-                    Text("Edit")
-                    Image(systemName: "pencil.tip")
-                        .font(.caption)
+            Text(calendarDetailItemVm.logBookText)
+                .font(.callout)
+            Spacer()
+            if calendarDetailItemVm.logBookText.isEmpty {
+                ButtonTextAction(iconName: "plus", text: "Neuer Eintrag"){
+                    calendarDetailItemVm.createlogBookText()
                 }
+                .padding()
             }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(color)
+        .shadow(radius: 10)
+        .toolbar{
+            Button{
+                calendarDetailItemVm.updateLogBookText()
+            } label: {
+                Text("Edit")
+                Image(systemName: "pencil.tip")
+                    .font(.caption)
+            }
+        }
     }
 }
 
-#Preview {
-    CalendarDetailItemView(calendarDetailItemVm: CalendarDetailItemViewModel(calendarItemModel: LogBookModel(userId: "1", formattedDate: "0", logBookText: "Heute war ich angeln", laditude: 0.0, longitude: 0.0), calendarVm: CalendarViewModel(date: Date())))
-}
+
+//#Preview {
+//    CalendarDetailItemView(user: UserModel(id: "1", email: "", registeredTime: Date(), userName: "Hans", timeStampLastVisitChat: Date()))
+//}

@@ -19,6 +19,7 @@ class CalendarDetailItemViewModel: ObservableObject {
     let calendarItemModel: LogBookModel
     
     init(calendarItemModel: LogBookModel, calendarVm: CalendarViewModel) {
+        
         self.calendarItemModel = calendarItemModel.self
         self.latitude = calendarItemModel.laditude
         self.longitude = calendarItemModel.longitude
@@ -27,6 +28,7 @@ class CalendarDetailItemViewModel: ObservableObject {
         self.calendarVm = calendarVm.self
         
         formattedDate = dateFormatter()
+        
     }
     
     func createlogBookText(){
@@ -44,7 +46,7 @@ class CalendarDetailItemViewModel: ObservableObject {
         
     }
     
-     func dateFormatter() -> String {
+    func dateFormatter() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM/yyyy"
         return dateFormatter.string(from: calendarVm.date)

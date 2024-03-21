@@ -44,8 +44,8 @@ class CalendarViewModel: ObservableObject {
     
     func getAllMonths(date: Date) -> [Date]{
         var months = [Date]()
-        for i in 0..<12 {
-            let month = Calendar.current.date(byAdding: .month, value: i, to: date)!
+        for thisMonth in 0..<12 {
+            let month = Calendar.current.date(byAdding: .month, value: thisMonth, to: date)!
             months.append(month)
         }
         return months
@@ -59,8 +59,8 @@ class CalendarViewModel: ObservableObject {
         //Alle Tage in einem Array gespeichert
         var days = [Date]()
         //mit der for Schleife wird geschaut welche Tage der Monat hat
-        for i in 0..<getDaysCountOfMonth(date: date) {
-            let day = Calendar.current.date(byAdding: .day, value: i, to: date)!
+        for thisDay in 0..<getDaysCountOfMonth(date: date) {
+            let day = Calendar.current.date(byAdding: .day, value: thisDay, to: date)!
             //Die Tage werden dann der days hinzugefügt
             days.append(day)
         }
