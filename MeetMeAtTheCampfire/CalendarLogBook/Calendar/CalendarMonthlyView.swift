@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CalendarMonthlyView: View {
     @ObservedObject var dateVm : CalendarViewModel
+    @ObservedObject var calendarDetailItemVm: CalendarDetailItemViewModel
     
     var body: some View {
         VStack {
@@ -20,8 +21,8 @@ struct CalendarMonthlyView: View {
                 ForEach(0..<dateVm.getWeekday(date: dateVm.date), id: \.self){ _ in
                     Spacer()
                 }
-                ForEach(dateVm.getAllDaysToNextMonth(from: dateVm.date), id: \.self){ day in
-                    NavigationLink(destination: CalendarDetailItemView(calendarDetailItemVm: CalendarDetailItemViewModel(calendarItemModel: LogBookModel(userId: "1", formattedDate: "1", logBookText: "", laditude: 52.0, longitude: 8.25), calendarVm: CalendarViewModel(date: day)))){
+                ForEach(dateVm.getAllDaysToNextMonth(from: dateVm.date), id: \.self) { day in
+                    NavigationLink(destination: CalendarDetailItemView(calendarDetailItemVm: calendarDetailItemVm)) {
                         CalendarDailyView(dateVm: CalendarViewModel(date: day))
                     }
                 }
@@ -30,6 +31,3 @@ struct CalendarMonthlyView: View {
     }
 }
 
-#Preview {
-    CalendarMonthlyView(dateVm: CalendarViewModel(date: Date()))
-}

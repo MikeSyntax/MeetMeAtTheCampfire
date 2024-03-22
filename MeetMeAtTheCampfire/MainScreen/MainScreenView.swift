@@ -13,14 +13,10 @@ struct MainScreenView: View {
     @StateObject var languageVm = LanguageScreenViewModel(languageChoice: Language(code: "af", name: "Afrikaans"), languageSource: Language(code: "de", name: "Deutsch"))
     @StateObject var chatSenderVm = ChatSenderViewModel(chatDesign: ChatModel(userId: "2", userName: "Dieter", messageText: "Danke", timeStamp: Date(), isReadbyUser: []))
     @StateObject var dateVm = CalendarViewModel(date: Date())
-    //Immer mit der HomeScreenView anfangen 
+    @StateObject var calendarDetailItemVm = CalendarDetailItemViewModel(calendarItemModel: LogBookModel(userId: "1", formattedDate: "123", logBookText: "", laditude: 0.47586, longitude: 0.883626), calendarVm: CalendarViewModel(date: Date()))
+    
+    //Immer mit der HomeScreenView anfangen
     @State private var selectedTab = 0
-    //Ungelesenen Nachrichten filtern nach dem TimeStamp des einloggens im Vergleich zum letzten Besuch des Chats
-//    var unreadedMessages: Int {
-//        chatVm.chatSenderViewModels.filter ({ $0.timeStamp > authVm.user!.timeStampLastVisitChat}).count
-//    }
-    
-    
     
     init(authVm: AuthViewModel){
         _chatVm = StateObject(wrappedValue: ChatScreenViewModel(user: authVm.user!))
@@ -43,7 +39,7 @@ struct MainScreenView: View {
                 .badge(/*unreadedMessages*/ chatVm.messageCountResult)
                 .tag(1)
             
-            CalendarYearlyView(dateVm: dateVm)
+            CalendarYearlyView(dateVm: dateVm, calendarDetailItemVm: calendarDetailItemVm)
                 .tabItem {
                     Image(systemName: "book")
                     Text("Logbuch")
@@ -75,7 +71,3 @@ struct MainScreenView: View {
         }
     }
 }
-
-//#Preview {
-//    MainScreenView(authVm: AuthViewModel())
-//}

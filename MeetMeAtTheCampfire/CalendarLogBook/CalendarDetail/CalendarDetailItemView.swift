@@ -10,19 +10,13 @@ import MapKit
 
 struct CalendarDetailItemView: View {
     @ObservedObject var calendarDetailItemVm: CalendarDetailItemViewModel
+    
+    @State private var showNewEntryView: Bool = false
     @State private var bgColor: [Color] = [.blue, .green, .yellow, .red, .pink, .brown]
     
-//    var user: UserModel
-//    
-//    init(user: UserModel, calendarDetailItemVm: CalendarDetailItemViewModel){
-//        self.user = user
-//        self.calendarDetailItemVm = calendarDetailItemVm.self
-//    }
-    
     var body: some View {
-        
-//        var userExiting: LogBookModel = LogBookModel(userId: user.id ?? "no user id" , formattedDate: calendarDetailItemVm.formattedDate, logBookText: calendarDetailItemVm.logBookText, laditude: calendarDetailItemVm.latitude, longitude: calendarDetailItemVm.longitude)
         let color = bgColor.randomElement()
+        
         VStack{
             Text("Mein Logbuch")
                 .font(.title)
@@ -30,7 +24,7 @@ struct CalendarDetailItemView: View {
             Text("Eintrag vom \(calendarDetailItemVm.formattedDate)")
                 .font(.callout)
                 .bold()
-            MapKitView(/*mapKitVm: MapKitViewModel(), calenderDetailVm: CalendarDetailItemViewModel(calendarItemModel: userExiting, calendarVm: CalendarViewModel(date: calendarDetailItemVm.calendarVm.date))*/)
+            MapKitView(calendarDetailItemVm: calendarDetailItemVm)
             Spacer()
             
             Text(calendarDetailItemVm.logBookText)
@@ -38,7 +32,7 @@ struct CalendarDetailItemView: View {
             Spacer()
             if calendarDetailItemVm.logBookText.isEmpty {
                 ButtonTextAction(iconName: "plus", text: "Neuer Eintrag"){
-                    calendarDetailItemVm.createlogBookText()
+                    showNewEntryView.toggle()
                 }
                 .padding()
             }
@@ -55,10 +49,10 @@ struct CalendarDetailItemView: View {
                     .font(.caption)
             }
         }
+        .sheet(isPresented: $showNewEntryView) {
+            CalendarDetailNewEntryView(calendarDetailItemVm: calendarDetailItemVm)
+            
+        }
     }
 }
 
-
-//#Preview {
-//    CalendarDetailItemView(user: UserModel(id: "1", email: "", registeredTime: Date(), userName: "Hans", timeStampLastVisitChat: Date()))
-//}

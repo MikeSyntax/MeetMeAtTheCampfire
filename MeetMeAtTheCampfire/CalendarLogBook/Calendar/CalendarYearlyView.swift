@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CalendarYearlyView: View {
     @ObservedObject var dateVm: CalendarViewModel
+    @ObservedObject var calendarDetailItemVm: CalendarDetailItemViewModel
     @State var id: String = ""
     
     var body: some View {
@@ -19,10 +20,9 @@ struct CalendarYearlyView: View {
                         .padding(.bottom)
                         .padding(.top)
                     ForEach(dateVm.getAllMonths(date: dateVm.date), id: \.self) { month in
-                        CalendarMonthlyView(dateVm: CalendarViewModel(date: month))
+                        CalendarMonthlyView(dateVm: CalendarViewModel(date: month), calendarDetailItemVm: calendarDetailItemVm)
                             .padding(.bottom, 50)
                             .id(dateVm.get(.month))
-                        
                         Divider()
                     }
                 }
@@ -41,6 +41,3 @@ struct CalendarYearlyView: View {
     }
 }
 
-#Preview {
-    CalendarYearlyView(dateVm: CalendarViewModel(date: Date()))
-}
