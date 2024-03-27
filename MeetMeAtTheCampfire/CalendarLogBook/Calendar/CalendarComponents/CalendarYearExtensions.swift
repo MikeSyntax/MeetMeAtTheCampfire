@@ -10,6 +10,9 @@ import Foundation
 extension Calendar {
     
     func startOfYear(date: Date) -> Date {
-        return self.date(from: self.dateComponents([.year, .year], from: date))!
+        let calender = Calendar.current
+        let currentDate = Date()
+        let components = calender.dateComponents([.year], from: currentDate)
+        return calender.date(from: components) ?? Date()
     }
 }

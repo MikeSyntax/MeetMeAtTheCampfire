@@ -12,7 +12,15 @@ struct MainScreenView: View {
     @StateObject var chatVm: ChatScreenViewModel
     @StateObject var languageVm = LanguageScreenViewModel(languageChoice: Language(code: "af", name: "Afrikaans"), languageSource: Language(code: "de", name: "Deutsch"))
     @StateObject var chatSenderVm = ChatSenderViewModel(chatDesign: ChatModel(userId: "2", userName: "Dieter", messageText: "Danke", timeStamp: Date(), isReadbyUser: []))
-    @StateObject var dateVm = CalendarViewModel(date: Date())
+    //@StateObject var dateVm = CalendarViewModel(date: Date())
+    
+    @StateObject var dateVm = {
+        let calendar = Calendar.current
+        let currentDate = Date()
+        let components = calendar.dateComponents([.year], from: currentDate)
+        return CalendarViewModel(date: calendar.date(from: components) ?? Date())
+    }()
+    
     @StateObject var calendarDetailItemVm = CalendarDetailItemViewModel(calendarItemModel: LogBookModel(userId: "1", formattedDate: "123", logBookText: "", laditude: 0.47586, longitude: 0.883626), calendarVm: CalendarViewModel(date: Date()))
     
     //Immer mit der HomeScreenView anfangen
@@ -65,7 +73,7 @@ struct MainScreenView: View {
             if selectedTab == 1 {
                 authVm.user!.timeStampLastVisitChat = Date.now
             }
-      }
+        }
         .onDisappear{
             authVm.updateUser()
         }

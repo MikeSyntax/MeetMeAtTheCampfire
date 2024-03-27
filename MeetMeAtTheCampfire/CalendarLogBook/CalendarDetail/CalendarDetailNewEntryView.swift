@@ -17,7 +17,7 @@ struct CalendarDetailNewEntryView: View {
         NavigationStack{
             ScrollView{
                 VStack{
-                    MapKitNewEntryView(calendarDetailItemVm: calendarDetailItemVm)
+                    MapKitNewEntryView()
                     Spacer()
                     TextField("Gib hier deine Erlebnisse ein", text: $calendarDetailItemVm.logBookText)
                         .textFieldStyle(.roundedBorder)

@@ -9,7 +9,6 @@ import SwiftUI
 import MapKit
 
 struct MapKitNewEntryView: View {
-    @ObservedObject var calendarDetailItemVm: CalendarDetailItemViewModel
     var body: some View {
         ScrollView{
             VStack{

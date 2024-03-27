@@ -22,7 +22,7 @@ struct CalendarMonthlyView: View {
                     Spacer()
                 }
                 ForEach(dateVm.getAllDaysToNextMonth(from: dateVm.date), id: \.self) { day in
-                    NavigationLink(destination: CalendarDetailItemView(calendarDetailItemVm: calendarDetailItemVm)) {
+                    NavigationLink(destination: CalendarDetailItemView(calendarDetailItemVm: CalendarDetailItemViewModel(calendarItemModel: LogBookModel(userId: "1", formattedDate: "1", logBookText: "", laditude: calendarDetailItemVm.latitude, longitude: calendarDetailItemVm.longitude), calendarVm: CalendarViewModel(date: day)))) {
                         CalendarDailyView(dateVm: CalendarViewModel(date: day))
                     }
                 }
