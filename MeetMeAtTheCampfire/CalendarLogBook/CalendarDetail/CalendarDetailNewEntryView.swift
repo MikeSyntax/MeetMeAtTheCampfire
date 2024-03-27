@@ -10,8 +10,10 @@ import MapKit
 
 struct CalendarDetailNewEntryView: View {
     @ObservedObject var calendarDetailItemVm: CalendarDetailItemViewModel
-    //@ObservedObject var mapKitVm: MapKitViewModel
     @Environment(\.dismiss) private var dismiss
+    
+    @State var showImagePicker: Bool = false
+    @State var selectedImage: UIImage?
     
     var body: some View {
         NavigationStack{
@@ -22,6 +24,21 @@ struct CalendarDetailNewEntryView: View {
                     TextField("Gib hier deine Erlebnisse ein", text: $calendarDetailItemVm.logBookText)
                         .textFieldStyle(.roundedBorder)
                         .padding()
+                    Spacer()
+                    //Ab hier Image Picker
+                    if selectedImage != nil {
+                        Image(uiImage: selectedImage!)
+                            .resizable()
+                            .frame(width: 300, height: 300, alignment: .center)
+                    }
+                   //Button für Image Picker
+                    Button{
+                        showImagePicker.toggle()
+                    }label: {
+                        Text("Foto hinzufügen oder ändern")
+                    }
+                    //.buttonStyle(.borderedProminent)
+                    
                 }
                 
             }
@@ -39,6 +56,9 @@ struct CalendarDetailNewEntryView: View {
         }
         .onAppear {
             calendarDetailItemVm.requestLocation()
+        }
+        .sheet(isPresented: $showImagePicker, onDismiss: nil) {
+            ImagePicker(selectedImage: $selectedImage, showImagePicker: $showImagePicker)
         }
     }
 }

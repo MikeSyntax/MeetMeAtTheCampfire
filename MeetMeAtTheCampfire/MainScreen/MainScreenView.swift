@@ -41,10 +41,10 @@ struct MainScreenView: View {
             
             ChatScreenView(chatVm: self.chatVm)
                 .tabItem {
-                    Image(systemName: "message")dfg
+                    Image(systemName: "message")
                     Text("Chat")
                 }
-                .badge(/*unreadedMessages*/ chatVm.messageCountResult)
+                .badge(chatVm.messageCountResult)
                 .tag(1)
             
             CalendarYearlyView(dateVm: dateVm, calendarDetailItemVm: calendarDetailItemVm)
