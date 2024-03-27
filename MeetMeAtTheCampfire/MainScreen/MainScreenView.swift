@@ -41,7 +41,7 @@ struct MainScreenView: View {
             
             ChatScreenView(chatVm: self.chatVm)
                 .tabItem {
-                    Image(systemName: "message")
+                    Image(systemName: "message")dfg
                     Text("Chat")
                 }
                 .badge(/*unreadedMessages*/ chatVm.messageCountResult)
