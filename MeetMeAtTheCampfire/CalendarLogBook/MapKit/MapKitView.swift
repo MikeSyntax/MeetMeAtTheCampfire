@@ -11,7 +11,6 @@ import MapKit
 struct MapKitView: View {
     @ObservedObject var calendarDetailItemVm: CalendarDetailItemViewModel
     var body: some View {
-        ScrollView{
             VStack{
                 Map() {
                     Annotation("Hier war ich", coordinate: CLLocationCoordinate2D(latitude: calendarDetailItemVm.latitude, longitude: calendarDetailItemVm.longitude)){
@@ -21,13 +20,10 @@ struct MapKitView: View {
                             .clipShape(Circle())
                     }
                 }
-                .frame(width: 300, height: 300)
-                .padding()
                 .onAppear {
                     //todo read Daten aus Firebase
                 }
             }
         }
-    }
 }
 

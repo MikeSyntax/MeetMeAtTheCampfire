@@ -19,8 +19,6 @@ struct MapKitNewEntryView: View {
                     MapUserLocationButton()
                 }
                 .frame(width: 300, height: 300)
-                .padding()
-                
             }
         }
     }

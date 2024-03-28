@@ -83,7 +83,7 @@ class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManager
             self.mapCameraPosition = MapCameraPosition.camera(MapCamera(centerCoordinate: lastLocation.coordinate, distance: 5000))
             self.latitude = lastLocation.coordinate.latitude
             self.longitude = lastLocation.coordinate.longitude
-            print(self.latitude, self.longitude)
+            print("Deine ausgewählten Koordinaten sind \(self.latitude) und \(self.longitude)")
         }
     }
 }

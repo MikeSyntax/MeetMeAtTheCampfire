@@ -48,7 +48,7 @@ struct ChatScreenView: View {
                         .autocorrectionDisabled()
                         .padding()
                     
-                    ButtonTextAction(iconName: "plus", text: "Neu") {
+                    ButtonTextAction(iconName: "plus", text: "Senden") {
                         chatVm.createNewMessage(userName: userName, messageText: newMessage)
                         newMessage = ""
                     }

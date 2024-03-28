@@ -21,3 +21,5 @@ import Foundation
 //im ChatViewModel eine Funktion bauen die alle Nachrichten nach dem gesuchten Text filtert und dann den Index nach dem Text nachschlagen, wenn es Treffenr gibt ist der Weiter button sichtbar, mit @State für Highlight Index. mit dem Id-Modifier an den Nachrichten nach der Id suchen
 //Logbuch für tägliches Tagebuch oder Einträge was passiert ist nach Kalendertagen sortiert
 //firebaselistener
+//TabBar YearlyView nicht mit Hintergrund
+//Abstand zur View oben zu groß in der CalendarDetailView

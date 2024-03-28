@@ -12,18 +12,20 @@ struct CalendarMonthlyView: View {
     @ObservedObject var calendarDetailItemVm: CalendarDetailItemViewModel
     
     var body: some View {
-        VStack {
-            Text(CalendarUtils.getMonthCaption(dateVm.date))
-                .font(.title2)
-                .padding(.leading, 9)
-                .frame(maxWidth: .infinity, alignment: .leading)
-            LazyVGrid(columns: dateVm.columns, spacing: 25) {
-                ForEach(0..<dateVm.getWeekday(date: dateVm.date), id: \.self){ _ in
-                    Spacer()
-                }
-                ForEach(dateVm.getAllDaysToNextMonth(from: dateVm.date), id: \.self) { day in
-                    NavigationLink(destination: CalendarDetailItemView(calendarDetailItemVm: CalendarDetailItemViewModel(calendarItemModel: LogBookModel(userId: "1", formattedDate: "1", logBookText: "", laditude: calendarDetailItemVm.latitude, longitude: calendarDetailItemVm.longitude), calendarVm: CalendarViewModel(date: day)))) {
-                        CalendarDailyView(dateVm: CalendarViewModel(date: day))
+        NavigationStack{
+            VStack {
+                Text(CalendarUtils.getMonthCaption(dateVm.date))
+                    .font(.title2)
+                    .padding(.leading, 9)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                LazyVGrid(columns: dateVm.columns, spacing: 25) {
+                    ForEach(0..<dateVm.getWeekday(date: dateVm.date), id: \.self){ _ in
+                        Spacer()
+                    }
+                    ForEach(dateVm.getAllDaysToNextMonth(from: dateVm.date), id: \.self) { day in
+                        NavigationLink(destination: CalendarDetailItemView(calendarDetailItemVm: CalendarDetailItemViewModel(calendarItemModel: LogBookModel(userId: calendarDetailItemVm.userId, formattedDate: calendarDetailItemVm.formattedDate, logBookText: calendarDetailItemVm.logBookText, laditude: calendarDetailItemVm.latitude, longitude: calendarDetailItemVm.longitude), calendarVm: CalendarViewModel(date: day)))) {
+                            CalendarDailyView(dateVm: CalendarViewModel(date: day))
+                        }
                     }
                 }
             }
@@ -31,3 +33,6 @@ struct CalendarMonthlyView: View {
     }
 }
 
+#Preview {
+    CalendarMonthlyView(dateVm: CalendarViewModel(date: Date()), calendarDetailItemVm: CalendarDetailItemViewModel(calendarItemModel: LogBookModel(userId: "1", formattedDate: "", logBookText: "", laditude: 0.0, longitude: 0.0), calendarVm: CalendarViewModel(date: Date())))
+}
