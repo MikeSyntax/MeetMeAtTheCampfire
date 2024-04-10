@@ -9,5 +9,5 @@ import Foundation
 
 struct LanguageApiKey {
     
-    static let languageApiKey: String = "c65dd80e82msh893f7b189c7193ep1de5bbjsnf4c5c8126a8b"
+    static let languageApiKey: String = "c65dd80e82msh893f7b189c7193ep1de5bbjsnf4c5c8126a8b hier noch ein Fehler"
 }

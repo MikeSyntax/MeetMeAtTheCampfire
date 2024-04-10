@@ -25,22 +25,17 @@ struct CalendarDetailNewEntryView: View {
                             .padding(EdgeInsets(top: 0, leading: 0, bottom: -6, trailing: 0))
                         ZStack{
                             MapKitNewEntryView()
+                                .border(Color.blue, width: 2)
+                                .frame(width: 300, height: 200)
                             Text("Klicke den Pfeil auf der Karte")
                                 .bold()
-                                .padding(EdgeInsets(top: 0, leading: 0, bottom: 250, trailing: 50))
+                                .padding(EdgeInsets(top: 0, leading: 0, bottom: 170, trailing: 50))
                             
                         }
                         .padding(0)
-                        Text("2. Schreibe hier Deine Erlebnisse rein")
-                            .font(.callout)
-                            .padding(EdgeInsets(top: 2, leading: 0, bottom: -6, trailing: 0))
-                        TextEditor(text: $calendarDetailItemVm.logBookText)
-                            .fontDesign(.rounded)
-                            .padding(1)
-                            .frame(minWidth: 300,  minHeight: 100)
-                            .border(Color.blue, width: 2)
+                        Divider()
                         //Ab hier Image Picker
-                        Text("3. Wähle auf Wunsch ein Galeriefoto   ")
+                        Text("2. Wähle auf Wunsch ein Galeriefoto   ")
                             .font(.callout)
                             .padding(EdgeInsets(top: 2, leading: 0, bottom: -4, trailing: 0))
                         if selectedImage != nil {
@@ -48,6 +43,7 @@ struct CalendarDetailNewEntryView: View {
                                 .resizable()
                                 .scaledToFit()
                                 .padding(0)
+                                .border(Color.blue, width: 2)
                         }
                         //Button für Image Picker
                         Button{
@@ -56,16 +52,26 @@ struct CalendarDetailNewEntryView: View {
                             Image(systemName: "photo.tv")
                             Text("Foto hinzufügen oder ändern")
                         }
+                        .padding(0)
+                        Divider()
+                        //Ab hier Text für die Erlebnisse
+                        Text("3. Schreibe hier Deine Erlebnisse rein")
+                            .font(.callout)
+                            .padding(EdgeInsets(top: 2, leading: 0, bottom: -6, trailing: 0))
+                        TextEditor(text: $calendarDetailItemVm.logBookText)
+                            .fontDesign(.rounded)
+                            .padding(1)
+                            .frame(minWidth: 300,  minHeight: 200)
+                            .border(Color.blue, width: 2)
+                        
                     }
                     .frame(width: 300, alignment: .center)
                     .padding(5)
                 }
+                //Button zum speichern von Bildern
                 ButtonTextAction(iconName: "square.and.arrow.down", text: "Speichern"){
                     calendarDetailItemVm.createlogBookText(logBookText: calendarDetailItemVm.logBookText)
-    //Button zum speichern von Bildern
                     uploadPhoto()
-                    
-                    
                     dismiss()
                 }
             }
@@ -109,11 +115,10 @@ struct CalendarDetailNewEntryView: View {
             metadata, error in
             
             if error == nil && metadata != nil {
-                
+                print("pic uploaded")
             }
         }
     }
-    
 }
 
 #Preview {

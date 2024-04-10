@@ -18,6 +18,7 @@ struct ChatScreenView: View {
         let currentUser = authVm.user?.id ?? "No current user"
         NavigationStack {
             VStack {
+                Divider()
                 ScrollView {
                     ScrollViewReader { scrollView in
                         LazyVStack {
@@ -40,20 +41,26 @@ struct ChatScreenView: View {
                     }
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .padding()
-                
+                .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
+                Divider()
+                    .frame(height: 5)
                 HStack {
                     TextField("Neue Nachricht", text: $newMessage)
                         .textFieldStyle(.roundedBorder)
                         .autocorrectionDisabled()
-                        .padding()
-                    
-                    ButtonTextAction(iconName: "plus", text: "Senden") {
+                        .padding(0)
+                            .overlay(
+                                    RoundedRectangle(cornerRadius: 10) // Erstellen eines gerundeten Rechtecks als Overlay
+                                        .stroke(Color.cyan, lineWidth: 2) // Farbe und Breite des Rahmens festlegen
+                                )
+                    ButtonTextAction(iconName: "paperplane", text: "Senden") {
                         chatVm.createNewMessage(userName: userName, messageText: newMessage)
                         newMessage = ""
                     }
                 }
                 .padding(.horizontal)
+                Divider()
+                    .padding(EdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0))
             }
             .navigationTitle("Chat")
             .toolbar {

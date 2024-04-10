@@ -70,7 +70,7 @@ struct LanguageScreenView: View {
                         .opacity(0.2)
                         .ignoresSafeArea())
             }
-            .navigationTitle(Text("Translator"))
+            .navigationTitle(Text("Übersetzer"))
         }
         .onAppear {
             languageVm.loadLanguages()

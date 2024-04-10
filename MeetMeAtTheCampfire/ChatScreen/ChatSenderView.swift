@@ -17,25 +17,32 @@ struct ChatSenderView: View {
             .frame(minWidth: 200, maxWidth: 300, minHeight: 100, maxHeight: 500)
             .overlay(
                 VStack{
-                    Text(chatSenderVm.userName)
-                        .font(.caption)
-                        .frame(maxWidth: .infinity, alignment: chatSenderVm.isCurrentUser ? .trailing : .leading)
-                        .padding(.trailing)
-                        .padding(.leading)
-                  
-                        Text(chatSenderVm.messageText)
-                            .font(.headline)
-                            .frame(maxWidth: .infinity, alignment: chatSenderVm.isCurrentUser ? .leading : .trailing)
-                            .padding(.leading)
-                            .padding(.trailing)
-                       
-                    Spacer()
+                    //Absendername
                     HStack{
-                    Text(chatSenderVm.dateString)
-                        .font(.caption)
-                        .frame(maxWidth: .infinity, alignment: chatSenderVm.isCurrentUser ? .trailing : .leading)
-                        .padding(.trailing)
+                        Image(.logo)
+                            .resizable()
+                            .frame(width: 20, height: 20)
+                            .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
+                        Text(chatSenderVm.userName)
+                            .font(.caption)
+                    }
+                    .frame(maxWidth: .infinity, alignment: chatSenderVm.isCurrentUser ? .trailing : .leading)
+                    .padding(.trailing)
+                    .padding(.leading)
+                    //Nachricht
+                    Text(chatSenderVm.messageText)
+                        .font(.headline)
+                        .frame(maxWidth: .infinity, alignment: chatSenderVm.isCurrentUser ? .leading : .trailing)
                         .padding(.leading)
+                        .padding(.trailing)
+                    Spacer()
+                    //Datum und Uhrzeit der Nachricht
+                    HStack{
+                        Text(chatSenderVm.dateString)
+                            .font(.caption)
+                            .frame(maxWidth: .infinity, alignment: chatSenderVm.isCurrentUser ? .trailing : .leading)
+                            .padding(.trailing)
+                            .padding(.leading)
                         if chatSenderVm.isReadbyUser.contains(chatSenderVm.userId) {
                             CheckmarkIsRead()
                         } else {

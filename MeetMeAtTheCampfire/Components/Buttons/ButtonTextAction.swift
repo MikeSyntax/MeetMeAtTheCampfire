@@ -20,13 +20,17 @@ struct ButtonTextAction: View {
                 Image(systemName: iconName)
                 Text(text)
             }
-            .frame(height: 30)
+            .frame(height: 20)
             .padding(8)
             .background(.cyan)
             .cornerRadius(10)
             .foregroundColor(.white)
             .font(.headline)
         })
+        .overlay(
+                RoundedRectangle(cornerRadius: 10) // Erstellen eines gerundeten Rechtecks als Overlay
+                    .stroke(Color.white, lineWidth: 2) // Farbe und Breite des Rahmens festlegen
+            )
     }
 }
 
