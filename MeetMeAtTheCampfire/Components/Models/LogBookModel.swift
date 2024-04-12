@@ -19,4 +19,7 @@ struct LogBookModel: Codable, Identifiable {
     //Zuordnung der Position des Eintrags
     let laditude: Double
     let longitude: Double
+    
+    let imageUrl: String
+    
 }

@@ -12,6 +12,7 @@ struct CalendarDetailItemView: View {
     @ObservedObject var calendarDetailItemVm: CalendarDetailItemViewModel
     
     @State private var showNewEntryView: Bool = false
+    @State private var logBookEntryIsEmpty: Bool = false
     
     var body: some View {
         NavigationStack{
@@ -21,10 +22,32 @@ struct CalendarDetailItemView: View {
                         Text("Eintrag vom \(calendarDetailItemVm.formattedDate)")
                             .font(.callout)
                         MapKitView(calendarDetailItemVm: calendarDetailItemVm)
-                            .frame(width: 300, height: 300)
+                            .frame(width: 300, height: 200)
+                            .shadow(radius: 10)
                         Spacer()
-                        Text(calendarDetailItemVm.logBookText)
-                            .font(.callout)
+                        Divider()
+                        VStack{
+                            ForEach(calendarDetailItemVm.readImages, id: \.self){ image in
+                                Image(uiImage: image)
+                                    .resizable()
+                                    .frame(maxWidth: 300, maxHeight: 300)
+                                    .cornerRadius(20)
+                                    .shadow(radius: 10)
+                            }
+                        }
+                        Divider()
+                        VStack{
+                            ForEach(calendarDetailItemVm.newEntryLogs) {
+                                newEntryLog in
+                                VStack{
+                                    Text(newEntryLog.logBookText)
+                                        .font(.callout)
+                                        .italic()
+                                        .bold()
+                                }
+                            }
+                        }
+                        Divider()
                         Spacer()
                     }
                     .padding(5)
@@ -35,6 +58,12 @@ struct CalendarDetailItemView: View {
                     }
                     .padding()
                 }
+            }
+            .onAppear {
+                calendarDetailItemVm.readLogBookText(formattedDate: calendarDetailItemVm.formattedDate)
+            }
+            .onDisappear {
+                calendarDetailItemVm.removeListener()
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -64,6 +93,6 @@ struct CalendarDetailItemView: View {
     }
 }
 
-#Preview {
-    CalendarDetailItemView(calendarDetailItemVm: CalendarDetailItemViewModel(calendarItemModel: LogBookModel(userId: "1", formattedDate: "", logBookText: "", laditude: 0.0, longitude: 0.0), calendarVm: CalendarViewModel(date: Date())))
-}
+//#Preview {
+//    CalendarDetailItemView(calendarDetailItemVm: CalendarDetailItemViewModel(calendarItemModel: LogBookModel(userId: "1", formattedDate: "date", logBookText: "", laditude: 0.0, longitude: 0.0, imageUrl: ""), calendarVm: CalendarViewModel(date: Date())))
+//}

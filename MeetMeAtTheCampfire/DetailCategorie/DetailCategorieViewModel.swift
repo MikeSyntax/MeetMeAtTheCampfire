@@ -39,7 +39,8 @@ class DetailCategorieViewModel: ObservableObject {
         }
         
         self.listener = FirebaseManager.shared.firestore.collection("tasksInCategorie").whereField("categorieId", isEqualTo: categorieId).addSnapshotListener{ querySnapshot, error in
-            if let error {
+            //Error hinzugefügt
+            if let error = error {
                 print("Error reading tasks: \(error)")
                 return
             }
@@ -54,7 +55,8 @@ class DetailCategorieViewModel: ObservableObject {
             }
             
             let detailCategorieItemViewModels = tasks.map { DetailCategorieItemViewModel(detailCategorieItemModel: $0) }
-            self.detailCategorieItemViewModels = detailCategorieItemViewModels }
+            self.detailCategorieItemViewModels = detailCategorieItemViewModels
+        }
     }
     
     func updateTask(detailCategorieItemVm: DetailCategorieItemViewModel, taskId: String?){

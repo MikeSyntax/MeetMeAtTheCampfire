@@ -23,7 +23,7 @@ struct CalendarMonthlyView: View {
                         Spacer()
                     }
                     ForEach(dateVm.getAllDaysToNextMonth(from: dateVm.date), id: \.self) { day in
-                        NavigationLink(destination: CalendarDetailItemView(calendarDetailItemVm: CalendarDetailItemViewModel(calendarItemModel: LogBookModel(userId: calendarDetailItemVm.userId, formattedDate: calendarDetailItemVm.formattedDate, logBookText: calendarDetailItemVm.logBookText, laditude: calendarDetailItemVm.latitude, longitude: calendarDetailItemVm.longitude), calendarVm: CalendarViewModel(date: day)))) {
+                        NavigationLink(destination: CalendarDetailItemView(calendarDetailItemVm: CalendarDetailItemViewModel(calendarItemModel: LogBookModel(userId: calendarDetailItemVm.userId, formattedDate: calendarDetailItemVm.formattedDate, logBookText: calendarDetailItemVm.logBookText, laditude: calendarDetailItemVm.latitude, longitude: calendarDetailItemVm.longitude, imageUrl: calendarDetailItemVm.imageUrl), calendarVm: CalendarViewModel(date: day)))) {
                             CalendarDailyView(dateVm: CalendarViewModel(date: day))
                         }
                     }
@@ -34,5 +34,5 @@ struct CalendarMonthlyView: View {
 }
 
 #Preview {
-    CalendarMonthlyView(dateVm: CalendarViewModel(date: Date()), calendarDetailItemVm: CalendarDetailItemViewModel(calendarItemModel: LogBookModel(userId: "1", formattedDate: "", logBookText: "", laditude: 0.0, longitude: 0.0), calendarVm: CalendarViewModel(date: Date())))
+    CalendarMonthlyView(dateVm: CalendarViewModel(date: Date()), calendarDetailItemVm: CalendarDetailItemViewModel(calendarItemModel: LogBookModel(userId: "1", formattedDate: "", logBookText: "", laditude: 0.0, longitude: 0.0, imageUrl: ""), calendarVm: CalendarViewModel(date: Date())))
 }
