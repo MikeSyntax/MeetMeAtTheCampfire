@@ -167,6 +167,7 @@ class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManager
         dateFormatter.dateFormat = "dd/MM/yyyy"
         return dateFormatter.string(from: calendarVm.date)
     }
+
     
     func requestLocation(){
         self.locationManager.requestWhenInUseAuthorization()

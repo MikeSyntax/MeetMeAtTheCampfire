@@ -42,6 +42,8 @@ struct HomeScreenView: View {
                 }, label: {
                     CategorieAddView()
                 })
+                .transition(.move(edge: .top))
+                .animation(.default)
             }
             .toolbar{
                 Button {

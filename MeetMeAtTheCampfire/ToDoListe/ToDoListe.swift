@@ -23,3 +23,9 @@ import Foundation
 //firebaselistener
 //TabBar YearlyView nicht mit Hintergrund
 //Abstand zur View oben zu groß in der CalendarDetailView
+
+
+//blauer Punkt wenn ein Eintrag in der Kalenderview mit Daten befüllt ist
+//Bildergröße in der KalenderView
+//Button soll verschwinden wenn logBookText vorhanden ist
+//Seite muss sich aktualisieren sobald Bilder hochgeladen wurden

@@ -19,8 +19,18 @@ struct CalendarDetailItemView: View {
             VStack {
                 ScrollView {
                     VStack {
-                        Text("Eintrag vom \(calendarDetailItemVm.formattedDate)")
-                            .font(.callout)
+                        VStack{
+                            Text("Meine Erlebnisse vom")
+                            Text(calendarDetailItemVm.formattedDate)
+                        }
+                        .underline()
+                        .foregroundColor(.blue)
+                        .font(.callout)
+                        .padding(8)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(Color.blue, lineWidth: 2)
+                        )
                         MapKitView(calendarDetailItemVm: calendarDetailItemVm)
                             .frame(width: 300, height: 200)
                             .shadow(radius: 10)
@@ -45,6 +55,7 @@ struct CalendarDetailItemView: View {
                                         .italic()
                                         .bold()
                                 }
+                                .frame(width: 300)
                             }
                         }
                         Divider()
@@ -57,6 +68,8 @@ struct CalendarDetailItemView: View {
                         showNewEntryView.toggle()
                     }
                     .padding()
+                    .transition(.move(edge: .bottom))
+                    .animation(.default)
                 }
             }
             .onAppear {
