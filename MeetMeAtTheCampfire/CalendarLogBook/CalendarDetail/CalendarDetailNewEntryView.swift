@@ -70,9 +70,8 @@ struct CalendarDetailNewEntryView: View {
                 }
                 //Button zum speichern von Bildern
                 ButtonTextAction(iconName: "square.and.arrow.down", text: "Speichern"){
-                    //calendarDetailItemVm.uploadPhoto()
                     calendarDetailItemVm.createlogBookText(logBookText: calendarDetailItemVm.logBookText)
-                    calendarDetailItemVm.logBookText = ""
+                   // calendarDetailItemVm.logBookText = ""
                     dismiss()
                 }
             }

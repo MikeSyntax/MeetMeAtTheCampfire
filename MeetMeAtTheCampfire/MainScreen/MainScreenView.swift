@@ -17,7 +17,7 @@ struct MainScreenView: View {
     @StateObject var dateVm = {
         let calendar = Calendar.current
         let currentDate = Date()
-        let components = calendar.dateComponents([.year], from: currentDate)
+        let components = calendar.dateComponents([.year, .month], from: currentDate)
         return CalendarViewModel(date: calendar.date(from: components) ?? Date())
     }()
     
@@ -53,6 +53,7 @@ struct MainScreenView: View {
                     Text("Logbuch")
                 }.tag(2)
             
+            
             LanguageScreenView(languageVm: self.languageVm)
                 .tabItem {
                     Image(systemName: "network")
@@ -68,6 +69,11 @@ struct MainScreenView: View {
         .onAppear{
             selectedTab = 0
             chatVm.readMessages()
+            if #available(iOS 15.0, *) {
+                let tabBarAppearance = UITabBarAppearance()
+                tabBarAppearance.configureWithDefaultBackground()
+                UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+            }
         }
         .onChange(of: selectedTab){
             if selectedTab == 1 {

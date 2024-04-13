@@ -15,6 +15,7 @@ struct CalendarYearlyView: View {
     var body: some View {
         NavigationStack {
             VStack{
+                Divider()
                 ScrollView {
                     VStack {
                         WeekdayHeaderView(dateVm: dateVm)
@@ -28,12 +29,6 @@ struct CalendarYearlyView: View {
                         }
                     }
                 }
-                .background(
-                    Image("background")
-                        .resizable()
-                        .scaledToFill()
-                        .opacity(0.2)
-                        .ignoresSafeArea())
             }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
@@ -42,6 +37,14 @@ struct CalendarYearlyView: View {
             }
             .scrollPosition(id: $dateVm.scrollPosition)
             .navigationTitle("Logbuch \(CalendarUtils.getYearCaption(dateVm.date))")
+            .scrollContentBackground(.hidden)
+            .background(
+                Image("background")
+                    .resizable()
+                    .scaledToFill()
+                    .opacity(0.2)
+                    .ignoresSafeArea(.all)
+            )
         }
         .onAppear {
             dateVm.scrollPosition = Calendar.current.component(.month, from: dateVm.date)

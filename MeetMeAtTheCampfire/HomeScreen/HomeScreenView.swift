@@ -22,6 +22,7 @@ struct HomeScreenView: View {
     var body: some View {
         NavigationStack {
             VStack {
+                Divider()
                 Spacer()
                 ScrollView {
                     // Hier wird ein LazyVGrid (Lazy deshalb, da nur sichtbare Ansichten erstellt werden, um Speicher zu sparen), das eine Gitteransicht mit variabler Breite für die Spalten und einem Abstand zwischen den Elementen erstellt.
@@ -36,7 +37,7 @@ struct HomeScreenView: View {
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .padding(.vertical, 20)
-                
+                Divider()
                 Button(action: {
                     showNewCategorieAlert.toggle()
                 }, label: {
@@ -44,6 +45,7 @@ struct HomeScreenView: View {
                 })
                 .transition(.move(edge: .top))
                 .animation(.default)
+                .padding(.bottom)
             }
             .toolbar{
                 Button {

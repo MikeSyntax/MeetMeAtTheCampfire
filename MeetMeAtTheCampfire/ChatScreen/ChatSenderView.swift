@@ -14,7 +14,7 @@ struct ChatSenderView: View {
     var body: some View {
         RoundedRectangle(cornerRadius: 10)
             .fill(chatSenderVm.isCurrentUser ? Color.cyan.opacity(0.6) : Color.green.opacity(0.6))
-            .frame(minWidth: 200, maxWidth: 300, minHeight: 100, maxHeight: 500)
+            .frame(minWidth: 200, maxWidth: 300, minHeight: 100)
             .overlay(
                 VStack{
                     //Absendername
@@ -58,7 +58,7 @@ struct ChatSenderView: View {
 }
 
 #Preview {
-    let chat = ChatModel(userId: "1", userName: "Fettes Brot", messageText: "Heute gehen wir campen", timeStamp: Date(), isReadbyUser: [])
+    let chat = ChatModel(userId: "1", userName: "Fettes Brot", messageText: "In diesem Beispiel wird der Text innerhalb des Rechtecks angezeigt, und die Höhe des Rechtecks passt sich automatisch an die Höhe des Textinhalts an. Die fixedSize(horizontal:vertical:)-Modifikator sorgt dafür, dass der Text nicht über die Breite des Rechtecks hinauswächst, aber vertikal kann er beliebig wachsen. Damit sollten längere Texte vollständig angezeigt werden.", timeStamp: Date(), isReadbyUser: [])
     let chatVm = ChatSenderViewModel(chatDesign: chat)
     return ChatSenderView(chatSenderVm: chatVm)
 }

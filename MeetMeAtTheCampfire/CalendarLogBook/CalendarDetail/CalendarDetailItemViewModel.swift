@@ -52,9 +52,8 @@ class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManager
     deinit{
         removeListener()
     }
-    
+    //create new data logBookText with image
     func createlogBookText(logBookText: String){
-        //Ab hier werden die Bilder erzeugt und ins FirebaseStorage geladen
         guard selectedImage != nil else {
             return
         }
@@ -64,19 +63,23 @@ class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManager
         guard imageData != nil else {
             return
         }
-        //Hier wird der Path erzeugt und auch unten in der Erstellung des Storage Eintrags übernommen
+        //create path for storage and firestore
         self.imageUrl = "images\(UUID().uuidString).jpg"
         let fileRef = FirebaseManager.shared.storage.reference().child(self.imageUrl)
         
         let uploadTask = fileRef.putData(imageData!, metadata: nil){
             metadata, error in
             
+            if let error {
+                print("Error loading metadata \(error)")
+                return
+            }
+            
             if error == nil && metadata != nil {
                 print("Image upload succesfull")
             }
         }
-        
-        //Ab hier wird der Storage Eintrage begonnen und von oben der imagePath übernommen
+        //create new data for firestore
         guard let userId = FirebaseManager.shared.userId else {
             return
         }
@@ -92,11 +95,12 @@ class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManager
         }
     }
     
+    //Read all Data from Firebase
     func readLogBookText(formattedDate: String){
         guard let userId = FirebaseManager.shared.userId else {
             return
         }
-        
+        //SnapshotListener
         self.listener = FirebaseManager.shared.firestore.collection("newLogEntry")
             .whereField("userId", isEqualTo: userId)
             .whereField("formattedDate", isEqualTo: formattedDate)
@@ -106,16 +110,7 @@ class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManager
                     print("Error reading newLogEntrys \(error)")
                     return
                 }
-                
-                guard let documents = querySnapshot?.documents else {
-                    print("QuerySnapshot is empty")
-                    return
-                }
-                
-                self.newEntryLogs = documents.compactMap { document in
-                    try? document.data(as: LogBookModel.self)
-                }
-                
+                //Load all images in querySnapshot
                 if error == nil && querySnapshot != nil {
                     
                     var imagePaths = [String]()
@@ -131,17 +126,16 @@ class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManager
                         
                         //Retrieve the data
                         fileRef.getMetadata { metadata, error in
-                            if let error = error {
+                            if let error {
                                 print("Error fetching image metadata: \(error)")
                                 return
                             }
-                            
+                            //imagesize
                             guard let size = metadata?.size else {
                                 print("Failed to get image size")
                                 return
                             }
-                            
-                            
+                            //add images to readImages Array
                             fileRef.getData(maxSize: size) { data, error in
                                 if error == nil && data != nil {
                                     if let image = UIImage(data: data!) {
@@ -154,6 +148,15 @@ class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManager
                         }
                     }
                 }
+                
+                guard let documents = querySnapshot?.documents else {
+                    print("QuerySnapshot is empty")
+                    return
+                }
+                
+                self.newEntryLogs = documents.compactMap { document in
+                    try? document.data(as: LogBookModel.self)
+                }
             }
     }
     
@@ -164,7 +167,7 @@ class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManager
     
     func dateFormatter() -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy"
+        dateFormatter.dateFormat = "dd.MM.yyyy"
         return dateFormatter.string(from: calendarVm.date)
     }
 

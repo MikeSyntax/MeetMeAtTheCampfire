@@ -8,7 +8,7 @@
 import Foundation
 import FirebaseFirestoreSwift
 
-struct LogBookModel: Codable, Identifiable {
+struct LogBookModel: Codable, Identifiable, Equatable {
     @DocumentID var id: String?
     
     //Zuordnung des Eintrags

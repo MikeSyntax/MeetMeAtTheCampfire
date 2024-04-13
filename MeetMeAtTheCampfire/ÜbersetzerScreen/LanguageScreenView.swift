@@ -16,6 +16,7 @@ struct LanguageScreenView: View {
     var body: some View {
         NavigationStack {
             VStack {
+                Divider()
                 ZStack{
                     Form {
                         Section(header: Text("Wähle hier Deine Zielsprache aus").foregroundStyle(.black)){
@@ -62,15 +63,16 @@ struct LanguageScreenView: View {
                         }
                     }
                 }
-                .scrollContentBackground(.hidden)
-                .background(
-                    Image("background")
-                        .resizable()
-                        .scaledToFill()
-                        .opacity(0.2)
-                        .ignoresSafeArea())
             }
-            .navigationTitle(Text("Übersetzer"))
+            .scrollContentBackground(.hidden)
+            .background(
+                Image("background")
+                    .resizable()
+                    .scaledToFill()
+                    .opacity(0.2)
+                    .ignoresSafeArea())
+            
+            .navigationTitle("Übersetzer")
         }
         .onAppear {
             languageVm.loadLanguages()
