@@ -8,7 +8,7 @@
 import Foundation
 import FirebaseFirestoreSwift
 
-struct LogBookModel: Codable, Identifiable, Equatable {
+struct LogBookModel: Codable, Identifiable, Equatable, Hashable {
     @DocumentID var id: String?
     
     //Zuordnung des Eintrags
@@ -17,9 +17,9 @@ struct LogBookModel: Codable, Identifiable, Equatable {
     let logBookText: String
     
     //Zuordnung der Position des Eintrags
-    let laditude: Double
+    let latitude: Double
     let longitude: Double
     
     let imageUrl: String
-    
+    let containsLogBookEntry: Bool
 }

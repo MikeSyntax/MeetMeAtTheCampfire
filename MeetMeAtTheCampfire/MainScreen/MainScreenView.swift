@@ -21,10 +21,11 @@ struct MainScreenView: View {
         return CalendarViewModel(date: calendar.date(from: components) ?? Date())
     }()
     
-    @StateObject var calendarDetailItemVm = CalendarDetailItemViewModel(calendarItemModel: LogBookModel(userId: "1", formattedDate: "123", logBookText: "", laditude: 0.47586, longitude: 0.883626, imageUrl: ""), calendarVm: CalendarViewModel(date: Date()))
+    @StateObject var calendarDetailItemVm = CalendarDetailItemViewModel(calendarItemModel: LogBookModel(userId: "1", formattedDate: "123", logBookText: "", latitude: 0.47586, longitude: 0.883626, imageUrl: "", containsLogBookEntry: false), calendarVm: CalendarViewModel(date: Date()))
     
     //Immer mit der HomeScreenView anfangen
     @State private var selectedTab = 0
+    @State private var currentTab = 2
     
     init(authVm: AuthViewModel){
         _chatVm = StateObject(wrappedValue: ChatScreenViewModel(user: authVm.user!))
@@ -32,7 +33,7 @@ struct MainScreenView: View {
     }
     
     var body: some View {
-        TabView{
+        TabView(selection: $selectedTab) {
             HomeScreenView()
                 .tabItem {
                     Image(systemName: "house")
@@ -49,10 +50,9 @@ struct MainScreenView: View {
             
             CalendarYearlyView(dateVm: dateVm, calendarDetailItemVm: calendarDetailItemVm)
                 .tabItem {
-                    Image(systemName: "book")
+                    Image(systemName: selectedTab == 2 ? "book":"book.closed")
                     Text("Logbuch")
                 }.tag(2)
-            
             
             LanguageScreenView(languageVm: self.languageVm)
                 .tabItem {

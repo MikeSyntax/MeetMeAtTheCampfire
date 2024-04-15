@@ -13,8 +13,6 @@ import SwiftUI
 class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     //Leeres Array mit LogBockModels
     @Published var newEntryLogs: [LogBookModel] = []
-    //Listener
-    private var listener: ListenerRegistration? = nil
     //alle published Variablen
     @Published var mapCameraPosition: MapCameraPosition = MapCameraPosition.automatic
     @Published var lastLocation: CLLocation?
@@ -26,7 +24,10 @@ class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManager
     @Published var imageUrl: String = ""
     @Published var selectedImage: UIImage?
     @Published var readImages: [UIImage] = []
+    @Published var containsLogBookEntry: Bool = false
     
+    //Listener
+    private var listener: ListenerRegistration? = nil
     let calendarItemModel: LogBookModel
     let calendarVm: CalendarViewModel
     
@@ -35,12 +36,13 @@ class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManager
     init(calendarItemModel: LogBookModel, calendarVm: CalendarViewModel) {
         
         self.calendarItemModel = calendarItemModel.self
-        self.latitude = calendarItemModel.laditude
+        self.latitude = calendarItemModel.latitude
         self.longitude = calendarItemModel.longitude
         self.logBookText = calendarItemModel.logBookText
         self.formattedDate = calendarItemModel.formattedDate
         self.calendarVm = calendarVm.self
         self.imageUrl = calendarItemModel.imageUrl
+        self.containsLogBookEntry = calendarItemModel.containsLogBookEntry
         
         super.init()
         locationManager.delegate = self
@@ -84,7 +86,7 @@ class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManager
             return
         }
         
-        let newText = LogBookModel(userId: userId, formattedDate: formattedDate, logBookText: logBookText, laditude: self.latitude, longitude: self.longitude, imageUrl: self.imageUrl)
+        let newText = LogBookModel(userId: userId, formattedDate: formattedDate, logBookText: logBookText, latitude: self.latitude, longitude: self.longitude, imageUrl: self.imageUrl, containsLogBookEntry: true)
         
         do{
             try
@@ -96,6 +98,7 @@ class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManager
     }
     
     //Read all Data from Firebase
+    @MainActor
     func readLogBookText(formattedDate: String){
         guard let userId = FirebaseManager.shared.userId else {
             return
@@ -153,9 +156,10 @@ class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManager
                     print("QuerySnapshot is empty")
                     return
                 }
-                
-                self.newEntryLogs = documents.compactMap { document in
-                    try? document.data(as: LogBookModel.self)
+                DispatchQueue.main.async {
+                    self.newEntryLogs = documents.compactMap { document in
+                        try? document.data(as: LogBookModel.self)
+                    }
                 }
             }
     }
@@ -177,8 +181,8 @@ class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManager
         self.locationManager.startUpdatingLocation()
     }
     
+    @MainActor
     func locationManager(_ manager: CLLocationManager, didUpdateLocations location: [CLLocation]){
-        
         if let lastLocation = location.last {
             self.lastLocation = lastLocation
             self.mapCameraPosition = MapCameraPosition.camera(MapCamera(centerCoordinate: lastLocation.coordinate, distance: 5000))
@@ -191,6 +195,7 @@ class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManager
     func removeListener(){
         self.listener = nil
         self.newEntryLogs = []
+        self.readImages = []
     }
 }
 
