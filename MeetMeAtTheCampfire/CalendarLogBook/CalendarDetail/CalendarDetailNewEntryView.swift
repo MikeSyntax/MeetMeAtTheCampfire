@@ -13,7 +13,7 @@ struct CalendarDetailNewEntryView: View {
     @Environment(\.dismiss) private var dismiss
     
     @State var showImagePicker: Bool = false
-    //@State var selectedImage: UIImage?
+    @State var selectedImage: UIImage?
     
     var body: some View {
         NavigationStack{
@@ -102,5 +102,5 @@ struct CalendarDetailNewEntryView: View {
 }
 
 #Preview {
-    CalendarDetailNewEntryView(calendarDetailItemVm: CalendarDetailItemViewModel(calendarItemModel: LogBookModel(userId: "1", formattedDate: "", logBookText: "Hallo", latitude: 0.0, longitude: 0.0, imageUrl: "", containsLogBookEntry: false), calendarVm: CalendarViewModel(date: Date())))
+    CalendarDetailNewEntryView(calendarDetailItemVm: CalendarDetailItemViewModel(calendarItemModel: LogBookModel(userId: "1", formattedDate: "", logBookText: "Hallo", latitude: 0.0, longitude: 0.0, imageUrl: "", containsLogBookEntry: false), dateVm: CalendarViewModel(date: Date())))
 }

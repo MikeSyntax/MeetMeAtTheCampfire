@@ -28,6 +28,20 @@ class DetailCategorieViewModel: ObservableObject {
         do{
             try FirebaseManager.shared.firestore.collection("tasksInCategorie").addDocument(from: task)
             print("creating task succeeded")
+            
+            let updatedCategorie = [
+                "tasksInCategorie" : tasksInCategorieCounter + 1
+            ]
+            
+            FirebaseManager.shared.firestore.collection("categories").document(categorieId).updateData(updatedCategorie) {
+                error in
+                if let error {
+                    print("update categorie failed: \(error)")
+                } else {
+                    print("update categorie done")
+                }
+            }
+            
         } catch {
             print("Error creating new task: \(error)")
         }
@@ -103,6 +117,19 @@ class DetailCategorieViewModel: ObservableObject {
                         }
                     }
                 }
+        }
+        
+        let updatedCategorie = [
+            "tasksInCategorie" : tasksInCategorieCounter - 1
+        ]
+        
+        FirebaseManager.shared.firestore.collection("categories").document(categorieId).updateData(updatedCategorie) {
+            error in
+            if let error {
+                print("update categorie failed: \(error)")
+            } else {
+                print("update categorie done")
+            }
         }
     }
 

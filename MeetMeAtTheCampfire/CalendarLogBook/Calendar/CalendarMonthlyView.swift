@@ -23,8 +23,8 @@ struct CalendarMonthlyView: View {
                         Spacer()
                     }
                     ForEach(dateVm.getAllDaysToNextMonth(from: dateVm.date), id: \.self) { day in
-                        NavigationLink(destination: CalendarDetailItemView(calendarDetailItemVm: calendarDetailItemVm)) {
-                            CalendarDailyView(dateVm: CalendarViewModel(date: day)) /* Ab hier neues Model*/
+                        NavigationLink(destination: CalendarDetailItemView(calendarDetailItemVm: CalendarDetailItemViewModel(calendarItemModel: LogBookModel(userId: calendarDetailItemVm.userId, formattedDate: calendarDetailItemVm.formattedDate, logBookText: calendarDetailItemVm.logBookText, latitude: calendarDetailItemVm.latitude, longitude: calendarDetailItemVm.longitude, imageUrl: calendarDetailItemVm.imageUrl, containsLogBookEntry: calendarDetailItemVm.containsLogBookEntry), dateVm: CalendarViewModel(date: day)))) {
+                            CalendarDailyView(dateVm: CalendarViewModel(date: day), calendarDetailItemVm: CalendarDetailItemViewModel(calendarItemModel: LogBookModel(userId: calendarDetailItemVm.userId, formattedDate: calendarDetailItemVm.formattedDate, logBookText: calendarDetailItemVm.logBookText, latitude: calendarDetailItemVm.latitude, longitude: calendarDetailItemVm.longitude, imageUrl: calendarDetailItemVm.imageUrl, containsLogBookEntry: calendarDetailItemVm.containsLogBookEntry), dateVm: CalendarViewModel(date: day))) 
                         }
                     }
                 }
@@ -33,6 +33,6 @@ struct CalendarMonthlyView: View {
     }
 }
 
-#Preview {
-    CalendarMonthlyView(dateVm: CalendarViewModel(date: Date()), calendarDetailItemVm: CalendarDetailItemViewModel(calendarItemModel: LogBookModel(userId: "1", formattedDate: "", logBookText: "", latitude: 0.0, longitude: 0.0, imageUrl: "", containsLogBookEntry: false), calendarVm: CalendarViewModel(date: Date())))
-}
+//#Preview {
+//    CalendarMonthlyView(dateVm: CalendarViewModel(date: Date()), calendarDetailItemVm: CalendarDetailItemViewModel(calendarItemModel: LogBookModel(userId: "1", formattedDate: "", logBookText: "", latitude: 0.0, longitude: 0.0, imageUrl: "", containsLogBookEntry: false), calendarVm: CalendarViewModel(date: Date())))
+//}

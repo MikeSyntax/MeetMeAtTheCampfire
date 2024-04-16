@@ -31,7 +31,7 @@ import Foundation
 //Settings mit Account löschen
 //Beim Chat die Box automatisch der Nachricht anpassen
 //AsyncImage mit Url nicht und mit UIImage in Storage speichern
-
+//Höhe des Feldes für die Übersetzung
 
 
 

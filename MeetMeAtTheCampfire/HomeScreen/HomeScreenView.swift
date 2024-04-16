@@ -14,7 +14,7 @@ struct HomeScreenView: View {
     
     @State private var showNewCategorieAlert: Bool = false
     @State private var newCategorie: String = ""
-    @State private var tasksInCategorie: String = ""
+    @State private var tasksInCategorie: Int = 0
     @State private var showSettingsSheet: Bool = false
     
     @Environment(\.dismiss) private var dismiss
@@ -66,15 +66,13 @@ struct HomeScreenView: View {
         .alert("Neue Kategorie", isPresented: $showNewCategorieAlert) {
             TextField("Name", text: $newCategorie)
                 .lineLimit(1)
-            TextField("Anzahl Tasks", text: $tasksInCategorie)
-                .lineLimit(1)
             Button("zurück") {
                 dismiss()
             }
             Button("Speichern") {
-                homeVm.createCategorie(categorieName: newCategorie, tasksInCategorie: Int(tasksInCategorie) ?? 4)
+                homeVm.createCategorie(categorieName: newCategorie)
                 newCategorie = ""
-                tasksInCategorie = ""
+                
             }
         }
         .sheet(isPresented: $showSettingsSheet) {
@@ -90,6 +88,6 @@ struct HomeScreenView: View {
 }
 
 
-#Preview {
-    HomeScreenView()
-}
+//#Preview {
+//    HomeScreenView()
+//}

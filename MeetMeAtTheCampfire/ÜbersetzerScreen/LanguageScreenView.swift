@@ -30,11 +30,11 @@ struct LanguageScreenView: View {
                             .onChange(of: selectionLanguage) { languageVm.languageChoice = selectionLanguage }
                         }
                         Section(header: Text("Text eingeben").foregroundStyle(.black)){
-                            TextField("Texteingabe für die Übersetzung", text: $languageVm.textToTranslate)
+                            TextField("Texteingabe für die Übersetzung", text: $languageVm.textToTranslate, axis: .vertical)
                                 .shadow(color: .red, radius: 8)
                                 .textInputAutocapitalization(.never)
                                 .autocorrectionDisabled()
-                                .lineLimit(5, reservesSpace: true)
+                                .lineLimit(1...5)
                                 .textFieldStyle(.roundedBorder)
                                 .frame(minHeight: 40)
                                 .scrollContentBackground(.hidden)
@@ -53,11 +53,11 @@ struct LanguageScreenView: View {
                             .frame(maxWidth: .infinity, alignment: .center)
                         }
                         Section(header: Text("Übersetzung").foregroundStyle(.black)){
-                            TextField("Übersetzung", text: $languageVm.translatedText)
+                            TextField("Übersetzung", text: $languageVm.translatedText, axis: .vertical)
                                 .shadow(color: .green, radius: 8)
                                 .textInputAutocapitalization(.never)
                                 .autocorrectionDisabled()
-                                .lineLimit(5, reservesSpace: true)
+                                .lineLimit(1...5)
                                 .textFieldStyle(.roundedBorder)
                                 .frame(minHeight: 40)
                         }

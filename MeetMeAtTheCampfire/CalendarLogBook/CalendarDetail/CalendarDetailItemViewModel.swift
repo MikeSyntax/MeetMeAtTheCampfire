@@ -23,24 +23,24 @@ class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManager
     @Published var userId: String = ""
     @Published var imageUrl: String = ""
     @Published var selectedImage: UIImage?
-    @Published var readImages: [UIImage] = []
+    @Published var readImages: [String] = []
     @Published var containsLogBookEntry: Bool = false
     
     //Listener
     private var listener: ListenerRegistration? = nil
     let calendarItemModel: LogBookModel
-    let calendarVm: CalendarViewModel
+    let dateVm: CalendarViewModel
     
     private let locationManager = CLLocationManager()
     
-    init(calendarItemModel: LogBookModel, calendarVm: CalendarViewModel) {
+    init(calendarItemModel: LogBookModel, dateVm: CalendarViewModel) {
         
         self.calendarItemModel = calendarItemModel.self
         self.latitude = calendarItemModel.latitude
         self.longitude = calendarItemModel.longitude
         self.logBookText = calendarItemModel.logBookText
         self.formattedDate = calendarItemModel.formattedDate
-        self.calendarVm = calendarVm.self
+        self.dateVm = dateVm.self
         self.imageUrl = calendarItemModel.imageUrl
         self.containsLogBookEntry = calendarItemModel.containsLogBookEntry
         
@@ -54,22 +54,22 @@ class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManager
     deinit{
         removeListener()
     }
-    //create new data logBookText with image
+    
+    ///create new data logBookText with image
     func createlogBookText(logBookText: String){
-        guard selectedImage != nil else {
+        guard let uploadImage = selectedImage else {
             return
         }
         
-        let imageData = selectedImage!.jpegData(compressionQuality: 0.8)
+        let imageData = uploadImage.jpegData(compressionQuality: 0.8)
         
         guard imageData != nil else {
             return
         }
         //create path for storage and firestore
-        self.imageUrl = "images\(UUID().uuidString).jpg"
-        let fileRef = FirebaseManager.shared.storage.reference().child(self.imageUrl)
+        let fileRef = FirebaseManager.shared.storage.reference().child("/images/\(UUID().uuidString).jpg")
         
-        let uploadTask = fileRef.putData(imageData!, metadata: nil){
+        fileRef.putData(imageData!, metadata: nil){
             metadata, error in
             
             if let error {
@@ -80,20 +80,36 @@ class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManager
             if error == nil && metadata != nil {
                 print("Image upload succesfull")
             }
-        }
-        //create new data for firestore
-        guard let userId = FirebaseManager.shared.userId else {
-            return
-        }
-        
-        let newText = LogBookModel(userId: userId, formattedDate: formattedDate, logBookText: logBookText, latitude: self.latitude, longitude: self.longitude, imageUrl: self.imageUrl, containsLogBookEntry: true)
-        
-        do{
-            try
-            FirebaseManager.shared.firestore.collection("newLogEntry").addDocument(from: newText)
-            print("Creating newLogEntry succesfull")
-        } catch{
-            print("Error creating newLogEntry: \(error)")
+            
+            //create new data for firestore
+            guard let userId = FirebaseManager.shared.userId else {
+                return
+            }
+            
+            fileRef.downloadURL { url, error in
+                guard let imageUrl = url?.absoluteString else {
+                    print("URL WAR KACKE")
+                    return
+                }
+                self.imageUrl = imageUrl
+                let newText = LogBookModel(
+                    userId: userId,
+                    formattedDate: self.formattedDate,
+                    logBookText: logBookText,
+                    latitude: self.latitude,
+                    longitude: self.longitude,
+                    imageUrl: imageUrl,
+                    containsLogBookEntry: true
+                )
+                
+                do{
+                    try
+                    FirebaseManager.shared.firestore.collection("newLogEntry").addDocument(from: newText)
+                    print("Creating newLogEntry succesfull")
+                } catch{
+                    print("Error creating newLogEntry: \(error)")
+                }
+            }
         }
     }
     
@@ -115,40 +131,8 @@ class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManager
                 }
                 //Load all images in querySnapshot
                 if error == nil && querySnapshot != nil {
-                    
-                    var imagePaths = [String]()
-                    
-                    //Loop for all returned docs
                     for doc in querySnapshot!.documents {
-                        imagePaths.append(doc["imageUrl"] as? String ?? "")
-                    }
-                    //Loop through each file an fetch the data storage
-                    for imagePath in imagePaths {
-                        let ref = FirebaseManager.shared.storage.reference()
-                        let fileRef = ref.child(imagePath)
-                        
-                        //Retrieve the data
-                        fileRef.getMetadata { metadata, error in
-                            if let error {
-                                print("Error fetching image metadata: \(error)")
-                                return
-                            }
-                            //imagesize
-                            guard let size = metadata?.size else {
-                                print("Failed to get image size")
-                                return
-                            }
-                            //add images to readImages Array
-                            fileRef.getData(maxSize: size) { data, error in
-                                if error == nil && data != nil {
-                                    if let image = UIImage(data: data!) {
-                                        DispatchQueue.main.async {
-                                            self.readImages.append(image)
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        self.readImages.append(doc["imageUrl"] as? String ?? "")
                     }
                 }
                 
@@ -172,9 +156,9 @@ class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManager
     func dateFormatter() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd.MM.yyyy"
-        return dateFormatter.string(from: calendarVm.date)
+        return dateFormatter.string(from: dateVm.date)
     }
-
+    
     
     func requestLocation(){
         self.locationManager.requestWhenInUseAuthorization()

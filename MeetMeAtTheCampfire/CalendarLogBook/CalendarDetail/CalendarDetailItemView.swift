@@ -43,11 +43,28 @@ struct CalendarDetailItemView: View {
                         Spacer()
                         VStack{
                             ForEach(calendarDetailItemVm.readImages, id: \.self){ image in
-                                    Image(uiImage: image)
-                                        .resizable()
-                                        .frame(maxWidth: 300, maxHeight: 300)
-                                        .cornerRadius(10)
-                                        .shadow(radius: 10)
+                                AsyncImage(
+                                    url: URL(string: image),
+                                    content: { image in
+                                       image
+                                            .resizable()
+                                            .frame(maxWidth: 300, maxHeight: 300)
+                                            .cornerRadius(10)
+                                            .shadow(radius: 10)
+                                    },
+                                    placeholder: {
+                                        Image(systemName: "photo")
+                                            .resizable()
+                                            .frame(maxWidth: 300, minHeight: 300)
+                                            .cornerRadius(10)
+                                            .shadow(radius: 10)
+                                    }
+                                )
+//                                    Image(uiImage: image)
+//                                        .resizable()
+//                                        .frame(maxWidth: 300, maxHeight: 300)
+//                                        .cornerRadius(10)
+//                                        .shadow(radius: 10)
                             }
                         }
                         Spacer()
@@ -75,6 +92,9 @@ struct CalendarDetailItemView: View {
                     .padding()
                 }
             }
+//            .onChange(of: calendarDetailItemVm.newEntryLogs) {
+//                calendarDetailItemVm.readLogBookText(formattedDate: calendarDetailItemVm.formattedDate)
+//            }
             .onAppear {
                 calendarDetailItemVm.readLogBookText(formattedDate: calendarDetailItemVm.formattedDate)
             }
@@ -363,9 +383,9 @@ struct CalendarDetailItemView: View {
 //    }
 //}
 //
-//#Preview {
-//    CalendarDetailItemView(calendarDetailItemVm: CalendarDetailItemViewModel(calendarItemModel: LogBookModel(userId: "1", formattedDate: "date", logBookText: "", laditude: 0.0, longitude: 0.0, imageUrl: ""), calendarVm: CalendarViewModel(date: Date())))
-//}
+#Preview {
+    CalendarDetailItemView(calendarDetailItemVm: CalendarDetailItemViewModel(calendarItemModel: LogBookModel(userId: "1", formattedDate: "date", logBookText: "", latitude: 0.0, longitude: 0.0, imageUrl: "", containsLogBookEntry: true), dateVm: CalendarViewModel(date: Date())))
+}
 //
 //
 //
