@@ -14,6 +14,10 @@ class DetailCategorieViewModel: ObservableObject {
     @Published var tasksInCategorieCounter: Int = 0
     private var listener: ListenerRegistration? = nil
     
+    init() {
+        tasksInCategorieCounter = detailCategorieItemViewModels.count
+    }
+    
     deinit{
         removeListener()
     }
@@ -29,8 +33,9 @@ class DetailCategorieViewModel: ObservableObject {
             try FirebaseManager.shared.firestore.collection("tasksInCategorie").addDocument(from: task)
             print("creating task succeeded")
             
+            tasksInCategorieCounter += 1
             let updatedCategorie = [
-                "tasksInCategorie" : tasksInCategorieCounter + 1
+                "tasksInCategorie" : tasksInCategorieCounter
             ]
             
             FirebaseManager.shared.firestore.collection("categories").document(categorieId).updateData(updatedCategorie) {
@@ -114,22 +119,23 @@ class DetailCategorieViewModel: ObservableObject {
                             print("Error deleting document: \(error)")
                         } else {
                             print("Document successfully deleted")
+                            
+                            self.tasksInCategorieCounter -= 1
+                            let updatedCategorie = [
+                                "tasksInCategorie" : self.tasksInCategorieCounter
+                            ]
+                            
+                            FirebaseManager.shared.firestore.collection("categories").document(categorieId).updateData(updatedCategorie) {
+                                error in
+                                if let error {
+                                    print("update categorie failed: \(error)")
+                                } else {
+                                    print("update categorie done")
+                                }
+                            }
                         }
                     }
                 }
-        }
-        
-        let updatedCategorie = [
-            "tasksInCategorie" : tasksInCategorieCounter - 1
-        ]
-        
-        FirebaseManager.shared.firestore.collection("categories").document(categorieId).updateData(updatedCategorie) {
-            error in
-            if let error {
-                print("update categorie failed: \(error)")
-            } else {
-                print("update categorie done")
-            }
         }
     }
 

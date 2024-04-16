@@ -3,4 +3,70 @@
    uuid = "D98E02D2-1B0B-47F0-84A1-BCF45625112F"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "13FE6216-2BA2-4936-9FEA-CD40D3E67C34"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MeetMeAtTheCampfire/CalendarLogBook/Calendar/CalendarDailyView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "16"
+            endingLineNumber = "16"
+            landmarkName = "hasLogBookText"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "371FF85D-DC12-448E-8D15-DC00F8D0BAD2"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MeetMeAtTheCampfire/CalendarLogBook/Calendar/CalendarDailyView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "15"
+            endingLineNumber = "15"
+            landmarkName = "hasLogBookText"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "371FF85D-DC12-448E-8D15-DC00F8D0BAD2 - cb3fa700fbf3b154"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MeetMeAtTheCampfire.CalendarDailyView.hasLogBookText.getter : Swift.Bool"
+                  moduleName = "MeetMeAtTheCampfire"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mikereich/MeetMeAtTheCampfire/MeetMeAtTheCampfire/CalendarLogBook/Calendar/CalendarDailyView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "76">
+               </Location>
+               <Location
+                  uuid = "371FF85D-DC12-448E-8D15-DC00F8D0BAD2 - f00ed2ad1f7ed16"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (MeetMeAtTheCampfire.LogBookModel) -&gt; Swift.Bool in MeetMeAtTheCampfire.CalendarDailyView.hasLogBookText.getter : Swift.Bool"
+                  moduleName = "MeetMeAtTheCampfire"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mikereich/MeetMeAtTheCampfire/MeetMeAtTheCampfire/CalendarLogBook/Calendar/CalendarDailyView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "252">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

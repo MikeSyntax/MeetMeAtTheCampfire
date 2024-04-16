@@ -21,7 +21,7 @@ struct MainScreenView: View {
         return CalendarViewModel(date: calendar.date(from: components) ?? Date())
     }()
     
-    @StateObject var calendarDetailItemVm = CalendarDetailItemViewModel(calendarItemModel: LogBookModel(userId: "1", formattedDate: "123", logBookText: "", latitude: 0.47586, longitude: 0.883626, imageUrl: "", containsLogBookEntry: false), dateVm: CalendarViewModel(date: Date()))
+    @StateObject var calendarDetailItemVm = CalendarDetailItemViewModel(calendarItemModel: LogBookModel(userId: "1", formattedDate: "123", logBookText: "", latitude: 0.47586, longitude: 0.883626, imageUrl: "", containsLogBookEntry: false), date: Date())
     
     //Immer mit der HomeScreenView anfangen
     @State private var selectedTab = 0

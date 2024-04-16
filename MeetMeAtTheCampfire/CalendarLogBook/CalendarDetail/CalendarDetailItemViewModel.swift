@@ -29,18 +29,18 @@ class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManager
     //Listener
     private var listener: ListenerRegistration? = nil
     let calendarItemModel: LogBookModel
-    let dateVm: CalendarViewModel
+    let date: Date
     
     private let locationManager = CLLocationManager()
     
-    init(calendarItemModel: LogBookModel, dateVm: CalendarViewModel) {
+    init(calendarItemModel: LogBookModel, date: Date) {
         
-        self.calendarItemModel = calendarItemModel.self
+        self.calendarItemModel = calendarItemModel
         self.latitude = calendarItemModel.latitude
         self.longitude = calendarItemModel.longitude
         self.logBookText = calendarItemModel.logBookText
         self.formattedDate = calendarItemModel.formattedDate
-        self.dateVm = dateVm.self
+        self.date = date
         self.imageUrl = calendarItemModel.imageUrl
         self.containsLogBookEntry = calendarItemModel.containsLogBookEntry
         
@@ -144,6 +144,12 @@ class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManager
                     self.newEntryLogs = documents.compactMap { document in
                         try? document.data(as: LogBookModel.self)
                     }
+                    if let longitude = self.newEntryLogs.first?.longitude {
+                        self.longitude = longitude
+                    }
+                    if let latitude = self.newEntryLogs.first?.latitude {
+                        self.latitude = latitude
+                    }
                 }
             }
     }
@@ -156,7 +162,7 @@ class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManager
     func dateFormatter() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd.MM.yyyy"
-        return dateFormatter.string(from: dateVm.date)
+        return dateFormatter.string(from: self.date)
     }
     
     
@@ -182,70 +188,3 @@ class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManager
         self.readImages = []
     }
 }
-
-
-
-
-
-
-
-
-//        FirebaseManager.shared.firestore.collection("newLogEntry").getDocuments { snapshot, error in
-//
-//            if error == nil && querySnapshot != nil {
-//
-//                var imagePaths = [String]()
-//
-//                //Loop for all returned docs
-//                for doc in snapshot!.documents {
-//                    imagePaths.append(doc["url"] as! String)
-//                }
-//                //Loop through each file an fetch the data storage
-//                for imagePath in imagePaths {
-//                    let ref = FirebaseManager.shared.storage.reference()
-//                    let fileRef = ref.child(imagePath)
-//
-//                    //Retrieve the data
-//                    fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
-//                        if error == nil && data != nil {
-//                            if let image = UIImage(data: data!) {
-//                                DispatchQueue.main.async {
-//                                    self.readImages.append(image)
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//
-
-
-
-
-//    func uploadPhoto(){
-//        guard selectedImage != nil else {
-//            return
-//        }
-//
-//        let imageData = selectedImage!.jpegData(compressionQuality: 0.8)
-//
-//        guard imageData != nil else {
-//            return
-//        }
-//
-//        let imagePath = "images\(UUID().uuidString).jpg"
-//        let fileRef = FirebaseManager.shared.storage.reference().child(imagePath)
-//
-//        let uploadTask = fileRef.putData(imageData!, metadata: nil){
-//            metadata, error in
-//
-//            if error == nil && metadata != nil {
-//                FirebaseManager.shared.firestore.collection("newLogEntry").document().setData(["imageUrl": imagePath])
-//                self.imageUrl = imagePath
-//                print("Image uploaded")
-//
-//
-//            }
-//        }
-//    }
