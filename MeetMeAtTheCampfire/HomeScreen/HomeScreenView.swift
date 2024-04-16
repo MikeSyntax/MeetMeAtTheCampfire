@@ -72,7 +72,6 @@ struct HomeScreenView: View {
             Button("Speichern") {
                 homeVm.createCategorie(categorieName: newCategorie)
                 newCategorie = ""
-                
             }
         }
         .sheet(isPresented: $showSettingsSheet) {
