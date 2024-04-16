@@ -14,9 +14,9 @@ class DetailCategorieViewModel: ObservableObject {
     @Published var tasksInCategorieCounter: Int = 0
     private var listener: ListenerRegistration? = nil
     
-    init() {
-        tasksInCategorieCounter = detailCategorieItemViewModels.count
-    }
+//    init() {
+//        tasksInCategorieCounter = detailCategorieItemViewModels.count
+//    }
     
     deinit{
         removeListener()
@@ -32,6 +32,8 @@ class DetailCategorieViewModel: ObservableObject {
         do{
             try FirebaseManager.shared.firestore.collection("tasksInCategorie").addDocument(from: task)
             print("creating task succeeded")
+            
+            tasksInCategorieCounter = detailCategorieItemViewModels.count
             
             tasksInCategorieCounter += 1
             let updatedCategorie = [
@@ -119,6 +121,8 @@ class DetailCategorieViewModel: ObservableObject {
                             print("Error deleting document: \(error)")
                         } else {
                             print("Document successfully deleted")
+                            
+                            self.tasksInCategorieCounter = self.detailCategorieItemViewModels.count + 1
                             
                             self.tasksInCategorieCounter -= 1
                             let updatedCategorie = [

@@ -19,13 +19,21 @@ struct ChatSenderView: View {
                 .frame(minWidth: 200, maxWidth: maxWidth, minHeight: 70, maxHeight: 500, alignment: chatSenderVm.isCurrentUser ? .trailing : .leading)
                 .shadow(radius: 10)
             VStack{
-                Text(chatSenderVm.userName)
-                    .font(.caption)
-                    .padding(.trailing)
-                    .padding(.leading)
-                    .padding(.vertical, 2)
-                    .frame(maxWidth: maxWidth, alignment: chatSenderVm.isCurrentUser ? .trailing : .leading)
-
+                HStack{
+                    Image(.logo)
+                        .resizable()
+                        .frame(width: 20, height: 20)
+                        .clipShape(Circle())
+                    
+                    Text(chatSenderVm.userName)
+                        .font(.caption)
+                    
+                }
+                .padding(.trailing)
+                .padding(.leading)
+                .padding(.vertical, 2)
+                .frame(maxWidth: maxWidth, alignment: chatSenderVm.isCurrentUser ? .trailing : .leading)
+                
                 Text(chatSenderVm.messageText)
                     .lineLimit(1...)
                     .font(.headline)
@@ -33,7 +41,6 @@ struct ChatSenderView: View {
                     .padding(.trailing)
                     .padding(.vertical, 2)
                     .frame(maxWidth: maxWidth, alignment: chatSenderVm.isCurrentUser ? .trailing : .leading)
-
 
                 Spacer()
                 HStack{

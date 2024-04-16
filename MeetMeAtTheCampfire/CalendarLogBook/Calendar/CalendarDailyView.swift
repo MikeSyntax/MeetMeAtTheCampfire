@@ -9,13 +9,14 @@ import SwiftUI
 
 struct CalendarDailyView: View {
     @ObservedObject var dateVm: CalendarViewModel
-    @ObservedObject var calendarDetailItemVm: CalendarDetailItemViewModel
+    //@ObservedObject var calendarDetailItemVm: CalendarDetailItemViewModel
     
-    var hasLogBookText: Bool {
-        calendarDetailItemVm.newEntryLogs.contains{
-            $0.logBookText != "" && !$0.logBookText.isEmpty && $0.formattedDate == calendarDetailItemVm.formattedDate
-        }
-    }
+//    var hasLogBookText: Bool {
+//        calendarDetailItemVm.readLogBookText(formattedDate: calendarDetailItemVm.formattedDate)
+//        return calendarDetailItemVm.newEntryLogs.contains{
+//            $0.logBookText != "" && !$0.logBookText.isEmpty && $0.formattedDate == calendarDetailItemVm.formattedDate
+//        }
+//    }
     
     var body: some View {
         //aktuellen Tag anzeigen
@@ -27,12 +28,12 @@ struct CalendarDailyView: View {
                             Circle()
                                 .frame(width: 30, height: 30)
                                 .foregroundStyle(.red)
-                        } else if hasLogBookText {
-                            Circle()
-                                .frame(width: 30, height: 30)
-                                .foregroundStyle(.blue)
-        
-                        }
+                        } // else if hasLogBookText {
+//                            Circle()
+//                                .frame(width: 30, height: 30)
+//                                .foregroundStyle(.blue)
+//        
+//                        }
                     }
     }
 }
