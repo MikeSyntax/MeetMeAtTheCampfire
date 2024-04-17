@@ -37,6 +37,15 @@ struct HomeScreenView: View {
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .padding(.vertical, 20)
+                
+                if homeVm.categorieViewModels.isEmpty {
+                            HStack(alignment: .center){
+                                VideoStartCategoriesView()
+                            }
+                            .frame(width: 300)
+                            .cornerRadius(30)
+                }
+                
                 Divider()
                 Button(action: {
                     showNewCategorieAlert.toggle()
@@ -87,6 +96,6 @@ struct HomeScreenView: View {
 }
 
 
-//#Preview {
-//    HomeScreenView()
-//}
+#Preview {
+    HomeScreenView()
+}
