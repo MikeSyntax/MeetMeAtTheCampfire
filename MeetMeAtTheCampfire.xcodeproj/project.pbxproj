@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2B0158672B9789F20026CA84 /* DetailCategorieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0158662B9789F20026CA84 /* DetailCategorieView.swift */; };
+		2B0BBE502BB48EFC006D93EB /* ImagePickerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0BBE4F2BB48EFC006D93EB /* ImagePickerCoordinator.swift */; };
 		2B1738A12BAD80FC0043CAF0 /* CalendarDetailNewEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1738A02BAD80FC0043CAF0 /* CalendarDetailNewEntryView.swift */; };
 		2B1738A32BAD82050043CAF0 /* MapKitNewEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1738A22BAD82050043CAF0 /* MapKitNewEntryView.swift */; };
 		2B2778B22B8F5C9B00779FB5 /* MeetMeAtTheCampfireApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2778B12B8F5C9B00779FB5 /* MeetMeAtTheCampfireApp.swift */; };
@@ -58,6 +59,10 @@
 		2B5DF1892B99B68900FA285C /* ChatSenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5DF1882B99B68900FA285C /* ChatSenderView.swift */; };
 		2B5DF18B2B99B7B900FA285C /* ChatSenderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5DF18A2B99B7B900FA285C /* ChatSenderViewModel.swift */; };
 		2B637BAA2BAC430B001B4C63 /* MapKitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B637BA92BAC430B001B4C63 /* MapKitViewModel.swift */; };
+		2B8E6D8E2BCF9D880042C15F /* VideoStartCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8E6D8D2BCF9D880042C15F /* VideoStartCategories.swift */; };
+		2B8E6D902BCF9F3D0042C15F /* VideoStartToDos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8E6D8F2BCF9F3D0042C15F /* VideoStartToDos.swift */; };
+		2B8E6D9A2BCFF8FD0042C15F /* Cat.MP4 in Resources */ = {isa = PBXBuildFile; fileRef = 2B8E6D992BCFF8FD0042C15F /* Cat.MP4 */; };
+		2B8E6D9C2BCFF9230042C15F /* ToDo.MP4 in Resources */ = {isa = PBXBuildFile; fileRef = 2B8E6D9B2BCFF9230042C15F /* ToDo.MP4 */; };
 		2BAB624A2B95D60B00C7839E /* HomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAB62492B95D60B00C7839E /* HomeScreenView.swift */; };
 		2BAB624C2B95D61B00C7839E /* HomeScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAB624B2B95D61B00C7839E /* HomeScreenViewModel.swift */; };
 		2BAB624E2B95D64300C7839E /* CategorieAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAB624D2B95D64300C7839E /* CategorieAddView.swift */; };
@@ -96,6 +101,7 @@
 
 /* Begin PBXFileReference section */
 		2B0158662B9789F20026CA84 /* DetailCategorieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCategorieView.swift; sourceTree = "<group>"; };
+		2B0BBE4F2BB48EFC006D93EB /* ImagePickerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerCoordinator.swift; sourceTree = "<group>"; };
 		2B1738A02BAD80FC0043CAF0 /* CalendarDetailNewEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDetailNewEntryView.swift; sourceTree = "<group>"; };
 		2B1738A22BAD82050043CAF0 /* MapKitNewEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapKitNewEntryView.swift; sourceTree = "<group>"; };
 		2B2778AE2B8F5C9B00779FB5 /* MeetMeAtTheCampfire.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeetMeAtTheCampfire.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -120,6 +126,10 @@
 		2B5DF1882B99B68900FA285C /* ChatSenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatSenderView.swift; sourceTree = "<group>"; };
 		2B5DF18A2B99B7B900FA285C /* ChatSenderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatSenderViewModel.swift; sourceTree = "<group>"; };
 		2B637BA92BAC430B001B4C63 /* MapKitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapKitViewModel.swift; sourceTree = "<group>"; };
+		2B8E6D8D2BCF9D880042C15F /* VideoStartCategories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoStartCategories.swift; sourceTree = "<group>"; };
+		2B8E6D8F2BCF9F3D0042C15F /* VideoStartToDos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoStartToDos.swift; sourceTree = "<group>"; };
+		2B8E6D992BCFF8FD0042C15F /* Cat.MP4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = Cat.MP4; path = ../../Downloads/Cat.MP4; sourceTree = "<group>"; };
+		2B8E6D9B2BCFF9230042C15F /* ToDo.MP4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = ToDo.MP4; path = ../../Downloads/ToDo.MP4; sourceTree = "<group>"; };
 		2BAB62492B95D60B00C7839E /* HomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenView.swift; sourceTree = "<group>"; };
 		2BAB624B2B95D61B00C7839E /* HomeScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewModel.swift; sourceTree = "<group>"; };
 		2BAB624D2B95D64300C7839E /* CategorieAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorieAddView.swift; sourceTree = "<group>"; };
@@ -203,6 +213,14 @@
 			path = DetailCategorie;
 			sourceTree = "<group>";
 		};
+		2B0BBE4E2BB48ECD006D93EB /* ImagePicker */ = {
+			isa = PBXGroup;
+			children = (
+				2B0BBE4F2BB48EFC006D93EB /* ImagePickerCoordinator.swift */,
+			);
+			path = ImagePicker;
+			sourceTree = "<group>";
+		};
 		2B2778A52B8F5C9B00779FB5 = {
 			isa = PBXGroup;
 			children = (
@@ -222,8 +240,9 @@
 		2B2778B02B8F5C9B00779FB5 /* MeetMeAtTheCampfire */ = {
 			isa = PBXGroup;
 			children = (
-				2B2778B12B8F5C9B00779FB5 /* MeetMeAtTheCampfireApp.swift */,
-				2B2778BF2B8FA74B00779FB5 /* GoogleService-Info.plist */,
+				2B8E6D9B2BCFF9230042C15F /* ToDo.MP4 */,
+				2B8E6D992BCFF8FD0042C15F /* Cat.MP4 */,
+				2B8E6D8C2BCF9D550042C15F /* VideoStart */,
 				2B2778B52B8F5C9C00779FB5 /* Assets.xcassets */,
 				2BD8D4362BA0A6480050CB64 /* Authentication */,
 				2BB2B02F2BA8395B0003CFE2 /* CalendarLogBook */,
@@ -232,8 +251,10 @@
 				2BD8D4352BA0A5FC0050CB64 /* Components */,
 				2B0158652B9789D30026CA84 /* DetailCategorie */,
 				2BBE466B2BA1E231002A11A2 /* DetailCategorieItem */,
+				2B2778BF2B8FA74B00779FB5 /* GoogleService-Info.plist */,
 				2BAB62482B95D5F100C7839E /* HomeScreen */,
 				2BF4B9752B98748E00C1AF1A /* MainScreen */,
+				2B2778B12B8F5C9B00779FB5 /* MeetMeAtTheCampfireApp.swift */,
 				2B2778B72B8F5C9C00779FB5 /* Preview Content */,
 				2BF4B9782B98762A00C1AF1A /* ProfileScreen */,
 				2BF4B97E2B98A23000C1AF1A /* SettingsScreen */,
@@ -346,6 +367,15 @@
 			path = MapKit;
 			sourceTree = "<group>";
 		};
+		2B8E6D8C2BCF9D550042C15F /* VideoStart */ = {
+			isa = PBXGroup;
+			children = (
+				2B8E6D8D2BCF9D880042C15F /* VideoStartCategories.swift */,
+				2B8E6D8F2BCF9F3D0042C15F /* VideoStartToDos.swift */,
+			);
+			path = VideoStart;
+			sourceTree = "<group>";
+		};
 		2BAB62482B95D5F100C7839E /* HomeScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -368,6 +398,7 @@
 		2BB2B02F2BA8395B0003CFE2 /* CalendarLogBook */ = {
 			isa = PBXGroup;
 			children = (
+				2B0BBE4E2BB48ECD006D93EB /* ImagePicker */,
 				2B637BAB2BAC463F001B4C63 /* MapKit */,
 				2B55614E2BAB09E80028C6E5 /* CalendarDetail */,
 				2B55614D2BAB09D60028C6E5 /* Calendar */,
@@ -576,6 +607,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B2778B92B8F5C9C00779FB5 /* Preview Assets.xcassets in Resources */,
+				2B8E6D9A2BCFF8FD0042C15F /* Cat.MP4 in Resources */,
+				2B8E6D9C2BCFF9230042C15F /* ToDo.MP4 in Resources */,
 				2B2778B62B8F5C9C00779FB5 /* Assets.xcassets in Resources */,
 				2B2778C02B8FA74B00779FB5 /* GoogleService-Info.plist in Resources */,
 			);
@@ -626,6 +659,8 @@
 				2BB2B03B2BA84BA20003CFE2 /* CalendarYearlyView.swift in Sources */,
 				2B36879C2B9E039400F2E944 /* CheckmarkIsRead.swift in Sources */,
 				2BBC150F2B9B66DD00305504 /* LanguageRepository.swift in Sources */,
+				2B8E6D902BCF9F3D0042C15F /* VideoStartToDos.swift in Sources */,
+				2B0BBE502BB48EFC006D93EB /* ImagePickerCoordinator.swift in Sources */,
 				2BAB62532B95DDC600C7839E /* CategorieFilledView.swift in Sources */,
 				2BB2B03D2BA84F1F0003CFE2 /* CalendarYearExtensions.swift in Sources */,
 				2B0158672B9789F20026CA84 /* DetailCategorieView.swift in Sources */,
@@ -650,6 +685,7 @@
 				2BBE46682BA1E1B7002A11A2 /* DetailCategorieFilledView.swift in Sources */,
 				2BBE466F2BA1E360002A11A2 /* TaskModel.swift in Sources */,
 				2B2779022B907E8800779FB5 /* RegisterView.swift in Sources */,
+				2B8E6D8E2BCF9D880042C15F /* VideoStartCategories.swift in Sources */,
 				2BAB624E2B95D64300C7839E /* CategorieAddView.swift in Sources */,
 				2BF4B9802B98A24C00C1AF1A /* SettingsScreenView.swift in Sources */,
 				2B5DF1852B99B46E00FA285C /* ChatModel.swift in Sources */,

@@ -16,6 +16,7 @@ struct ProfileScreenView: View {
         let userEmail = authVm.user?.email ?? "Email unbekannt"
         NavigationStack {
             VStack {
+                Divider()
                 Image(.logo)
                     .resizable()
                     .clipShape(Circle())

@@ -12,19 +12,20 @@ struct MainScreenView: View {
     @StateObject var chatVm: ChatScreenViewModel
     @StateObject var languageVm = LanguageScreenViewModel(languageChoice: Language(code: "af", name: "Afrikaans"), languageSource: Language(code: "de", name: "Deutsch"))
     @StateObject var chatSenderVm = ChatSenderViewModel(chatDesign: ChatModel(userId: "2", userName: "Dieter", messageText: "Danke", timeStamp: Date(), isReadbyUser: []))
-    //@StateObject var dateVm = CalendarViewModel(date: Date())
     
     @StateObject var dateVm = {
         let calendar = Calendar.current
         let currentDate = Date()
-        let components = calendar.dateComponents([.year], from: currentDate)
+        let components = calendar.dateComponents([.year, .month], from: currentDate)
         return CalendarViewModel(date: calendar.date(from: components) ?? Date())
     }()
     
-    @StateObject var calendarDetailItemVm = CalendarDetailItemViewModel(calendarItemModel: LogBookModel(userId: "1", formattedDate: "123", logBookText: "", laditude: 0.47586, longitude: 0.883626), calendarVm: CalendarViewModel(date: Date()))
+    @StateObject var calendarDetailItemVm = CalendarDetailItemViewModel(calendarItemModel: LogBookModel(userId: "1", formattedDate: "123", logBookText: "", latitude: 0.47586, longitude: 0.883626, imageUrl: "", containsLogBookEntry: false), date: Date())
     
     //Immer mit der HomeScreenView anfangen
     @State private var selectedTab = 0
+    @State private var currentTab = 2
+    @State private var currentTasksForShowVideo = 0
     
     init(authVm: AuthViewModel){
         _chatVm = StateObject(wrappedValue: ChatScreenViewModel(user: authVm.user!))
@@ -32,7 +33,7 @@ struct MainScreenView: View {
     }
     
     var body: some View {
-        TabView{
+        TabView(selection: $selectedTab) {
             HomeScreenView()
                 .tabItem {
                     Image(systemName: "house")
@@ -44,12 +45,12 @@ struct MainScreenView: View {
                     Image(systemName: "message")
                     Text("Chat")
                 }
-                .badge(/*unreadedMessages*/ chatVm.messageCountResult)
+                .badge(chatVm.messageCountResult)
                 .tag(1)
             
             CalendarYearlyView(dateVm: dateVm, calendarDetailItemVm: calendarDetailItemVm)
                 .tabItem {
-                    Image(systemName: "book")
+                    Image(systemName: selectedTab == 2 ? "book":"book.closed")
                     Text("Logbuch")
                 }.tag(2)
             
@@ -68,6 +69,11 @@ struct MainScreenView: View {
         .onAppear{
             selectedTab = 0
             chatVm.readMessages()
+            if #available(iOS 15.0, *) {
+                let tabBarAppearance = UITabBarAppearance()
+                tabBarAppearance.configureWithDefaultBackground()
+                UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+            }
         }
         .onChange(of: selectedTab){
             if selectedTab == 1 {

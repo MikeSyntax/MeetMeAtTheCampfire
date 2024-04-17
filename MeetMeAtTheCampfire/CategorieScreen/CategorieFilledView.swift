@@ -28,7 +28,7 @@ struct CategorieFilledView: View {
                         .padding(EdgeInsets(top: 0, leading: 2, bottom: 0, trailing: 2))
                     Spacer() // Fügt den verbleibenden Platz ein
                     Divider()
-                    Text(String(categorieVm.tasksInCategorie))
+                    Text(String( categorieVm.tasksInCategorie ))
                         .padding(8)
                         .background(.red)
                         .foregroundColor(.black)

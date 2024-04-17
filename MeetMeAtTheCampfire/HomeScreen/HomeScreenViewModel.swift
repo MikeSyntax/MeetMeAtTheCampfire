@@ -12,6 +12,7 @@ class HomeScreenViewModel: ObservableObject {
     
     //Leere Liste an Kategorien
     @Published var categorieViewModels: [CategorieViewModel] = []
+    
     //der Listener muss beim Logout auch wieder auf nil gesetzt werden
     private var listener: ListenerRegistration? = nil
     
@@ -21,13 +22,13 @@ class HomeScreenViewModel: ObservableObject {
         removeListener()
     }
     //Anlegen einer neuen Kategorie im Firebase Firestore
-    func createCategorie(categorieName: String, tasksInCategorie: Int){
+    func createCategorie(categorieName: String){
         //wenn die userId leer ist mache nichts
         guard let userId = FirebaseManager.shared.userId else {
             return
         }
         
-        let categorie = CategorieModel(userId: userId, categorieName: categorieName, isDone: false, tasksInCategorie: tasksInCategorie)
+        let categorie = CategorieModel(userId: userId, categorieName: categorieName, isDone: false, tasksInCategorie: 0)
         
         do{
             //versuche im Firestore eine neue Kategorie anzulegen
@@ -61,6 +62,7 @@ class HomeScreenViewModel: ObservableObject {
             
             let categorieViewModels = categories.map { CategorieViewModel(categorieDesign: $0) }
             self.categorieViewModels = categorieViewModels }
+        
     }
     
     //Zurücksetzen des Listeners und leeren des categorie Arrays bei Logout, umso zu gewährleisten, falls sich ein anderer User einloggt nicht die selbe Liste zu sehen.

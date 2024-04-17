@@ -6,11 +6,14 @@
 //
 
 import Foundation
+import FirebaseFirestore
 import MapKit
 import SwiftUI
 
 class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
-    
+    //Leeres Array mit LogBockModels
+    @Published var newEntryLogs: [LogBookModel] = []
+    //alle published Variablen
     @Published var mapCameraPosition: MapCameraPosition = MapCameraPosition.automatic
     @Published var lastLocation: CLLocation?
     @Published var latitude: Double
@@ -18,20 +21,28 @@ class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManager
     @Published var logBookText: String = ""
     @Published var formattedDate: String = ""
     @Published var userId: String = ""
+    @Published var imageUrl: String = ""
+    @Published var selectedImage: UIImage?
+    @Published var readImages: [String] = []
+    @Published var containsLogBookEntry: Bool = false
     
+    //Listener
+    private var listener: ListenerRegistration? = nil
     let calendarItemModel: LogBookModel
-    let calendarVm: CalendarViewModel
+    let date: Date
     
     private let locationManager = CLLocationManager()
     
-    init(calendarItemModel: LogBookModel, calendarVm: CalendarViewModel) {
+    init(calendarItemModel: LogBookModel, date: Date) {
         
-        self.calendarItemModel = calendarItemModel.self
-        self.latitude = calendarItemModel.laditude
+        self.calendarItemModel = calendarItemModel
+        self.latitude = calendarItemModel.latitude
         self.longitude = calendarItemModel.longitude
         self.logBookText = calendarItemModel.logBookText
         self.formattedDate = calendarItemModel.formattedDate
-        self.calendarVm = calendarVm.self
+        self.date = date
+        self.imageUrl = calendarItemModel.imageUrl
+        self.containsLogBookEntry = calendarItemModel.containsLogBookEntry
         
         super.init()
         locationManager.delegate = self
@@ -40,50 +51,140 @@ class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManager
         formattedDate = dateFormatter()
     }
     
+    deinit{
+        removeListener()
+    }
+    
+    ///create new data logBookText with image
     func createlogBookText(logBookText: String){
-        guard let userId = FirebaseManager.shared.userId else {
+        guard let uploadImage = selectedImage else {
             return
         }
         
-        let newText = LogBookModel(userId: userId, formattedDate: formattedDate, logBookText: logBookText, laditude: self.latitude, longitude: self.longitude)
+        let imageData = uploadImage.jpegData(compressionQuality: 0.8)
         
-        do{
-            try
-            FirebaseManager.shared.firestore.collection("newLogEntry").addDocument(from: newText)
-        } catch{
-            print("Error creating newLogEntry: \(error)")
+        guard imageData != nil else {
+            return
+        }
+        //create path for storage and firestore
+        let fileRef = FirebaseManager.shared.storage.reference().child("/images/\(UUID().uuidString).jpg")
+        
+        fileRef.putData(imageData!, metadata: nil){
+            metadata, error in
+            
+            if let error {
+                print("Error loading metadata \(error)")
+                return
+            }
+            
+            if error == nil && metadata != nil {
+                print("Image upload succesfull")
+            }
+            
+            //create new data for firestore
+            guard let userId = FirebaseManager.shared.userId else {
+                return
+            }
+            
+            fileRef.downloadURL { url, error in
+                guard let imageUrl = url?.absoluteString else {
+                    print("URL WAR KACKE")
+                    return
+                }
+                self.imageUrl = imageUrl
+                let newText = LogBookModel(
+                    userId: userId,
+                    formattedDate: self.formattedDate,
+                    logBookText: logBookText,
+                    latitude: self.latitude,
+                    longitude: self.longitude,
+                    imageUrl: imageUrl,
+                    containsLogBookEntry: true
+                )
+                
+                do{
+                    try
+                    FirebaseManager.shared.firestore.collection("newLogEntry").addDocument(from: newText)
+                    print("Creating newLogEntry succesfull")
+                } catch{
+                    print("Error creating newLogEntry: \(error)")
+                }
+            }
         }
     }
     
-    func readLogBookText(){
-        
-        
+    //Read all Data from Firebase
+    @MainActor
+    func readLogBookText(formattedDate: String){
+        guard let userId = FirebaseManager.shared.userId else {
+            return
+        }
+        //SnapshotListener
+        self.listener = FirebaseManager.shared.firestore.collection("newLogEntry")
+            .whereField("userId", isEqualTo: userId)
+            .whereField("formattedDate", isEqualTo: formattedDate)
+            .addSnapshotListener {
+                querySnapshot, error in
+                if let error {
+                    print("Error reading newLogEntrys \(error)")
+                    return
+                }
+                //Load all images in querySnapshot
+                if error == nil && querySnapshot != nil {
+                    for doc in querySnapshot!.documents {
+                        self.readImages.append(doc["imageUrl"] as? String ?? "")
+                    }
+                }
+                
+                guard let documents = querySnapshot?.documents else {
+                    print("QuerySnapshot is empty")
+                    return
+                }
+                DispatchQueue.main.async {
+                    self.newEntryLogs = documents.compactMap { document in
+                        try? document.data(as: LogBookModel.self)
+                    }
+                    if let longitude = self.newEntryLogs.first?.longitude {
+                        self.longitude = longitude
+                    }
+                    if let latitude = self.newEntryLogs.first?.latitude {
+                        self.latitude = latitude
+                    }
+                }
+            }
     }
     
     func updateLogBookText(){
-        
+        //TODO Updatefunktion bzw. edit Button
         
     }
     
     func dateFormatter() -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy"
-        return dateFormatter.string(from: calendarVm.date)
+        dateFormatter.dateFormat = "dd.MM.yyyy"
+        return dateFormatter.string(from: self.date)
     }
+    
     
     func requestLocation(){
         self.locationManager.requestWhenInUseAuthorization()
         self.locationManager.startUpdatingLocation()
     }
     
+    @MainActor
     func locationManager(_ manager: CLLocationManager, didUpdateLocations location: [CLLocation]){
-        
         if let lastLocation = location.last {
             self.lastLocation = lastLocation
             self.mapCameraPosition = MapCameraPosition.camera(MapCamera(centerCoordinate: lastLocation.coordinate, distance: 5000))
             self.latitude = lastLocation.coordinate.latitude
             self.longitude = lastLocation.coordinate.longitude
-            print(self.latitude, self.longitude)
+            print("Deine ausgewählten Koordinaten sind \(self.latitude) und \(self.longitude)")
         }
+    }
+    
+    func removeListener(){
+        self.listener = nil
+        self.newEntryLogs = []
+        self.readImages = []
     }
 }

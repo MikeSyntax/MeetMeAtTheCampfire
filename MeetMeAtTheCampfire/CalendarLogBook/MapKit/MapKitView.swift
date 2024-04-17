@@ -11,23 +11,23 @@ import MapKit
 struct MapKitView: View {
     @ObservedObject var calendarDetailItemVm: CalendarDetailItemViewModel
     var body: some View {
-        ScrollView{
-            VStack{
-                Map() {
-                    Annotation("Hier war ich", coordinate: CLLocationCoordinate2D(latitude: calendarDetailItemVm.latitude, longitude: calendarDetailItemVm.longitude)){
-                        Image(systemName: "beach.umbrella")
-                            .padding(5)
-                            .background(.red)
-                            .clipShape(Circle())
+        VStack{
+            Map {
+                Marker("Home", coordinate: CLLocationCoordinate2D(latitude: 49.0069, longitude: 8.40))
+                    .tint(.orange)
+                
+                Annotation("Hier war ich", coordinate: CLLocationCoordinate2D(latitude: calendarDetailItemVm.latitude, longitude: calendarDetailItemVm.longitude)) {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 5)
+                            .fill(Color.red)
+                        Image(systemName: "car.side")
                     }
-                }
-                .frame(width: 300, height: 300)
-                .padding()
-                .onAppear {
-                    //todo read Daten aus Firebase
                 }
             }
         }
     }
 }
 
+#Preview {
+    MapKitView(calendarDetailItemVm: CalendarDetailItemViewModel(calendarItemModel: LogBookModel(userId: "1", formattedDate: "", logBookText: "", latitude: 49.0069, longitude: 8.4037, imageUrl: "", containsLogBookEntry: false), date: Date()))
+}
