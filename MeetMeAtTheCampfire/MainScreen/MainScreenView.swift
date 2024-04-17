@@ -12,7 +12,6 @@ struct MainScreenView: View {
     @StateObject var chatVm: ChatScreenViewModel
     @StateObject var languageVm = LanguageScreenViewModel(languageChoice: Language(code: "af", name: "Afrikaans"), languageSource: Language(code: "de", name: "Deutsch"))
     @StateObject var chatSenderVm = ChatSenderViewModel(chatDesign: ChatModel(userId: "2", userName: "Dieter", messageText: "Danke", timeStamp: Date(), isReadbyUser: []))
-    //@StateObject var dateVm = CalendarViewModel(date: Date())
     
     @StateObject var dateVm = {
         let calendar = Calendar.current
@@ -26,6 +25,7 @@ struct MainScreenView: View {
     //Immer mit der HomeScreenView anfangen
     @State private var selectedTab = 0
     @State private var currentTab = 2
+    @State private var currentTasksForShowVideo = 0
     
     init(authVm: AuthViewModel){
         _chatVm = StateObject(wrappedValue: ChatScreenViewModel(user: authVm.user!))

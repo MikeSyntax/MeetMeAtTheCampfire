@@ -12,6 +12,7 @@ class DetailCategorieViewModel: ObservableObject {
     
     @Published var detailCategorieItemViewModels: [DetailCategorieItemViewModel] = []
     @Published var tasksInCategorieCounter: Int = 0
+    @Published var checkForTaskForShowVideo: Int = 0
     private var listener: ListenerRegistration? = nil
     
 //    init() {
@@ -54,6 +55,7 @@ class DetailCategorieViewModel: ObservableObject {
         }
     }
     
+    @MainActor
     func readTasks(categorieId: String?){
         guard let categorieId = categorieId else {
             return
@@ -77,6 +79,11 @@ class DetailCategorieViewModel: ObservableObject {
             
             let detailCategorieItemViewModels = tasks.map { DetailCategorieItemViewModel(detailCategorieItemModel: $0) }
             self.detailCategorieItemViewModels = detailCategorieItemViewModels
+            
+            if let checkForTaskForShowVideo = self.detailCategorieItemViewModels.first?.taskName.count {
+                self.checkForTaskForShowVideo = checkForTaskForShowVideo
+            }
+            
         }
     }
     

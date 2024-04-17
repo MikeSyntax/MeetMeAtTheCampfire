@@ -11,11 +11,11 @@ import AVKit
 import UIKit
 
 struct VideoStartToDosView: UIViewControllerRepresentable {
-    func makeUIViewController(context: Context) -> VideoStartCategories {
-        return VideoStartCategories()
+    func makeUIViewController(context: Context) -> VideoStartToDos {
+        return VideoStartToDos()
     }
     
-    func updateUIViewController(_ uiViewController: VideoStartCategories, context: Context) {
+    func updateUIViewController(_ uiViewController: VideoStartToDos, context: Context) {
         //update the ViewController if needed
     }
 }
@@ -30,7 +30,7 @@ class VideoStartToDos: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        guard let url = Bundle.main.url(forResource: "startToDo", withExtension: "MP4") else {
+        guard let url = Bundle.main.url(forResource: "ToDo", withExtension: "MP4") else {
             return
         }
         

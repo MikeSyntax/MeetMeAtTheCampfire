@@ -12,6 +12,7 @@ class HomeScreenViewModel: ObservableObject {
     
     //Leere Liste an Kategorien
     @Published var categorieViewModels: [CategorieViewModel] = []
+    
     //der Listener muss beim Logout auch wieder auf nil gesetzt werden
     private var listener: ListenerRegistration? = nil
     
@@ -61,6 +62,7 @@ class HomeScreenViewModel: ObservableObject {
             
             let categorieViewModels = categories.map { CategorieViewModel(categorieDesign: $0) }
             self.categorieViewModels = categorieViewModels }
+        
     }
     
     //Zurücksetzen des Listeners und leeren des categorie Arrays bei Logout, umso zu gewährleisten, falls sich ein anderer User einloggt nicht die selbe Liste zu sehen.

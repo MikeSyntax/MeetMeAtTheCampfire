@@ -23,38 +23,39 @@ struct HomeScreenView: View {
         NavigationStack {
             VStack {
                 Divider()
-                Spacer()
-                ScrollView {
-                    // Hier wird ein LazyVGrid (Lazy deshalb, da nur sichtbare Ansichten erstellt werden, um Speicher zu sparen), das eine Gitteransicht mit variabler Breite für die Spalten und einem Abstand zwischen den Elementen erstellt.
-                    LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 20), count: 3), spacing: 20) {
-                        ForEach(homeVm.categorieViewModels) { categorieViewModel in
-                            NavigationLink(destination: DetailCategorieView(categorieVm: categorieViewModel, homeVm: homeVm, detailCategorieVm: detailCategorieVm, detailCategorieItemVm: detailCategorieItemVm)) {
-                                CategorieFilledView(categorieVm: categorieViewModel, detailCategorieVm: detailCategorieVm)
+                VStack{
+                    ScrollView {
+                        // Hier wird ein LazyVGrid (Lazy deshalb, da nur sichtbare Ansichten erstellt werden, um Speicher zu sparen), das eine Gitteransicht mit variabler Breite für die Spalten und einem Abstand zwischen den Elementen erstellt.
+                        LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 20), count: 3), spacing: 20) {
+                            ForEach(homeVm.categorieViewModels) { categorieViewModel in
+                                NavigationLink(destination: DetailCategorieView(categorieVm: categorieViewModel, homeVm: homeVm, detailCategorieVm: detailCategorieVm, detailCategorieItemVm: detailCategorieItemVm)) {
+                                    CategorieFilledView(categorieVm: categorieViewModel, detailCategorieVm: detailCategorieVm)
+                                }
                             }
                         }
+                        .padding(.horizontal, 20)
                     }
-                    .padding(.horizontal, 20)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .padding(.vertical, 20)
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .padding(.vertical, 20)
-                
                 VStack{
-                    if detailCategorieVm.detailCategorieItemViewModels.isEmpty && !homeVm.categorieViewModels.isEmpty {
-                        HStack(alignment: .center){
-                            VideoStartToDosView()
+                    if homeVm.categorieViewModels.isEmpty {
+                        HStack(alignment: .bottom){
+                            VideoStartCategoriesView()
+                                .opacity(0.6)
                         }
                         .frame(width: 300)
                         .cornerRadius(30)
                     }
-                    Spacer()
-//                    if homeVm.categorieViewModels.isEmpty {
-//                        HStack(alignment: .center){
-//                            VideoStartCategoriesView()
-//                        }
-//                        .frame(width: 300)
-//                        .cornerRadius(30)
-//                    }
-                    
+                    if !homeVm.categorieViewModels.isEmpty && homeVm.categorieViewModels[0].tasksInCategorie == 0  {
+                        HStack(){
+                            VideoStartToDosView()
+                                .opacity(0.6)
+                        }
+                        .frame(width: 300)
+                        .cornerRadius(30)
+                        .offset(x: 0, y: -100)
+                    }
                 }
                 Divider()
                 Button(action: {

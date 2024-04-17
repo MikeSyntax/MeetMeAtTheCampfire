@@ -50,10 +50,10 @@ struct ChatScreenView: View {
                         .textFieldStyle(.roundedBorder)
                         .autocorrectionDisabled()
                         .padding(0)
-                            .overlay(
-                                    RoundedRectangle(cornerRadius: 10) // Erstellen eines gerundeten Rechtecks als Overlay
-                                        .stroke(Color.cyan, lineWidth: 2) // Farbe und Breite des Rahmens festlegen
-                                )
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 10) // Erstellen eines gerundeten Rechtecks als Overlay
+                                .stroke(Color.cyan, lineWidth: 2) // Farbe und Breite des Rahmens festlegen
+                        )
                     ButtonTextAction(iconName: "paperplane", text: "Senden") {
                         chatVm.createNewMessage(userName: userName, messageText: newMessage)
                         newMessage = ""
@@ -85,6 +85,15 @@ struct ChatScreenView: View {
         }
         .onDisappear{
             chatVm.removeListener()
+        }
+        .searchable(text: $chatVm.searchTerm)
+        .onChange(of: chatVm.searchTerm){
+            searchTerm in
+            if !searchTerm.isEmpty {
+                chatVm.readMessages()
+                let matchingMessageIDs = chatVm.searchMessages(for: searchTerm)
+                // Verarbeite die gefundenen Nachrichten-IDs
+            }
         }
     }
 }

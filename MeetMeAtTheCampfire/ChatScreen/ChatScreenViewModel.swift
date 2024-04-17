@@ -16,6 +16,10 @@ class ChatScreenViewModel: ObservableObject {
     var messageCountResult: Int = 0
     //der Listener muss beim Logout auch wieder auf nil gesetzt werden
     private var listener: ListenerRegistration? = nil
+    //Search in Chat
+    @Published var chatMessages: [ChatSenderViewModel] = []
+    @Published var searchTerm: String = ""
+    
     var user: UserModel
     
     init(user: UserModel){
@@ -41,6 +45,14 @@ class ChatScreenViewModel: ObservableObject {
             print("Error creating new message: \(error)")
         }
     }
+    
+    //Search in Chat
+    func searchMessages(for searchTerm: String) -> [String] {
+        // Durchsuche die Nachrichten nach dem Suchbegriff und gib die IDs zurück
+        let matchingMessages = chatSenderViewModels.filter { $0.messageText.contains(searchTerm) }
+        return matchingMessages.map { $0.chatSenderVm.id ?? "Keine Nachricht" } // Hier wird die ID direkt aus dem ChatModel extrahiert
+    }
+
     
     //Lesen aller Nachrichten aus dem Firestore
     func readMessages() {
