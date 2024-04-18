@@ -71,7 +71,7 @@ struct CalendarDetailNewEntryView: View {
                 //Button zum speichern von Bildern
                 ButtonTextAction(iconName: "square.and.arrow.down", text: "Speichern"){
                     calendarDetailItemVm.createlogBookText(logBookText: calendarDetailItemVm.logBookText)
-                   // calendarDetailItemVm.logBookText = ""
+                    calendarDetailItemVm.logBookText = ""
                     dismiss()
                 }
             }
@@ -97,10 +97,5 @@ struct CalendarDetailNewEntryView: View {
             ImagePicker(selectedImage: $calendarDetailItemVm.selectedImage, showImagePicker: $showImagePicker)
         }
     }
-    
-   
 }
 
-//#Preview {
-//    CalendarDetailNewEntryView(calendarDetailItemVm: CalendarDetailItemViewModel(calendarItemModel: LogBookModel(userId: "1", formattedDate: "", logBookText: "Hallo", latitude: 0.0, longitude: 0.0, imageUrl: "", containsLogBookEntry: false), dateVm: CalendarViewModel(date: Date())))
-//}

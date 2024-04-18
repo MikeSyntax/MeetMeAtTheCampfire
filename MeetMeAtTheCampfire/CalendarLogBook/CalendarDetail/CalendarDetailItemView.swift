@@ -13,6 +13,7 @@ struct CalendarDetailItemView: View {
     @ObservedObject var calendarDetailItemVm: CalendarDetailItemViewModel
     
     @State private var showNewEntryView: Bool = false
+    @State private var showAnimation: Bool = false
     
     var body: some View {
         NavigationStack{
@@ -46,7 +47,7 @@ struct CalendarDetailItemView: View {
                                 AsyncImage(
                                     url: URL(string: image),
                                     content: { image in
-                                       image
+                                        image
                                             .resizable()
                                             .frame(maxWidth: 300, maxHeight: 300)
                                             .cornerRadius(10)
@@ -85,10 +86,13 @@ struct CalendarDetailItemView: View {
                         }
                     }
                     .padding()
+                    .transition(.move(edge: .bottom))
+                    .animation(.default, value: showAnimation)
                 }
             }
             .onAppear {
                 calendarDetailItemVm.readLogBookText(formattedDate: calendarDetailItemVm.formattedDate)
+                showAnimation = true
             }
             .onDisappear {
                 calendarDetailItemVm.removeListener()
@@ -121,14 +125,8 @@ struct CalendarDetailItemView: View {
             CalendarDetailNewEntryView(calendarDetailItemVm: calendarDetailItemVm)
         }
         .toolbar(.hidden, for: .tabBar)
-        .transition(.move(edge: .bottom))
-        .animation(.default)
     }
 }
-
-//#Preview {
-//    CalendarDetailItemView(calendarDetailItemVm: CalendarDetailItemViewModel(calendarItemModel: LogBookModel(userId: "1", formattedDate: "date", logBookText: "", latitude: 0.0, longitude: 0.0, imageUrl: "", containsLogBookEntry: true), dateVm: CalendarViewModel(date: Date())))
-//}
 
 
 

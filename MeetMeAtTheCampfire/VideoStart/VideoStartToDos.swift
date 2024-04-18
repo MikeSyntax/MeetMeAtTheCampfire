@@ -16,7 +16,6 @@ struct VideoStartToDosView: UIViewControllerRepresentable {
     }
     
     func updateUIViewController(_ uiViewController: VideoStartToDos, context: Context) {
-        //update the ViewController if needed
     }
 }
 
@@ -57,6 +56,3 @@ class VideoStartToDos: UIViewController {
     }
 }
 
-//#Preview {
-//    VideoStartToDos()
-//}

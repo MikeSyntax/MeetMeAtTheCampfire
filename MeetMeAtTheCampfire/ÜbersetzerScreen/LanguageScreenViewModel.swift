@@ -24,12 +24,6 @@ class LanguageScreenViewModel: ObservableObject {
         self.languageRepo = LanguageRepository()
         self.languageChoice = languageChoice
         self.languageSource = languageSource
-        
-//        languages = [
-//            Language(code: "ru", name: "russisch"),
-//            Language(code: "es", name: "spanisch"),
-//            Language(code: "hr", name: "kroatisch")
-//        ]
     }
     
     deinit{
@@ -64,6 +58,5 @@ class LanguageScreenViewModel: ObservableObject {
     func clearTextFields(){
         textToTranslate = ""
         translatedText = ""
-        
     }
 }

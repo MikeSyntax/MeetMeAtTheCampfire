@@ -13,6 +13,6 @@ struct TaskModel: Codable, Identifiable {
     
     let categorieId: String
     let taskName: String
-    let taskIsDone: Bool
+    var taskIsDone: Bool
     
 }

@@ -28,9 +28,9 @@ struct ButtonTextAction: View {
             .font(.headline)
         })
         .overlay(
-                RoundedRectangle(cornerRadius: 10) // Erstellen eines gerundeten Rechtecks als Overlay
-                    .stroke(Color.white, lineWidth: 2) // Farbe und Breite des Rahmens festlegen
-            )
+            RoundedRectangle(cornerRadius: 10) // Erstellen eines gerundeten Rechtecks als Overlay
+                .stroke(Color.white, lineWidth: 2) // Farbe und Breite des Rahmens festlegen
+        )
     }
 }
 

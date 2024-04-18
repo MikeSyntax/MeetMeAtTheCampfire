@@ -15,10 +15,6 @@ class DetailCategorieViewModel: ObservableObject {
     @Published var checkForTaskForShowVideo: Int = 0
     private var listener: ListenerRegistration? = nil
     
-    init() {
-        //tasksInCategorieCounter = detailCategorieItemViewModels.count
-    }
-    
     deinit{
         removeListener()
     }
@@ -87,24 +83,34 @@ class DetailCategorieViewModel: ObservableObject {
         }
     }
     
-    
     func updateTask(detailCategorieItemVm: DetailCategorieItemViewModel, taskId: String?){
         guard let taskId = taskId else {
             return
         }
         
-        let updatedTask = [
-            "taskIsDone" : detailCategorieItemVm.taskIsDone ? false : true
-        ]
+        // Task suchen, welche gerade angeklickt wurde
+        let task = detailCategorieItemViewModels.first { vm in
+            vm.detailCategorieItemModel.id == taskId
+        }?.detailCategorieItemModel
         
-        FirebaseManager.shared.firestore.collection("tasksInCategorie").document(taskId).setData(updatedTask, merge: true) {
-            error in
-            if let error {
-                print("update task failed: \(error)")
-            } else {
-                print("update task done")
-                
+        // Unwrap damit danach nicht mehr Optional? weil togglen
+        guard var task else {
+            return
+        }
+        
+        task.taskIsDone.toggle()
+        
+        do {
+            try FirebaseManager.shared.firestore.collection("tasksInCategorie").document(taskId).setData(from: task, merge: true) {
+                error in
+                if let error {
+                    print("update task failed: \(error)")
+                } else {
+                    print("update task done")
+                }
             }
+        } catch {
+            print("update task failed: \(error)")
         }
     }
     
@@ -149,9 +155,9 @@ class DetailCategorieViewModel: ObservableObject {
                         }
                     }
                 }
-        }
+            }
     }
-
+    
     func removeListener() {
         self.listener = nil
         self.detailCategorieItemViewModels = []

@@ -38,10 +38,10 @@ class CalendarViewModel: ObservableObject {
         return weekday
     }
     
-//    func getFirstDateOfYear(date: Date) -> Date {
-//        return startOfYear(date: self.date)
-//    }
-   
+    //    func getFirstDateOfYear(date: Date) -> Date {
+    //        return startOfYear(date: self.date)
+    //    }
+    
     func getAllMonths(date: Date) -> [Date]{
         var months = [Date]()
         for thisMonth in 0..<12 {
@@ -51,9 +51,9 @@ class CalendarViewModel: ObservableObject {
         return months
     }
     
-//    func startOfYear(date: Date) -> Date {
-//        return Calendar.current.startOfYear(date: date)
-//    }
+    //    func startOfYear(date: Date) -> Date {
+    //        return Calendar.current.startOfYear(date: date)
+    //    }
     
     func getAllDaysToNextMonth(from date: Date) -> [Date] {
         //Alle Tage in einem Array gespeichert

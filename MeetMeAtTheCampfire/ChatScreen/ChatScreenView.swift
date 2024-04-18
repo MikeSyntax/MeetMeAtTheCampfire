@@ -34,7 +34,7 @@ struct ChatScreenView: View {
                             }
                         }
                         .onChange(of: chatVm.chatSenderViewModels) {
-                           // if let lastMessageId = chatVm.chatSenderViewModels.last?.isReadbyUser.last {
+                            // if let lastMessageId = chatVm.chatSenderViewModels.last?.isReadbyUser.last {
                             if let lastMessageId = chatVm.chatSenderViewModels.last?.id {
                                 scrollView.scrollTo(lastMessageId, anchor: .bottom)
                             }
@@ -88,11 +88,10 @@ struct ChatScreenView: View {
             chatVm.removeListener()
         }
         .searchable(text: $chatVm.searchTerm)
-        .onChange(of: chatVm.searchTerm){
-            searchTerm in
-            if !searchTerm.isEmpty {
+        .onChange(of: chatVm.searchTerm) { newSearchTerm, _ in
+            if !newSearchTerm.isEmpty {
                 chatVm.readMessages()
-                let matchingMessageIDs = chatVm.searchMessages(for: searchTerm)
+                let matchingMessageIDs = chatVm.searchMessages(for: newSearchTerm)
                 // Verarbeite die gefundenen Nachrichten-IDs
             }
         }

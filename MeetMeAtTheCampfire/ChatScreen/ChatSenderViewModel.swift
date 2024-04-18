@@ -23,10 +23,10 @@ class ChatSenderViewModel: ObservableObject, Identifiable, Equatable {
     
     // Variable 'timeStamp', die das Datum und die Uhrzeit des Chatnachrichtenzeitstempels speichert.
     @Published var timeStamp = Date()
-
+    
     // Eine Konstante 'chatSenderVm' vom Typ 'ChatModel', die die Daten des Chatmodells enthält.
     let chatSenderVm: ChatModel
-
+    
     // Initialisierungsmethode, die ein ChatModel-Objekt und optionalen Parameter 'isCurrentUser' erhält.
     init(chatDesign: ChatModel, isCurrentUser: Bool = false) {
         // Zuweisung des übergebenen ChatModel-Objekts an die 'chatSenderVm'-Variable.
@@ -43,7 +43,7 @@ class ChatSenderViewModel: ObservableObject, Identifiable, Equatable {
         // Aufruf der Methode 'updateDate()', um das Datumsformat zu aktualisieren.
         updateDate()
     }
-
+    
     // Methode, die das Datumsformat aktualisiert.
     func updateDate() {
         // Erstellung eines DateFormatter-Objekts.

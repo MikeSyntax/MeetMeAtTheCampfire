@@ -16,6 +16,7 @@ struct HomeScreenView: View {
     @State private var newCategorie: String = ""
     @State private var tasksInCategorie: Int = 0
     @State private var showSettingsSheet: Bool = false
+    @State private var showAnimation: Bool = false
     
     @Environment(\.dismiss) private var dismiss
     
@@ -42,7 +43,7 @@ struct HomeScreenView: View {
                     if homeVm.categorieViewModels.isEmpty {
                         HStack(alignment: .bottom){
                             VideoStartCategoriesView()
-                                .opacity(0.6)
+                                .opacity(0.5)
                         }
                         .frame(width: 300)
                         .cornerRadius(30)
@@ -50,7 +51,7 @@ struct HomeScreenView: View {
                     if !homeVm.categorieViewModels.isEmpty && homeVm.categorieViewModels[0].tasksInCategorie == 0  {
                         HStack(){
                             VideoStartToDosView()
-                                .opacity(0.6)
+                                .opacity(0.5)
                         }
                         .frame(width: 300)
                         .cornerRadius(30)
@@ -64,7 +65,7 @@ struct HomeScreenView: View {
                     CategorieAddView()
                 })
                 .transition(.move(edge: .top))
-                .animation(.default)
+                .animation(.default, value: showAnimation)
                 .padding(.bottom)
             }
             .toolbar{
@@ -99,6 +100,7 @@ struct HomeScreenView: View {
         }
         .onAppear {
             homeVm.readCategories()
+            showAnimation = true
         }
         .onDisappear{
             homeVm.removeListener()

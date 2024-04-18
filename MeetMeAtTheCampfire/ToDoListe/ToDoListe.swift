@@ -44,10 +44,112 @@ import Foundation
 
 
 
+//                    Image(systemName: detailCategorieItemVm.taskIsDone ? "checkmark.circle" : "circle")
+//                        .font(.title)
+//                        .foregroundColor(color)
+
+/*, calendarDetailItemVm: CalendarDetailItemViewModel(calendarItemModel: LogBookModel(userId: calendarDetailItemVm.userId, formattedDate: calendarDetailItemVm.formattedDate, logBookText: calendarDetailItemVm.logBookText, latitude: calendarDetailItemVm.latitude, longitude: calendarDetailItemVm.longitude, imageUrl: calendarDetailItemVm.imageUrl, containsLogBookEntry: calendarDetailItemVm.containsLogBookEntry), date: day))*/
+
+// else if hasLogBookText {
+//                            Circle()
+//                                .frame(width: 30, height: 30)
+//                                .foregroundStyle(.blue)
+//
+//                        }
+
+//@ObservedObject var calendarDetailItemVm: CalendarDetailItemViewModel
+
+//    var hasLogBookText: Bool {
+//        calendarDetailItemVm.readLogBookText(formattedDate: calendarDetailItemVm.formattedDate)
+//        return calendarDetailItemVm.newEntryLogs.contains{
+//            $0.logBookText != "" && !$0.logBookText.isEmpty && $0.formattedDate == calendarDetailItemVm.formattedDate
+//        }
+//    }
+
+
+//#Preview("Heute") {
+//    CalendarDailyView(dateVm: CalendarViewModel(date: Date()), calendarDetailItemVm: CalendarDetailItemViewModel(calendarItemModel: LogBookModel(userId: "1", formattedDate: "", logBookText: "", latitude: 0.0, longitude: 0.0, imageUrl: "", containsLogBookEntry: false), dateVm: CalendarViewModel(date: Date())))
+//}
+//
+//#Preview("Wochenende") {
+//    CalendarDailyView(dateVm: CalendarViewModel(date: Date(timeIntervalSince1970: TimeInterval(1711900977))), calendarDetailItemVm: CalendarDetailItemViewModel(calendarItemModel: LogBookModel(userId: "1", formattedDate: "", logBookText: "", latitude: 0.0, longitude: 0.0, imageUrl: "", containsLogBookEntry: false), dateVm: CalendarViewModel(date: Date())))
+//}
+//
+//#Preview("Log is true") {
+//    CalendarDailyView(dateVm: CalendarViewModel(date: Date(timeIntervalSince1970: TimeInterval(1713117721))), calendarDetailItemVm: CalendarDetailItemViewModel(calendarItemModel: LogBookModel(userId: "1", formattedDate: "14.04.2024", logBookText: "12", latitude: 0.0, longitude: 0.0, imageUrl: "", containsLogBookEntry: true), dateVm: CalendarViewModel(date: Date())))
+//}
 
 
 
-
+//struct VideoStartCategoriesView: UIViewControllerRepresentable {
+//    var shouldPlay: Bool
+//
+//    func makeUIViewController(context: Context) -> VideoStartCategories {
+//        return VideoStartCategories(shouldPlay: shouldPlay)
+//    }
+//
+//    func updateUIViewController(_ uiViewController: VideoStartCategories, context: Context) {
+//        uiViewController.shouldPlay = shouldPlay
+//    }
+//}
+//
+//class VideoStartCategories: UIViewController {
+//    private var player: AVPlayer?
+//    var shouldPlay: Bool = true {
+//        didSet {
+//            if shouldPlay {
+//                player?.play()
+//            } else {
+//                player?.pause()
+//            }
+//        }
+//    }
+//
+//    init(shouldPlay: Bool) {
+//        self.shouldPlay = shouldPlay
+//        super.init(nibName: nil, bundle: nil)
+//    }
+//
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+//
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//    }
+//
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//
+//        guard let url = Bundle.main.url(forResource: "Cat", withExtension: "MP4") else {
+//            return
+//        }
+//
+//        player = AVPlayer(url: url)
+//        let playerLayer = AVPlayerLayer(player: player)
+//        playerLayer.videoGravity = .resizeAspect
+//        playerLayer.frame = view.bounds
+//        view.layer.addSublayer(playerLayer)
+//        player?.volume = 0
+//
+//        if shouldPlay {
+//            player?.play()
+//        }
+//
+//        NotificationCenter.default.addObserver(self, selector: #selector(playerItemDidReachEnd), name: .AVPlayerItemDidPlayToEndTime, object: player?.currentItem)
+//    }
+//
+//    @objc func playerItemDidReachEnd(notification: Notification) {
+//        if let playerItem = notification.object as? AVPlayerItem {
+//            playerItem.seek(to: .zero, completionHandler: nil)
+//            player?.play()
+//        }
+//    }
+//
+//    deinit {
+//        NotificationCenter.default.removeObserver(self)
+//    }
+//}
 
 
 

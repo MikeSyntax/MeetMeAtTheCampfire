@@ -84,7 +84,7 @@ class ChatScreenViewModel: ObservableObject {
                 self.chatSenderViewModels = chatSenderViewModels
                 //Anzahl ungelesener Nachrichten ermitteln um den .badge anzuzeigen
                 let counter = chatSenderViewModels.filter { !$0.chatSenderVm.isReadbyUser.contains(userId) }.count
-                 print("new email counter \(counter)")
+                print("new email counter \(counter)")
                 self.messageCountResult = counter
             }
     }

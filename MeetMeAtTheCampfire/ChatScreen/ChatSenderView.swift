@@ -41,29 +41,29 @@ struct ChatSenderView: View {
                     .padding(.trailing)
                     .padding(.vertical, 2)
                     .frame(maxWidth: maxWidth, alignment: chatSenderVm.isCurrentUser ? .trailing : .leading)
-
+                
                 Spacer()
                 HStack{
-                Text(chatSenderVm.dateString)
-                    .font(.caption)
-                    .padding(.trailing)
-                    .padding(.leading)
-                    .padding(.vertical, 2)
-                    .frame(maxWidth: maxWidth, alignment: chatSenderVm.isCurrentUser ? .trailing : .leading)
-
-                if chatSenderVm.isReadbyUser.contains(chatSenderVm.userId) {
-                    CheckmarkIsRead()
-                } else {
-                    CheckmarkNotRead()
-                }
+                    Text(chatSenderVm.dateString)
+                        .font(.caption)
+                        .padding(.trailing)
+                        .padding(.leading)
+                        .padding(.vertical, 2)
+                        .frame(maxWidth: maxWidth, alignment: chatSenderVm.isCurrentUser ? .trailing : .leading)
+                    
+                    if chatSenderVm.isReadbyUser.contains(chatSenderVm.userId) {
+                        CheckmarkIsRead()
+                    } else {
+                        CheckmarkNotRead()
+                    }
                 }
             }
             .frame(minWidth: 200, maxWidth: maxWidth, minHeight: 70, maxHeight: 500, alignment: chatSenderVm.isCurrentUser ? .leading : .trailing)
-
+            
             .padding(2)
         }
         .frame(minWidth: 200, maxWidth: .infinity, minHeight: 70, maxHeight: 500, alignment: chatSenderVm.isCurrentUser ? .trailing : .leading)
-
+        
     }
 }
 

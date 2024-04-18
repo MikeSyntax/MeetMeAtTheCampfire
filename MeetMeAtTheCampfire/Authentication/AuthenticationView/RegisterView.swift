@@ -10,7 +10,6 @@ import SwiftUI
 struct RegisterView: View {
     
     @EnvironmentObject private var authVM: AuthViewModel
-    //@Environment(\.dismiss) private var dismiss
     @Binding var showRegisterSheet: Bool
     
     var body: some View {
