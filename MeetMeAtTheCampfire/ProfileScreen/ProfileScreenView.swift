@@ -22,7 +22,7 @@ struct ProfileScreenView: View {
                     .clipShape(Circle())
                     .frame(width: 250, height: 250)
                 // Hier kannst du den Inhalt deiner Profilansicht einfügen
-                Text("Profil Ansicht!")
+              
                 Spacer()
                 Text("eingeloggt als:")
                 Text(userName)

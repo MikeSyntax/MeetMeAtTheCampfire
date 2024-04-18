@@ -39,11 +39,27 @@ struct HomeScreenView: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .padding(.vertical, 20)
                 }
+                
+                
                 VStack{
-                    if homeVm.categorieViewModels.isEmpty {
-                        HStack(alignment: .bottom){
-                            VideoStartCategoriesView()
-                                .opacity(0.5)
+                    ZStack{
+                        if homeVm.categorieViewModels.isEmpty {
+                            ZStack{
+                                RoundedView()
+                                Image(.logo)
+                                    .resizable()
+                                    .frame(width: 150, height: 150)
+                                    .clipShape(Circle())
+                            }
+                            .offset(x: 0, y: -250)
+                        }
+                        VStack{
+                            if homeVm.categorieViewModels.isEmpty {
+                                HStack(){
+                                    VideoStartCategoriesView()
+                                        .opacity(0.5)
+                                }
+                            }
                         }
                         .frame(width: 300)
                         .cornerRadius(30)

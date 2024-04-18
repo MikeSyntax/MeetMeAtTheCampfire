@@ -38,12 +38,6 @@ import Foundation
 
 
 
-
-
-
-
-
-
 //                    Image(systemName: detailCategorieItemVm.taskIsDone ? "checkmark.circle" : "circle")
 //                        .font(.title)
 //                        .foregroundColor(color)
@@ -164,7 +158,7 @@ import Foundation
 //        }
 //    }()
 //    @State private var draggingIndex: Int?
-//    
+//
 //    var body: some View {
 //        VStack {
 //            Spacer()
@@ -194,7 +188,7 @@ import Foundation
 //        }
 //        .edgesIgnoringSafeArea(.all)
 //    }
-//    
+//
 //    func saveImageOffsets() {
 //        let offsetsToSave = imageOffsets.map { [$0.width, $0.height] }
 //        UserDefaults.standard.set(offsetsToSave, forKey: "ImageOffsets")

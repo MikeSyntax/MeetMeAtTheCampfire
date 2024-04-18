@@ -92,6 +92,7 @@
 		2BD8D4342B9F60C40050CB64 /* ChatScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD8D4332B9F60C40050CB64 /* ChatScreenViewModel.swift */; };
 		2BF347D92BD1BEC1007F0AB3 /* ToDo.MP4 in Resources */ = {isa = PBXBuildFile; fileRef = 2BF347D72BD1BEC1007F0AB3 /* ToDo.MP4 */; };
 		2BF347DA2BD1BEC1007F0AB3 /* Cat.MP4 in Resources */ = {isa = PBXBuildFile; fileRef = 2BF347D82BD1BEC1007F0AB3 /* Cat.MP4 */; };
+		2BF347DD2BD1D7E2007F0AB3 /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF347DC2BD1D7E2007F0AB3 /* RoundedView.swift */; };
 		2BF4B9772B9874BC00C1AF1A /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF4B9762B9874BC00C1AF1A /* MainScreenView.swift */; };
 		2BF4B97A2B98764300C1AF1A /* ProfileScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF4B9792B98764300C1AF1A /* ProfileScreenView.swift */; };
 		2BF4B97D2B9877D900C1AF1A /* ChatScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF4B97C2B9877D900C1AF1A /* ChatScreenView.swift */; };
@@ -158,6 +159,7 @@
 		2BD8D4332B9F60C40050CB64 /* ChatScreenViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatScreenViewModel.swift; sourceTree = "<group>"; };
 		2BF347D72BD1BEC1007F0AB3 /* ToDo.MP4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = ToDo.MP4; path = ../../Downloads/ToDo.MP4; sourceTree = "<group>"; };
 		2BF347D82BD1BEC1007F0AB3 /* Cat.MP4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = Cat.MP4; path = ../../Downloads/Cat.MP4; sourceTree = "<group>"; };
+		2BF347DC2BD1D7E2007F0AB3 /* RoundedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedView.swift; sourceTree = "<group>"; };
 		2BF4B9762B9874BC00C1AF1A /* MainScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
 		2BF4B9792B98764300C1AF1A /* ProfileScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreenView.swift; sourceTree = "<group>"; };
 		2BF4B97C2B9877D900C1AF1A /* ChatScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatScreenView.swift; sourceTree = "<group>"; };
@@ -238,10 +240,11 @@
 		2B2778B02B8F5C9B00779FB5 /* MeetMeAtTheCampfire */ = {
 			isa = PBXGroup;
 			children = (
-				2BF347D72BD1BEC1007F0AB3 /* ToDo.MP4 */,
+				2B2778B12B8F5C9B00779FB5 /* MeetMeAtTheCampfireApp.swift */,
 				2BF347D82BD1BEC1007F0AB3 /* Cat.MP4 */,
+				2BF347D72BD1BEC1007F0AB3 /* ToDo.MP4 */,
+				2B2778BF2B8FA74B00779FB5 /* GoogleService-Info.plist */,
 				2B2778B52B8F5C9C00779FB5 /* Assets.xcassets */,
-				2B8E6D8C2BCF9D550042C15F /* VideoStart */,
 				2BD8D4362BA0A6480050CB64 /* Authentication */,
 				2BB2B02F2BA8395B0003CFE2 /* CalendarLogBook */,
 				2BAB62512B95D8CC00C7839E /* CategorieScreen */,
@@ -249,14 +252,14 @@
 				2BD8D4352BA0A5FC0050CB64 /* Components */,
 				2B0158652B9789D30026CA84 /* DetailCategorie */,
 				2BBE466B2BA1E231002A11A2 /* DetailCategorieItem */,
-				2B2778BF2B8FA74B00779FB5 /* GoogleService-Info.plist */,
 				2BAB62482B95D5F100C7839E /* HomeScreen */,
 				2BF4B9752B98748E00C1AF1A /* MainScreen */,
-				2B2778B12B8F5C9B00779FB5 /* MeetMeAtTheCampfireApp.swift */,
 				2BF4B9782B98762A00C1AF1A /* ProfileScreen */,
+				2BF347DB2BD1D7C3007F0AB3 /* RoundedView */,
 				2BF4B97E2B98A23000C1AF1A /* SettingsScreen */,
 				2BBC15082B9B5BC100305504 /* ToDoListe */,
 				2BBC150B2B9B669800305504 /* TranslatorScreen */,
+				2B8E6D8C2BCF9D550042C15F /* VideoStart */,
 			);
 			path = MeetMeAtTheCampfire;
 			sourceTree = "<group>";
@@ -469,6 +472,14 @@
 			path = Authentication;
 			sourceTree = "<group>";
 		};
+		2BF347DB2BD1D7C3007F0AB3 /* RoundedView */ = {
+			isa = PBXGroup;
+			children = (
+				2BF347DC2BD1D7E2007F0AB3 /* RoundedView.swift */,
+			);
+			path = RoundedView;
+			sourceTree = "<group>";
+		};
 		2BF4B9752B98748E00C1AF1A /* MainScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -661,6 +672,7 @@
 				2BF4B97D2B9877D900C1AF1A /* ChatScreenView.swift in Sources */,
 				2B1738A32BAD82050043CAF0 /* MapKitNewEntryView.swift in Sources */,
 				2BBC15152B9B746000305504 /* LanguageError.swift in Sources */,
+				2BF347DD2BD1D7E2007F0AB3 /* RoundedView.swift in Sources */,
 				2BAB62502B95D79800C7839E /* CategorieViewModel.swift in Sources */,
 				2BAB624A2B95D60B00C7839E /* HomeScreenView.swift in Sources */,
 				2BBC15192B9C614900305504 /* Translation.swift in Sources */,
