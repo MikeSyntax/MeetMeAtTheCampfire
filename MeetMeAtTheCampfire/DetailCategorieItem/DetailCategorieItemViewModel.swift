@@ -9,7 +9,7 @@ import Foundation
 
 class DetailCategorieItemViewModel: ObservableObject {
     @Published var taskName: String = ""
-    @Published var taskIsDone: Bool = false
+    @Published var taskIsDone: Bool
     
     let detailCategorieItemModel: TaskModel
     

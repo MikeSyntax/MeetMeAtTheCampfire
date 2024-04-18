@@ -83,30 +83,39 @@ class DetailCategorieViewModel: ObservableObject {
             if let checkForTaskForShowVideo = self.detailCategorieItemViewModels.first?.taskName.count {
                 self.checkForTaskForShowVideo = checkForTaskForShowVideo
             }
-            
         }
     }
-    
     
     func updateTask(detailCategorieItemVm: DetailCategorieItemViewModel, taskId: String?){
-        guard let taskId = taskId else {
-            return
-        }
-        
-        let updatedTask = [
-            "taskIsDone" : detailCategorieItemVm.taskIsDone ? false : true
-        ]
-        
-        FirebaseManager.shared.firestore.collection("tasksInCategorie").document(taskId).setData(updatedTask, merge: true) {
-            error in
-            if let error {
+            guard let taskId = taskId else {
+                return
+            }
+
+            // Task suchen, welche gerade angeklickt wurde
+            let task = detailCategorieItemViewModels.first { vm in
+                vm.detailCategorieItemModel.id == taskId
+            }?.detailCategorieItemModel
+
+            // Unwrap damit wir danach nicht mehr task? oder alternativen geben müssen, aber nicht als let sondern als var weil wir togglen wollen
+            guard var task else {
+                return
+            }
+            // true -> false und false -> true
+            task.taskIsDone.toggle()
+
+            do {
+                try FirebaseManager.shared.firestore.collection("tasksInCategorie").document(taskId).setData(from: task, merge: true) {
+                    error in
+                    if let error {
+                        print("update task failed: \(error)")
+                    } else {
+                        print("update task done")
+                    }
+                }
+            } catch {
                 print("update task failed: \(error)")
-            } else {
-                print("update task done")
-                
             }
         }
-    }
     
     func deleteTask(categorieId: String?) {
         guard let categorieId = categorieId else {

@@ -61,7 +61,8 @@ class HomeScreenViewModel: ObservableObject {
             }
             
             let categorieViewModels = categories.map { CategorieViewModel(categorieDesign: $0) }
-            self.categorieViewModels = categorieViewModels }
+            self.categorieViewModels = categorieViewModels
+        }
         
     }
     
