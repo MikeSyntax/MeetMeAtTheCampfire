@@ -25,9 +25,17 @@ struct DetailCategorieItemFilledView: View {
                         .foregroundColor(.black)
                         .bold()
                     Spacer()
-                    Image(systemName: detailCategorieItemVm.taskIsDone ?     "checkmark.circle" : "circle")
-                        .font(.title)
-                        .foregroundColor(color)
+                    
+                    if detailCategorieItemVm.taskIsDone {
+                        Image(systemName: "checkmark.circle")
+                            .foregroundColor(.green)
+                    } else {
+                        Image(systemName: "circle")
+                    }
+                    
+//                    Image(systemName: detailCategorieItemVm.taskIsDone ? "checkmark.circle" : "circle")
+//                        .font(.title)
+//                        .foregroundColor(color)
                     
                 }
                     .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
