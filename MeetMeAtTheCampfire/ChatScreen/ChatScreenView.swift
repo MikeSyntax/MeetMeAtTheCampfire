@@ -34,6 +34,7 @@ struct ChatScreenView: View {
                             }
                         }
                         .onChange(of: chatVm.chatSenderViewModels) {
+                           // if let lastMessageId = chatVm.chatSenderViewModels.last?.isReadbyUser.last {
                             if let lastMessageId = chatVm.chatSenderViewModels.last?.id {
                                 scrollView.scrollTo(lastMessageId, anchor: .bottom)
                             }

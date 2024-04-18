@@ -30,6 +30,14 @@ class ChatScreenViewModel: ObservableObject {
         removeListener()
     }
     
+    //Search in Chat
+    func searchMessages(for searchTerm: String) -> [String] {
+        // Durchsuche die Nachrichten nach dem Suchbegriff und gib die IDs zurück
+        let matchingMessages = chatMessages.filter { $0.messageText.contains(searchTerm) }
+        print("Matching Messages \(matchingMessages.count)")
+        return matchingMessages.map { $0.chatSenderVm.id ?? "Keine Nachricht" } // Hier wird die ID direkt aus dem ChatModel extrahiert
+    }
+    
     //MARK Anlegen aller 4 CRUD Operationen Create Read Update und Delete ------------------------------------------------------------------
     //Neue ChatNachricht im Firestore anlegen
     func createNewMessage(userName: String, messageText: String){
@@ -45,14 +53,6 @@ class ChatScreenViewModel: ObservableObject {
             print("Error creating new message: \(error)")
         }
     }
-    
-    //Search in Chat
-    func searchMessages(for searchTerm: String) -> [String] {
-        // Durchsuche die Nachrichten nach dem Suchbegriff und gib die IDs zurück
-        let matchingMessages = chatSenderViewModels.filter { $0.messageText.contains(searchTerm) }
-        return matchingMessages.map { $0.chatSenderVm.id ?? "Keine Nachricht" } // Hier wird die ID direkt aus dem ChatModel extrahiert
-    }
-
     
     //Lesen aller Nachrichten aus dem Firestore
     func readMessages() {

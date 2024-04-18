@@ -15,9 +15,9 @@ class DetailCategorieViewModel: ObservableObject {
     @Published var checkForTaskForShowVideo: Int = 0
     private var listener: ListenerRegistration? = nil
     
-//    init() {
-//        tasksInCategorieCounter = detailCategorieItemViewModels.count
-//    }
+    init() {
+        //tasksInCategorieCounter = detailCategorieItemViewModels.count
+    }
     
     deinit{
         removeListener()
@@ -87,6 +87,7 @@ class DetailCategorieViewModel: ObservableObject {
         }
     }
     
+    
     func updateTask(detailCategorieItemVm: DetailCategorieItemViewModel, taskId: String?){
         guard let taskId = taskId else {
             return
@@ -96,12 +97,13 @@ class DetailCategorieViewModel: ObservableObject {
             "taskIsDone" : detailCategorieItemVm.taskIsDone ? false : true
         ]
         
-        FirebaseManager.shared.firestore.collection("tasksInCategorie").document(taskId).updateData(updatedTask) {
+        FirebaseManager.shared.firestore.collection("tasksInCategorie").document(taskId).setData(updatedTask, merge: true) {
             error in
             if let error {
                 print("update task failed: \(error)")
             } else {
                 print("update task done")
+                
             }
         }
     }
