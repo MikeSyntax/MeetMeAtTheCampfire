@@ -158,6 +158,33 @@ class DetailCategorieViewModel: ObservableObject {
             }
     }
     
+    func deleteAllTask(categorieId: String?) {
+        guard let categorieId = categorieId else {
+            return
+        }
+        let ref = FirebaseManager.shared.firestore.collection("tasksInCategorie")
+        //Kategorie überprüfen
+        ref.whereField("categorieId", isEqualTo: categorieId)
+            .getDocuments() { snapshot, error in
+                if let error = error {
+                    print("Error getting documents: \(error)")
+                    return
+                }
+                //alle bei denen die Bedingungen passen löschen
+                for document in snapshot!.documents {
+                    ref.document(document.documentID).delete() { error in
+                        if let error = error {
+                            print("Error deleting document: \(error)")
+                        } else {
+                            print("Document successfully deleted")
+                        }
+                    }
+                }
+            }
+    }
+    
+    
+    
     func removeListener() {
         self.listener = nil
         self.detailCategorieItemViewModels = []

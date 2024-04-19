@@ -11,6 +11,9 @@ struct ProfileScreenView: View {
     
     @EnvironmentObject var authVm: AuthViewModel
     
+    //After Logout start with selectedTab
+    //var onLogout: (()-> Void)?
+    
     var body: some View {
         let userName = authVm.user?.userName ?? "User unbekannt"
         let userEmail = authVm.user?.email ?? "Email unbekannt"
@@ -21,8 +24,6 @@ struct ProfileScreenView: View {
                     .resizable()
                     .clipShape(Circle())
                     .frame(width: 250, height: 250)
-                // Hier kannst du den Inhalt deiner Profilansicht einfügen
-              
                 Spacer()
                 Text("eingeloggt als:")
                 Text(userName)
@@ -37,6 +38,7 @@ struct ProfileScreenView: View {
             .toolbar {
                 Button {
                     authVm.logout()
+                  //  onLogout?()
                 } label: {
                     Text("Logout")
                     Image(systemName: "door.left.hand.open")

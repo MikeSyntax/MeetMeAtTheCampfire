@@ -98,9 +98,9 @@ class HomeScreenViewModel: ObservableObject {
         
         FirebaseManager.shared.firestore.collection("categories").document(categorieId).delete() { error in
             if let error {
-                print("deleting categorie failde \(error)")
+                print("deleting categorie failed \(error)")
             } else {
-                print("delete succeeded")
+                print("delete categorie succeeded")
             }
         }
     }

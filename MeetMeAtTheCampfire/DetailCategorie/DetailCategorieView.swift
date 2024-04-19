@@ -57,7 +57,7 @@ struct DetailCategorieView: View {
             //Beim Löschen der Kategorie werden auch alle Tasks gelöscht!!
             ButtonTextAction(iconName: "trash", text: "Gesamte Kategorie löschen"){
                 homeVm.deleteCategorie(categorieVm: categorieVm)
-                detailCategorieVm.deleteTask(categorieId: categorieVm.categorieViewModel.id)
+                detailCategorieVm.deleteAllTask(categorieId: categorieVm.categorieViewModel.id)
                 dismiss()
             }
             .padding()
@@ -72,14 +72,32 @@ struct DetailCategorieView: View {
         
         .navigationBarTitle("Kategorie ToDo´s", displayMode: .inline)
         .alert("Neuen Task erstellen", isPresented: $showNewTaskAlert) {
-            TextField("Beschreibung", text: $newTask)
-                .lineLimit(1)
-            Button("zurück") {
-                showNewTaskAlert.toggle()
-            }
-            Button("Speichern") {
-                detailCategorieVm.createNewTask(taskName: newTask, categorieId: categorieVm.categorieViewModel.id)
-                newTask = ""
+            if SettingsScreenView().isDark {
+                TextField("Beschreibung", text: $newTask)
+                    .lineLimit(1)
+                    .foregroundColor(.black)
+                    .textInputAutocapitalization(.never)
+                    .autocorrectionDisabled()
+                Button("zurück") {
+                    showNewTaskAlert.toggle()
+                }
+                Button("Speichern") {
+                    detailCategorieVm.createNewTask(taskName: newTask, categorieId: categorieVm.categorieViewModel.id)
+                    newTask = ""
+                }
+            } else {
+                TextField("Beschreibung", text: $newTask)
+                    .lineLimit(1)
+                    .foregroundColor(.black)
+                    .textInputAutocapitalization(.never)
+                    .autocorrectionDisabled()
+                Button("zurück") {
+                    showNewTaskAlert.toggle()
+                }
+                Button("Speichern") {
+                    detailCategorieVm.createNewTask(taskName: newTask, categorieId: categorieVm.categorieViewModel.id)
+                    newTask = ""
+                }
             }
         }
         .onAppear{

@@ -5,15 +5,7 @@
 //  Created by Mike Reichenbach on 19.04.24.
 //
 
-import UIKit
 import SwiftUI
-import SwiftUI
-
-struct RoundedView: View {
-    var body: some View {
-        CircularTextView(title: "   Deine Camper App -Meet me at the campfire".uppercased(), radius: 125)
-    }
-}
 
 struct CircularTextView: View {
     @State var letterWidths: [Int:Double] = [:]
@@ -31,7 +23,7 @@ struct CircularTextView: View {
                 VStack {
                     Text(String(letter))
                         .font(.system(size: 13, design: .monospaced))
-                        .foregroundColor(.red)
+                        .foregroundColor(.cyan)
                         .kerning(5)
                         .background(LetterWidthSize()) // Mark 2
                         .onPreferenceChange(WidthLetterPreferenceKey.self, perform: { width in  // Mark 2

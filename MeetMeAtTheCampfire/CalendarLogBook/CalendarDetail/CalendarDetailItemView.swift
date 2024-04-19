@@ -20,18 +20,34 @@ struct CalendarDetailItemView: View {
             VStack {
                 Spacer()
                 VStack{
-                    Text("Meine Erlebnisse vom \(calendarDetailItemVm.formattedDate)")
-                        .frame(width: 300)
-                        .underline()
-                        .foregroundColor(.black)
-                        .font(.callout)
-                        .bold()
-                        .italic()
-                        .padding(EdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0))
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(Color.gray, lineWidth: 2)
-                        )
+                    if SettingsScreenView().isDark {
+                        Text("Meine Erlebnisse vom \(calendarDetailItemVm.formattedDate)")
+                            .frame(width: 300)
+                            .underline()
+                            .foregroundColor(.white)
+                            .font(.callout)
+                            .bold()
+                            .italic()
+                            .padding(EdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0))
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(Color.gray, lineWidth: 2)
+                            )
+                    } else {
+                        Text("Meine Erlebnisse vom \(calendarDetailItemVm.formattedDate)")
+                            .frame(width: 300)
+                            .underline()
+                            .foregroundColor(.black)
+                            .font(.callout)
+                            .bold()
+                            .italic()
+                            .padding(EdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0))
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(Color.gray, lineWidth: 2)
+                            )
+                    }
+                    
                 }
                 Spacer()
                 ScrollView {

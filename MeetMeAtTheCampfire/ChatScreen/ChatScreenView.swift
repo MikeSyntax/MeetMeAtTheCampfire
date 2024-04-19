@@ -27,7 +27,8 @@ struct ChatScreenView: View {
                                 ChatSenderView(chatSenderVm: chatSenderViewModel)
                                     .id(chatSenderViewModel.id)
                                     .onAppear {
-                                        if !chatSenderViewModel.isReadbyUser.contains(currentUser) {
+                                        if
+                                            !chatSenderViewModel.isReadbyUser.contains(currentUser) {
                                             chatVm.updateisReadStatus(chatSenderVm: chatSenderViewModel)
                                         }
                                     }
@@ -56,7 +57,7 @@ struct ChatScreenView: View {
                                 .stroke(Color.cyan, lineWidth: 2) // Farbe und Breite des Rahmens festlegen
                         )
                     ButtonTextAction(iconName: "paperplane", text: "Senden") {
-                        chatVm.createNewMessage(userName: userName, messageText: newMessage)
+                        chatVm.createNewMessage(userName: userName, messageText: newMessage, isLikeByUser: false)
                         newMessage = ""
                     }
                 }
@@ -87,14 +88,14 @@ struct ChatScreenView: View {
         .onDisappear{
             chatVm.removeListener()
         }
-        .searchable(text: $chatVm.searchTerm)
-        .onChange(of: chatVm.searchTerm) { newSearchTerm, _ in
-            if !newSearchTerm.isEmpty {
-                chatVm.readMessages()
-                let matchingMessageIDs = chatVm.searchMessages(for: newSearchTerm)
-                // Verarbeite die gefundenen Nachrichten-IDs
-            }
-        }
+//        .searchable(text: $chatVm.searchTerm)
+//        .onChange(of: chatVm.searchTerm) { newSearchTerm, _ in
+//            if !newSearchTerm.isEmpty {
+//                chatVm.readMessages()
+//                let matchingMessageIDs = chatVm.searchMessages(for: newSearchTerm)
+//                // Verarbeite die gefundenen Nachrichten-IDs
+//            }
+//        }
     }
 }
 

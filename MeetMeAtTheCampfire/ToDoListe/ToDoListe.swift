@@ -5,8 +5,6 @@
 //  Created by Mike Reichenbach on 08.03.24.
 //
 
-import Foundation
-
 //Aufgaben
 
 //Task für die Kategorien einbauen ERLEDIGT-----------------------------------------------------------------------------------------------------------
@@ -34,9 +32,55 @@ import Foundation
 //Höhe des Feldes für die Übersetzung
 
 
+//ProfileScreenView(onLogout: { selectedTab = 0 })
+//    .tabItem {
+//        Image(systemName: "person")
+//        Text("Profil")
+//    }.tag(4)
 
+//After Logout start with selectedTab
+//var onLogout: (()-> Void)?
 
+//                    if chatSenderVm.isLiked {
+//                        Button{
+//                            chatSenderVm.isLiked.toggle()
+//                            chatSenderVm.updateIsLikedStatus(chatSenderVm: chatSenderVm)
+//                        } label: {
+//                            Image(systemName: "star.fill")
+//                                .frame(alignment: chatSenderVm.isCurrentUser ? .trailing : .leading)
+//                                .bold()
+//                        }
+//                    } else {
+//                        Button{
+//                            chatSenderVm.isLiked.toggle()
+//                            chatSenderVm.updateIsLikedStatus(chatSenderVm: chatSenderVm)
+//                        } label: {
+//                            Image(systemName: "star")
+//                                .frame(alignment: chatSenderVm.isCurrentUser ? .trailing : .leading)
+//                                .bold()
+//                        }
+//                   }
 
+//    func updateIsLikedStatus(chatSenderVm: ChatSenderViewModel) {
+//        guard let messageId = chatSenderVm.chatSenderVm.id else {
+//            return
+//        }
+//
+//        let messagesBox = ["isLiked" : chatSenderVm.isLiked ? false : true]
+//        //chatSenderVm.isLiked.toggle()
+//        do {
+//            try
+//            FirebaseManager.shared.firestore.collection("messages").document(messageId).setData(from: messagesBox, merge: true) { error in
+//                if let error {
+//                    print("update isLikedStatus failed: \(error)")
+//                } else {
+//                    print("update isLikedStatus done")
+//                }
+//            }
+//        }catch {
+//            print("update task failed: \(error)")
+//        }
+//    }
 
 //                    Image(systemName: detailCategorieItemVm.taskIsDone ? "checkmark.circle" : "circle")
 //                        .font(.title)

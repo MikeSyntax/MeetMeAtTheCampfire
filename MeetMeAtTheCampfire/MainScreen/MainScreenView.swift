@@ -11,7 +11,7 @@ struct MainScreenView: View {
     let authVm: AuthViewModel
     @StateObject var chatVm: ChatScreenViewModel
     @StateObject var languageVm = LanguageScreenViewModel(languageChoice: Language(code: "af", name: "Afrikaans"), languageSource: Language(code: "de", name: "Deutsch"))
-    @StateObject var chatSenderVm = ChatSenderViewModel(chatDesign: ChatModel(userId: "2", userName: "Dieter", messageText: "Danke", timeStamp: Date(), isReadbyUser: []))
+    @StateObject var chatSenderVm = ChatSenderViewModel(chatDesign: ChatModel(userId: "2", userName: "Dieter", messageText: "Danke", timeStamp: Date(), isReadbyUser: [], isLiked: false))
     
     @StateObject var dateVm = {
         let calendar = Calendar.current
@@ -57,7 +57,7 @@ struct MainScreenView: View {
                     Text("Übersetzer")
                 }.tag(3)
             
-            ProfileScreenView()
+            ProfileScreenView(/*onLogout: { selectedTab = 0 }*/)
                 .tabItem {
                     Image(systemName: "person")
                     Text("Profil")

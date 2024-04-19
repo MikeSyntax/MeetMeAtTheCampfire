@@ -31,15 +31,15 @@ struct LanguageScreenView: View {
                         }
                         Section(header: Text("Text eingeben").foregroundStyle(.black)){
                             TextField("Texteingabe für die Übersetzung", text: $languageVm.textToTranslate, axis: .vertical)
-                                .shadow(color: .red, radius: 8)
+                                .shadow(color: .cyan, radius: 2)
                                 .textInputAutocapitalization(.never)
                                 .autocorrectionDisabled()
                                 .lineLimit(1...5)
+                                .scaleEffect(x: 80, y: 80)
                                 .textFieldStyle(.roundedBorder)
                                 .frame(minHeight: 40)
                                 .scrollContentBackground(.hidden)
                         }
-                        
                         Section(header: Text("Es wird übersetzt von").foregroundStyle(.black)){
                             HStack{
                                 Text("\(selectionSourceLanguage.name)")
@@ -54,7 +54,7 @@ struct LanguageScreenView: View {
                         }
                         Section(header: Text("Übersetzung").foregroundStyle(.black)){
                             TextField("Übersetzung", text: $languageVm.translatedText, axis: .vertical)
-                                .shadow(color: .green, radius: 8)
+                                .shadow(color: .green, radius: 2)
                                 .textInputAutocapitalization(.never)
                                 .autocorrectionDisabled()
                                 .lineLimit(1...5)

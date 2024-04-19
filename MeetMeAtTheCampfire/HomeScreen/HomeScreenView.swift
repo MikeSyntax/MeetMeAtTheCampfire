@@ -39,17 +39,23 @@ struct HomeScreenView: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .padding(.vertical, 20)
                 }
-                
-                
                 VStack{
                     ZStack{
                         if homeVm.categorieViewModels.isEmpty {
                             ZStack{
-                                RoundedView()
-                                Image(.logo)
-                                    .resizable()
-                                    .frame(width: 150, height: 150)
-                                    .clipShape(Circle())
+                                CircularTextView(title: "   Deine Camper App -Meet me at the campfire".uppercased(), radius: 125)
+                                if SettingsScreenView().isDark {
+                                    Image(.logo)
+                                        .resizable()
+                                        .frame(width: 150, height: 150)
+                                        .clipShape(Circle())
+                                        .opacity(0.6)
+                                } else {
+                                    Image(.logo)
+                                        .resizable()
+                                        .frame(width: 150, height: 150)
+                                        .clipShape(Circle())
+                                }
                             }
                             .offset(x: 0, y: -250)
                         }
@@ -57,7 +63,7 @@ struct HomeScreenView: View {
                             if homeVm.categorieViewModels.isEmpty {
                                 HStack(){
                                     VideoStartCategoriesView()
-                                        .opacity(0.5)
+                                        .opacity(0.6)
                                 }
                             }
                         }
@@ -67,7 +73,7 @@ struct HomeScreenView: View {
                     if !homeVm.categorieViewModels.isEmpty && homeVm.categorieViewModels[0].tasksInCategorie == 0  {
                         HStack(){
                             VideoStartToDosView()
-                                .opacity(0.5)
+                                .opacity(0.6)
                         }
                         .frame(width: 300)
                         .cornerRadius(30)
@@ -84,6 +90,7 @@ struct HomeScreenView: View {
                 .animation(.default, value: showAnimation)
                 .padding(.bottom)
             }
+            .preferredColorScheme(SettingsScreenView().isDark ? .dark : .light)
             .toolbar{
                 Button {
                     showSettingsSheet.toggle()
@@ -101,14 +108,32 @@ struct HomeScreenView: View {
             .navigationBarTitle("Meine Kategorien")
         }
         .alert("Neue Kategorie", isPresented: $showNewCategorieAlert) {
-            TextField("Name", text: $newCategorie)
-                .lineLimit(1)
-            Button("zurück") {
-                dismiss()
-            }
-            Button("Speichern") {
-                homeVm.createCategorie(categorieName: newCategorie)
-                newCategorie = ""
+            if SettingsScreenView().isDark {
+                TextField("Name", text: $newCategorie)
+                    .lineLimit(1)
+                    .foregroundColor(.black)
+                    .textInputAutocapitalization(.never)
+                    .autocorrectionDisabled()
+                Button("zurück") {
+                    dismiss()
+                }
+                Button("Speichern") {
+                    homeVm.createCategorie(categorieName: newCategorie)
+                    newCategorie = ""
+                }
+            } else {
+                TextField("Name", text: $newCategorie)
+                    .lineLimit(1)
+                    .foregroundColor(.black)
+                    .textInputAutocapitalization(.never)
+                    .autocorrectionDisabled()
+                Button("zurück") {
+                    dismiss()
+                }
+                Button("Speichern") {
+                    homeVm.createCategorie(categorieName: newCategorie)
+                    newCategorie = ""
+                }
             }
         }
         .sheet(isPresented: $showSettingsSheet) {

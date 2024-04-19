@@ -16,6 +16,7 @@ struct ChatModel: Codable, Identifiable {
     let messageText: String
     let timeStamp: Date
     let isReadbyUser: [String]
+    var isLiked: Bool
     
     //um den TimeStamp überall zugänglich zu machen
     func getTimeStamp() -> Date {

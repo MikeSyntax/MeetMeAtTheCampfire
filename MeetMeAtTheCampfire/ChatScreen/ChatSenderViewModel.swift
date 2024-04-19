@@ -20,6 +20,7 @@ class ChatSenderViewModel: ObservableObject, Identifiable, Equatable {
     @Published var isCurrentUser: Bool = false
     @Published var isReadbyUser: [String] = []
     @Published var userId: String = ""
+    @Published var isLiked: Bool
     
     // Variable 'timeStamp', die das Datum und die Uhrzeit des Chatnachrichtenzeitstempels speichert.
     @Published var timeStamp = Date()
@@ -37,6 +38,7 @@ class ChatSenderViewModel: ObservableObject, Identifiable, Equatable {
         self.messageText = chatDesign.messageText
         self.isReadbyUser = chatDesign.isReadbyUser
         self.userId = chatDesign.userId
+        self.isLiked = chatDesign.isLiked
         
         self.isCurrentUser = isCurrentUser
         
@@ -53,4 +55,27 @@ class ChatSenderViewModel: ObservableObject, Identifiable, Equatable {
         // Konvertierung des 'timeStamp' in das angegebene Datumsformat und Zuweisung an 'dateString'.
         self.dateString = formatter.string(from: timeStamp)
     }
+    
+        func updateIsLikedStatus(chatSenderVm: ChatSenderViewModel) {
+            guard let messageId = chatSenderVm.chatSenderVm.id else {
+                return
+            }
+            chatSenderVm.isLiked.toggle()
+            
+            let messagesBox = ["isLiked" : chatSenderVm.isLiked ? false : true]
+            
+            do {
+                try
+                FirebaseManager.shared.firestore.collection("messages").document(messageId).setData(from: messagesBox, merge: true) { error in
+                    if let error {
+                        print("update isLikedStatus failed: \(error)")
+                    } else {
+                        print("update isLikedStatus done")
+                    }
+                }
+            }catch {
+                print("update task failed: \(error)")
+            }
+        }
+
 }

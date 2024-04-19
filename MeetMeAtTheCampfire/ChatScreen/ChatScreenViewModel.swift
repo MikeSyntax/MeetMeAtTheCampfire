@@ -40,12 +40,12 @@ class ChatScreenViewModel: ObservableObject {
     
     //MARK Anlegen aller 4 CRUD Operationen Create Read Update und Delete ------------------------------------------------------------------
     //Neue ChatNachricht im Firestore anlegen
-    func createNewMessage(userName: String, messageText: String){
+    func createNewMessage(userName: String, messageText: String, isLikeByUser: Bool){
         guard let userId = FirebaseManager.shared.userId else {
             return
         }
         
-        let message = ChatModel(userId: userId, userName: userName, messageText: messageText, timeStamp: Date(), isReadbyUser: [userId])
+        let message = ChatModel(userId: userId, userName: userName, messageText: messageText, timeStamp: Date(), isReadbyUser: [userId], isLiked: isLikeByUser)
         
         do{
             try FirebaseManager.shared.firestore.collection("messages").addDocument(from: message)
@@ -97,10 +97,11 @@ class ChatScreenViewModel: ObservableObject {
         guard let userId = user.id else {
             return
         }
-        
-        //zuerst zur Liste die neue Id hinzufügen
-        chatSenderVm.isReadbyUser.append(userId)
-        //hier dann nur die neue Liste übergeben
+        if !chatSenderVm.isReadbyUser.contains(userId){
+            //zuerst zur Liste die neue Id hinzufügen
+            chatSenderVm.isReadbyUser.append(userId)
+            //hier dann nur die neue Liste übergeben
+        }
         let newData = ["isReadbyUser": chatSenderVm.isReadbyUser]
         
         FirebaseManager.shared.firestore.collection("messages").document(messageId).updateData(newData) { error in
