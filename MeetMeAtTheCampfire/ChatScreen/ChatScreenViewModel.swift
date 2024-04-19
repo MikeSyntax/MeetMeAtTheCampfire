@@ -12,6 +12,8 @@ class ChatScreenViewModel: ObservableObject {
     
     //Leere Liste erzeugt
     @Published var chatSenderViewModels: [ChatSenderViewModel] = []
+    
+    @Published var chatSearchModels: [ChatSenderViewModel] = []
     //Counter für den .badge im MainScreen
     var messageCountResult: Int = 0
     //der Listener muss beim Logout auch wieder auf nil gesetzt werden

@@ -32,6 +32,44 @@
 //Höhe des Feldes für die Übersetzung
 
 
+//.onChange(of: chatVm.searchTerm) { newSearchTerm, _ in
+//    if !newSearchTerm.isEmpty {
+//        chatVm.readMessages()
+//        matchingChatIds = chatVm.searchMessages(for: newSearchTerm)
+//        print("matchingIds \(matchingChatIds)")
+//    }
+//}
+
+//    func readSearchedMessages(serchTerm: String) {
+//        guard let userId = FirebaseManager.shared.userId else {
+//            return
+//        }
+//
+//        self.listener = FirebaseManager.shared.firestore.collection("messages")
+//            .whereField("messageText", arrayContains: serchTerm)
+//            .addSnapshotListener { querySnapshot, error in
+//                if let error = error {
+//                    print("Error reading messages: \(error)")
+//                    return
+//                }
+//
+//                guard let documents = querySnapshot?.documents else {
+//                    print("Query Snapshot is empty")
+//                    return
+//                }
+//
+//                let messages = documents.compactMap { document in
+//                    try? document.data(as: ChatModel.self)
+//                }
+//
+//                let chatSearchModels = messages.map { message in
+//                    let isCurrentUser = message.userId == userId // Überprüfen, ob der Absender der eingeloggte Benutzer ist
+//                    return ChatSenderViewModel(chatDesign: message, isCurrentUser: isCurrentUser)
+//                }
+//                self.chatSearchModels = chatSearchModels
+//            }
+//    }
+
 //ProfileScreenView(onLogout: { selectedTab = 0 })
 //    .tabItem {
 //        Image(systemName: "person")

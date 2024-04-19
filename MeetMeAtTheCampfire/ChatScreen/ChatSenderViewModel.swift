@@ -67,10 +67,10 @@ class ChatSenderViewModel: ObservableObject, Identifiable, Equatable {
             return
         }
         
-        // Überprüfen, ob der Benutzer die Nachricht bereits gemocht hat
+        // check for user like
         let isLikedByUser = chatSenderVm.isLikedByUser.contains(userId)
         
-        // Wenn der Benutzer die Nachricht bereits gemocht hat, entferne ihn aus dem Array, ansonsten füge ihn hinzu
+        // add or remove Arry
         if isLikedByUser {
             if let index = chatSenderVm.isLikedByUser.firstIndex(of: userId) {
                 chatSenderVm.isLikedByUser.remove(at: index)
@@ -79,11 +79,11 @@ class ChatSenderViewModel: ObservableObject, Identifiable, Equatable {
             chatSenderVm.isLikedByUser.append(userId)
         }
         
-        // Erstellen des Nachrichtenobjekts für die Aktualisierung in Firestore
+        // create array
         let messagesBox: [String: Any] = ["isLiked": !chatSenderVm.isLikedByUser.isEmpty,
                                           "isLikedByUser": chatSenderVm.isLikedByUser]
         
-        // Aktualisierung der Nachrichtendaten in Firestore
+        // update firestore
         FirebaseManager.shared.firestore.collection("messages").document(messageId).setData(messagesBox, merge: true) { error in
             if let error = error {
                 print("update isLikedStatus failed: \(error)")
@@ -92,5 +92,4 @@ class ChatSenderViewModel: ObservableObject, Identifiable, Equatable {
             }
         }
     }
-
 }

@@ -13,6 +13,7 @@ struct ChatScreenView: View {
     @ObservedObject var chatVm: ChatScreenViewModel
     @EnvironmentObject var authVm: AuthViewModel
     @State private var newMessage: String = ""
+    @State private var matchingChatIds: [String] = []
     
     var body: some View {
         let userName = authVm.user?.userName ?? "User name unknown"
@@ -40,6 +41,17 @@ struct ChatScreenView: View {
                                 scrollView.scrollTo(lastMessageId, anchor: .bottom)
                             }
                             authVm.user?.timeStampLastVisitChat = Date.now
+                        }
+                        .onChange(of: chatVm.searchTerm) { newSearchTerm, _ in
+                            if !newSearchTerm.isEmpty {
+                                chatVm.readMessages()
+                                matchingChatIds = chatVm.searchMessages(for: newSearchTerm)
+                                if !matchingChatIds.isEmpty {
+                                    let result = matchingChatIds[0]
+                                    scrollView.scrollTo(result, anchor: .bottom)
+                                    print("matchingIndex \(result)")
+                                }
+                            }
                         }
                     }
                 }
@@ -89,14 +101,6 @@ struct ChatScreenView: View {
             chatVm.removeListener()
         }
         .searchable(text: $chatVm.searchTerm)
-        .onChange(of: chatVm.searchTerm) { newSearchTerm, _ in
-            if !newSearchTerm.isEmpty {
-                chatVm.readMessages()
-                let matchingMessageIDs = chatVm.searchMessages(for: newSearchTerm)
-                // Verarbeite die gefundenen Nachrichten-IDs
-                print("matching id \(matchingMessageIDs)")
-            }
-        }
     }
 }
 
