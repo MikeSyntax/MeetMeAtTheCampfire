@@ -21,6 +21,7 @@ class ChatSenderViewModel: ObservableObject, Identifiable, Equatable {
     @Published var isReadbyUser: [String] = []
     @Published var userId: String = ""
     @Published var isLiked: Bool
+    @Published var isLikedByUser: [String] = []
     
     // Variable 'timeStamp', die das Datum und die Uhrzeit des Chatnachrichtenzeitstempels speichert.
     @Published var timeStamp = Date()
@@ -39,7 +40,7 @@ class ChatSenderViewModel: ObservableObject, Identifiable, Equatable {
         self.isReadbyUser = chatDesign.isReadbyUser
         self.userId = chatDesign.userId
         self.isLiked = chatDesign.isLiked
-        
+        self.isLikedByUser = chatDesign.isLikedByUser
         self.isCurrentUser = isCurrentUser
         
         // Aufruf der Methode 'updateDate()', um das Datumsformat zu aktualisieren.
@@ -56,26 +57,40 @@ class ChatSenderViewModel: ObservableObject, Identifiable, Equatable {
         self.dateString = formatter.string(from: timeStamp)
     }
     
-        func updateIsLikedStatus(chatSenderVm: ChatSenderViewModel) {
-            guard let messageId = chatSenderVm.chatSenderVm.id else {
-                return
+    //For like chat messages change star and true or false an enter or remove id from Array of id´s
+    func updateIsLikedStatus(chatSenderVm: ChatSenderViewModel) {
+        guard let messageId = chatSenderVm.chatSenderVm.id else {
+            return
+        }
+        
+        guard let userId = FirebaseManager.shared.userId else {
+            return
+        }
+        
+        // Überprüfen, ob der Benutzer die Nachricht bereits gemocht hat
+        let isLikedByUser = chatSenderVm.isLikedByUser.contains(userId)
+        
+        // Wenn der Benutzer die Nachricht bereits gemocht hat, entferne ihn aus dem Array, ansonsten füge ihn hinzu
+        if isLikedByUser {
+            if let index = chatSenderVm.isLikedByUser.firstIndex(of: userId) {
+                chatSenderVm.isLikedByUser.remove(at: index)
             }
-            chatSenderVm.isLiked.toggle()
-            
-            let messagesBox = ["isLiked" : chatSenderVm.isLiked ? false : true]
-            
-            do {
-                try
-                FirebaseManager.shared.firestore.collection("messages").document(messageId).setData(from: messagesBox, merge: true) { error in
-                    if let error {
-                        print("update isLikedStatus failed: \(error)")
-                    } else {
-                        print("update isLikedStatus done")
-                    }
-                }
-            }catch {
-                print("update task failed: \(error)")
+        } else {
+            chatSenderVm.isLikedByUser.append(userId)
+        }
+        
+        // Erstellen des Nachrichtenobjekts für die Aktualisierung in Firestore
+        let messagesBox: [String: Any] = ["isLiked": !chatSenderVm.isLikedByUser.isEmpty,
+                                          "isLikedByUser": chatSenderVm.isLikedByUser]
+        
+        // Aktualisierung der Nachrichtendaten in Firestore
+        FirebaseManager.shared.firestore.collection("messages").document(messageId).setData(messagesBox, merge: true) { error in
+            if let error = error {
+                print("update isLikedStatus failed: \(error)")
+            } else {
+                print("update isLikedStatus done")
             }
         }
+    }
 
 }

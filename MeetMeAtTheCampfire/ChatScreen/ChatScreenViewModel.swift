@@ -17,7 +17,6 @@ class ChatScreenViewModel: ObservableObject {
     //der Listener muss beim Logout auch wieder auf nil gesetzt werden
     private var listener: ListenerRegistration? = nil
     //Search in Chat
-    @Published var chatMessages: [ChatSenderViewModel] = []
     @Published var searchTerm: String = ""
     
     var user: UserModel
@@ -33,19 +32,18 @@ class ChatScreenViewModel: ObservableObject {
     //Search in Chat
     func searchMessages(for searchTerm: String) -> [String] {
         // Durchsuche die Nachrichten nach dem Suchbegriff und gib die IDs zurück
-        let matchingMessages = chatMessages.filter { $0.messageText.contains(searchTerm) }
-        print("Matching Messages \(matchingMessages.count)")
+        let matchingMessages = chatSenderViewModels.filter { $0.messageText.contains(searchTerm) }
         return matchingMessages.map { $0.chatSenderVm.id ?? "Keine Nachricht" } // Hier wird die ID direkt aus dem ChatModel extrahiert
     }
     
     //MARK Anlegen aller 4 CRUD Operationen Create Read Update und Delete ------------------------------------------------------------------
     //Neue ChatNachricht im Firestore anlegen
-    func createNewMessage(userName: String, messageText: String, isLikeByUser: Bool){
+    func createNewMessage(userName: String, messageText: String, isLiked: Bool, isLikedByUser: [String]){
         guard let userId = FirebaseManager.shared.userId else {
             return
         }
         
-        let message = ChatModel(userId: userId, userName: userName, messageText: messageText, timeStamp: Date(), isReadbyUser: [userId], isLiked: isLikeByUser)
+        let message = ChatModel(userId: userId, userName: userName, messageText: messageText, timeStamp: Date(), isReadbyUser: [userId], isLiked: isLiked, isLikedByUser: isLikedByUser)
         
         do{
             try FirebaseManager.shared.firestore.collection("messages").addDocument(from: message)
@@ -84,7 +82,6 @@ class ChatScreenViewModel: ObservableObject {
                 self.chatSenderViewModels = chatSenderViewModels
                 //Anzahl ungelesener Nachrichten ermitteln um den .badge anzuzeigen
                 let counter = chatSenderViewModels.filter { !$0.chatSenderVm.isReadbyUser.contains(userId) }.count
-                print("new email counter \(counter)")
                 self.messageCountResult = counter
             }
     }

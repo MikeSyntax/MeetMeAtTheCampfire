@@ -11,6 +11,7 @@ struct ChatSenderView: View {
     
     @ObservedObject var chatSenderVm: ChatSenderViewModel
     private let maxWidth: CGFloat = 300.0
+    private let userId = FirebaseManager.shared.userId
     
     var body: some View {
         ZStack {
@@ -45,9 +46,15 @@ struct ChatSenderView: View {
                             chatSenderVm.isLiked.toggle()
                             chatSenderVm.updateIsLikedStatus(chatSenderVm: chatSenderVm)
                         } label: {
-                            Image(systemName: "star.fill")
-                                .frame(alignment: chatSenderVm.isCurrentUser ? .trailing : .leading)
-                                .bold()
+                            if chatSenderVm.isLikedByUser.contains(userId ?? "no UserId"){
+                                Image(systemName: "star.fill")
+                                    .frame(alignment: chatSenderVm.isCurrentUser ? .trailing : .leading)
+                                    .bold()
+                            } else {
+                                Image(systemName: "star")
+                                    .frame(alignment: chatSenderVm.isCurrentUser ? .trailing : .leading)
+                                    .bold()
+                            }
                         }
                     } else {
                         Button{
@@ -75,12 +82,11 @@ struct ChatSenderView: View {
             .padding(2)
         }
         .frame(minWidth: 200, maxWidth: .infinity, minHeight: 70, maxHeight: 500, alignment: chatSenderVm.isCurrentUser ? .trailing : .leading)
-        
     }
 }
 
 #Preview {
-    let chat = ChatModel(userId: "1", userName: "Fettes Brot", messageText: "In diesem Beispiel wird der Text innerhalb des Rechtecks angezeigt, und die Höhe des Rechtecks passt sich automatisch an die Höhe des Textinhalts an. Die fixedSize(horizontal:vertical:)-Modifikator sorgt dafür, dass der Text nicht über die Breite des Rechtecks hinauswächst, aber vertikal kann er beliebig wachsen. Damit sollten längere Texte vollständig angezeigt werden.", timeStamp: Date(), isReadbyUser: [], isLiked: false)
+    let chat = ChatModel(userId: "1", userName: "Fettes Brot", messageText: "In diesem Beispiel wird der Text innerhalb des Rechtecks angezeigt, und die Höhe des Rechtecks passt sich automatisch an die Höhe des Textinhalts an. Die fixedSize(horizontal:vertical:)-Modifikator sorgt dafür, dass der Text nicht über die Breite des Rechtecks hinauswächst, aber vertikal kann er beliebig wachsen. Damit sollten längere Texte vollständig angezeigt werden.", timeStamp: Date(), isReadbyUser: [], isLiked: false, isLikedByUser: [])
     let chatVm = ChatSenderViewModel(chatDesign: chat)
     return ChatSenderView(chatSenderVm: chatVm)
 }

@@ -57,7 +57,7 @@ struct ChatScreenView: View {
                                 .stroke(Color.cyan, lineWidth: 2) // Farbe und Breite des Rahmens festlegen
                         )
                     ButtonTextAction(iconName: "paperplane", text: "Senden") {
-                        chatVm.createNewMessage(userName: userName, messageText: newMessage, isLikeByUser: false)
+                        chatVm.createNewMessage(userName: userName, messageText: newMessage, isLiked: false, isLikedByUser: [])
                         newMessage = ""
                     }
                 }
@@ -88,14 +88,15 @@ struct ChatScreenView: View {
         .onDisappear{
             chatVm.removeListener()
         }
-//        .searchable(text: $chatVm.searchTerm)
-//        .onChange(of: chatVm.searchTerm) { newSearchTerm, _ in
-//            if !newSearchTerm.isEmpty {
-//                chatVm.readMessages()
-//                let matchingMessageIDs = chatVm.searchMessages(for: newSearchTerm)
-//                // Verarbeite die gefundenen Nachrichten-IDs
-//            }
-//        }
+        .searchable(text: $chatVm.searchTerm)
+        .onChange(of: chatVm.searchTerm) { newSearchTerm, _ in
+            if !newSearchTerm.isEmpty {
+                chatVm.readMessages()
+                let matchingMessageIDs = chatVm.searchMessages(for: newSearchTerm)
+                // Verarbeite die gefundenen Nachrichten-IDs
+                print("matching id \(matchingMessageIDs)")
+            }
+        }
     }
 }
 

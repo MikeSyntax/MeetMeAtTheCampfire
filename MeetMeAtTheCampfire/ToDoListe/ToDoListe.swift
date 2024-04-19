@@ -244,3 +244,66 @@
 //        ContentView()
 //    }
 //}
+
+
+
+
+//func updateIsLikedStatus(chatSenderVm: ChatSenderViewModel) {
+//    guard let messageId = chatSenderVm.chatSenderVm.id else {
+//        return
+//    }
+//    
+//    guard let userId = FirebaseManager.shared.userId else {
+//        return
+//    }
+//    
+//    if !chatSenderVm.isLikedByUser.contains(userId){
+//        chatSenderVm.isLikedByUser.append(userId)
+//    }
+//    
+//    chatSenderVm.isLiked.toggle()
+//    
+//    let isLiked = !chatSenderVm.isLiked
+//    let isLikedByUser = chatSenderVm.isLikedByUser
+//    
+//    let messagesBox: [String: Any] = ["isLiked": isLiked, "isLikedByUser": isLikedByUser.map({$0}), "userId": userId]
+//    
+//    FirebaseManager.shared.firestore.collection("messages").document(messageId).updateData(messagesBox) { error in
+//        if let error {
+//            print("update isLikedStatus failed: \(error)")
+//        } else {
+//            print("update isLikedStatus done")
+//        }
+//    }
+//}
+
+    // Überprüfen, ob der Benutzer bereits im Array isLikeByUser enthalten ist
+//    let userIndex = chatSenderVm.isLikeByUser.firstIndex(of: userId)
+//    
+//    // Wenn die Nachricht gemocht wurde und der Benutzer nicht im Array enthalten ist, füge ihn hinzu
+//    if chatSenderVm.isLiked && userIndex == nil {
+//        chatSenderVm.isLikeByUser.append(userId)
+//    }
+//    
+//    // Wenn die Nachricht nicht gemocht wurde und der Benutzer im Array enthalten ist, entferne ihn
+//    if !chatSenderVm.isLiked && userIndex != nil {
+//        chatSenderVm.isLikeByUser.remove(at: userIndex!)
+//    }
+//    
+//    // Ändern des isLiked-Status
+//    chatSenderVm.isLiked.toggle()
+//    
+//    // Erstellen des Nachrichtenobjekts für die Aktualisierung in Firestore
+//    let messagesBox: [String: Any] = ["isLiked": chatSenderVm.isLiked,
+//                                      "isLikedByUser": chatSenderVm.isLikeByUser,
+//                                      "userId": userId]
+//    
+//    // Aktualisierung der Nachrichtendaten in Firestore
+//    FirebaseManager.shared.firestore.collection("messages").document(messageId).setData(messagesBox, merge: true) { error in
+//        if let error = error {
+//            print("update isLikedStatus failed: \(error)")
+//        } else {
+//            print("update isLikedStatus done")
+//        }
+//    }
+//}
