@@ -27,6 +27,9 @@ struct ChatSenderView: View {
                         .clipShape(Circle())
                     Text(chatSenderVm.userName)
                         .font(.caption)
+                    Spacer()
+                    Text("UserId: \(chatSenderVm.userId)")
+                        .font(.system(size: 8))
                 }
                 .padding(.trailing)
                 .padding(.leading)

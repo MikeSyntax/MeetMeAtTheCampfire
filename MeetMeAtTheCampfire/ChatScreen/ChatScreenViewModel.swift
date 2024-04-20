@@ -10,17 +10,11 @@ import FirebaseFirestore
 
 class ChatScreenViewModel: ObservableObject {
     
-    //Leere Liste erzeugt
     @Published var chatSenderViewModels: [ChatSenderViewModel] = []
-    
-    @Published var chatSearchModels: [ChatSenderViewModel] = []
     //Counter für den .badge im MainScreen
     var messageCountResult: Int = 0
-    //der Listener muss beim Logout auch wieder auf nil gesetzt werden
     private var listener: ListenerRegistration? = nil
-    //Search in Chat
     @Published var searchTerm: String = ""
-    
     var user: UserModel
     
     init(user: UserModel){

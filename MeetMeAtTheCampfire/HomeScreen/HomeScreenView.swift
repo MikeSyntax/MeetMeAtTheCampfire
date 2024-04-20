@@ -12,12 +12,10 @@ struct HomeScreenView: View {
     @StateObject private var detailCategorieVm = DetailCategorieViewModel()
     @StateObject private var detailCategorieItemVm = DetailCategorieItemViewModel(detailCategorieItemModel: TaskModel(categorieId: "1", taskName: "1", taskIsDone: false))
     
-    @State private var showNewCategorieAlert: Bool = false
-    @State private var newCategorie: String = ""
-    @State private var tasksInCategorie: Int = 0
-    @State private var showSettingsSheet: Bool = false
-    @State private var showAnimation: Bool = false
-    
+    @State private var showNewCategorieAlert = false
+    @State private var newCategorie = ""
+    @State private var showSettingsSheet = false
+    @State private var showAnimation = false
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
@@ -26,7 +24,6 @@ struct HomeScreenView: View {
                 Divider()
                 VStack{
                     ScrollView {
-                        // Hier wird ein LazyVGrid (Lazy deshalb, da nur sichtbare Ansichten erstellt werden, um Speicher zu sparen), das eine Gitteransicht mit variabler Breite für die Spalten und einem Abstand zwischen den Elementen erstellt.
                         LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 20), count: 3), spacing: 20) {
                             ForEach(homeVm.categorieViewModels) { categorieViewModel in
                                 NavigationLink(destination: DetailCategorieView(categorieVm: categorieViewModel, homeVm: homeVm, detailCategorieVm: detailCategorieVm, detailCategorieItemVm: detailCategorieItemVm)) {

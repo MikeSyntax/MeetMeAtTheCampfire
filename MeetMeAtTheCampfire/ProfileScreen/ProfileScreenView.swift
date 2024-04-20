@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ProfileScreenView: View {
-    
+    @ObservedObject var profileScreenVm: ProfileScreenViewModel
     @EnvironmentObject var authVm: AuthViewModel
     
     //After Logout start with selectedTab
@@ -20,21 +20,50 @@ struct ProfileScreenView: View {
         NavigationStack {
             VStack {
                 Divider()
-                Image(.logo)
-                    .resizable()
-                    .clipShape(Circle())
-                    .frame(width: 250, height: 250)
-                Spacer()
-                Text("eingeloggt als:")
-                Text(userName)
-                    .font(.largeTitle)
-                Spacer()
-                
-                Text("mit der Email:")
-                Text(userEmail)
-                    .font(.largeTitle)
-                Spacer()
+                VStack{
+                    VStack{
+                        HStack{
+                            Image(.logo)
+                                .resizable()
+                                .clipShape(Circle())
+                                .frame(width: 100, height: 100, alignment: .leading)
+                        }
+                        .frame(width: 350, alignment: .leading)
+                        Spacer()
+                        HStack{
+                            Text(userName)
+                            Spacer()
+                            Text(userEmail)
+                        }
+                        .frame(width: 300, alignment: .leading)
+                        Spacer()
+                        HStack{
+                            Text("Id: \(FirebaseManager.shared.userId ?? "no user Id")")
+                                .underline()
+                        }
+                        .frame(width: 300, alignment: .leading)
+                    }
+                }
+                .frame(height: 170, alignment: .leading)
+                VStack{
+                    Divider()
+                        .background(.gray)
+                    Spacer()
+                    Text("Meine gespeicherten Nachrichten")
+                        .font(.headline)
+                        .bold()
+                        .italic()
+                        .frame(width: 300, alignment: .leading)
+                    ScrollView{
+                        ForEach(profileScreenVm.chatLikedViewModels){ chatLikedViewModel in
+                            ChatSenderView(chatSenderVm: chatLikedViewModel)
+                                .id(chatLikedViewModel.id)
+                        }
+                    }
+                    .frame(width: 300, alignment: .center)
+                }
             }
+            .padding()
             .toolbar {
                 Button {
                     authVm.logout()
@@ -52,10 +81,16 @@ struct ProfileScreenView: View {
                     .opacity(0.2)
                     .ignoresSafeArea())
         }
+        .onAppear{
+            profileScreenVm.readLikedMessages()
+        }
+        .onDisappear{
+            profileScreenVm.removeListener()
+        }
     }
 }
 
 #Preview {
-    ProfileScreenView()
+    ProfileScreenView(profileScreenVm: ProfileScreenViewModel(user: UserModel(id: "", email: "", registeredTime: Date(), userName: "Hans", timeStampLastVisitChat: Date())))
         .environmentObject(AuthViewModel())
 }

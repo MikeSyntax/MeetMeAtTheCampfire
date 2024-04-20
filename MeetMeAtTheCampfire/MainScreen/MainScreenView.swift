@@ -10,15 +10,15 @@ import SwiftUI
 struct MainScreenView: View {
     let authVm: AuthViewModel
     @StateObject var chatVm: ChatScreenViewModel
+    @StateObject var profileScreenVm: ProfileScreenViewModel
     @StateObject var languageVm = LanguageScreenViewModel(languageChoice: Language(code: "af", name: "Afrikaans"), languageSource: Language(code: "de", name: "Deutsch"))
     @StateObject var chatSenderVm = ChatSenderViewModel(chatDesign: ChatModel(userId: "2", userName: "Dieter", messageText: "Danke", timeStamp: Date(), isReadbyUser: [], isLiked: false, isLikedByUser: []))
-    @StateObject var calendarDetailItemVm = CalendarDetailItemViewModel(calendarItemModel: LogBookModel(userId: "1", formattedDate: "123", logBookText: "", latitude: 0.47586, longitude: 0.883626, imageUrl: "", containsLogBookEntry: false), date: Date())
-    
-    //Immer mit der HomeScreenView anfangen
-    @State private var selectedTab = 0
+
+    @State var selectedTab = 0
     
     init(authVm: AuthViewModel){
         _chatVm = StateObject(wrappedValue: ChatScreenViewModel(user: authVm.user!))
+        _profileScreenVm = StateObject(wrappedValue: ProfileScreenViewModel(user: authVm.user!))
         self.authVm = authVm
     }
     
@@ -38,7 +38,7 @@ struct MainScreenView: View {
                 .badge(chatVm.messageCountResult)
                 .tag(1)
             
-            CalendarYearlyView(calendarDetailItemVm: calendarDetailItemVm)
+            CalendarYearlyView(/*calendarDetailItemVm: calendarDetailItemVm*/)
                 .tabItem {
                     Image(systemName: selectedTab == 2 ? "book":"book.closed")
                     Text("Logbuch")
@@ -50,7 +50,7 @@ struct MainScreenView: View {
                     Text("Übersetzer")
                 }.tag(3)
             
-            ProfileScreenView(/*onLogout: { selectedTab = 0 }*/)
+            ProfileScreenView(/*onLogout: { selectedTab = 0 }*/profileScreenVm: profileScreenVm)
                 .tabItem {
                     Image(systemName: "person")
                     Text("Profil")
@@ -75,3 +75,7 @@ struct MainScreenView: View {
         }
     }
 }
+
+//    @StateObject var calendarDetailItemVm = CalendarDetailItemViewModel(calendarItemModel: LogBookModel(userId: "1", formattedDate: "123", logBookText: "", latitude: 0.47586, longitude: 0.883626, imageUrl: "", containsLogBookEntry: false), date: Date())
+    
+    //Immer mit der HomeScreenView anfangen

@@ -14,10 +14,8 @@ struct DetailCategorieView: View {
     @ObservedObject var homeVm: HomeScreenViewModel
     @ObservedObject var detailCategorieVm: DetailCategorieViewModel
     @ObservedObject var detailCategorieItemVm: DetailCategorieItemViewModel
-    
     @State private var showNewTaskAlert: Bool = false
     @State private var newTask: String = ""
-    
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
@@ -108,3 +106,5 @@ struct DetailCategorieView: View {
         }
     }
 }
+
+

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CalendarYearlyView: View {
 
-    @ObservedObject var calendarDetailItemVm: CalendarDetailItemViewModel
+    //@ObservedObject var calendarDetailItemVm: CalendarDetailItemViewModel
     @State private var year = Date().getFirstDateOfYear()
     @State private var scrollPosition: Int? = nil
     
@@ -24,7 +24,7 @@ struct CalendarYearlyView: View {
                             .padding(.top)
                         
                         ForEach(year.getAllMonths(), id:  \.self) { month in
-                            CalendarMonthlyView(calendarDetailItemVm: calendarDetailItemVm, month: month)
+                            CalendarMonthlyView(/*calendarDetailItemVm: calendarDetailItemVm, */month: month)
                                 .padding(.bottom, 50)
                                 .id(month.get(.month))
                             
@@ -54,6 +54,10 @@ struct CalendarYearlyView: View {
             )
         }
     }
+}
+
+#Preview{
+    CalendarYearlyView()
 }
 
 private struct WeekdayHeaderView: View {
