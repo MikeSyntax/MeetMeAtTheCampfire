@@ -8,36 +8,42 @@
 import SwiftUI
 
 struct CalendarYearlyView: View {
-    @ObservedObject var dateVm: CalendarViewModel
+
     @ObservedObject var calendarDetailItemVm: CalendarDetailItemViewModel
-    @State var id: String = ""
+    @State private var year = Date().getFirstDateOfYear()
+    @State private var scrollPosition: Int? = nil
     
     var body: some View {
-        NavigationStack {
+        NavigationStack{
             VStack{
                 Divider()
                 ScrollView {
-                    VStack {
-                        WeekdayHeaderView(dateVm: dateVm)
+                    VStack{
+                        WeekdayHeaderView()
                             .padding(.bottom)
                             .padding(.top)
-                        ForEach(dateVm.getAllMonths(date: dateVm.date), id: \.self) { month in
-                            CalendarMonthlyView(dateVm: CalendarViewModel(date: month), calendarDetailItemVm: calendarDetailItemVm)
-                                .padding(.bottom, 50)
-                                .id(dateVm.get(.month))
-                            Divider()
-                        }
                         
+                        ForEach(year.getAllMonths(), id:  \.self) { month in
+                            CalendarMonthlyView(calendarDetailItemVm: calendarDetailItemVm, month: month)
+                                .padding(.bottom, 50)
+                                .id(month.get(.month))
+                            
+                            Divider()
+                                .background(.gray)
+                        }
                     }
                 }
             }
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    CalendarYearSwitcherView(dateVm: dateVm)
+                ToolbarItem(placement: .topBarTrailing){
+                    YearSwitcher(year: $year)
                 }
             }
-            .scrollPosition(id: $dateVm.scrollPosition)
-            .navigationTitle("Logbuch \(CalendarUtils.getYearCaption(dateVm.date))")
+            .onAppear {
+                scrollPosition = Int(Date().get(.month))
+            }
+            .scrollPosition(id: $scrollPosition)
+            .navigationTitle("Logbuch \(CalendarUtils.getYearCaption(year))")
             .scrollContentBackground(.hidden)
             .background(
                 Image("background")
@@ -47,16 +53,35 @@ struct CalendarYearlyView: View {
                     .ignoresSafeArea(.all)
             )
         }
-        .onAppear {
-            dateVm.scrollPosition = Calendar.current.component(.month, from: dateVm.date)
+    }
+}
+
+private struct WeekdayHeaderView: View {
+    
+    private var weekdays = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]
+    let columns = Array(repeating: GridItem(.flexible()), count: 7)
+    
+    var body: some View{
+        LazyVGrid(columns: columns, spacing: 25){
+            ForEach(weekdays, id: \.self) { weekday in
+                Text(weekday)
+            }
         }
     }
 }
 
-
-// Preview
-struct CalendarYearlyView_Previews: PreviewProvider {
-    static var previews: some View {
-        CalendarYearlyView(dateVm: CalendarViewModel(date: Date()), calendarDetailItemVm: CalendarDetailItemViewModel(calendarItemModel: LogBookModel(userId: "1", formattedDate: "", logBookText: "", latitude: 0.0, longitude: 0.0, imageUrl: "", containsLogBookEntry: false), date: Date()))
+private struct YearSwitcher: View {
+    @Binding var year: Date
+    
+    var body: some View{
+        HStack{
+            Button("-"){
+                year = year.getPreviousYear()
+            }
+            Text(CalendarUtils.getYearCaption(year))
+            Button("+"){
+                year = year.getNextYear()
+            }
+        }
     }
 }

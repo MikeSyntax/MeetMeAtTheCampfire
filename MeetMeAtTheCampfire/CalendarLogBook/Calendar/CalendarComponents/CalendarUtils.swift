@@ -10,21 +10,6 @@ import Foundation
 class CalendarUtils {
     
     //Monats Formatter
-    private static var dayFormatter = createDayFormatter()
-    
-    
-    static func getDayCaption(_ date: Date) -> String {
-        return dayFormatter.string(from: date)
-    }
-    
-    private static func createDayFormatter() -> DateFormatter {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "DDDD"
-        return formatter
-    }
-    
-    
-    //Monats Formatter
     private static var monthFormatter = createMonthFormatter()
     
     
@@ -38,7 +23,6 @@ class CalendarUtils {
         return formatter
     }
     
-    
     //Jahr Formatter
     private static var yearFormatter = createYearFormatter()
     
@@ -48,7 +32,7 @@ class CalendarUtils {
     
     private static func createYearFormatter() -> DateFormatter {
         let formatter = DateFormatter()
-        formatter.dateFormat = "YYYY"
+        formatter.dateFormat = "yyyy"
         return formatter
     }
 }

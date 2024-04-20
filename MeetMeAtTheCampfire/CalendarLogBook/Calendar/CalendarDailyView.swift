@@ -8,17 +8,17 @@
 import SwiftUI
 
 struct CalendarDailyView: View {
-    @ObservedObject var dateVm: CalendarViewModel
+    var date: Date
+    let weekendColor = Color(cgColor: CGColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1))
+    
     var body: some View {
-        //aktuellen Tag anzeigen
-        Text("\(dateVm.get(.day))")
-        //Wochenende werden die Daten grau angezeigt
-            .foregroundStyle(dateVm.isWeekend(date: dateVm.date) ? dateVm.weekendColor : .primary)
-            .background {
-                if dateVm.isToday(date: dateVm.date) {
+        Text("\(date.get(.day))")
+            .foregroundStyle(date.isWeekend() ? weekendColor : .primary)
+            .background{
+                if date.isToday(){
                     Circle()
                         .frame(width: 30, height: 30)
-                        .foregroundStyle(.red)
+                        .foregroundColor(.red)
                 }
             }
     }

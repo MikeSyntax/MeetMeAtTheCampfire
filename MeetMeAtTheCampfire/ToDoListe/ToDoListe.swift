@@ -31,6 +31,11 @@
 //AsyncImage mit Url nicht und mit UIImage in Storage speichern
 //Höhe des Feldes für die Übersetzung
 
+//    @StateObject var dateVm = {
+//        let calendar = Calendar.current
+//        let currentDate = Date()
+//        let components = calendar.dateComponents([.year, .month], from: currentDate)
+//        return CalendarViewModel(date: calendar.date(from: components) ?? Date())}()
 
 //.onChange(of: chatVm.searchTerm) { newSearchTerm, _ in
 //    if !newSearchTerm.isEmpty {

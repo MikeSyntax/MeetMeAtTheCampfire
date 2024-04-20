@@ -12,13 +12,6 @@ struct MainScreenView: View {
     @StateObject var chatVm: ChatScreenViewModel
     @StateObject var languageVm = LanguageScreenViewModel(languageChoice: Language(code: "af", name: "Afrikaans"), languageSource: Language(code: "de", name: "Deutsch"))
     @StateObject var chatSenderVm = ChatSenderViewModel(chatDesign: ChatModel(userId: "2", userName: "Dieter", messageText: "Danke", timeStamp: Date(), isReadbyUser: [], isLiked: false, isLikedByUser: []))
-    
-    @StateObject var dateVm = {
-        let calendar = Calendar.current
-        let currentDate = Date()
-        let components = calendar.dateComponents([.year, .month], from: currentDate)
-        return CalendarViewModel(date: calendar.date(from: components) ?? Date())}()
-    
     @StateObject var calendarDetailItemVm = CalendarDetailItemViewModel(calendarItemModel: LogBookModel(userId: "1", formattedDate: "123", logBookText: "", latitude: 0.47586, longitude: 0.883626, imageUrl: "", containsLogBookEntry: false), date: Date())
     
     //Immer mit der HomeScreenView anfangen
@@ -45,7 +38,7 @@ struct MainScreenView: View {
                 .badge(chatVm.messageCountResult)
                 .tag(1)
             
-            CalendarYearlyView(dateVm: dateVm, calendarDetailItemVm: calendarDetailItemVm)
+            CalendarYearlyView(calendarDetailItemVm: calendarDetailItemVm)
                 .tabItem {
                     Image(systemName: selectedTab == 2 ? "book":"book.closed")
                     Text("Logbuch")
