@@ -1,5 +1,5 @@
 //
-//  ChatSenderView.swift
+//  ChatItemView.swift
 //  MeetMeAtTheCampfire
 //
 //  Created by Mike Reichenbach on 07.03.24.
@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct ChatSenderView: View {
+struct ChatItemView: View {
     
-    @ObservedObject var chatSenderVm: ChatSenderViewModel
+    @ObservedObject var chatSenderVm: ChatItemViewModel
     private let maxWidth: CGFloat = 300.0
     private let userId = FirebaseManager.shared.userId
     
@@ -90,8 +90,8 @@ struct ChatSenderView: View {
 
 #Preview {
     let chat = ChatModel(userId: "1", userName: "Fettes Brot", messageText: "In diesem Beispiel wird der Text innerhalb des Rechtecks angezeigt, und die Höhe des Rechtecks passt sich automatisch an die Höhe des Textinhalts an. Die fixedSize(horizontal:vertical:)-Modifikator sorgt dafür, dass der Text nicht über die Breite des Rechtecks hinauswächst, aber vertikal kann er beliebig wachsen. Damit sollten längere Texte vollständig angezeigt werden.", timeStamp: Date(), isReadbyUser: [], isLiked: false, isLikedByUser: [])
-    let chatVm = ChatSenderViewModel(chatDesign: chat)
-    return ChatSenderView(chatSenderVm: chatVm)
+    let chatVm = ChatItemViewModel(chatDesign: chat)
+    return ChatItemView(chatSenderVm: chatVm)
 }
 
 

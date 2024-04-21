@@ -31,6 +31,16 @@
 //AsyncImage mit Url nicht und mit UIImage in Storage speichern
 //Höhe des Feldes für die Übersetzung
 
+
+//            .toolbar {
+//                Button{
+//                    //todo Search
+//                } label: {
+//                    Text("Suche")
+//                    Image(systemName: "magnifyingglass")
+//                }
+//            }
+
 //    @StateObject var dateVm = {
 //        let calendar = Calendar.current
 //        let currentDate = Date()

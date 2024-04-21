@@ -1,5 +1,5 @@
 //
-//  CategorieTaskItemViewModel.swift
+//  DetailCategorieItemViewModel.swift
 //  MeetMeAtTheCampfire
 //
 //  Created by Mike Reichenbach on 13.03.24.
@@ -7,15 +7,15 @@
 
 import Foundation
 
-class CategorieTaskItemViewModel: ObservableObject {
+class DetailCategorieItemViewModel: ObservableObject {
     @Published var taskName: String = ""
     @Published var taskIsDone: Bool = false
     
-    let categorieTaskItemModel: TaskModel
+    let detailCategorieItemModel: TaskModel
     
-    init(categorieTaskItemModel: TaskModel){
-        self.categorieTaskItemModel = categorieTaskItemModel.self
-        self.taskName = categorieTaskItemModel.taskName
-        self.taskIsDone = categorieTaskItemModel.taskIsDone
+    init(detailCategorieItemModel: TaskModel){
+        self.detailCategorieItemModel = detailCategorieItemModel.self
+        self.taskName = detailCategorieItemModel.taskName
+        self.taskIsDone = detailCategorieItemModel.taskIsDone
     }
 }

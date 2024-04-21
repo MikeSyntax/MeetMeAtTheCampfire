@@ -14,6 +14,7 @@ struct ChatScreenView: View {
     @EnvironmentObject var authVm: AuthViewModel
     @State private var newMessage: String = ""
     @State private var matchingChatIds: [String] = []
+    @State private var scrollPosition: Int? = nil
     
     var body: some View {
         let userName = authVm.user?.userName ?? "User name unknown"
@@ -25,7 +26,7 @@ struct ChatScreenView: View {
                     ScrollViewReader { scrollView in
                         LazyVStack {
                             ForEach(chatVm.chatSenderViewModels) { chatSenderViewModel in
-                                ChatSenderView(chatSenderVm: chatSenderViewModel)
+                                ChatItemView(chatSenderVm: chatSenderViewModel)
                                     .id(chatSenderViewModel.id)
                                     .onAppear {
                                         if
@@ -37,8 +38,10 @@ struct ChatScreenView: View {
                         }
                         .onChange(of: chatVm.chatSenderViewModels) {
                             // if let lastMessageId = chatVm.chatSenderViewModels.last?.isReadbyUser.last {
-                            if let lastMessageId = chatVm.chatSenderViewModels.last?.id {
-                                scrollView.scrollTo(lastMessageId, anchor: .bottom)
+                            if chatVm.searchTerm.isEmpty {
+                                if let lastMessageId = chatVm.chatSenderViewModels.last?.id {
+                                    scrollView.scrollTo(lastMessageId, anchor: .bottom)
+                                }
                             }
                             authVm.user?.timeStampLastVisitChat = Date.now
                         }
@@ -46,10 +49,15 @@ struct ChatScreenView: View {
                             if !newSearchTerm.isEmpty {
                                 chatVm.readMessages()
                                 matchingChatIds = chatVm.searchMessages(for: newSearchTerm)
+                                print("MatchingIds \(matchingChatIds)")
                                 if !matchingChatIds.isEmpty {
-                                    let result = matchingChatIds[0]
-                                    scrollView.scrollTo(result, anchor: .bottom)
-                                    print("matchingIndex \(result)")
+                                    if let firstMatchingId = matchingChatIds.first {
+                                        let filteredChats = chatVm.chatSenderViewModels.filter { $0.chatSenderVm.id == firstMatchingId }
+                                        chatVm.chatSenderViewModels = filteredChats
+                                        if let firstFilteredChat = filteredChats.first {
+                                            scrollView.scrollTo(firstFilteredChat.id, anchor: .top)
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -78,14 +86,6 @@ struct ChatScreenView: View {
                     .padding(EdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0))
             }
             .navigationTitle("Chat")
-            .toolbar {
-                Button{
-                    //todo Search
-                } label: {
-                    Text("Suche")
-                    Image(systemName: "magnifyingglass")
-                }
-            }
             .background(
                 Image("background")
                     .resizable()

@@ -10,7 +10,7 @@ import FirebaseFirestore
 
 class ChatScreenViewModel: ObservableObject {
     
-    @Published var chatSenderViewModels: [ChatSenderViewModel] = []
+    @Published var chatSenderViewModels: [ChatItemViewModel] = []
     //Counter für den .badge im MainScreen
     var messageCountResult: Int = 0
     private var listener: ListenerRegistration? = nil
@@ -73,7 +73,7 @@ class ChatScreenViewModel: ObservableObject {
                 
                 let chatSenderViewModels = sortedMessages.map { message in
                     let isCurrentUser = message.userId == userId // Überprüfen, ob der Absender der eingeloggte Benutzer ist
-                    return ChatSenderViewModel(chatDesign: message, isCurrentUser: isCurrentUser)
+                    return ChatItemViewModel(chatDesign: message, isCurrentUser: isCurrentUser)
                 }
                 self.chatSenderViewModels = chatSenderViewModels
                 //Anzahl ungelesener Nachrichten ermitteln um den .badge anzuzeigen
@@ -82,7 +82,7 @@ class ChatScreenViewModel: ObservableObject {
             }
     }
     
-    func updateisReadStatus(chatSenderVm: ChatSenderViewModel) {
+    func updateisReadStatus(chatSenderVm: ChatItemViewModel) {
         guard let messageId = chatSenderVm.chatSenderVm.id else {
             return
         }

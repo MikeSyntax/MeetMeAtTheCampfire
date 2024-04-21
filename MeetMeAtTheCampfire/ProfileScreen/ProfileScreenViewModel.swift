@@ -10,7 +10,7 @@ import FirebaseFirestore
 
 class ProfileScreenViewModel: ObservableObject {
     
-    @Published var chatLikedViewModels: [ChatSenderViewModel] = []
+    @Published var chatLikedViewModels: [ChatItemViewModel] = []
     //Counter für den .badge im MainScreen
     var messageCountResult: Int = 0
     private var listener: ListenerRegistration? = nil
@@ -50,7 +50,7 @@ class ProfileScreenViewModel: ObservableObject {
                 let sortedMessages = messages.sorted { $0.timeStamp < $1.timeStamp }
                 
                 let chatLikedViewModels = sortedMessages.map { message in
-                    return ChatSenderViewModel(chatDesign: message)
+                    return ChatItemViewModel(chatDesign: message)
                 }
                 self.chatLikedViewModels = chatLikedViewModels
             }

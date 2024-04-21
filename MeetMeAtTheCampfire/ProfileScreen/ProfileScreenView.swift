@@ -56,7 +56,7 @@ struct ProfileScreenView: View {
                         .frame(width: 300, alignment: .leading)
                     ScrollView{
                         ForEach(profileScreenVm.chatLikedViewModels){ chatLikedViewModel in
-                            ChatSenderView(chatSenderVm: chatLikedViewModel)
+                            ChatItemView(chatSenderVm: chatLikedViewModel)
                                 .id(chatLikedViewModel.id)
                         }
                     }

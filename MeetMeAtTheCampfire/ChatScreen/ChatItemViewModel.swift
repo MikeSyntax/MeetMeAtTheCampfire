@@ -1,5 +1,5 @@
 //
-//  ChatSenderViewModel.swift
+//  ChatItemViewModel.swift
 //  MeetMeAtTheCampfire
 //
 //  Created by Mike Reichenbach on 07.03.24.
@@ -7,9 +7,9 @@
 
 import Foundation
 //Hier werden verschiedene Protokolle implementiert unter anderen das Equatable Protokoll (Vergleichsprotokoll)
-class ChatSenderViewModel: ObservableObject, Identifiable, Equatable {
+class ChatItemViewModel: ObservableObject, Identifiable, Equatable {
     //mit dieser static Funktion wird es ermöglicht Instanzen dieser Klasse zu vergleichen in diesem Fall die id´s der ChatSenderViewModels und es wird eine true oder false zurückgegeben
-    static func == (chatReceiver: ChatSenderViewModel, chatSender: ChatSenderViewModel) -> Bool {
+    static func == (chatReceiver: ChatItemViewModel, chatSender: ChatItemViewModel) -> Bool {
         return chatReceiver.id == chatSender.id
     }
     
@@ -58,7 +58,7 @@ class ChatSenderViewModel: ObservableObject, Identifiable, Equatable {
     }
     
     //For like chat messages change star and true or false an enter or remove id from Array of id´s
-    func updateIsLikedStatus(chatSenderVm: ChatSenderViewModel) {
+    func updateIsLikedStatus(chatSenderVm: ChatItemViewModel) {
         guard let messageId = chatSenderVm.chatSenderVm.id else {
             return
         }

@@ -43,5 +43,5 @@ struct DetailCategorieItemFilledView: View {
     }
 }
 #Preview {
-    CategorieTaskFilledView(detailCategorieItemVm: DetailCategorieItemViewModel(detailCategorieItemModel: TaskModel(categorieId: "1", taskName: "Camper packen", taskIsDone: false)))
+    DetailCategorieItemFilledView(detailCategorieItemVm: DetailCategorieItemViewModel(detailCategorieItemModel: TaskModel(categorieId: "1", taskName: "Camper packen", taskIsDone: false)))
 }
