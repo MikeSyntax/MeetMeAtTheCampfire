@@ -59,11 +59,11 @@ struct MainScreenView: View {
         .onAppear{
             selectedTab = 0
             chatVm.readMessages()
-            if #available(iOS 15.0, *) {
-                let tabBarAppearance = UITabBarAppearance()
-                tabBarAppearance.configureWithDefaultBackground()
-                UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
-            }
+//            if #available(iOS 15.0, *) {
+//                let tabBarAppearance = UITabBarAppearance()
+//                tabBarAppearance.configureWithDefaultBackground()
+//                UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+//            }
         }
         .onChange(of: selectedTab){
             if selectedTab == 1 {

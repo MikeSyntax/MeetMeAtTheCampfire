@@ -14,7 +14,6 @@ struct SettingsScreenView: View {
     var body: some View {
         NavigationStack{
             VStack{
-                Text("Settings!")
                 Spacer()
                 Button{
                     isDark.toggle()
@@ -26,7 +25,7 @@ struct SettingsScreenView: View {
                 Spacer()
             }
             .toolbar{
-                Button("cancel"){
+                Button("abbrechen"){
                     dismiss()
                 }
             }
@@ -36,7 +35,7 @@ struct SettingsScreenView: View {
                     .resizable()
                     .scaledToFill()
                     .opacity(0.2)
-                    .ignoresSafeArea())
+                    .ignoresSafeArea(.all))
         }
         .environment(\.colorScheme, isDark ? .dark : .light)
     }

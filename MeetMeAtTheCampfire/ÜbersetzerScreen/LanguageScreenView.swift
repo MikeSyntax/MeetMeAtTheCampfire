@@ -53,7 +53,7 @@ struct LanguageScreenView: View {
                                 Spacer()
                                 Text("\(selectionLanguage.name)")
                             }
-                            .frame(maxWidth: .infinity, alignment: .center)
+                            .frame(maxWidth: .infinity, minHeight: 70, alignment: .center)
                         }
                         Section(header: Text("Übersetzung").foregroundStyle(.black)){
                             TextField("Übersetzung", text: $languageVm.translatedText, axis: .vertical)
@@ -73,8 +73,7 @@ struct LanguageScreenView: View {
                     .resizable()
                     .scaledToFill()
                     .opacity(0.2)
-                    .ignoresSafeArea())
-            
+                    .ignoresSafeArea(.all))
             .navigationTitle("Übersetzer")
         }
         .onAppear {

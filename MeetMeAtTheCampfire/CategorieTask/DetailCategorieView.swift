@@ -66,9 +66,9 @@ struct DetailCategorieView: View {
                 .resizable()
                 .scaledToFill()
                 .opacity(0.2)
-                .ignoresSafeArea())
+                .ignoresSafeArea(.all))
         
-        .navigationBarTitle("Kategorie ToDo´s", displayMode: .inline)
+        .navigationBarTitle("Kategorie ToDo´s")
         .alert("Neuen Task erstellen", isPresented: $showNewTaskAlert) {
             if SettingsScreenView().isDark {
                 TextField("Beschreibung", text: $newTask)

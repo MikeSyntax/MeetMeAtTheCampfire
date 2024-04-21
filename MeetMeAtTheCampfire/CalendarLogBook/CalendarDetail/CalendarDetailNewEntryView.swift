@@ -18,6 +18,7 @@ struct CalendarDetailNewEntryView: View {
     var body: some View {
         NavigationStack{
             VStack{
+                Divider()
                 ScrollView{
                     VStack{
                         Text("1. Wähle Deinen aktuellen Standort")
@@ -75,20 +76,20 @@ struct CalendarDetailNewEntryView: View {
                     dismiss()
                 }
             }
+            .toolbar{
+                Button("abbrechen"){
+                    dismiss()
+                }
+            }
+            .navigationTitle("Neuer Logbuch Eintrag")
+            .navigationBarTitleDisplayMode(.inline)
             .scrollContentBackground(.hidden)
             .background(
                 Image("background")
                     .resizable()
                     .scaledToFill()
                     .opacity(0.2)
-                    .ignoresSafeArea())
-            .navigationTitle("Neuer Logbuch Eintrag")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar{
-                Button("abbrechen"){
-                    dismiss()
-                }
-            }
+                    .ignoresSafeArea(.all))
         }
         .onAppear {
             calendarDetailItemVm.requestLocation()
@@ -96,6 +97,7 @@ struct CalendarDetailNewEntryView: View {
         .sheet(isPresented: $showImagePicker, onDismiss: nil) {
             ImagePicker(selectedImage: $calendarDetailItemVm.selectedImage, showImagePicker: $showImagePicker)
         }
+        .toolbar(.hidden, for: .tabBar)
     }
 }
 

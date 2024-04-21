@@ -6,7 +6,8 @@
 //
 
 //Aufgaben
-
+//Die Monate sind nicht alle auf Deutsch
+//Koordinaten für die eigene Location mit var anlegen um diese beim ersten Mal einzugeben
 //Task für die Kategorien einbauen ERLEDIGT-----------------------------------------------------------------------------------------------------------
 //Anzeige der ungelesenen Nachrichten. ERLEDIGT-------------------------------------------------------------------------------------------------------
 //Die Sprache aus dem Picker wird nicht geändert. ERLEDIGT--------------------------------------------------------------------------------------------
@@ -31,6 +32,104 @@
 //AsyncImage mit Url nicht und mit UIImage in Storage speichern
 //Höhe des Feldes für die Übersetzung
 
+
+
+//MARK ----
+
+//struct CalendarYearlyView: View {
+//
+//    @State private var year = Date().getFirstDateOfYear()
+//    @State private var scrollPosition: Int? = nil
+//
+//    var body: some View {
+//        NavigationStack{
+//            VStack{
+//                Divider()
+//                ScrollView {
+//                    VStack{
+//                        WeekdayHeaderView()
+//                        ForEach(year.getAllMonths(), id:  \.self) { month in
+//                            CalendarMonthlyView(month: month)
+//                                .id(month.get(.month))
+//                        }
+//                    }
+//                }
+//            }
+//            .toolbar {
+//                ToolbarItem(placement: .topBarTrailing){
+//                    YearSwitcher(year: $year)
+//                }
+//            }
+//            .onAppear {
+//                scrollPosition = Int(Date().get(.month))
+//            }
+//            .scrollPosition(id: $scrollPosition)
+//            .navigationTitle("Logbuch \(CalendarUtils.getYearCaption(year))")
+//            .scrollContentBackground(.hidden)
+//            .background(
+//                Image("background")
+//                    .resizable()
+//                    .scaledToFill()
+//                    .opacity(0.2)
+//                    .ignoresSafeArea(.all))
+//        }
+//    }
+//}
+//
+//#Preview{
+//    CalendarYearlyView()
+//}
+//
+//private struct WeekdayHeaderView: View {
+//
+//    private var weekdays = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]
+//    let columns = Array(repeating: GridItem(.flexible()), count: 7)
+//
+//    var body: some View{
+//        LazyVGrid(columns: columns, spacing: 25){
+//            ForEach(weekdays, id: \.self) { weekday in
+//                Text(weekday)
+//            }
+//        }
+//    }
+//}
+//
+//private struct YearSwitcher: View {
+//    @Binding var year: Date
+//
+//    var body: some View{
+//        HStack{
+//            Button("-"){
+//                year = year.getPreviousYear()
+//            }
+//            Text(CalendarUtils.getYearCaption(year))
+//            Button("+"){
+//                year = year.getNextYear()
+//            }
+//        }
+//    }
+//}
+
+
+//if #available(iOS 15.0, *) {
+//    let tabBarAppearance = UITabBarAppearance()
+//    tabBarAppearance.backgroundColor = UIColor.clear // Setze die Hintergrundfarbe auf cyan
+//    UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+//}
+
+// Aus der CalendarDeteilItemView für die edit Funktion
+//            .toolbar {
+//                ToolbarItem(placement: .navigationBarTrailing) {
+//                    Button {
+//                        calendarDetailItemVm.updateLogBookText()
+//                    } label: {
+//                        Text("Edit")
+//                        Image(systemName: "pencil")
+//                            .font(.caption)
+//                            .bold()
+//                    }
+//                }
+//            }
 
 //import SwiftUI
 //

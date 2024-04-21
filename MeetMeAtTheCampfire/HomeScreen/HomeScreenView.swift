@@ -14,8 +14,8 @@ struct HomeScreenView: View {
     
     @State private var showNewCategorieAlert = false
     @State private var newCategorie = ""
-    @State private var showSettingsSheet = false
-    @State private var showAnimation = false
+    @State private var showSettingsSheet: Bool = false
+    @State private var showAnimation: Bool = false
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
@@ -101,7 +101,7 @@ struct HomeScreenView: View {
                     .resizable()
                     .scaledToFill()
                     .opacity(0.2)
-                    .ignoresSafeArea())
+                    .ignoresSafeArea(.all))
             .navigationBarTitle("Meine Kategorien")
         }
         .alert("Neue Kategorie", isPresented: $showNewCategorieAlert) {

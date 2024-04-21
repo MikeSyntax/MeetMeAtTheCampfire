@@ -66,10 +66,7 @@
 		2BAB62502B95D79800C7839E /* CategorieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAB624F2B95D79800C7839E /* CategorieViewModel.swift */; };
 		2BAB62532B95DDC600C7839E /* CategorieFilledView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAB62522B95DDC600C7839E /* CategorieFilledView.swift */; };
 		2BAB62552B95E04900C7839E /* CategorieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAB62542B95E04900C7839E /* CategorieModel.swift */; };
-		2BB2B0312BA839930003CFE2 /* CalendarDailyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB2B0302BA839930003CFE2 /* CalendarDailyView.swift */; };
 		2BB2B0332BA83A3A0003CFE2 /* CalendarExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB2B0322BA83A3A0003CFE2 /* CalendarExtensions.swift */; };
-		2BB2B0372BA841D50003CFE2 /* CalendarMonthlyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB2B0362BA841D50003CFE2 /* CalendarMonthlyView.swift */; };
-		2BB2B0392BA843B60003CFE2 /* CalendarUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB2B0382BA843B60003CFE2 /* CalendarUtils.swift */; };
 		2BB2B03B2BA84BA20003CFE2 /* CalendarYearlyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB2B03A2BA84BA20003CFE2 /* CalendarYearlyView.swift */; };
 		2BB2B03D2BA84F1F0003CFE2 /* CalendarYearExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB2B03C2BA84F1F0003CFE2 /* CalendarYearExtensions.swift */; };
 		2BBC150A2B9B5BF400305504 /* ToDoListe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBC15092B9B5BF400305504 /* ToDoListe.swift */; };
@@ -131,10 +128,7 @@
 		2BAB624F2B95D79800C7839E /* CategorieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorieViewModel.swift; sourceTree = "<group>"; };
 		2BAB62522B95DDC600C7839E /* CategorieFilledView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorieFilledView.swift; sourceTree = "<group>"; };
 		2BAB62542B95E04900C7839E /* CategorieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorieModel.swift; sourceTree = "<group>"; };
-		2BB2B0302BA839930003CFE2 /* CalendarDailyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDailyView.swift; sourceTree = "<group>"; };
 		2BB2B0322BA83A3A0003CFE2 /* CalendarExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarExtensions.swift; sourceTree = "<group>"; };
-		2BB2B0362BA841D50003CFE2 /* CalendarMonthlyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarMonthlyView.swift; sourceTree = "<group>"; };
-		2BB2B0382BA843B60003CFE2 /* CalendarUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarUtils.swift; sourceTree = "<group>"; };
 		2BB2B03A2BA84BA20003CFE2 /* CalendarYearlyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarYearlyView.swift; sourceTree = "<group>"; };
 		2BB2B03C2BA84F1F0003CFE2 /* CalendarYearExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarYearExtensions.swift; sourceTree = "<group>"; };
 		2BBC15092B9B5BF400305504 /* ToDoListe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListe.swift; sourceTree = "<group>"; };
@@ -319,8 +313,6 @@
 		2B55614D2BAB09D60028C6E5 /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
-				2BB2B0302BA839930003CFE2 /* CalendarDailyView.swift */,
-				2BB2B0362BA841D50003CFE2 /* CalendarMonthlyView.swift */,
 				2BB2B03A2BA84BA20003CFE2 /* CalendarYearlyView.swift */,
 				2BB2B0402BA864F40003CFE2 /* CalendarComponents */,
 			);
@@ -398,7 +390,6 @@
 			children = (
 				2BB2B0322BA83A3A0003CFE2 /* CalendarExtensions.swift */,
 				2BB2B03C2BA84F1F0003CFE2 /* CalendarYearExtensions.swift */,
-				2BB2B0382BA843B60003CFE2 /* CalendarUtils.swift */,
 			);
 			path = CalendarComponents;
 			sourceTree = "<group>";
@@ -656,13 +647,11 @@
 				2BAB62532B95DDC600C7839E /* CategorieFilledView.swift in Sources */,
 				2BB2B03D2BA84F1F0003CFE2 /* CalendarYearExtensions.swift in Sources */,
 				2B0158672B9789F20026CA84 /* DetailCategorieView.swift in Sources */,
-				2BB2B0392BA843B60003CFE2 /* CalendarUtils.swift in Sources */,
 				2B1738A12BAD80FC0043CAF0 /* CalendarDetailNewEntryView.swift in Sources */,
 				2B2779082B90810300779FB5 /* UserModel.swift in Sources */,
 				2BB2B0332BA83A3A0003CFE2 /* CalendarExtensions.swift in Sources */,
 				2B5561502BAB0A480028C6E5 /* CalendarDetailItemView.swift in Sources */,
 				2B2CEC5E2BD4558200348DD1 /* ProfileScreenViewModel.swift in Sources */,
-				2BB2B0312BA839930003CFE2 /* CalendarDailyView.swift in Sources */,
 				2BF4B97D2B9877D900C1AF1A /* ChatScreenView.swift in Sources */,
 				2B1738A32BAD82050043CAF0 /* MapKitNewEntryView.swift in Sources */,
 				2BBC15152B9B746000305504 /* LanguageError.swift in Sources */,
@@ -672,7 +661,6 @@
 				2BBC15192B9C614900305504 /* Translation.swift in Sources */,
 				2BBE46662BA1E04F002A11A2 /* DetailCategorieItemAddView.swift in Sources */,
 				2B5D19402B91DD3D004DB072 /* AuthenticationRepository.swift in Sources */,
-				2BB2B0372BA841D50003CFE2 /* CalendarMonthlyView.swift in Sources */,
 				2B511B302BA9D9A5004AEAD6 /* MapKitView.swift in Sources */,
 				2BBE46642BA1E032002A11A2 /* DetailCategorieViewModel.swift in Sources */,
 				2BBE46682BA1E1B7002A11A2 /* DetailCategorieItemFilledView.swift in Sources */,
@@ -846,9 +834,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = mikeSyntax.MeetMeAtTheCampfire;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -875,9 +866,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = mikeSyntax.MeetMeAtTheCampfire;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

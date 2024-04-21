@@ -18,6 +18,7 @@ struct CalendarDetailItemView: View {
     var body: some View {
         NavigationStack{
             VStack {
+                Divider()
                 Spacer()
                 VStack{
                     if SettingsScreenView().isDark {
@@ -47,7 +48,6 @@ struct CalendarDetailItemView: View {
                                     .stroke(Color.gray, lineWidth: 2)
                             )
                     }
-                    
                 }
                 Spacer()
                 ScrollView {
@@ -94,7 +94,6 @@ struct CalendarDetailItemView: View {
                         }
                     }
                 }
-                //Button displayed only wiht empty Logs
                 if calendarDetailItemVm.newEntryLogs.isEmpty || calendarDetailItemVm.newEntryLogs.contains(where: { $0.logBookText.isEmpty && $0.formattedDate == calendarDetailItemVm.formattedDate }){
                     ButtonTextAction(iconName: "plus", text: "Neuer Eintrag") {
                         withAnimation(.easeInOut(duration: 0.25)) {
@@ -106,36 +105,22 @@ struct CalendarDetailItemView: View {
                     .animation(.default, value: showAnimation)
                 }
             }
-            .onAppear {
-                calendarDetailItemVm.readLogBookText(formattedDate: calendarDetailItemVm.formattedDate)
-                showAnimation = true
-            }
-            .onDisappear {
-                calendarDetailItemVm.removeListener()
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        calendarDetailItemVm.updateLogBookText()
-                    } label: {
-                        Text("Edit")
-                        Image(systemName: "pencil")
-                            .font(.caption)
-                            .bold()
-                    }
-                }
-            }
             .scrollContentBackground(.hidden)
             .background(
                 Image("background")
                     .resizable()
                     .scaledToFill()
                     .opacity(0.2)
-                    .ignoresSafeArea(.all)
-            )
+                    .ignoresSafeArea(.all))
             .navigationTitle("Mein Logbuch")
             .navigationBarTitleDisplayMode(.inline)
-            
+        }
+        .onAppear {
+            calendarDetailItemVm.readLogBookText(formattedDate: calendarDetailItemVm.formattedDate)
+            showAnimation = true
+        }
+        .onDisappear {
+            calendarDetailItemVm.removeListener()
         }
         .sheet(isPresented: $showNewEntryView) {
             CalendarDetailNewEntryView(calendarDetailItemVm: calendarDetailItemVm)
@@ -144,6 +129,10 @@ struct CalendarDetailItemView: View {
     }
 }
 
+let logbookMod: LogBookModel = LogBookModel(userId: "1", formattedDate: "", logBookText: "Hallo", latitude: 0.0, longitude: 0.0, imageUrl: "", containsLogBookEntry: false)
 
+#Preview{
+    CalendarDetailItemView(calendarDetailItemVm: CalendarDetailItemViewModel(calendarItemModel: logbookMod, date: Date()))
+}
 
 

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CalendarYearlyView: View {
-
+    
     @State private var year = Date().getFirstDateOfYear()
     @State private var scrollPosition: Int? = nil
     
@@ -16,22 +16,16 @@ struct CalendarYearlyView: View {
         NavigationStack{
             VStack{
                 Divider()
+                WeekdayHeaderView()
                 ScrollView {
                     VStack{
-                        WeekdayHeaderView()
-                            .padding(.bottom)
-                            .padding(.top)
-                        
                         ForEach(year.getAllMonths(), id:  \.self) { month in
-                            CalendarMonthlyView(/*calendarDetailItemVm: calendarDetailItemVm, */month: month)
-                                .padding(.bottom, 50)
+                            CalendarMonthlyView(month: month)
                                 .id(month.get(.month))
-                            
-                            Divider()
-                                .background(.gray)
                         }
                     }
                 }
+                Divider()
             }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing){
@@ -49,23 +43,20 @@ struct CalendarYearlyView: View {
                     .resizable()
                     .scaledToFill()
                     .opacity(0.2)
-                    .ignoresSafeArea(.all)
-            )
+                    .ignoresSafeArea(.all))
         }
     }
 }
 
-#Preview{
-    CalendarYearlyView()
-}
+//MARK ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 private struct WeekdayHeaderView: View {
     
     private var weekdays = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]
     let columns = Array(repeating: GridItem(.flexible()), count: 7)
     
-    var body: some View{
-        LazyVGrid(columns: columns, spacing: 25){
+    var body: some View {
+        LazyVGrid(columns: columns, spacing: 25) {
             ForEach(weekdays, id: \.self) { weekday in
                 Text(weekday)
             }
@@ -73,18 +64,116 @@ private struct WeekdayHeaderView: View {
     }
 }
 
+//MARK ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+private struct CalendarMonthlyView: View {
+    
+    let columns = Array(repeating: GridItem(.flexible()), count: 7)
+    var month: Date
+    
+    var body: some View {
+        VStack {
+            Text(CalendarUtils.getMonthCaption(month))
+                .font(.title2)
+                .padding(.leading, 12)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            
+            LazyVGrid(columns: columns, spacing: 25) {
+                ForEach(0..<month.getWeekday(), id: \.self) { _ in
+                    Spacer()
+                }
+                ForEach(month.getAllDaysToNextMonth(), id: \.self){ day in
+                    NavigationLink(destination: NavigationLazyView(destinationView(for: day))) {
+                        CalendarDailyView(date: day)
+                    }
+                }
+            }
+        }
+    }
+    private func destinationView(for date: Date) -> some View {
+        let calendarDetailItemVm = CalendarDetailItemViewModel(calendarItemModel: LogBookModel(userId: "1", formattedDate: "123", logBookText: "", latitude: 0.47586, longitude: 0.883626, imageUrl: "", containsLogBookEntry: false), date: date)
+        return CalendarDetailItemView(calendarDetailItemVm: calendarDetailItemVm)
+    }
+}
+
+//MARK ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+struct NavigationLazyView<Content: View>: View {
+    let build: () -> Content
+    init(_ build: @autoclosure @escaping () -> Content) {
+        self.build = build
+    }
+    var body: Content {
+        build()
+    }
+}
+
+//MARK ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+private struct CalendarDailyView: View {
+    
+    var date: Date
+    let weekendColor = Color.gray
+    
+    var body: some View {
+        Text("\(date.get(.day))")
+            .foregroundStyle(date.isWeekend() ? weekendColor : .primary)
+            .background {
+                if date.isToday() {
+                    Circle()
+                        .frame(width: 30, height: 30)
+                        .foregroundColor(.red)
+                }
+            }
+    }
+}
+
+//MARK ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 private struct YearSwitcher: View {
+    
     @Binding var year: Date
     
-    var body: some View{
-        HStack{
-            Button("-"){
+    var body: some View {
+        HStack {
+            Button("-") {
                 year = year.getPreviousYear()
             }
             Text(CalendarUtils.getYearCaption(year))
-            Button("+"){
+            Button("+") {
                 year = year.getNextYear()
             }
         }
+    }
+}
+
+//MARK ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+class CalendarUtils {
+    
+    //Monats Formatter
+    private static var monthFormatter = createMonthFormatter()
+    
+    static func getMonthCaption(_ date: Date) -> String {
+        return monthFormatter.string(from: date)
+    }
+    
+    private static func createMonthFormatter() -> DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMMM"
+        return formatter
+    }
+    
+    //Jahr Formatter
+    private static var yearFormatter = createYearFormatter()
+    
+    static func getYearCaption(_ date: Date) -> String {
+        return yearFormatter.string(from: date)
+    }
+    
+    private static func createYearFormatter() -> DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy"
+        return formatter
     }
 }

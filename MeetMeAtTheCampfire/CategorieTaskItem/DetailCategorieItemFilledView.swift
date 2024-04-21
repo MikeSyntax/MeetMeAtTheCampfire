@@ -9,12 +9,10 @@ import SwiftUI
 
 struct DetailCategorieItemFilledView: View {
     @ObservedObject var detailCategorieItemVm: DetailCategorieItemViewModel
-    @State private var bgColor: [Color] = [.blue, .green, .yellow, .red, .pink, .brown]
+    @State private var bgColor: [Color] = [.blue, .green, .yellow, .red, .pink, .brown, .orange, .purple, .cyan, .gray, .mint, .indigo]
     
     
     var body: some View {
-        
-        let color = bgColor.randomElement()
         RoundedRectangle(cornerRadius: 10)
             .fill(Color.white).opacity(0.7)
             .padding(4)
@@ -37,7 +35,7 @@ struct DetailCategorieItemFilledView: View {
                     .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
             )
             .lineLimit(1)
-            .background(color)
+            .background(bgColor.randomElement())
             .shadow(radius: 10)
             .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
     }

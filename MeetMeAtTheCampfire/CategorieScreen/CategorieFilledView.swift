@@ -11,13 +11,11 @@ struct CategorieFilledView: View {
     
     @ObservedObject var categorieVm: CategorieViewModel
     @ObservedObject var detailCategorieVm: DetailCategorieViewModel
-    @State private var bgColor: [Color] = [.blue, .green, .yellow, .red, .pink, .brown]
+    @State private var bgColor: [Color] = [.blue, .green, .yellow, .red, .pink, .brown, .orange, .purple, .cyan, .gray, .mint, .indigo]
     
     var body: some View {
-        
-        let color = bgColor.randomElement()
         RoundedRectangle(cornerRadius: 10)
-            .fill(color ?? .white).opacity(0.7)
+            .fill(bgColor.randomElement() ?? .white).opacity(0.7)
             .frame(width: 100, height: 100)
             .overlay(
                 VStack{
@@ -26,7 +24,7 @@ struct CategorieFilledView: View {
                         .multilineTextAlignment(.center)
                         .foregroundColor(.black)
                         .padding(EdgeInsets(top: 0, leading: 2, bottom: 0, trailing: 2))
-                    Spacer() // Fügt den verbleibenden Platz ein
+                    Spacer()
                     Divider()
                     Text(String( categorieVm.tasksInCategorie ))
                         .padding(8)

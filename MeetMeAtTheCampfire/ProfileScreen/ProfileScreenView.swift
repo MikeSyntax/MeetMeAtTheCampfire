@@ -32,6 +32,7 @@ struct ProfileScreenView: View {
                         Spacer()
                         HStack{
                             Text(userName)
+                                .bold()
                             Spacer()
                             Text(userEmail)
                         }
@@ -40,6 +41,7 @@ struct ProfileScreenView: View {
                         HStack{
                             Text("Id: \(FirebaseManager.shared.userId ?? "no user Id")")
                                 .underline()
+                                .font(.caption)
                         }
                         .frame(width: 300, alignment: .leading)
                     }
@@ -73,13 +75,13 @@ struct ProfileScreenView: View {
                     Image(systemName: "door.left.hand.open")
                 }
             }
-            .navigationBarTitle("Profil")
+            .navigationBarTitle("Mein Profil")
             .background(
                 Image("background")
                     .resizable()
                     .scaledToFill()
                     .opacity(0.2)
-                    .ignoresSafeArea())
+                    .ignoresSafeArea(.all))
         }
         .onAppear{
             profileScreenVm.readLikedMessages()

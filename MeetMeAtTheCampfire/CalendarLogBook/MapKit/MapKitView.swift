@@ -13,14 +13,18 @@ struct MapKitView: View {
     var body: some View {
         VStack{
             Map {
-                Marker("Home", coordinate: CLLocationCoordinate2D(latitude: 49.0069, longitude: 8.40))
-                    .tint(.orange)
-                
+                Annotation("zuHause", coordinate: CLLocationCoordinate2D(latitude: 49.0069, longitude: 8.40)) {
+                                    ZStack {
+                                        Image(systemName: "mappin.and.ellipse")
+                                            .foregroundColor(.red)
+                                            .font(.system(size: 20))
+                                    }
+                                }
                 Annotation("Hier war ich", coordinate: CLLocationCoordinate2D(latitude: calendarDetailItemVm.latitude, longitude: calendarDetailItemVm.longitude)) {
                     ZStack {
-                        RoundedRectangle(cornerRadius: 5)
-                            .fill(Color.red)
-                        Image(systemName: "car.side")
+                        Image(systemName: "figure.wave")
+                            .foregroundColor(.red)
+                            
                     }
                 }
             }
