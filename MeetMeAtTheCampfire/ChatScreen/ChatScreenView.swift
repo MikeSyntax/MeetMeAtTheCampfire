@@ -14,7 +14,6 @@ struct ChatScreenView: View {
     @EnvironmentObject var authVm: AuthViewModel
     @State private var newMessage: String = ""
     @State private var matchingChatIds: [String] = []
-    @State private var scrollPosition: Int? = nil
     
     var body: some View {
         let userName = authVm.user?.userName ?? "User name unknown"
@@ -37,7 +36,6 @@ struct ChatScreenView: View {
                             }
                         }
                         .onChange(of: chatVm.chatSenderViewModels) {
-                            // if let lastMessageId = chatVm.chatSenderViewModels.last?.isReadbyUser.last {
                             if chatVm.searchTerm.isEmpty {
                                 if let lastMessageId = chatVm.chatSenderViewModels.last?.id {
                                     scrollView.scrollTo(lastMessageId, anchor: .bottom)
@@ -53,7 +51,6 @@ struct ChatScreenView: View {
                                 if !matchingChatIds.isEmpty {
                                     if let firstMatchingId = matchingChatIds.first {
                                         let filteredChats = chatVm.chatSenderViewModels.filter { $0.chatSenderVm.id == firstMatchingId }
-                                        chatVm.chatSenderViewModels = filteredChats
                                         if let firstFilteredChat = filteredChats.first {
                                             scrollView.scrollTo(firstFilteredChat.id, anchor: .top)
                                         }
@@ -69,6 +66,11 @@ struct ChatScreenView: View {
                     .frame(height: 5)
                 HStack {
                     TextField("Neue Nachricht", text: $newMessage)
+                        .onChange(of: newMessage) { newValue, _ in
+                            if newValue.count > 500 {
+                                newMessage = String(newValue.prefix(500))
+                            }
+                        }
                         .textFieldStyle(.roundedBorder)
                         .autocorrectionDisabled()
                         .padding(0)
@@ -100,7 +102,10 @@ struct ChatScreenView: View {
         .onDisappear{
             chatVm.removeListener()
         }
-        .searchable(text: $chatVm.searchTerm)
+        .searchable(text: Binding(
+            get: { chatVm.searchTerm },
+            set: { chatVm.searchTerm = $0.lowercased() }
+        ))
     }
 }
 

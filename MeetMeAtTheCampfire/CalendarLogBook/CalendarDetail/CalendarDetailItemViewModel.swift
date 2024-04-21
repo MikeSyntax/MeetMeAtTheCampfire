@@ -88,7 +88,7 @@ class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManager
             
             fileRef.downloadURL { url, error in
                 guard let imageUrl = url?.absoluteString else {
-                    print("URL WAR KACKE")
+                    print("bad url request")
                     return
                 }
                 self.imageUrl = imageUrl

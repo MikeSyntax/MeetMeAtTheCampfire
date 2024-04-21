@@ -9,7 +9,6 @@ import SwiftUI
 
 struct CalendarYearlyView: View {
 
-    //@ObservedObject var calendarDetailItemVm: CalendarDetailItemViewModel
     @State private var year = Date().getFirstDateOfYear()
     @State private var scrollPosition: Int? = nil
     

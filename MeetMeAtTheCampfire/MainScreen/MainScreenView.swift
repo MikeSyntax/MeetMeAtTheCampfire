@@ -38,7 +38,7 @@ struct MainScreenView: View {
                 .badge(chatVm.messageCountResult)
                 .tag(1)
             
-            CalendarYearlyView(/*calendarDetailItemVm: calendarDetailItemVm*/)
+            CalendarYearlyView()
                 .tabItem {
                     Image(systemName: selectedTab == 2 ? "book":"book.closed")
                     Text("Logbuch")
@@ -75,7 +75,3 @@ struct MainScreenView: View {
         }
     }
 }
-
-//    @StateObject var calendarDetailItemVm = CalendarDetailItemViewModel(calendarItemModel: LogBookModel(userId: "1", formattedDate: "123", logBookText: "", latitude: 0.47586, longitude: 0.883626, imageUrl: "", containsLogBookEntry: false), date: Date())
-    
-    //Immer mit der HomeScreenView anfangen

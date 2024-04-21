@@ -32,6 +32,79 @@
 //Höhe des Feldes für die Übersetzung
 
 
+//import SwiftUI
+//
+//struct CalendarMonthlyView: View {
+//
+//    @ObservedObject var calendarDetailItemVm: CalendarDetailItemViewModel
+//    let columns = Array(repeating: GridItem(.flexible()), count: 7)
+//    var month: Date
+//
+//    var body: some View {
+//        VStack{
+//            Text(CalendarUtils.getMonthCaption(month))
+//                .font(.title2)
+//                .padding(.leading, 12)
+//                .frame(maxWidth: .infinity, alignment: .leading)
+//
+//            LazyVGrid(columns: columns, spacing: 25) {
+//                ForEach(0..<month.getWeekday(), id: \.self) { _ in
+//                    Spacer()
+//                }
+//
+//                ForEach(month.getAllDaysToNextMonth(), id: \.self){ day in
+//                    NavigationLink(destination: CalendarDetailItemView(calendarDetailItemVm: CalendarDetailItemViewModel(calendarItemModel: LogBookModel(userId: calendarDetailItemVm.userId, formattedDate: calendarDetailItemVm.formattedDate, logBookText: calendarDetailItemVm.logBookText, latitude: calendarDetailItemVm.latitude, longitude: calendarDetailItemVm.longitude, imageUrl: calendarDetailItemVm.imageUrl, containsLogBookEntry: calendarDetailItemVm.containsLogBookEntry), date: day))) {
+//                        CalendarDailyView(date: day)
+//                    }
+//                }
+//            }
+//        }
+//    }
+//}
+
+
+
+//    @State private var searchAlertIsShowed: Bool = false
+
+//            .toolbar {
+//                Button{
+//                    searchAlertIsShowed.toggle()
+//                } label: {
+//                    Text("Suche")
+//                    Image(systemName: "magnifyingglass")
+//                }
+//            }
+//            .alert("Neue Chatsuche", isPresented: $searchAlertIsShowed) {
+//                if SettingsScreenView().isDark {
+//                    TextField("Suchtext", text: Binding(
+//                        get: { chatVm.searchTerm },
+//                        set: { chatVm.searchTerm = $0.lowercased() }
+//                    ))
+//                    .lineLimit(1)
+//                    .foregroundColor(.black)
+//                    .textInputAutocapitalization(.never)
+//                    .autocorrectionDisabled()
+//                    Button("zurück") {
+//                        searchAlertIsShowed.toggle()
+//                        chatVm.searchTerm = ""
+//                    }
+//                } else {
+//                    TextField("Suchtext", text: Binding(
+//                        get: { chatVm.searchTerm },
+//                        set: { chatVm.searchTerm = $0.lowercased() }
+//                    ))
+//                    .lineLimit(1)
+//                    .foregroundColor(.black)
+//                    .textInputAutocapitalization(.never)
+//                    .autocorrectionDisabled()
+//                    Button("zurück") {
+//                        searchAlertIsShowed.toggle()
+//                        chatVm.searchTerm = ""
+//                    }
+//                }
+//            }
+
+
 //            .toolbar {
 //                Button{
 //                    //todo Search

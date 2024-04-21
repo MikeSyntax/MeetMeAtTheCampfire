@@ -31,14 +31,17 @@ struct LanguageScreenView: View {
                         }
                         Section(header: Text("Text eingeben").foregroundStyle(.black)){
                             TextField("Texteingabe für die Übersetzung", text: $languageVm.textToTranslate, axis: .vertical)
+                                .onChange(of: languageVm.textToTranslate) { newValue, _ in
+                                    if newValue.count > 300 {
+                                        languageVm.textToTranslate = String(newValue.prefix(300))
+                                    }
+                                }
                                 .shadow(color: .cyan, radius: 2)
                                 .textInputAutocapitalization(.never)
                                 .autocorrectionDisabled()
                                 .lineLimit(1...5)
-                                .scaleEffect(x: 80, y: 80)
                                 .textFieldStyle(.roundedBorder)
                                 .frame(minHeight: 40)
-                                .scrollContentBackground(.hidden)
                         }
                         Section(header: Text("Es wird übersetzt von").foregroundStyle(.black)){
                             HStack{
