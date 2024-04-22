@@ -17,7 +17,7 @@ struct CategorieAddView: View {
             .padding(4)
             .overlay(
                 VStack{
-                    Text("Add new")
+                    Text("Neu")
                         .padding(2)
                         .foregroundColor(.gray)
                         .bold()

@@ -18,7 +18,7 @@ struct SettingsScreenView: View {
                 Button{
                     isDark.toggle()
                 }label: {
-                    isDark ? Label("Lightmode", systemImage: "lightbulb.fill") : Label("Darkmode", systemImage: "lightbulb")
+                    isDark ? Label("Hell", systemImage: "lightbulb.fill") : Label("Dunkel", systemImage: "lightbulb")
                 }
                 .buttonStyle(.borderedProminent)
                 .offset(x: 0, y: -150)
@@ -29,7 +29,7 @@ struct SettingsScreenView: View {
                     dismiss()
                 }
             }
-            .navigationTitle("Settings")
+            .navigationBarTitle("Einstellungen", displayMode: .inline)
             .background(
                 Image("background")
                     .resizable()

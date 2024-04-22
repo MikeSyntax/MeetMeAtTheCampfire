@@ -44,7 +44,7 @@ struct DetailCategorieView: View {
                 Button(role: .destructive) {
                     detailCategorieVm.deleteTask(categorieId: categorieVm.categorieViewModel.id)
                 } label: {
-                    Text("Erledigte Tasks löschen")
+                    Text("Erledigte ToDo´s löschen")
                     Image(systemName: "trash")
                 }
                 .buttonStyle(.borderedProminent)
@@ -68,15 +68,15 @@ struct DetailCategorieView: View {
                 .opacity(0.2)
                 .ignoresSafeArea(.all))
         
-        .navigationBarTitle("Kategorie ToDo´s")
-        .alert("Neuen Task erstellen", isPresented: $showNewTaskAlert) {
+        .navigationBarTitle("Kategorie ToDo´s", displayMode: .inline)
+        .alert("Neues ToDo erstellen", isPresented: $showNewTaskAlert) {
             if SettingsScreenView().isDark {
                 TextField("Beschreibung", text: $newTask)
                     .lineLimit(1)
                     .foregroundColor(.black)
                     .textInputAutocapitalization(.never)
                     .autocorrectionDisabled()
-                Button("zurück") {
+                Button("Zurück") {
                     showNewTaskAlert.toggle()
                 }
                 Button("Speichern") {
@@ -89,7 +89,7 @@ struct DetailCategorieView: View {
                     .foregroundColor(.black)
                     .textInputAutocapitalization(.never)
                     .autocorrectionDisabled()
-                Button("zurück") {
+                Button("Zurück") {
                     showNewTaskAlert.toggle()
                 }
                 Button("Speichern") {

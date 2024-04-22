@@ -74,7 +74,7 @@ struct LanguageScreenView: View {
                     .scaledToFill()
                     .opacity(0.2)
                     .ignoresSafeArea(.all))
-            .navigationTitle("Übersetzer")
+            .navigationBarTitle("Übersetzer", displayMode: .inline)
         }
         .onAppear {
             languageVm.loadLanguages()

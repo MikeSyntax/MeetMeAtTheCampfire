@@ -87,7 +87,7 @@ struct ChatScreenView: View {
                 Divider()
                     .padding(EdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0))
             }
-            .navigationTitle("Chat")
+            .navigationBarTitle("Mein Chat", displayMode: .inline)
             .background(
                 Image("background")
                     .resizable()
@@ -105,7 +105,7 @@ struct ChatScreenView: View {
         .searchable(text: Binding(
             get: { chatVm.searchTerm },
             set: { chatVm.searchTerm = $0.lowercased() }
-        ))
+        ), prompt: "Suche")
     }
 }
 

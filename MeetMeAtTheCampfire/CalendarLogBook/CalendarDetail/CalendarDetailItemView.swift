@@ -18,7 +18,6 @@ struct CalendarDetailItemView: View {
     var body: some View {
         NavigationStack{
             VStack {
-                Divider()
                 Spacer()
                 VStack{
                     if SettingsScreenView().isDark {
@@ -104,6 +103,7 @@ struct CalendarDetailItemView: View {
                     .transition(.move(edge: .bottom))
                     .animation(.default, value: showAnimation)
                 }
+                Spacer()
             }
             .scrollContentBackground(.hidden)
             .background(
@@ -112,8 +112,7 @@ struct CalendarDetailItemView: View {
                     .scaledToFill()
                     .opacity(0.2)
                     .ignoresSafeArea(.all))
-            .navigationTitle("Mein Logbuch")
-            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarTitle("Mein Logbuch", displayMode: .inline)
         }
         .onAppear {
             calendarDetailItemVm.readLogBookText(formattedDate: calendarDetailItemVm.formattedDate)

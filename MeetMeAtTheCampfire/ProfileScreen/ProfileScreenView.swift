@@ -71,11 +71,11 @@ struct ProfileScreenView: View {
                     authVm.logout()
                   //  onLogout?()
                 } label: {
-                    Text("Logout")
+                    Text("Ausloggen")
                     Image(systemName: "door.left.hand.open")
                 }
             }
-            .navigationBarTitle("Mein Profil")
+            .navigationBarTitle("Mein Profil", displayMode: .inline)
             .background(
                 Image("background")
                     .resizable()

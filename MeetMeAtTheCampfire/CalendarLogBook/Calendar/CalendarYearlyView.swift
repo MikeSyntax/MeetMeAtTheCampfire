@@ -36,7 +36,7 @@ struct CalendarYearlyView: View {
                 scrollPosition = Int(Date().get(.month))
             }
             .scrollPosition(id: $scrollPosition)
-            .navigationTitle("Logbuch \(CalendarUtils.getYearCaption(year))")
+            .navigationBarTitle("Logbuch \(CalendarUtils.getYearCaption(year))", displayMode: .inline)
             .scrollContentBackground(.hidden)
             .background(
                 Image("background")

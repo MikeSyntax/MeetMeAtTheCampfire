@@ -54,7 +54,7 @@ struct HomeScreenView: View {
                                         .clipShape(Circle())
                                 }
                             }
-                            .offset(x: 0, y: -250)
+                            .offset(x: 0, y: -300)
                         }
                         VStack{
                             if homeVm.categorieViewModels.isEmpty {
@@ -92,7 +92,7 @@ struct HomeScreenView: View {
                 Button {
                     showSettingsSheet.toggle()
                 } label: {
-                    Text("Settings")
+                    Text("Einstellungen")
                     Image(systemName: "gearshape")
                 }
             }
@@ -102,7 +102,7 @@ struct HomeScreenView: View {
                     .scaledToFill()
                     .opacity(0.2)
                     .ignoresSafeArea(.all))
-            .navigationBarTitle("Meine Kategorien")
+            .navigationBarTitle("Meine Kategorien", displayMode: .inline)
         }
         .alert("Neue Kategorie", isPresented: $showNewCategorieAlert) {
             if SettingsScreenView().isDark {
@@ -111,7 +111,7 @@ struct HomeScreenView: View {
                     .foregroundColor(.black)
                     .textInputAutocapitalization(.never)
                     .autocorrectionDisabled()
-                Button("zurück") {
+                Button("Zurück") {
                     dismiss()
                 }
                 Button("Speichern") {
@@ -124,7 +124,7 @@ struct HomeScreenView: View {
                     .foregroundColor(.black)
                     .textInputAutocapitalization(.never)
                     .autocorrectionDisabled()
-                Button("zurück") {
+                Button("Zurück") {
                     dismiss()
                 }
                 Button("Speichern") {

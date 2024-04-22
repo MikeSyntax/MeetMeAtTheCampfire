@@ -14,7 +14,7 @@ struct DetailCategorieItemAddView: View {
             .padding(4)
             .overlay(
                 HStack{
-                    Text("Add ToDo")
+                    Text("Neues ToDo")
                         .lineLimit(2)
                         .foregroundColor(.gray)
                         .bold()
