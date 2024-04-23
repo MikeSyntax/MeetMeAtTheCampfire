@@ -21,70 +21,89 @@ struct RegisterView: View {
                     .italic()
                     .bold()
                     .foregroundStyle(.gray)
-                
-                ZStack(alignment: .trailing){
-                    TextField("Benutzernamen eingeben", text: $authVM.userName)
-                        .textFieldStyle(.roundedBorder)
-                        .textInputAutocapitalization(.never)
-                        .autocorrectionDisabled()
+                VStack(alignment: .leading){
+                    Text("Benutzername")
+                        .font(.system(size: 10))
+                        .foregroundColor(.black)
                         .padding(.leading)
-                        .padding(.trailing)
-                    if !authVM.userName.isEmpty {
-                        if authVM.userName.count >= 2 {
-                            RightView()
-                        } else {
-                            FalseView()
+                    ZStack(alignment: .trailing){
+                        TextField("Benutzernamen eingeben", text: $authVM.userName)
+                            .textFieldStyle(.roundedBorder)
+                            .textInputAutocapitalization(.never)
+                            .autocorrectionDisabled()
+                            .padding(.leading)
+                            .padding(.trailing)
+                        if !authVM.userName.isEmpty {
+                            if authVM.userName.count >= 2 {
+                                RightView()
+                            } else {
+                                FalseView()
+                            }
                         }
                     }
                 }
-                
-                ZStack(alignment: .trailing){
-                    TextField("Email eingeben", text: $authVM.email)
-                        .textFieldStyle(.roundedBorder)
-                        .textInputAutocapitalization(.never)
-                        .autocorrectionDisabled()
+                Spacer()
+                VStack(alignment: .leading){
+                    Text("Email")
+                        .font(.system(size: 10))
+                        .foregroundColor(.black)
                         .padding(.leading)
-                        .padding(.trailing)
-                    if !authVM.email.isEmpty {
-                        if authVM.email.count >= 2 {
-                            RightView()
-                        } else {
-                            FalseView()
+                    ZStack(alignment: .trailing){
+                        TextField("Email eingeben", text: $authVM.email)
+                            .textFieldStyle(.roundedBorder)
+                            .textInputAutocapitalization(.never)
+                            .autocorrectionDisabled()
+                            .padding(.leading)
+                            .padding(.trailing)
+                        if !authVM.email.isEmpty {
+                            if authVM.email.count >= 2 {
+                                RightView()
+                            } else {
+                                FalseView()
+                            }
                         }
                     }
                 }
-                
-                Divider()
-                    .padding()
-                
-                ZStack(alignment: .trailing){
-                    SecureField("Passwort eingeben", text: $authVM.password)
-                        .textFieldStyle(.roundedBorder)
+                Spacer()
+                VStack(alignment: .leading){
+                    Text("Passwort")
+                        .font(.system(size: 10))
+                        .foregroundColor(.black)
                         .padding(.leading)
-                        .padding(.trailing)
-                    if !authVM.password.isEmpty {
-                        if authVM.password.count >= 6 {
-                            RightView()
-                        } else {
-                            FalseView()
+                    ZStack(alignment: .trailing){
+                        SecureField("Passwort eingeben", text: $authVM.password)
+                            .textFieldStyle(.roundedBorder)
+                            .padding(.leading)
+                            .padding(.trailing)
+                        if !authVM.password.isEmpty {
+                            if authVM.password.count >= 6 {
+                                RightView()
+                            } else {
+                                FalseView()
+                            }
                         }
                     }
                 }
-                
-                ZStack(alignment: .trailing){
-                    SecureField("Passwort wiederholen", text: $authVM.confirmPassword)
-                        .textFieldStyle(.roundedBorder)
+                Spacer()
+                VStack(alignment: .leading){
+                    Text("Passwort wiederholen")
+                        .font(.system(size: 10))
+                        .foregroundColor(.black)
                         .padding(.leading)
-                        .padding(.trailing)
-                    if (!authVM.confirmPassword.isEmpty) {
-                        if  (authVM.password == authVM.confirmPassword) {
-                            RightView()
-                        } else {
-                            FalseView()
+                    ZStack(alignment: .trailing){
+                        SecureField("Passwort wiederholen", text: $authVM.confirmPassword)
+                            .textFieldStyle(.roundedBorder)
+                            .padding(.leading)
+                            .padding(.trailing)
+                        if (!authVM.confirmPassword.isEmpty) {
+                            if  (authVM.password == authVM.confirmPassword) {
+                                RightView()
+                            } else {
+                                FalseView()
+                            }
                         }
                     }
                 }
-                
                 Divider()
                     .padding()
                 
@@ -103,7 +122,7 @@ struct RegisterView: View {
             }
             .padding()
             .toolbar(content: {
-                Button("zurück") {
+                Button("Zurück") {
                     showRegisterSheet.toggle()
                 }
             })

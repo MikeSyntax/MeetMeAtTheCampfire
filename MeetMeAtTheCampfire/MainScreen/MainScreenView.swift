@@ -50,7 +50,7 @@ struct MainScreenView: View {
                     Text("Übersetzer")
                 }.tag(3)
             
-            ProfileScreenView(/*onLogout: { selectedTab = 0 }*/profileScreenVm: profileScreenVm)
+            ProfileScreenView(profileScreenVm: profileScreenVm)
                 .tabItem {
                     Image(systemName: "person")
                     Text("Profil")
@@ -59,11 +59,6 @@ struct MainScreenView: View {
         .onAppear{
             selectedTab = 0
             chatVm.readMessages()
-//            if #available(iOS 15.0, *) {
-//                let tabBarAppearance = UITabBarAppearance()
-//                tabBarAppearance.configureWithDefaultBackground()
-//                UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
-//            }
         }
         .onChange(of: selectedTab){
             if selectedTab == 1 {
@@ -72,6 +67,9 @@ struct MainScreenView: View {
         }
         .onDisappear{
             authVm.updateUser()
+            chatVm.removeListener()
+            profileScreenVm.removeListener()
+            
         }
     }
 }

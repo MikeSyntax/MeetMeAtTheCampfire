@@ -22,7 +22,6 @@ struct DetailCategorieItemAddView: View {
                     Image(systemName: "plus")
                         .font(.title)
                         .foregroundColor(.gray)
-                    
                 }
                     .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
             )

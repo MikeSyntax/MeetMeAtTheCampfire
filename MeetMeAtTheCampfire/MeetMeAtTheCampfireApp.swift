@@ -17,6 +17,7 @@ struct MeetMeAtTheCampfireApp: App {
     init(){
         FirebaseConfiguration.shared.setLoggerLevel(.min)
         FirebaseApp.configure()
+        //UINavigationBar.appearance().setBackgroundImage(.background, for: .defaultPrompt)
     }
     
     var body: some Scene {
@@ -28,8 +29,8 @@ struct MeetMeAtTheCampfireApp: App {
                 LoginView()
                     .environmentObject(authVm)
             }
-            
         }
+        .environment(\.locale, .init(identifier: "de"))
     }
 }
 

@@ -66,6 +66,7 @@ struct LanguageScreenView: View {
                         }
                     }
                 }
+                Divider()
             }
             .scrollContentBackground(.hidden)
             .background(
@@ -87,5 +88,6 @@ struct LanguageScreenView: View {
 }
 
 #Preview {
-    LanguageScreenView(languageVm: LanguageScreenViewModel(languageChoice: Language(code: "de", name: "Deutsch"), languageSource: Language(code: "af", name: "Afrikaans")))
+    let languageVm = LanguageScreenViewModel(languageChoice: Language(code: "de", name: "Deutsch"), languageSource: Language(code: "af", name: "Afrikaans"))
+    return LanguageScreenView(languageVm: languageVm)
 }

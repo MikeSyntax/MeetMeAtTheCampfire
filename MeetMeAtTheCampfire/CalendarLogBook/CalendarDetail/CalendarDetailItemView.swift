@@ -103,13 +103,13 @@ struct CalendarDetailItemView: View {
                     .transition(.move(edge: .bottom))
                     .animation(.default, value: showAnimation)
                 }
-                Spacer()
             }
             .scrollContentBackground(.hidden)
             .background(
                 Image("background")
                     .resizable()
-                    .scaledToFill()
+                    .aspectRatio(contentMode: .fill)
+                    .edgesIgnoringSafeArea(.all)
                     .opacity(0.2)
                     .ignoresSafeArea(.all))
             .navigationBarTitle("Mein Logbuch", displayMode: .inline)
@@ -133,5 +133,4 @@ let logbookMod: LogBookModel = LogBookModel(userId: "1", formattedDate: "", logB
 #Preview{
     CalendarDetailItemView(calendarDetailItemVm: CalendarDetailItemViewModel(calendarItemModel: logbookMod, date: Date()))
 }
-
 

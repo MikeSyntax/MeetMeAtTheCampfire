@@ -53,10 +53,12 @@ struct ChatItemView: View {
                                 Image(systemName: "star.fill")
                                     .frame(alignment: chatSenderVm.isCurrentUser ? .trailing : .leading)
                                     .bold()
+                                    .foregroundColor(.primary)
                             } else {
                                 Image(systemName: "star")
                                     .frame(alignment: chatSenderVm.isCurrentUser ? .trailing : .leading)
                                     .bold()
+                                    .foregroundColor(.primary)
                             }
                         }
                     } else {
@@ -67,6 +69,7 @@ struct ChatItemView: View {
                             Image(systemName: "star")
                                 .frame(alignment: chatSenderVm.isCurrentUser ? .trailing : .leading)
                                 .bold()
+                                .foregroundColor(.primary)
                         }
                    }
                     Text(chatSenderVm.dateString)

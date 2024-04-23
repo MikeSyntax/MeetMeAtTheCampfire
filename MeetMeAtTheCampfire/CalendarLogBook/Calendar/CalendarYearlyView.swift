@@ -77,7 +77,6 @@ private struct CalendarMonthlyView: View {
                 .font(.title2)
                 .padding(.leading, 12)
                 .frame(maxWidth: .infinity, alignment: .leading)
-            
             LazyVGrid(columns: columns, spacing: 25) {
                 ForEach(0..<month.getWeekday(), id: \.self) { _ in
                     Spacer()
@@ -155,7 +154,39 @@ class CalendarUtils {
     private static var monthFormatter = createMonthFormatter()
     
     static func getMonthCaption(_ date: Date) -> String {
-        return monthFormatter.string(from: date)
+        let result = monthFormatter.string(from: date)
+        
+        func getGermanMonth(_ result: String) -> String {
+            switch result {
+            case "January":
+                return "Januar"
+            case "February":
+                return "Februar"
+            case "March":
+                return "März"
+            case "April":
+                return "April"
+            case "May":
+                return "Mai"
+            case "June":
+                return "Juni"
+            case "July":
+                return "Juli"
+            case "August":
+                return "August"
+            case "September":
+                return "September"
+            case "October":
+                return "Oktober"
+            case "November":
+                return "November"
+            case "December":
+                return "Dezember"
+            default:
+                return "Unknown"
+            }
+        }
+        return getGermanMonth(result)
     }
     
     private static func createMonthFormatter() -> DateFormatter {

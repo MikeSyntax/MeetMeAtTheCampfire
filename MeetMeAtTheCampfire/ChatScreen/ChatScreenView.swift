@@ -15,6 +15,11 @@ struct ChatScreenView: View {
     @State private var newMessage: String = ""
     @State private var matchingChatIds: [String] = []
     
+    init(chatVm: ChatScreenViewModel) {
+            self.chatVm = chatVm
+        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).title = "Abbrechen"
+        }
+    
     var body: some View {
         let userName = authVm.user?.userName ?? "User name unknown"
         let currentUser = authVm.user?.id ?? "No current user"
@@ -83,9 +88,8 @@ struct ChatScreenView: View {
                         newMessage = ""
                     }
                 }
-                .padding(.horizontal)
+                .padding(EdgeInsets(top: 0, leading: 10, bottom: 10, trailing: 10))
                 Divider()
-                    .padding(EdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0))
             }
             .navigationBarTitle("Mein Chat", displayMode: .inline)
             .background(
@@ -104,12 +108,13 @@ struct ChatScreenView: View {
         }
         .searchable(text: Binding(
             get: { chatVm.searchTerm },
-            set: { chatVm.searchTerm = $0.lowercased() }
-        ), prompt: "Suche")
+            set: { chatVm.searchTerm = $0.lowercased() })
+        )
     }
 }
 
 #Preview {
-    ChatScreenView(chatVm: ChatScreenViewModel(user: UserModel(id: "1", email: "1", registeredTime: Date(), userName: "hallo", timeStampLastVisitChat: Date.now)))
+    let chatVm = ChatScreenViewModel(user: UserModel(id: "1", email: "1", registeredTime: Date(), userName: "hallo", timeStampLastVisitChat: Date.now))
+    return ChatScreenView(chatVm: chatVm)
         .environmentObject(AuthViewModel())
 }

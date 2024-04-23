@@ -85,14 +85,15 @@ struct HomeScreenView: View {
                 })
                 .transition(.move(edge: .top))
                 .animation(.default, value: showAnimation)
-                .padding(.bottom)
+                //.padding(.bottom)
+                Divider()
             }
             .preferredColorScheme(SettingsScreenView().isDark ? .dark : .light)
             .toolbar{
                 Button {
                     showSettingsSheet.toggle()
                 } label: {
-                    Text("Einstellungen")
+                    //Text("Einstellungen")
                     Image(systemName: "gearshape")
                 }
             }

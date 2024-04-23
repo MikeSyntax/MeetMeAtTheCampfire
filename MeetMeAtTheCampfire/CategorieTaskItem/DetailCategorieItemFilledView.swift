@@ -22,9 +22,7 @@ struct DetailCategorieItemFilledView: View {
                         .strikethrough(detailCategorieItemVm.taskIsDone, color: .black)
                         .foregroundColor(.black)
                         .bold()
-                    
                     Spacer()
-                    
                     if detailCategorieItemVm.taskIsDone {
                         Image(systemName: "checkmark.circle")
                             .foregroundColor(.green)

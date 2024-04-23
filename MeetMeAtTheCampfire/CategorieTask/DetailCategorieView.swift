@@ -58,7 +58,7 @@ struct DetailCategorieView: View {
                 detailCategorieVm.deleteAllTask(categorieId: categorieVm.categorieViewModel.id)
                 dismiss()
             }
-            .padding()
+            Divider()
         }
         .scrollContentBackground(.hidden)
         .background(

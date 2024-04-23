@@ -11,9 +11,6 @@ struct ProfileScreenView: View {
     @ObservedObject var profileScreenVm: ProfileScreenViewModel
     @EnvironmentObject var authVm: AuthViewModel
     
-    //After Logout start with selectedTab
-    //var onLogout: (()-> Void)?
-    
     var body: some View {
         let userName = authVm.user?.userName ?? "User unbekannt"
         let userEmail = authVm.user?.email ?? "Email unbekannt"
@@ -64,12 +61,12 @@ struct ProfileScreenView: View {
                     }
                     .frame(width: 300, alignment: .center)
                 }
+                Divider()
             }
-            .padding()
             .toolbar {
                 Button {
+                    profileScreenVm.removeListener()
                     authVm.logout()
-                  //  onLogout?()
                 } label: {
                     Text("Ausloggen")
                     Image(systemName: "door.left.hand.open")
@@ -93,6 +90,7 @@ struct ProfileScreenView: View {
 }
 
 #Preview {
-    ProfileScreenView(profileScreenVm: ProfileScreenViewModel(user: UserModel(id: "", email: "", registeredTime: Date(), userName: "Hans", timeStampLastVisitChat: Date())))
+    let profileScreenVm = ProfileScreenViewModel(user: UserModel(id: "", email: "", registeredTime: Date(), userName: "Hans", timeStampLastVisitChat: Date()))
+    return ProfileScreenView(profileScreenVm: profileScreenVm)
         .environmentObject(AuthViewModel())
 }

@@ -25,7 +25,7 @@ struct SettingsScreenView: View {
                 Spacer()
             }
             .toolbar{
-                Button("abbrechen"){
+                Button("Übernehmen"){
                     dismiss()
                 }
             }
