@@ -13,6 +13,7 @@ import Firebase
 struct MeetMeAtTheCampfireApp: App {
     
     @StateObject var authVm = AuthViewModel()
+    @StateObject var infoButtonSettings = InfoButtonSettings()
     
     init(){
         FirebaseConfiguration.shared.setLoggerLevel(.min)
@@ -25,6 +26,7 @@ struct MeetMeAtTheCampfireApp: App {
             if authVm.userLoggedIn {
                 MainScreenView(authVm: authVm)
                     .environmentObject(authVm)
+                    .environmentObject(infoButtonSettings)
             } else {
                 LoginView()
                     .environmentObject(authVm)

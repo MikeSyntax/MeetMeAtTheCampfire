@@ -14,6 +14,7 @@ struct CalendarDetailItemView: View {
     
     @State private var showNewEntryView: Bool = false
     @State private var showAnimation: Bool = false
+    @EnvironmentObject var infoButtonSettings: InfoButtonSettings
     
     var body: some View {
         NavigationStack{
@@ -95,9 +96,7 @@ struct CalendarDetailItemView: View {
                 }
                 if calendarDetailItemVm.newEntryLogs.isEmpty || calendarDetailItemVm.newEntryLogs.contains(where: { $0.logBookText.isEmpty && $0.formattedDate == calendarDetailItemVm.formattedDate }){
                     ButtonTextAction(iconName: "plus", text: "Neuer Eintrag") {
-                        withAnimation(.easeInOut(duration: 0.25)) {
                             showNewEntryView.toggle()
-                        }
                     }
                     .padding()
                     .transition(.move(edge: .bottom))
@@ -127,10 +126,9 @@ struct CalendarDetailItemView: View {
         .toolbar(.hidden, for: .tabBar)
     }
 }
-
-let logbookMod: LogBookModel = LogBookModel(userId: "1", formattedDate: "", logBookText: "Hallo", latitude: 0.0, longitude: 0.0, imageUrl: "", containsLogBookEntry: false)
-
 #Preview{
-    CalendarDetailItemView(calendarDetailItemVm: CalendarDetailItemViewModel(calendarItemModel: logbookMod, date: Date()))
+    let logbookMod: LogBookModel = LogBookModel(userId: "1", formattedDate: "", logBookText: "Hallo", latitude: 0.0, longitude: 0.0, imageUrl: "", containsLogBookEntry: false)
+    
+    return CalendarDetailItemView(calendarDetailItemVm: CalendarDetailItemViewModel(calendarItemModel: logbookMod, date: Date()))
 }
 

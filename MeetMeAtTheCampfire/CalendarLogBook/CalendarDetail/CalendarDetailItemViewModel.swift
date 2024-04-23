@@ -12,6 +12,8 @@ import SwiftUI
 class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     //Leeres Array mit LogBockModels
     @Published var newEntryLogs: [LogBookModel] = []
+    //Leeres Arry für den showInfoButton
+    @Published var listForShowButton: [LogBookModel] = []
     //alle published Variablen
     @Published var mapCameraPosition: MapCameraPosition = MapCameraPosition.automatic
     @Published var lastLocation: CLLocation?
@@ -153,17 +155,11 @@ class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManager
             }
     }
     
-    func updateLogBookText(){
-        //TODO Updatefunktion bzw. edit Button
-        
-    }
-    
     func dateFormatter() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd.MM.yyyy"
         return dateFormatter.string(from: self.date)
     }
-    
     
     func requestLocation(){
         self.locationManager.requestWhenInUseAuthorization()

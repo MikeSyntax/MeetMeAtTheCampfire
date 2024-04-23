@@ -58,6 +58,8 @@
 		2B5DF1852B99B46E00FA285C /* ChatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5DF1842B99B46E00FA285C /* ChatModel.swift */; };
 		2B5DF1892B99B68900FA285C /* ChatItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5DF1882B99B68900FA285C /* ChatItemView.swift */; };
 		2B5DF18B2B99B7B900FA285C /* ChatItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5DF18A2B99B7B900FA285C /* ChatItemViewModel.swift */; };
+		2B7A00682BD7EB470054AABD /* CalendarInfoButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7A00672BD7EB470054AABD /* CalendarInfoButtonView.swift */; };
+		2B7A006A2BD7EF0F0054AABD /* CalendarInfoSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7A00692BD7EF0F0054AABD /* CalendarInfoSheetView.swift */; };
 		2B8E6D8E2BCF9D880042C15F /* VideoStartCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8E6D8D2BCF9D880042C15F /* VideoStartCategories.swift */; };
 		2B8E6D902BCF9F3D0042C15F /* VideoStartToDos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8E6D8F2BCF9F3D0042C15F /* VideoStartToDos.swift */; };
 		2BAB624A2B95D60B00C7839E /* HomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAB62492B95D60B00C7839E /* HomeScreenView.swift */; };
@@ -120,6 +122,8 @@
 		2B5DF1842B99B46E00FA285C /* ChatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatModel.swift; sourceTree = "<group>"; };
 		2B5DF1882B99B68900FA285C /* ChatItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatItemView.swift; sourceTree = "<group>"; };
 		2B5DF18A2B99B7B900FA285C /* ChatItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatItemViewModel.swift; sourceTree = "<group>"; };
+		2B7A00672BD7EB470054AABD /* CalendarInfoButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarInfoButtonView.swift; sourceTree = "<group>"; };
+		2B7A00692BD7EF0F0054AABD /* CalendarInfoSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarInfoSheetView.swift; sourceTree = "<group>"; };
 		2B8E6D8D2BCF9D880042C15F /* VideoStartCategories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoStartCategories.swift; sourceTree = "<group>"; };
 		2B8E6D8F2BCF9F3D0042C15F /* VideoStartToDos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoStartToDos.swift; sourceTree = "<group>"; };
 		2BAB62492B95D60B00C7839E /* HomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenView.swift; sourceTree = "<group>"; };
@@ -390,6 +394,8 @@
 			children = (
 				2BB2B0322BA83A3A0003CFE2 /* CalendarExtensions.swift */,
 				2BB2B03C2BA84F1F0003CFE2 /* CalendarYearExtensions.swift */,
+				2B7A00672BD7EB470054AABD /* CalendarInfoButtonView.swift */,
+				2B7A00692BD7EF0F0054AABD /* CalendarInfoSheetView.swift */,
 			);
 			path = CalendarComponents;
 			sourceTree = "<group>";
@@ -655,9 +661,11 @@
 				2BF4B97D2B9877D900C1AF1A /* ChatScreenView.swift in Sources */,
 				2B1738A32BAD82050043CAF0 /* MapKitNewEntryView.swift in Sources */,
 				2BBC15152B9B746000305504 /* LanguageError.swift in Sources */,
+				2B7A006A2BD7EF0F0054AABD /* CalendarInfoSheetView.swift in Sources */,
 				2BF347DD2BD1D7E2007F0AB3 /* RoundedView.swift in Sources */,
 				2BAB62502B95D79800C7839E /* CategorieViewModel.swift in Sources */,
 				2BAB624A2B95D60B00C7839E /* HomeScreenView.swift in Sources */,
+				2B7A00682BD7EB470054AABD /* CalendarInfoButtonView.swift in Sources */,
 				2BBC15192B9C614900305504 /* Translation.swift in Sources */,
 				2BBE46662BA1E04F002A11A2 /* DetailCategorieItemAddView.swift in Sources */,
 				2B5D19402B91DD3D004DB072 /* AuthenticationRepository.swift in Sources */,

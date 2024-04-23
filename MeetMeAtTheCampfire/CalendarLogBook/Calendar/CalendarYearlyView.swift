@@ -11,21 +11,43 @@ struct CalendarYearlyView: View {
     
     @State private var year = Date().getFirstDateOfYear()
     @State private var scrollPosition: Int? = nil
+    //@State private var infoButtonIsActive: Bool = true
+    @State private var showInfoSheet: Bool = false
+    @State private var isAnimating: Bool = false
+    
+    @ObservedObject var infoButtonSettings = InfoButtonSettings()
     
     var body: some View {
         NavigationStack{
-            VStack{
-                Divider()
-                WeekdayHeaderView()
-                ScrollView {
-                    VStack{
-                        ForEach(year.getAllMonths(), id:  \.self) { month in
-                            CalendarMonthlyView(month: month)
-                                .id(month.get(.month))
+            ZStack{
+                VStack{
+                    Divider()
+                    WeekdayHeaderView()
+                    ScrollView {
+                        VStack{
+                            ForEach(year.getAllMonths(), id:  \.self) { month in
+                                CalendarMonthlyView(month: month)
+                                    .id(month.get(.month))
+                            }
                         }
                     }
+                    Divider()
                 }
-                Divider()
+                if infoButtonSettings.infoButtonIsActive {
+                    VStack{
+                        Button{
+                            showInfoSheet.toggle()
+                        } label: {
+                            CalendarInfoButtonView()
+                        }
+                        .rotationEffect(Angle(degrees: isAnimating ? -0 : 20))
+                        .animation(Animation.easeInOut(duration: 0.3).repeatCount(7, autoreverses: true), value: isAnimating)
+                    }
+                    .offset(x: 100, y: 250)
+                    .onAppear {
+                        isAnimating = true
+                    }
+                }
             }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing){
@@ -45,10 +67,24 @@ struct CalendarYearlyView: View {
                     .opacity(0.2)
                     .ignoresSafeArea(.all))
         }
+        .sheet(isPresented: $showInfoSheet, onDismiss: nil) {
+                CalendarInfoSheetView(showInfoSheet: $showInfoSheet, infoButtonIsActive: $infoButtonSettings.infoButtonIsActive)
+                    .presentationDetents([.medium])
+            }
     }
 }
 
-//MARK ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#Preview{
+    CalendarYearlyView()
+}
+
+//MARK --------------------------------------------------------------------------------------------------------------------------------------------------
+
+class InfoButtonSettings: ObservableObject {
+    @Published var infoButtonIsActive: Bool = true
+}
+
+//MARK --------------------------------------------------------------------------------------------------------------------------------------------------
 
 private struct WeekdayHeaderView: View {
     
@@ -64,7 +100,7 @@ private struct WeekdayHeaderView: View {
     }
 }
 
-//MARK ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//MARK ---------------------------------------------------------------------------------------------------------------------------------------------------
 
 private struct CalendarMonthlyView: View {
     
@@ -95,7 +131,7 @@ private struct CalendarMonthlyView: View {
     }
 }
 
-//MARK ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//MARK ---------------------------------------------------------------------------------------------------------------------------------------------------
 
 struct NavigationLazyView<Content: View>: View {
     let build: () -> Content
@@ -107,7 +143,7 @@ struct NavigationLazyView<Content: View>: View {
     }
 }
 
-//MARK ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//MARK ----------------------------------------------------------------------------------------------------------------------------------------------------
 
 private struct CalendarDailyView: View {
     
@@ -127,7 +163,7 @@ private struct CalendarDailyView: View {
     }
 }
 
-//MARK ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//MARK ---------------------------------------------------------------------------------------------------------------------------------------------------
 
 private struct YearSwitcher: View {
     
@@ -146,7 +182,7 @@ private struct YearSwitcher: View {
     }
 }
 
-//MARK ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//MARK ---------------------------------------------------------------------------------------------------------------------------------------------------
 
 class CalendarUtils {
     

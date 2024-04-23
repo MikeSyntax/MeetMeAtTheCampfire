@@ -46,7 +46,7 @@ struct HomeScreenView: View {
                                         .resizable()
                                         .frame(width: 150, height: 150)
                                         .clipShape(Circle())
-                                        .opacity(0.6)
+                                        .opacity(0.7)
                                 } else {
                                     Image(.logo)
                                         .resizable()
@@ -58,42 +58,38 @@ struct HomeScreenView: View {
                         }
                         VStack{
                             if homeVm.categorieViewModels.isEmpty {
-                                HStack(){
-                                    VideoStartCategoriesView()
-                                        .opacity(0.6)
-                                }
+                                VideoStartCategoriesView()
+                                    .opacity(0.7)
+                                    .frame(width: 300)
                             }
                         }
-                        .frame(width: 300)
-                        .cornerRadius(30)
                     }
-                    if !homeVm.categorieViewModels.isEmpty && homeVm.categorieViewModels[0].tasksInCategorie == 0  {
-                        HStack(){
-                            VideoStartToDosView()
-                                .opacity(0.6)
+                    VStack{
+                        if !homeVm.categorieViewModels.isEmpty && homeVm.categorieViewModels[0].tasksInCategorie == 0  {
+                            HStack(){
+                                VideoStartToDosView()
+                                    .opacity(0.7)
+                                    .frame(width: 300)
+                                    .offset(x: 0, y: -100)
+                            }
                         }
-                        .frame(width: 300)
-                        .cornerRadius(30)
-                        .offset(x: 0, y: -100)
                     }
                 }
-                Divider()
-                Button(action: {
+                Button{
                     showNewCategorieAlert.toggle()
-                }, label: {
+                }label: {
                     CategorieAddView()
-                })
-                .transition(.move(edge: .top))
-                .animation(.default, value: showAnimation)
-                //.padding(.bottom)
+                }
+                .animation(Animation.smooth(duration: 0.9, extraBounce: 0.6), value: showAnimation)
+                .onAppear {
+                    showAnimation = true
+                }
                 Divider()
             }
-            .preferredColorScheme(SettingsScreenView().isDark ? .dark : .light)
             .toolbar{
                 Button {
                     showSettingsSheet.toggle()
                 } label: {
-                    //Text("Einstellungen")
                     Image(systemName: "gearshape")
                 }
             }
@@ -139,7 +135,6 @@ struct HomeScreenView: View {
         }
         .onAppear {
             homeVm.readCategories()
-            showAnimation = true
         }
         .onDisappear{
             homeVm.removeListener()

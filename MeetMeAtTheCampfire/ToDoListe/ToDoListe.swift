@@ -32,6 +32,43 @@
 //AsyncImage mit Url nicht und mit UIImage in Storage speichern
 //Höhe des Feldes für die Übersetzung
 
+
+
+
+
+
+
+
+
+//    @MainActor
+//    func readContainerForShowButton(){
+//        guard let userId = FirebaseManager.shared.userId else {
+//            return
+//        }
+//        //SnapshotListener
+//        self.listener = FirebaseManager.shared.firestore.collection("newLogEntry")
+//            .whereField("userId", isEqualTo: userId)
+//            .addSnapshotListener {
+//                querySnapshot, error in
+//                if let error {
+//                    print("Error reading newLogEntrys \(error)")
+//                    return
+//                }
+//
+//                guard let documents = querySnapshot?.documents else {
+//                    print("QuerySnapshot is empty")
+//                    return
+//                }
+//                DispatchQueue.main.async {
+//                    self.listForShowButton = documents.compactMap { document in
+//                        try? document.data(as: LogBookModel.self)
+//                        }
+//                    }
+//
+//                print("CalendarDetailItemVm ListButton \(self.listForShowButton.first?.logBookText ?? "leer")")
+//            }
+//    }
+
 //im ProfilScreen
 //After Logout start with selectedTab
 //var onLogout: (()-> Void)?
