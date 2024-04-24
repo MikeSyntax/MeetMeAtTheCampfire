@@ -10,7 +10,7 @@ import SwiftUI
 struct CalendarInfoSheetView: View {
     
     @Binding var showInfoSheet: Bool
-    @Binding var infoButtonIsActive: Bool
+    @AppStorage("infoButton") private var infoButtonIsActive: Bool = true
     
     var body: some View {
         NavigationStack{
@@ -31,7 +31,7 @@ struct CalendarInfoSheetView: View {
                     }
                     VStack{
                         ButtonTextAction(iconName: "arrow.down.right.and.arrow.up.left", text: "Nicht mehr anzeigen"){
-                            infoButtonIsActive.toggle()
+                            infoButtonIsActive = false
                             showInfoSheet.toggle()
                         }
                         .padding(20)
@@ -48,5 +48,5 @@ struct CalendarInfoSheetView: View {
 }
 
 #Preview {
-    CalendarInfoSheetView(showInfoSheet: .constant(false), infoButtonIsActive: .constant(true))
+    return CalendarInfoSheetView(showInfoSheet: .constant(false))
 }

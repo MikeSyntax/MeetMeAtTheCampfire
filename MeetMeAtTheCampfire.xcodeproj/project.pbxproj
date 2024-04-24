@@ -71,7 +71,6 @@
 		2BB2B0332BA83A3A0003CFE2 /* CalendarExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB2B0322BA83A3A0003CFE2 /* CalendarExtensions.swift */; };
 		2BB2B03B2BA84BA20003CFE2 /* CalendarYearlyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB2B03A2BA84BA20003CFE2 /* CalendarYearlyView.swift */; };
 		2BB2B03D2BA84F1F0003CFE2 /* CalendarYearExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB2B03C2BA84F1F0003CFE2 /* CalendarYearExtensions.swift */; };
-		2BBC150A2B9B5BF400305504 /* ToDoListe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBC15092B9B5BF400305504 /* ToDoListe.swift */; };
 		2BBC150F2B9B66DD00305504 /* LanguageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBC150E2B9B66DD00305504 /* LanguageRepository.swift */; };
 		2BBC15132B9B719A00305504 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBC15122B9B719A00305504 /* Language.swift */; };
 		2BBC15152B9B746000305504 /* LanguageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBC15142B9B746000305504 /* LanguageError.swift */; };
@@ -135,7 +134,6 @@
 		2BB2B0322BA83A3A0003CFE2 /* CalendarExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarExtensions.swift; sourceTree = "<group>"; };
 		2BB2B03A2BA84BA20003CFE2 /* CalendarYearlyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarYearlyView.swift; sourceTree = "<group>"; };
 		2BB2B03C2BA84F1F0003CFE2 /* CalendarYearExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarYearExtensions.swift; sourceTree = "<group>"; };
-		2BBC15092B9B5BF400305504 /* ToDoListe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListe.swift; sourceTree = "<group>"; };
 		2BBC150E2B9B66DD00305504 /* LanguageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageRepository.swift; sourceTree = "<group>"; };
 		2BBC15122B9B719A00305504 /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		2BBC15142B9B746000305504 /* LanguageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageError.swift; sourceTree = "<group>"; };
@@ -251,7 +249,6 @@
 				2BF4B9782B98762A00C1AF1A /* ProfileScreen */,
 				2BF347DB2BD1D7C3007F0AB3 /* RoundedView */,
 				2BF4B97E2B98A23000C1AF1A /* SettingsScreen */,
-				2BBC15082B9B5BC100305504 /* ToDoListe */,
 				2BBC150B2B9B669800305504 /* TranslatorScreen */,
 				2B8E6D8C2BCF9D550042C15F /* VideoStart */,
 			);
@@ -398,14 +395,6 @@
 				2B7A00692BD7EF0F0054AABD /* CalendarInfoSheetView.swift */,
 			);
 			path = CalendarComponents;
-			sourceTree = "<group>";
-		};
-		2BBC15082B9B5BC100305504 /* ToDoListe */ = {
-			isa = PBXGroup;
-			children = (
-				2BBC15092B9B5BF400305504 /* ToDoListe.swift */,
-			);
-			path = ToDoListe;
 			sourceTree = "<group>";
 		};
 		2BBC150B2B9B669800305504 /* TranslatorScreen */ = {
@@ -640,7 +629,6 @@
 				2BBC151D2B9C6B3C00305504 /* LanguageScreenView.swift in Sources */,
 				2BBC151B2B9C6B2600305504 /* LanguageScreenViewModel.swift in Sources */,
 				2BF4B97A2B98764300C1AF1A /* ProfileScreenView.swift in Sources */,
-				2BBC150A2B9B5BF400305504 /* ToDoListe.swift in Sources */,
 				2B2A3E472B90B176007E5E7F /* ButtonTextAction.swift in Sources */,
 				2B2778FD2B9079F200779FB5 /* FirebaseManager.swift in Sources */,
 				2B36879E2B9E03A700F2E944 /* CheckmarkNotRead.swift in Sources */,

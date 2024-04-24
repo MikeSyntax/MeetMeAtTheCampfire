@@ -19,6 +19,7 @@ class DetailCategorieViewModel: ObservableObject {
         removeListener()
     }
     
+    @MainActor
     func createNewTask(taskName: String, categorieId: String?){
         guard let categorieId = categorieId else {
             return
@@ -83,6 +84,7 @@ class DetailCategorieViewModel: ObservableObject {
         }
     }
     
+    @MainActor
     func updateTask(detailCategorieItemVm: DetailCategorieItemViewModel, taskId: String?){
         guard let taskId = taskId else {
             return
@@ -114,6 +116,7 @@ class DetailCategorieViewModel: ObservableObject {
         }
     }
     
+    @MainActor
     func deleteTask(categorieId: String?) {
         guard let categorieId = categorieId else {
             return
@@ -158,6 +161,7 @@ class DetailCategorieViewModel: ObservableObject {
             }
     }
     
+    @MainActor
     func deleteAllTask(categorieId: String?) {
         guard let categorieId = categorieId else {
             return
@@ -182,8 +186,6 @@ class DetailCategorieViewModel: ObservableObject {
                 }
             }
     }
-    
-    
     
     func removeListener() {
         self.listener = nil

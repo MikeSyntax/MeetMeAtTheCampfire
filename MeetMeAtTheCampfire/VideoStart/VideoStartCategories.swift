@@ -8,7 +8,6 @@
 import SwiftUI
 import AVFoundation
 import AVKit
-import UIKit
 
 struct VideoStartCategoriesView: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> VideoStartCategories {

@@ -8,7 +8,6 @@
 import SwiftUI
 import AVFoundation
 import AVKit
-import UIKit
 
 struct VideoStartToDosView: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> VideoStartToDos {

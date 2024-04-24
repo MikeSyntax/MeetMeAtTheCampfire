@@ -86,6 +86,7 @@ struct HomeScreenView: View {
                 }
                 Divider()
             }
+            .preferredColorScheme(SettingsScreenView().isDark ? .dark : .light)
             .toolbar{
                 Button {
                     showSettingsSheet.toggle()

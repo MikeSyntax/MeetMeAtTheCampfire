@@ -5,7 +5,6 @@
 //  Created by Mike Reichenbach on 27.03.24.
 //
 
-import UIKit
 import SwiftUI
 import Foundation
 

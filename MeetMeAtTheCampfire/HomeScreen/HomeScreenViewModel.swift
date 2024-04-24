@@ -22,6 +22,7 @@ class HomeScreenViewModel: ObservableObject {
         removeListener()
     }
     //Anlegen einer neuen Kategorie im Firebase Firestore
+    @MainActor
     func createCategorie(categorieName: String){
         //wenn die userId leer ist mache nichts
         guard let userId = FirebaseManager.shared.userId else {
@@ -39,6 +40,7 @@ class HomeScreenViewModel: ObservableObject {
     }
     
     //Lesen aller Kategorien aus dem Firestore
+    @MainActor
     func readCategories(){
         guard let userId = FirebaseManager.shared.userId else {
             return
@@ -65,13 +67,8 @@ class HomeScreenViewModel: ObservableObject {
         
     }
     
-    //Zurücksetzen des Listeners und leeren des categorie Arrays bei Logout, umso zu gewährleisten, falls sich ein anderer User einloggt nicht die selbe Liste zu sehen.
-    func removeListener(){
-        self.listener = nil
-        self.categorieViewModels = []
-    }
-    
     //Änderungen an der Kategorie vornehmen, in diesem Fall Kategorie ist erledigt
+    @MainActor
     func updateCategorie(categorieVm: CategorieViewModel){
         guard let categorieId = categorieVm.categorieViewModel.id else {
             return
@@ -91,6 +88,7 @@ class HomeScreenViewModel: ObservableObject {
     }
     
     //Löschen einer Kategorie
+    @MainActor
     func deleteCategorie(categorieVm: CategorieViewModel){
         guard let categorieId = categorieVm.categorieViewModel.id else {
             return
@@ -103,5 +101,10 @@ class HomeScreenViewModel: ObservableObject {
                 print("delete categorie succeeded")
             }
         }
+    }
+    
+    func removeListener(){
+        self.listener = nil
+        self.categorieViewModels = []
     }
 }

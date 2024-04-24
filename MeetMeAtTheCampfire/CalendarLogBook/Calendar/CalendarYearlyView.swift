@@ -11,11 +11,9 @@ struct CalendarYearlyView: View {
     
     @State private var year = Date().getFirstDateOfYear()
     @State private var scrollPosition: Int? = nil
-    //@State private var infoButtonIsActive: Bool = true
     @State private var showInfoSheet: Bool = false
     @State private var isAnimating: Bool = false
-    
-    @ObservedObject var infoButtonSettings = InfoButtonSettings()
+    @AppStorage("infoButton") private var infoButtonIsActive: Bool = true
     
     var body: some View {
         NavigationStack{
@@ -33,7 +31,7 @@ struct CalendarYearlyView: View {
                     }
                     Divider()
                 }
-                if infoButtonSettings.infoButtonIsActive {
+                if infoButtonIsActive {
                     VStack{
                         Button{
                             showInfoSheet.toggle()
@@ -68,20 +66,14 @@ struct CalendarYearlyView: View {
                     .ignoresSafeArea(.all))
         }
         .sheet(isPresented: $showInfoSheet, onDismiss: nil) {
-                CalendarInfoSheetView(showInfoSheet: $showInfoSheet, infoButtonIsActive: $infoButtonSettings.infoButtonIsActive)
-                    .presentationDetents([.medium])
-            }
+            CalendarInfoSheetView(showInfoSheet: $showInfoSheet)
+                .presentationDetents([.medium])
+        }
     }
 }
 
 #Preview{
-    CalendarYearlyView()
-}
-
-//MARK --------------------------------------------------------------------------------------------------------------------------------------------------
-
-class InfoButtonSettings: ObservableObject {
-    @Published var infoButtonIsActive: Bool = true
+    return CalendarYearlyView()
 }
 
 //MARK --------------------------------------------------------------------------------------------------------------------------------------------------

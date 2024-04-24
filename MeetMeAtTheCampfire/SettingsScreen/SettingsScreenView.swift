@@ -10,20 +10,32 @@ import SwiftUI
 struct SettingsScreenView: View {
     @Environment(\.dismiss) private var dismiss
     @AppStorage("isDarkMode") var isDark: Bool = false
+    @AppStorage("infoButton") private var infoButtonIsActive: Bool = true
     
     var body: some View {
         NavigationStack{
-            VStack{
-                Spacer()
-                Button{
-                    isDark.toggle()
-                }label: {
-                    isDark ? Label("Hell", systemImage: "lightbulb.fill") : Label("Dunkel", systemImage: "lightbulb")
+            VStack(alignment: .leading){
+                Section("Hell Dunkel Modus"){
+                    Button{
+                        isDark.toggle()
+                    }label: {
+                        isDark ? Label("Licht anschalten  ", systemImage: "lightbulb.fill") : Label("Licht ausschalten", systemImage: "lightbulb")
+                    }
+                    .padding(EdgeInsets(top: -10, leading: 0, bottom: 20, trailing: 20))
+                    .buttonStyle(.borderedProminent)
                 }
-                .buttonStyle(.borderedProminent)
-                .offset(x: 0, y: -150)
+                Section("Infobox im Kalender"){
+                    Button{
+                        infoButtonIsActive.toggle()
+                    } label: {
+                        infoButtonIsActive ? Label("Info ausblenden", systemImage: "info.square") : Label("Info einblenden ", systemImage: "info.square.fill")
+                    }
+                    .padding(EdgeInsets(top: -10, leading: 0, bottom: 20, trailing: 20))
+                    .buttonStyle(.borderedProminent)
+                }
                 Spacer()
             }
+            .padding(.top)
             .toolbar{
                 Button("Übernehmen"){
                     dismiss()

@@ -14,7 +14,7 @@ struct CalendarDetailItemView: View {
     
     @State private var showNewEntryView: Bool = false
     @State private var showAnimation: Bool = false
-    @EnvironmentObject var infoButtonSettings: InfoButtonSettings
+   // @EnvironmentObject var infoButtonSettings: InfoButtonSettings
     
     var body: some View {
         NavigationStack{
