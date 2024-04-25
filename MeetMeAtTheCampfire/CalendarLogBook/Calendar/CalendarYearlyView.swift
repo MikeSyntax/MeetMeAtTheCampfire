@@ -65,6 +65,9 @@ struct CalendarYearlyView: View {
                     .opacity(0.2)
                     .ignoresSafeArea(.all))
         }
+        .onDisappear{
+            isAnimating = false
+        }
         .sheet(isPresented: $showInfoSheet, onDismiss: nil) {
             CalendarInfoSheetView(showInfoSheet: $showInfoSheet)
                 .presentationDetents([.medium])
@@ -73,7 +76,7 @@ struct CalendarYearlyView: View {
 }
 
 #Preview{
-    return CalendarYearlyView()
+    CalendarYearlyView()
 }
 
 //MARK --------------------------------------------------------------------------------------------------------------------------------------------------

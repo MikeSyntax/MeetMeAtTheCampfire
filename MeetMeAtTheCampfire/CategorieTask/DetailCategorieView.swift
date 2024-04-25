@@ -17,6 +17,7 @@ struct DetailCategorieView: View {
     @State private var showNewTaskAlert: Bool = false
     @State private var newTask: String = ""
     @Environment(\.dismiss) private var dismiss
+    @AppStorage("isDarkMode") var isDark: Bool = false
     
     var body: some View {
         VStack {
@@ -70,7 +71,7 @@ struct DetailCategorieView: View {
         
         .navigationBarTitle("Kategorie ToDo´s", displayMode: .inline)
         .alert("Neues ToDo erstellen", isPresented: $showNewTaskAlert) {
-            if SettingsScreenView().isDark {
+            if isDark {
                 TextField("Beschreibung", text: $newTask)
                     .lineLimit(1)
                     .foregroundColor(.black)

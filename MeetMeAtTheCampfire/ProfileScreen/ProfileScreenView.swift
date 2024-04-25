@@ -67,6 +67,7 @@ struct ProfileScreenView: View {
                 Button {
                     profileScreenVm.removeListener()
                     authVm.logout()
+                    
                 } label: {
                     Text("Ausloggen")
                     Image(systemName: "door.left.hand.open")

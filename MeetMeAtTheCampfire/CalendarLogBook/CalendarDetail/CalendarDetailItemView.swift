@@ -14,14 +14,15 @@ struct CalendarDetailItemView: View {
     
     @State private var showNewEntryView: Bool = false
     @State private var showAnimation: Bool = false
-   // @EnvironmentObject var infoButtonSettings: InfoButtonSettings
+    
+    @AppStorage("isDarkMode") var isDark: Bool = false
     
     var body: some View {
         NavigationStack{
             VStack {
                 Spacer()
                 VStack{
-                    if SettingsScreenView().isDark {
+                    if isDark {
                         Text("Meine Erlebnisse vom \(calendarDetailItemVm.formattedDate)")
                             .frame(width: 300)
                             .underline()
@@ -132,3 +133,67 @@ struct CalendarDetailItemView: View {
     return CalendarDetailItemView(calendarDetailItemVm: CalendarDetailItemViewModel(calendarItemModel: logbookMod, date: Date()))
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// @EnvironmentObject var infoButtonSettings: InfoButtonSettings
+
+//Alles in der HomeView
+//
+//
+//
+//@Environment(\.colorScheme) private var colorScheme
+//@State private var isDark: Bool
+//
+//
+//
+//
+//init() {
+//        _isDark = State(initialValue: UserDefaults.standard.bool(forKey: "isDarkMode"))
+//    }
+//
+//
+//
+//
+//.preferredColorScheme(isDark ? .dark : .light)
+//
+//
+//
+//Button("Toggle Dark Mode") {
+//    isDark.toggle()
+//    UserDefaults.standard.set(isDark, forKey: "isDarkMode")
+//}

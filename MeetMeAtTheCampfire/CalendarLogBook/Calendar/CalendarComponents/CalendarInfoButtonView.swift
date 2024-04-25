@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct CalendarInfoButtonView: View {
+    @AppStorage("isDarkMode") var isDark: Bool = false
     
     var body: some View {
-        if SettingsScreenView().isDark {
+        if isDark {
             RoundedRectangle(cornerRadius: 10)
                 .fill(Color.white).opacity(0.8)
                 .frame(width: 100, height: 100)

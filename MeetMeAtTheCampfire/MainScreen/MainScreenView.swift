@@ -13,8 +13,8 @@ struct MainScreenView: View {
     @StateObject var profileScreenVm: ProfileScreenViewModel
     @StateObject var languageVm = LanguageScreenViewModel(languageChoice: Language(code: "af", name: "Afrikaans"), languageSource: Language(code: "de", name: "Deutsch"))
     @StateObject var chatSenderVm = ChatItemViewModel(chatDesign: ChatModel(userId: "2", userName: "Dieter", messageText: "Danke", timeStamp: Date(), isReadbyUser: [], isLiked: false, isLikedByUser: []))
-
-    @State var selectedTab = 0
+    @State private var selectedTab = 0
+    @AppStorage("isDarkMode") var isDark: Bool = false
     
     init(authVm: AuthViewModel){
         _chatVm = StateObject(wrappedValue: ChatScreenViewModel(user: authVm.user!))
@@ -32,8 +32,8 @@ struct MainScreenView: View {
             
             ChatScreenView(chatVm: self.chatVm)
                 .tabItem {
-                    Image(systemName: "message")
-                    Text("Chat")
+                    Image(systemName: "flame")
+                    Text("Campfire")
                 }
                 .badge(chatVm.messageCountResult)
                 .tag(1)
@@ -65,11 +65,43 @@ struct MainScreenView: View {
                 authVm.user!.timeStampLastVisitChat = Date.now
             }
         }
+        .onChange(of: authVm.user?.id){
+            selectedTab = 0
+        }
         .onDisappear{
             authVm.updateUser()
-            chatVm.removeListener()
-            profileScreenVm.removeListener()
             
         }
+        .environment(\.colorScheme, isDark ? .dark : .light)
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//            chatVm.removeListener()
+//            profileScreenVm.removeListener()
+//

@@ -4,19 +4,21 @@
 //
 //  Created by Mike Reichenbach on 04.03.24.
 //
-
+//-------------------------------
 import SwiftUI
 
 struct HomeScreenView: View {
     @StateObject private var homeVm = HomeScreenViewModel()
     @StateObject private var detailCategorieVm = DetailCategorieViewModel()
     @StateObject private var detailCategorieItemVm = DetailCategorieItemViewModel(detailCategorieItemModel: TaskModel(categorieId: "1", taskName: "1", taskIsDone: false))
-    
+    @State private var showAnimation = false
     @State private var showNewCategorieAlert = false
     @State private var newCategorie = ""
     @State private var showSettingsSheet: Bool = false
-    @State private var showAnimation: Bool = false
+    
     @Environment(\.dismiss) private var dismiss
+    //-----------------------------------------
+    @AppStorage("isDarkMode") var isDark: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -41,7 +43,7 @@ struct HomeScreenView: View {
                         if homeVm.categorieViewModels.isEmpty {
                             ZStack{
                                 CircularTextView(title: "   Deine Camper App -Meet me at the campfire".uppercased(), radius: 125)
-                                if SettingsScreenView().isDark {
+                                if isDark {
                                     Image(.logo)
                                         .resizable()
                                         .frame(width: 150, height: 150)
@@ -86,7 +88,7 @@ struct HomeScreenView: View {
                 }
                 Divider()
             }
-            .preferredColorScheme(SettingsScreenView().isDark ? .dark : .light)
+           // .preferredColorScheme(SettingsScreenView().isDark ? .dark : .light)
             .toolbar{
                 Button {
                     showSettingsSheet.toggle()
@@ -103,7 +105,7 @@ struct HomeScreenView: View {
             .navigationBarTitle("Meine Kategorien", displayMode: .inline)
         }
         .alert("Neue Kategorie", isPresented: $showNewCategorieAlert) {
-            if SettingsScreenView().isDark {
+            if isDark {
                 TextField("Name", text: $newCategorie)
                     .lineLimit(1)
                     .foregroundColor(.black)
@@ -139,10 +141,10 @@ struct HomeScreenView: View {
         }
         .onDisappear{
             homeVm.removeListener()
+            showAnimation = false
         }
     }
 }
-
 
 #Preview {
     HomeScreenView()

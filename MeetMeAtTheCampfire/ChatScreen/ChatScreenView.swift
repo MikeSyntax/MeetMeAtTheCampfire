@@ -28,7 +28,7 @@ struct ChatScreenView: View {
                 Divider()
                 ScrollView {
                     ScrollViewReader { scrollView in
-                        LazyVStack {
+                       /* Lazy*/VStack {
                             ForEach(chatVm.chatSenderViewModels) { chatSenderViewModel in
                                 ChatItemView(chatSenderVm: chatSenderViewModel)
                                     .id(chatSenderViewModel.id)
@@ -80,8 +80,8 @@ struct ChatScreenView: View {
                         .autocorrectionDisabled()
                         .padding(0)
                         .overlay(
-                            RoundedRectangle(cornerRadius: 10) // Erstellen eines gerundeten Rechtecks als Overlay
-                                .stroke(Color.cyan, lineWidth: 2) // Farbe und Breite des Rahmens festlegen
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(Color.cyan, lineWidth: 2)
                         )
                     ButtonTextAction(iconName: "paperplane", text: "Senden") {
                         chatVm.createNewMessage(userName: userName, messageText: newMessage, isLiked: false, isLikedByUser: [])
@@ -91,7 +91,7 @@ struct ChatScreenView: View {
                 .padding(EdgeInsets(top: 0, leading: 10, bottom: 10, trailing: 10))
                 Divider()
             }
-            .navigationBarTitle("Mein Chat", displayMode: .inline)
+            .navigationBarTitle("Mein Campfire", displayMode: .inline)
             .background(
                 Image("background")
                     .resizable()
