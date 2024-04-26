@@ -70,7 +70,6 @@ struct MainScreenView: View {
         }
         .onDisappear{
             authVm.updateUser()
-            
         }
         .environment(\.colorScheme, isDark ? .dark : .light)
     }

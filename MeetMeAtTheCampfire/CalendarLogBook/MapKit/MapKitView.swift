@@ -9,21 +9,26 @@ import SwiftUI
 import MapKit
 
 struct MapKitView: View {
+    
+    @AppStorage("homeLat") var homeBaseLatitude: Double = 49.849
+    @AppStorage("homeLong") var homeBaseLongitude: Double = 8.44
+    
     @ObservedObject var calendarDetailItemVm: CalendarDetailItemViewModel
     var body: some View {
         VStack{
             Map {
-                Annotation("zuHause", coordinate: CLLocationCoordinate2D(latitude: 49.0069, longitude: 8.40)) {
+                Annotation("zuHause", coordinate: CLLocationCoordinate2D(latitude: homeBaseLatitude, longitude: homeBaseLongitude)) {
                                     ZStack {
                                         Image(systemName: "mappin.and.ellipse")
                                             .foregroundColor(.red)
-                                            .font(.system(size: 20))
+                                            .font(.system(size: 30))
                                     }
                                 }
                 Annotation("Hier war ich", coordinate: CLLocationCoordinate2D(latitude: calendarDetailItemVm.latitude, longitude: calendarDetailItemVm.longitude)) {
                     ZStack {
                         Image(systemName: "figure.wave")
                             .foregroundColor(.red)
+                            .font(.system(size: 30))
                             
                     }
                 }
@@ -32,3 +37,6 @@ struct MapKitView: View {
     }
 }
 
+#Preview{
+    MapKitView(calendarDetailItemVm: CalendarDetailItemViewModel(calendarItemModel: LogBookModel(userId: "1", formattedDate: "1", logBookText: "", latitude: 48.0069, longitude: 0.0, imageUrl: "", containsLogBookEntry: false), date: Date()))
+}

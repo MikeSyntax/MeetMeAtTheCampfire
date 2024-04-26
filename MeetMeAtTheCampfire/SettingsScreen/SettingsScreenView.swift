@@ -15,15 +15,24 @@ struct SettingsScreenView: View {
     var body: some View {
         NavigationStack{
             VStack{
-                VStack(alignment: .leading){
+                VStack(alignment: .center){
                     Text("Hell Dunkel Modus")
                     Button{
                         isDark.toggle()
                     }label: {
                         isDark ? Label("Licht anschalten  ", systemImage: "lightbulb.fill") : Label("Licht ausschalten", systemImage: "lightbulb")
                     }
-                    .padding(EdgeInsets(top: -10, leading: 0, bottom: 20, trailing: 20))
-                    .buttonStyle(.borderedProminent)
+                    .frame(height: 20)
+                    .padding(8)
+                    .background(.cyan)
+                    .cornerRadius(10)
+                    .foregroundColor(.white)
+                    .font(.headline)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10) // Erstellen eines gerundeten Rechtecks als Overlay
+                            .stroke(Color.white, lineWidth: 2) // Farbe und Breite des Rahmens festlegen
+                    )
+                    .padding(EdgeInsets(top: -9, leading: 0, bottom: 20, trailing: 20))
                 }
                 VStack(alignment: .leading){
                     Text("Infobox im Kalender")
@@ -32,8 +41,17 @@ struct SettingsScreenView: View {
                     } label: {
                         infoButtonIsActive ? Label("Info ausblenden", systemImage: "info.square") : Label("Info einblenden ", systemImage: "info.square.fill")
                     }
-                    .padding(EdgeInsets(top: -10, leading: 0, bottom: 20, trailing: 20))
-                    .buttonStyle(.borderedProminent)
+                    .frame(height: 20)
+                    .padding(8)
+                    .background(.cyan)
+                    .cornerRadius(10)
+                    .foregroundColor(.white)
+                    .font(.headline)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10) // Erstellen eines gerundeten Rechtecks als Overlay
+                            .stroke(Color.white, lineWidth: 2) // Farbe und Breite des Rahmens festlegen
+                    )
+                    .padding(EdgeInsets(top: -9, leading: 0, bottom: 20, trailing: 20))
                 }
                 Spacer()
             }

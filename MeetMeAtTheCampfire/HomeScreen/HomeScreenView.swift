@@ -4,20 +4,19 @@
 //
 //  Created by Mike Reichenbach on 04.03.24.
 //
-//-------------------------------
+
 import SwiftUI
 
 struct HomeScreenView: View {
     @StateObject private var homeVm = HomeScreenViewModel()
     @StateObject private var detailCategorieVm = DetailCategorieViewModel()
     @StateObject private var detailCategorieItemVm = DetailCategorieItemViewModel(detailCategorieItemModel: TaskModel(categorieId: "1", taskName: "1", taskIsDone: false))
-    @State private var showAnimation = false
-    @State private var showNewCategorieAlert = false
-    @State private var newCategorie = ""
+    @State private var showAnimation: Bool = false
+    @State private var showNewCategorieAlert: Bool = false
+    @State private var newCategorie: String = ""
     @State private var showSettingsSheet: Bool = false
     
     @Environment(\.dismiss) private var dismiss
-    //-----------------------------------------
     @AppStorage("isDarkMode") var isDark: Bool = false
     
     var body: some View {
@@ -88,7 +87,6 @@ struct HomeScreenView: View {
                 }
                 Divider()
             }
-           // .preferredColorScheme(SettingsScreenView().isDark ? .dark : .light)
             .toolbar{
                 Button {
                     showSettingsSheet.toggle()

@@ -8,7 +8,6 @@
 import Foundation
 import FirebaseAuth
 
-
 class AuthViewModel: ObservableObject{
     
     //Öffentliche Variablen, die durch Nutzung des ViewModels auf den Screens bentuzt werden können
@@ -17,6 +16,9 @@ class AuthViewModel: ObservableObject{
     @Published var confirmPassword: String = ""
     @Published var userName: String = ""
     @Published var loginAlert: Bool = false
+    @Published var somethingGoneWrong: Bool = false
+    @Published var showEmailSendAlert: Bool = false
+    @Published var showEmailNotSendAlert: Bool = false
     
     //Erstellen eines User gemäß festgelegten UserModel
     @Published var user: UserModel?
@@ -36,6 +38,9 @@ class AuthViewModel: ObservableObject{
             if let user = self.workWithAuthResult(authResult: authResult, error: error){
                 self.readAppUser(withId: user.uid)
             }
+            else {
+                self.somethingGoneWrong.toggle()
+            }
         }
     }
     
@@ -47,6 +52,8 @@ class AuthViewModel: ObservableObject{
                 if authResult?.user != nil {
                     self.loginAlert.toggle()
                 }
+            } else {
+                self.somethingGoneWrong.toggle()
             }
         }
     }
@@ -145,4 +152,20 @@ class AuthViewModel: ObservableObject{
             print("Could not update appUser: \(error)")
         }
     }
+    
+    //Reset Password and send email with reset and get a new one
+    func passwordSendWithEmail(email: String, completion: @escaping (Error?) -> Void) {
+        Auth.auth().sendPasswordReset(withEmail: email) { error in
+            if let error = error {
+                completion(error)
+                self.showEmailNotSendAlert = true
+            } else {
+                // Erfolgreiches Zurücksetzen des Passworts
+                completion(nil)
+                self.showEmailSendAlert = true
+            }
+        }
+    }
+
 }
+
