@@ -41,32 +41,32 @@ struct ProfileScreenView: View {
                                         showHomeBaseAlert.toggle()
                                     }
                                     .alert("Homebase ändern,\nz.B 33.975", isPresented: $showHomeBaseAlert){
-                                        if isDark {
+//                                        if isDark {
                                             TextField("Latitude", text: $latitude)
                                                 .lineLimit(1)
                                                 .textInputAutocapitalization(.never)
                                                 .autocorrectionDisabled()
-                                                .foregroundColor(.black)
-                                        } else {
-                                            TextField("Latitude", text: $latitude)
-                                                .lineLimit(1)
-                                                .textInputAutocapitalization(.never)
-                                                .autocorrectionDisabled()
-                                                .foregroundColor(.primary)
-                                        }
-                                        if isDark {
+//                                                .foregroundColor(.black)
+//                                        } else {
+//                                            TextField("Latitude", text: $latitude)
+//                                                .lineLimit(1)
+//                                                .textInputAutocapitalization(.never)
+//                                                .autocorrectionDisabled()
+//                                                .foregroundColor(.primary)
+//                                        }
+//                                        if isDark {
                                             TextField("Longitude", text: $longitude)
                                                 .lineLimit(1)
                                                 .textInputAutocapitalization(.never)
                                                 .autocorrectionDisabled()
-                                                .foregroundColor(.black)
-                                        } else {
-                                            TextField("Longitude", text: $longitude)
-                                                .lineLimit(1)
-                                                .textInputAutocapitalization(.never)
-                                                .autocorrectionDisabled()
-                                                .foregroundColor(.primary)
-                                        }
+//                                                .foregroundColor(.black)
+//                                        } else {
+//                                            TextField("Longitude", text: $longitude)
+//                                                .lineLimit(1)
+//                                                .textInputAutocapitalization(.never)
+//                                                .autocorrectionDisabled()
+//                                                .foregroundColor(.primary)
+//                                        }
                                         Button("Zurück") {
                                             dismiss()
                                         }

@@ -5,50 +5,30 @@
 //  Created by Mike Reichenbach on 20.03.24.
 //
 
-
 import SwiftUI
 import MapKit
 
 struct CalendarDetailItemView: View {
     @ObservedObject var calendarDetailItemVm: CalendarDetailItemViewModel
-    
     @State private var showNewEntryView: Bool = false
-    @State private var showAnimation: Bool = false
-    
-    @AppStorage("isDarkMode") var isDark: Bool = false
+    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         NavigationStack{
             VStack {
-                Spacer()
+                Divider()
                 VStack{
-                    if isDark {
-                        Text("Meine Erlebnisse vom \(calendarDetailItemVm.formattedDate)")
-                            .frame(width: 300)
-                            .underline()
-                            .foregroundColor(.white)
-                            .font(.callout)
-                            .bold()
-                            .italic()
-                            .padding(EdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0))
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(Color.gray, lineWidth: 2)
-                            )
-                    } else {
-                        Text("Meine Erlebnisse vom \(calendarDetailItemVm.formattedDate)")
-                            .frame(width: 300)
-                            .underline()
-                            .foregroundColor(.black)
-                            .font(.callout)
-                            .bold()
-                            .italic()
-                            .padding(EdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0))
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(Color.gray, lineWidth: 2)
-                            )
-                    }
+                    Text("Meine Erlebnisse vom \(calendarDetailItemVm.formattedDate)")
+                        .frame(width: 300)
+                        .underline()
+                        .font(.callout)
+                        .bold()
+                        .italic()
+                        .padding(EdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(Color.gray, lineWidth: 2)
+                        )
                 }
                 Spacer()
                 ScrollView {
@@ -58,7 +38,6 @@ struct CalendarDetailItemView: View {
                                 .frame(width: 300, height: 200)
                                 .cornerRadius(10)
                         }
-                        Spacer()
                         VStack{
                             ForEach(calendarDetailItemVm.readImages, id: \.self){ image in
                                 AsyncImage(
@@ -66,42 +45,40 @@ struct CalendarDetailItemView: View {
                                     content: { image in
                                         image
                                             .resizable()
-                                            .frame(maxWidth: 300, maxHeight: 300)
+                                            .scaledToFit()
                                             .cornerRadius(10)
                                             .shadow(radius: 10)
                                     },
                                     placeholder: {
                                         Image(systemName: "photo")
                                             .resizable()
-                                            .frame(maxWidth: 300, minHeight: 300)
+                                            .scaledToFit()
                                             .cornerRadius(10)
                                             .shadow(radius: 10)
                                     }
                                 )
                             }
                         }
+                        .frame(width: 300)
                         Spacer()
                         VStack{
                             ForEach(calendarDetailItemVm.newEntryLogs) {
                                 newEntryLog in
-                                VStack{
-                                    Text(newEntryLog.logBookText)
-                                        .font(.callout)
-                                        .italic()
-                                        .bold()
-                                        .frame(width: 300)
-                                }
+                                        Text(newEntryLog.logBookText)
+                                            .font(.callout)
+                                            .italic()
+                                            .bold()
+                                            .frame(width: 300)
                             }
                         }
                     }
                 }
+                Divider()
                 if calendarDetailItemVm.newEntryLogs.isEmpty || calendarDetailItemVm.newEntryLogs.contains(where: { $0.logBookText.isEmpty && $0.formattedDate == calendarDetailItemVm.formattedDate }){
                     ButtonTextAction(iconName: "plus", text: "Neuer Eintrag") {
-                            showNewEntryView.toggle()
+                        showNewEntryView.toggle()
                     }
                     .padding()
-                    .transition(.move(edge: .bottom))
-                    .animation(.default, value: showAnimation)
                 }
             }
             .scrollContentBackground(.hidden)
@@ -113,10 +90,14 @@ struct CalendarDetailItemView: View {
                     .opacity(0.2)
                     .ignoresSafeArea(.all))
             .navigationBarTitle("Mein Logbuch", displayMode: .inline)
+            .navigationBarBackButtonHidden()
+            .toolbar{ ToolbarItem(placement: ToolbarItemPlacement.navigationBarLeading){
+                Button("Zurück") {
+                    dismiss()}}
+            }
         }
         .onAppear {
             calendarDetailItemVm.readLogBookText(formattedDate: calendarDetailItemVm.formattedDate)
-            showAnimation = true
         }
         .onDisappear {
             calendarDetailItemVm.removeListener()
@@ -136,6 +117,61 @@ struct CalendarDetailItemView: View {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// @EnvironmentObject var infoButtonSettings: InfoButtonSettings
+
+//Alles in der HomeView
+//
+//
+//
+//@Environment(\.colorScheme) private var colorScheme
+//@State private var isDark: Bool
+//
+//
+//
+//
+//init() {
+//        _isDark = State(initialValue: UserDefaults.standard.bool(forKey: "isDarkMode"))
+//    }
+//
+//
+//
+//
+//.preferredColorScheme(isDark ? .dark : .light)
+//
+//
+//
+//Button("Toggle Dark Mode") {
+//    isDark.toggle()
+//    UserDefaults.standard.set(isDark, forKey: "isDarkMode")
+//}
 
 
 

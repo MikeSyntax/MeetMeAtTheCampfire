@@ -24,7 +24,7 @@ struct DetailCategorieView: View {
             Text(categorieVm.categorie)
                 .font(.title)
             Text("Anzahl der Aufgaben: \(detailCategorieVm.detailCategorieItemViewModels.count)")
-                .font(.callout)
+                .font(.system(size: 10))
                 .bold()
             Button(action: {
                 showNewTaskAlert.toggle()
@@ -32,7 +32,7 @@ struct DetailCategorieView: View {
                 DetailCategorieItemAddView()
             })
             ScrollView{
-                VStack {
+                LazyVStack {
                     ForEach(detailCategorieVm.detailCategorieItemViewModels, id: \.taskName) { detailCategorieViewModel in
                         DetailCategorieItemFilledView(detailCategorieItemVm: detailCategorieViewModel)
                             .frame(height: 40)
@@ -59,6 +59,7 @@ struct DetailCategorieView: View {
                 detailCategorieVm.deleteAllTask(categorieId: categorieVm.categorieViewModel.id)
                 dismiss()
             }
+            .padding(EdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 0))
             Divider()
         }
         .scrollContentBackground(.hidden)
@@ -70,34 +71,41 @@ struct DetailCategorieView: View {
                 .ignoresSafeArea(.all))
         
         .navigationBarTitle("Kategorie ToDo´s", displayMode: .inline)
+        .navigationBarBackButtonHidden()
+        .toolbar{ ToolbarItem(placement: ToolbarItemPlacement.navigationBarLeading){
+            Button("Zurück") {
+                dismiss()}}
+        }
         .alert("Neues ToDo erstellen", isPresented: $showNewTaskAlert) {
-            if isDark {
+//            if isDark {
                 TextField("Beschreibung", text: $newTask)
                     .lineLimit(1)
-                    .foregroundColor(.black)
+//                    .foregroundColor(.black)
                     .textInputAutocapitalization(.never)
                     .autocorrectionDisabled()
                 Button("Zurück") {
+                    newTask = ""
                     showNewTaskAlert.toggle()
                 }
                 Button("Speichern") {
                     detailCategorieVm.createNewTask(taskName: newTask, categorieId: categorieVm.categorieViewModel.id)
                     newTask = ""
                 }
-            } else {
-                TextField("Beschreibung", text: $newTask)
-                    .lineLimit(1)
-                    .foregroundColor(.black)
-                    .textInputAutocapitalization(.never)
-                    .autocorrectionDisabled()
-                Button("Zurück") {
-                    showNewTaskAlert.toggle()
-                }
-                Button("Speichern") {
-                    detailCategorieVm.createNewTask(taskName: newTask, categorieId: categorieVm.categorieViewModel.id)
-                    newTask = ""
-                }
-            }
+//            } else {
+//                TextField("Beschreibung", text: $newTask)
+//                    .lineLimit(1)
+//                    .foregroundColor(.primary)
+//                    .textInputAutocapitalization(.never)
+//                    .autocorrectionDisabled()
+//                Button("Zurück") {
+//                    newTask = ""
+//                    showNewTaskAlert.toggle()
+//                }
+//                Button("Speichern") {
+//                    detailCategorieVm.createNewTask(taskName: newTask, categorieId: categorieVm.categorieViewModel.id)
+//                    newTask = ""
+//                }
+//            }
         }
         .onAppear{
             detailCategorieVm.readTasks(categorieId: categorieVm.categorieViewModel.id)

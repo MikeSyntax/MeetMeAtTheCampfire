@@ -70,7 +70,9 @@ struct ChatScreenView: View {
                 Divider()
                     .frame(height: 5)
                 HStack {
-                    TextField("Neue Nachricht", text: $newMessage)
+                    TextField("Neue Nachricht", text: $newMessage, onCommit: {
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                    })
                         .onChange(of: newMessage) { newValue, _ in
                             if newValue.count > 500 {
                                 newMessage = String(newValue.prefix(500))

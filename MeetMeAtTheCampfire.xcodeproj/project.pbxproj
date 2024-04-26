@@ -68,6 +68,7 @@
 		2BAB62532B95DDC600C7839E /* CategorieFilledView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAB62522B95DDC600C7839E /* CategorieFilledView.swift */; };
 		2BAB62552B95E04900C7839E /* CategorieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAB62542B95E04900C7839E /* CategorieModel.swift */; };
 		2BAE99642BDA9ACF002C20ED /* PasswortSendWithEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAE99632BDA9ACF002C20ED /* PasswortSendWithEmailView.swift */; };
+		2BAE99662BDC1A0C002C20ED /* CalendarNewEntrySheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAE99652BDC1A0C002C20ED /* CalendarNewEntrySheetView.swift */; };
 		2BB2B0332BA83A3A0003CFE2 /* CalendarExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB2B0322BA83A3A0003CFE2 /* CalendarExtensions.swift */; };
 		2BB2B03B2BA84BA20003CFE2 /* CalendarYearlyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB2B03A2BA84BA20003CFE2 /* CalendarYearlyView.swift */; };
 		2BB2B03D2BA84F1F0003CFE2 /* CalendarYearExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB2B03C2BA84F1F0003CFE2 /* CalendarYearExtensions.swift */; };
@@ -131,6 +132,7 @@
 		2BAB62522B95DDC600C7839E /* CategorieFilledView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorieFilledView.swift; sourceTree = "<group>"; };
 		2BAB62542B95E04900C7839E /* CategorieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorieModel.swift; sourceTree = "<group>"; };
 		2BAE99632BDA9ACF002C20ED /* PasswortSendWithEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswortSendWithEmailView.swift; sourceTree = "<group>"; };
+		2BAE99652BDC1A0C002C20ED /* CalendarNewEntrySheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarNewEntrySheetView.swift; sourceTree = "<group>"; };
 		2BB2B0322BA83A3A0003CFE2 /* CalendarExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarExtensions.swift; sourceTree = "<group>"; };
 		2BB2B03A2BA84BA20003CFE2 /* CalendarYearlyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarYearlyView.swift; sourceTree = "<group>"; };
 		2BB2B03C2BA84F1F0003CFE2 /* CalendarYearExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarYearExtensions.swift; sourceTree = "<group>"; };
@@ -327,6 +329,7 @@
 				2B55614F2BAB0A480028C6E5 /* CalendarDetailItemView.swift */,
 				2B5561512BAB0A5A0028C6E5 /* CalendarDetailItemViewModel.swift */,
 				2B1738A02BAD80FC0043CAF0 /* CalendarDetailNewEntryView.swift */,
+				2BAE99652BDC1A0C002C20ED /* CalendarNewEntrySheetView.swift */,
 			);
 			path = CalendarDetail;
 			sourceTree = "<group>";
@@ -670,6 +673,7 @@
 				2B5DF18B2B99B7B900FA285C /* ChatItemViewModel.swift in Sources */,
 				2B2779002B907E7B00779FB5 /* LoginView.swift in Sources */,
 				2B2778B22B8F5C9B00779FB5 /* MeetMeAtTheCampfireApp.swift in Sources */,
+				2BAE99662BDC1A0C002C20ED /* CalendarNewEntrySheetView.swift in Sources */,
 				2BBC15172B9B754D00305504 /* LanguageApiKey.swift in Sources */,
 				2B5561522BAB0A5A0028C6E5 /* CalendarDetailItemViewModel.swift in Sources */,
 				2BCC09AE2B95C066005BFC95 /* FalseView.swift in Sources */,

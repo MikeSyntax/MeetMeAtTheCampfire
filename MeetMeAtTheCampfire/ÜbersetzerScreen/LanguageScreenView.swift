@@ -31,12 +31,20 @@ struct LanguageScreenView: View {
                         }
                         Section(header: Text("Text eingeben").foregroundStyle(.primary)){
                             TextField("Texteingabe für die Übersetzung", text: $languageVm.textToTranslate, axis: .vertical)
+                                .overlay(
+                                    GeometryReader { proxy in
+                                        Color.clear
+                                            .onTapGesture {
+                                                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                                            }
+                                    }
+                                )
                                 .onChange(of: languageVm.textToTranslate) { newValue, _ in
                                     if newValue.count > 300 {
                                         languageVm.textToTranslate = String(newValue.prefix(300))
                                     }
                                 }
-                                .shadow(color: .cyan, radius: 2)
+                                
                                 .textInputAutocapitalization(.never)
                                 .autocorrectionDisabled()
                                 .lineLimit(1...5)
@@ -46,18 +54,23 @@ struct LanguageScreenView: View {
                         Section(header: Text("Es wird übersetzt von").foregroundStyle(.primary)){
                             HStack{
                                 Text("\(selectionSourceLanguage.name)")
+                                    .font(.system(size: 14))
                                 Spacer()
-                                ButtonTextAction(iconName: "network", text: "Los gehts"){
+                                ButtonTextAction(iconName: "network", text: "Übersetzen"){
                                     languageVm.translateLanguage()
+                                    languageVm.textToTranslate = ""
+                                onCommit: do {
+                                   UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                               }
                                 }
                                 Spacer()
                                 Text("\(selectionLanguage.name)")
+                                    .font(.system(size: 14))
                             }
                             .frame(maxWidth: .infinity, minHeight: 70, alignment: .center)
                         }
                         Section(header: Text("Übersetzung").foregroundStyle(.primary)){
                             TextField("Übersetzung", text: $languageVm.translatedText, axis: .vertical)
-                                .shadow(color: .green, radius: 2)
                                 .textInputAutocapitalization(.never)
                                 .autocorrectionDisabled()
                                 .lineLimit(1...5)
@@ -83,6 +96,9 @@ struct LanguageScreenView: View {
         .onDisappear{
             languageVm.clearTextFields()
             selectionLanguage = Language(code: "af", name: "Afrikaans")
+        }
+        .onTapGesture {
+            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
         }
     }
 }

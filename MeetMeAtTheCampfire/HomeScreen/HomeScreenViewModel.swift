@@ -62,7 +62,9 @@ class HomeScreenViewModel: ObservableObject {
                 try? document.data(as: CategorieModel.self)
             }
             
-            let categorieViewModels = categories.map { CategorieViewModel(categorieDesign: $0) }
+            let sortedCategories = categories.sorted { $0.categorieName < $1.categorieName }
+            
+            let categorieViewModels = sortedCategories.map { CategorieViewModel(categorieDesign: $0) }
             self.categorieViewModels = categorieViewModels }
         
     }
