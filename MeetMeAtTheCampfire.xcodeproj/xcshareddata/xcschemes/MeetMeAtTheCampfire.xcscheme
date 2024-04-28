@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2B2778AD2B8F5C9B00779FB5"
-               BuildableName = "MeetMeAtTheCampfire.app"
+               BuildableName = "Campfire.app"
                BlueprintName = "MeetMeAtTheCampfire"
                ReferencedContainer = "container:MeetMeAtTheCampfire.xcodeproj">
             </BuildableReference>
@@ -44,7 +44,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2B2778AD2B8F5C9B00779FB5"
-            BuildableName = "MeetMeAtTheCampfire.app"
+            BuildableName = "Campfire.app"
             BlueprintName = "MeetMeAtTheCampfire"
             ReferencedContainer = "container:MeetMeAtTheCampfire.xcodeproj">
          </BuildableReference>
@@ -65,7 +65,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2B2778AD2B8F5C9B00779FB5"
-            BuildableName = "MeetMeAtTheCampfire.app"
+            BuildableName = "Campfire.app"
             BlueprintName = "MeetMeAtTheCampfire"
             ReferencedContainer = "container:MeetMeAtTheCampfire.xcodeproj">
          </BuildableReference>

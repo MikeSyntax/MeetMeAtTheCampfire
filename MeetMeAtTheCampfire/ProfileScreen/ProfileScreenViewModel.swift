@@ -7,18 +7,27 @@
 
 import Foundation
 import FirebaseFirestore
+import MapKit
+import SwiftUI
 
-class ProfileScreenViewModel: ObservableObject {
+class ProfileScreenViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     @Published var chatLikedViewModels: [ChatItemViewModel] = []
-    //Counter für den .badge im MainScreen
-    var messageCountResult: Int = 0
+    @Published var homebaseCameraPosition: MapCameraPosition = MapCameraPosition.automatic
+    @Published var lastHomebase: CLLocation?
+    @AppStorage("homeLat") var homeBaseLatitude: Double = 49.849
+    @AppStorage("homeLong") var homeBaseLongitude: Double = 8.44
+    private let locationHomebase = CLLocationManager()
     private var listener: ListenerRegistration? = nil
-    @Published var searchTerm: String = ""
+    
     var user: UserModel
     
     init(user: UserModel){
+        
         self.user = user
+        
+        super.init()
+        locationHomebase.delegate = self
     }
     
     deinit{
@@ -59,5 +68,20 @@ class ProfileScreenViewModel: ObservableObject {
     func removeListener(){
         self.listener = nil
         self.chatLikedViewModels = []
+    }
+    
+    func requestHomebase(){
+        self.locationHomebase.requestWhenInUseAuthorization()
+    }
+    
+    @MainActor
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations location: [CLLocation]){
+        if let lastHomebase = location.last {
+            self.lastHomebase = lastHomebase
+            self.homebaseCameraPosition = MapCameraPosition.camera(MapCamera(centerCoordinate: lastHomebase.coordinate, distance: 5000))
+            self.homeBaseLatitude = lastHomebase.coordinate.latitude
+            self.homeBaseLongitude = lastHomebase.coordinate.longitude
+            print("homebase choosen \(self.homeBaseLatitude) and \(self.homeBaseLongitude)")
+        }
     }
 }

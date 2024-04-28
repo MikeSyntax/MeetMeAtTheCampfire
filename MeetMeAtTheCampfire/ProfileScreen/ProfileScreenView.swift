@@ -17,6 +17,7 @@ struct ProfileScreenView: View {
     @State private var showHomeBaseAlert: Bool = false
     @State private var latitude: String = ""
     @State private var longitude: String = ""
+    @State private var showHomeBaseMapKit: Bool = false
     
     var body: some View {
         let userName = authVm.user?.userName ?? "User unbekannt"
@@ -50,6 +51,9 @@ struct ProfileScreenView: View {
                                                 .lineLimit(1)
                                                 .textInputAutocapitalization(.never)
                                                 .autocorrectionDisabled()
+                                            Button("Homebase auf Karte wählen"){
+                                                showHomeBaseMapKit.toggle()
+                                            }
                                         Button("Zurück") {
                                             dismiss()
                                         }
@@ -82,7 +86,7 @@ struct ProfileScreenView: View {
                         .frame(width: 300, alignment: .leading)
                         Spacer()
                         HStack{
-                            Text("Id: \(FirebaseManager.shared.userId ?? "no user Id")")
+                            Text("UserId: \(FirebaseManager.shared.userId ?? "no user Id")")
                                 .font(.caption)
                         }
                         .frame(width: 300, alignment: .leading)
@@ -125,6 +129,9 @@ struct ProfileScreenView: View {
                     .scaledToFill()
                     .opacity(0.2)
                     .ignoresSafeArea(.all))
+        }
+        .sheet(isPresented: $showHomeBaseMapKit) {
+            HomeBaseSheetView(profileScreenVm: profileScreenVm)
         }
         .onAppear{
             profileScreenVm.readLikedMessages()

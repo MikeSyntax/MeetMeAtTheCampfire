@@ -3,4 +3,54 @@
    uuid = "D98E02D2-1B0B-47F0-84A1-BCF45625112F"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "288C312E-6EC1-452E-80D8-DEFEA074AA7B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MeetMeAtTheCampfire/CalendarLogBook/CalendarDetail/CalendarDetailItemViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "170"
+            endingLineNumber = "170"
+            landmarkName = "locationManager(_:didUpdateLocations:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "288C312E-6EC1-452E-80D8-DEFEA074AA7B - 4a79ace2820758c3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Campfire.CalendarDetailItemViewModel.locationManager(_: __C.CLLocationManager, didUpdateLocations: Swift.Array&lt;__C.CLLocation&gt;) -&gt; ()"
+                  moduleName = "Campfire"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mikereich/MeetMeAtTheCampfire/MeetMeAtTheCampfire/CalendarLogBook/CalendarDetail/CalendarDetailItemViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "171"
+                  endingLineNumber = "171"
+                  offsetFromSymbolStart = "208">
+               </Location>
+               <Location
+                  uuid = "288C312E-6EC1-452E-80D8-DEFEA074AA7B - 4a79ace2820758c3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Campfire.CalendarDetailItemViewModel.locationManager(_: __C.CLLocationManager, didUpdateLocations: Swift.Array&lt;__C.CLLocation&gt;) -&gt; ()"
+                  moduleName = "Campfire"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mikereich/MeetMeAtTheCampfire/MeetMeAtTheCampfire/CalendarLogBook/CalendarDetail/CalendarDetailItemViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "171"
+                  endingLineNumber = "171"
+                  offsetFromSymbolStart = "256">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
