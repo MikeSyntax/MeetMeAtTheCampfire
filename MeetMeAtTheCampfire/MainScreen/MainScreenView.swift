@@ -75,32 +75,3 @@ struct MainScreenView: View {
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//            chatVm.removeListener()
-//            profileScreenVm.removeListener()
-//

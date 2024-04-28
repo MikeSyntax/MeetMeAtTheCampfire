@@ -15,10 +15,11 @@ class AuthViewModel: ObservableObject{
     @Published var password: String = ""
     @Published var confirmPassword: String = ""
     @Published var userName: String = ""
-    @Published var loginAlert: Bool = false
-    @Published var somethingGoneWrong: Bool = false
+    @Published var registerSuccessfullAlert: Bool = false
+    @Published var registerFailedAlert: Bool = false
     @Published var showEmailSendAlert: Bool = false
     @Published var showEmailNotSendAlert: Bool = false
+    @Published var loginFailedAlert: Bool = false
     
     //Erstellen eines User gemäß festgelegten UserModel
     @Published var user: UserModel?
@@ -39,7 +40,7 @@ class AuthViewModel: ObservableObject{
                 self.readAppUser(withId: user.uid)
             }
             else {
-                self.somethingGoneWrong.toggle()
+                self.loginFailedAlert.toggle()
             }
         }
     }
@@ -50,10 +51,10 @@ class AuthViewModel: ObservableObject{
             if let user = self.workWithAuthResult(authResult: authResult, error: error){
                 self.createUser(withId: user.uid, email: self.email, userName: self.userName)
                 if authResult?.user != nil {
-                    self.loginAlert.toggle()
+                    self.registerSuccessfullAlert.toggle()
                 }
             } else {
-                self.somethingGoneWrong.toggle()
+                self.registerFailedAlert.toggle()
             }
         }
     }
@@ -95,6 +96,7 @@ class AuthViewModel: ObservableObject{
         }
         //Wenn alles geklappt hat gib einen User zurück
         return authResult.user
+        
         
     }
     
@@ -158,14 +160,13 @@ class AuthViewModel: ObservableObject{
         Auth.auth().sendPasswordReset(withEmail: email) { error in
             if let error = error {
                 completion(error)
-                self.showEmailNotSendAlert = true
+                self.showEmailNotSendAlert.toggle()
             } else {
                 // Erfolgreiches Zurücksetzen des Passworts
                 completion(nil)
-                self.showEmailSendAlert = true
+                self.showEmailSendAlert.toggle()
             }
         }
     }
-
+    
 }
-

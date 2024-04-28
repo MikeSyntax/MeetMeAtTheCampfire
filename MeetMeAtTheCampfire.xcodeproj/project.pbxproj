@@ -86,6 +86,7 @@
 		2BBE466F2BA1E360002A11A2 /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBE466E2BA1E360002A11A2 /* TaskModel.swift */; };
 		2BCC09AC2B95C05B005BFC95 /* RightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCC09AB2B95C05B005BFC95 /* RightView.swift */; };
 		2BCC09AE2B95C066005BFC95 /* FalseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCC09AD2B95C066005BFC95 /* FalseView.swift */; };
+		2BD855A82BDC5CEA001B0A09 /* ClearView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD855A72BDC5CEA001B0A09 /* ClearView.swift */; };
 		2BD8D4342B9F60C40050CB64 /* ChatScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD8D4332B9F60C40050CB64 /* ChatScreenViewModel.swift */; };
 		2BF347D92BD1BEC1007F0AB3 /* ToDo.MP4 in Resources */ = {isa = PBXBuildFile; fileRef = 2BF347D72BD1BEC1007F0AB3 /* ToDo.MP4 */; };
 		2BF347DA2BD1BEC1007F0AB3 /* Cat.MP4 in Resources */ = {isa = PBXBuildFile; fileRef = 2BF347D82BD1BEC1007F0AB3 /* Cat.MP4 */; };
@@ -150,6 +151,7 @@
 		2BBE466E2BA1E360002A11A2 /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
 		2BCC09AB2B95C05B005BFC95 /* RightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightView.swift; sourceTree = "<group>"; };
 		2BCC09AD2B95C066005BFC95 /* FalseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FalseView.swift; sourceTree = "<group>"; };
+		2BD855A72BDC5CEA001B0A09 /* ClearView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearView.swift; sourceTree = "<group>"; };
 		2BD8D4332B9F60C40050CB64 /* ChatScreenViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatScreenViewModel.swift; sourceTree = "<group>"; };
 		2BF347D72BD1BEC1007F0AB3 /* ToDo.MP4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = ToDo.MP4; path = ../../Downloads/ToDo.MP4; sourceTree = "<group>"; };
 		2BF347D82BD1BEC1007F0AB3 /* Cat.MP4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = Cat.MP4; path = ../../Downloads/Cat.MP4; sourceTree = "<group>"; };
@@ -425,9 +427,18 @@
 			path = FalseRight;
 			sourceTree = "<group>";
 		};
+		2BD855A62BDC5CD7001B0A09 /* ClearView */ = {
+			isa = PBXGroup;
+			children = (
+				2BD855A72BDC5CEA001B0A09 /* ClearView.swift */,
+			);
+			path = ClearView;
+			sourceTree = "<group>";
+		};
 		2BD8D4352BA0A5FC0050CB64 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				2BD855A62BDC5CD7001B0A09 /* ClearView */,
 				2B2778FA2B9079CA00779FB5 /* Firebase */,
 				2B2779062B9080F000779FB5 /* Models */,
 				2B2A3E452B90B147007E5E7F /* Buttons */,
@@ -663,6 +674,7 @@
 				2B5DF1852B99B46E00FA285C /* ChatModel.swift in Sources */,
 				2B43E1752BAACED400375D58 /* LogBookModel.swift in Sources */,
 				2BD8D4342B9F60C40050CB64 /* ChatScreenViewModel.swift in Sources */,
+				2BD855A82BDC5CEA001B0A09 /* ClearView.swift in Sources */,
 				2B2779052B907EBF00779FB5 /* AuthViewModel.swift in Sources */,
 				2BBE466D2BA1E2BF002A11A2 /* DetailCategorieItemViewModel.swift in Sources */,
 				2BBC15132B9B719A00305504 /* Language.swift in Sources */,

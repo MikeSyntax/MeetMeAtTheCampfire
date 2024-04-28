@@ -28,24 +28,26 @@ struct PasswortSendWithEmailView: View {
                         .textFieldStyle(.roundedBorder)
                         .textInputAutocapitalization(.never)
                         .autocorrectionDisabled()
-                        .padding(6)
+                        .padding(40)
                     Spacer()
                 }
-                ButtonTextAction(iconName: "paperplane.fill", text: "Abschicken"){
+                .keyboardType(.emailAddress)
+                Divider()
+                VStack{
+                    ButtonTextAction(iconName: "paperplane.fill", text: "Abschicken"){
                         authVm.passwordSendWithEmail(email: emailForPasswortSending) { error in
-                                if let error = error {
-                                    print("Password reset email failed: \(error).")
-                                } else {
-                                    print("Password reset email sent successfully.")
-                                }
+                            if let error = error {
+                                print("Password reset email failed: \(error).")
+                            } else {
+                                print("Password reset email sent successfully.")
+                            }
+                        }
+                    }
+                    .alert(isPresented: $authVm.showEmailSendAlert){
+                        Alert(title: Text("Email versendet"), message: Text("Bitte schau in dein Postfach"), dismissButton: .default(Text("OK")))
                     }
                 }
-                .alert(isPresented: $authVm.showEmailSendAlert){
-                    Alert(title: Text("Email versendet"), message: Text("Bitte schau in dein Postfach"), dismissButton: .default(Text("OK")))
-                }
-                .alert(isPresented: $authVm.showEmailNotSendAlert){
-                    Alert(title: Text("Hoppla!"), message: Text("Das hat leider nicht geklappt"), dismissButton: .default(Text("OK")))
-                }
+                .padding(.top)
             }
             .padding(20)
             .onDisappear{
@@ -61,10 +63,12 @@ struct PasswortSendWithEmailView: View {
                     .resizable()
                     .scaledToFill()
                     .opacity(0.2)
-                    .ignoresSafeArea())
-            
+                    .ignoresSafeArea(.all))
             .navigationTitle("Passwort vergessen")
             .navigationBarTitleDisplayMode(.inline)
+        }
+        .alert(isPresented: $authVm.showEmailNotSendAlert){
+            Alert(title: Text("Hoppla!"), message: Text("Das hat leider nicht geklappt"), dismissButton: .default(Text("OK")))
         }
     }
 }

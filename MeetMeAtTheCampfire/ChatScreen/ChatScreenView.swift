@@ -112,6 +112,9 @@ struct ChatScreenView: View {
             get: { chatVm.searchTerm },
             set: { chatVm.searchTerm = $0.lowercased() })
         )
+        .onTapGesture {
+            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+        }
     }
 }
 
