@@ -31,22 +31,26 @@ struct LanguageScreenView: View {
                         }
                         Section(header: Text("Text eingeben").foregroundStyle(.primary)){
                             ZStack(alignment: .trailing){
-                                TextField("Texteingabe für die Übersetzung", text: $languageVm.textToTranslate/*, axis: .vertical*/)
+                                TextField("Texteingabe für Übersetzung", text: $languageVm.textToTranslate, axis: .vertical)
                                     .onChange(of: languageVm.textToTranslate) { newValue, _ in
                                         if newValue.count > 300 {
                                             languageVm.textToTranslate = String(newValue.prefix(300))
                                         }
                                     }
-                                    .textInputAutocapitalization(.never)
+                                    .font(.system(size: 17))
+                                          .padding(4)
+                                          .background(.white.opacity(0.4))
+                                          .cornerRadius(10)
                                     .autocorrectionDisabled()
                                     .lineLimit(1...5)
-                                    .textFieldStyle(.roundedBorder)
                                     .frame(minHeight: 40)
+                                    .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                                 Button{
                                     languageVm.clearTextFields()
                                 } label: {
                                     ClearView()
                                 }
+                                .padding(EdgeInsets(top: -30, leading: 0, bottom: 0, trailing: -20))
                             }
                             .keyboardType(.default)
                             .submitLabel(.done)
@@ -70,10 +74,12 @@ struct LanguageScreenView: View {
                         Section(header: Text("Übersetzung")
                             .foregroundStyle(.primary)){
                                     TextField("Übersetzung", text: $languageVm.translatedText, axis: .vertical)
-                                        .textInputAutocapitalization(.never)
+                                    .font(.system(size: 17))
+                                          .padding(4)
+                                          .background(.white.opacity(0.4))
+                                          .cornerRadius(10)
                                         .autocorrectionDisabled()
                                         .lineLimit(1...5)
-                                        .textFieldStyle(.roundedBorder)
                                         .frame(minHeight: 40)
                             }
                     }
@@ -89,7 +95,7 @@ struct LanguageScreenView: View {
                     .ignoresSafeArea(.all))
             .navigationBarTitle("Mein Übersetzer", displayMode: .inline)
             .toolbar{
-                Button("Löschen"){
+                Button("Felder leeren"){
                     languageVm.clearTextFields()
                     UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                 }
@@ -102,6 +108,7 @@ struct LanguageScreenView: View {
             languageVm.clearTextFields()
             selectionLanguage = Language(code: "af", name: "Afrikaans")
         }
+        .background(Color(UIColor.systemBackground))
     }
 }
 

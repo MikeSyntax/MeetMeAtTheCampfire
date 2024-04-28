@@ -11,7 +11,7 @@ struct ProfileScreenView: View {
     @ObservedObject var profileScreenVm: ProfileScreenViewModel
     @EnvironmentObject var authVm: AuthViewModel
     @Environment(\.dismiss) private var dismiss
-    @AppStorage("isDarkMode") var isDark: Bool = false
+    //@AppStorage("isDarkMode") var isDark: Bool = false
     @AppStorage("homeLat") var homeBaseLatitude: Double = 49.849
     @AppStorage("homeLong") var homeBaseLongitude: Double = 8.44
     @State private var showHomeBaseAlert: Bool = false
@@ -139,6 +139,7 @@ struct ProfileScreenView: View {
         .onDisappear{
             profileScreenVm.removeListener()
         }
+        .background(Color(UIColor.systemBackground))
     }
 }
 

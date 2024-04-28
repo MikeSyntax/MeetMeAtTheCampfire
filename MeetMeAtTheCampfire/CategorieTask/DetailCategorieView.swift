@@ -17,7 +17,7 @@ struct DetailCategorieView: View {
     @State private var showNewTaskAlert: Bool = false
     @State private var newTask: String = ""
     @Environment(\.dismiss) private var dismiss
-    @AppStorage("isDarkMode") var isDark: Bool = false
+    //@AppStorage("isDarkMode") var isDark: Bool = false
     
     var body: some View {
         VStack {
@@ -96,6 +96,7 @@ struct DetailCategorieView: View {
         .onDisappear{
             detailCategorieVm.removeListener()
         }
+        .background(Color(UIColor.systemBackground))
     }
 }
 

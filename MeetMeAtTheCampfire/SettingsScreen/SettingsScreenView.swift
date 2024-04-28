@@ -9,32 +9,13 @@ import SwiftUI
 
 struct SettingsScreenView: View {
     @Environment(\.dismiss) private var dismiss
-    @AppStorage("isDarkMode") private var isDark: Bool = false
+    //@AppStorage("isDarkMode") private var isDark: Bool = false
     @AppStorage("infoButton") private var infoButtonIsActive: Bool = true
     @AppStorage("entryButton") private var entryButtonIsActive: Bool = true
     
     var body: some View {
         NavigationStack{
             VStack{
-                VStack(alignment: .leading){
-                    Text("Hell Dunkel Modus")
-                    Button{
-                        isDark.toggle()
-                    }label: {
-                        isDark ? Label("Licht anschalten  ", systemImage: "lightbulb.fill") : Label("Licht ausschalten", systemImage: "lightbulb")
-                    }
-                    .frame(height: 20)
-                    .padding(8)
-                    .background(.cyan)
-                    .cornerRadius(10)
-                    .foregroundColor(.white)
-                    .font(.headline)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 10) // Erstellen eines gerundeten Rechtecks als Overlay
-                            .stroke(Color.white, lineWidth: 2) // Farbe und Breite des Rahmens festlegen
-                    )
-                    .padding(EdgeInsets(top: -9, leading: 0, bottom: 20, trailing: 20))
-                }
                 VStack(alignment: .leading){
                     Text("Infobox im Kalender")
                     Button{
@@ -90,7 +71,8 @@ struct SettingsScreenView: View {
                     .opacity(0.2)
                     .ignoresSafeArea(.all))
         }
-        .preferredColorScheme(isDark ? .dark : .light)
+       // .preferredColorScheme(isDark ? .dark : .light)
+        .background(Color(UIColor.systemBackground))
     }
 }
 

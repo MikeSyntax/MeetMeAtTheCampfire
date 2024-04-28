@@ -13,7 +13,7 @@ struct HomeBaseSheetView: View {
     @ObservedObject var profileScreenVm: ProfileScreenViewModel
     @AppStorage("homeLat") var homeBaseLatitude: Double = 49.849
     @AppStorage("homeLong") var homeBaseLongitude: Double = 8.44
-    @AppStorage("isDarkMode") var isDark: Bool = false
+   // @AppStorage("isDarkMode") var isDark: Bool = false
     @Environment(\.dismiss) private var dismiss
     var body: some View {
         NavigationStack{
@@ -37,7 +37,8 @@ struct HomeBaseSheetView: View {
                 profileScreenVm.requestHomebase()
             }
         }
-        .preferredColorScheme(isDark ? .dark : .light)
+        //.preferredColorScheme(isDark ? .dark : .light)
+        .background(Color(UIColor.systemBackground))
     }
 }
 

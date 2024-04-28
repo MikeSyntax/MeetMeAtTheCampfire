@@ -106,6 +106,7 @@ struct CalendarDetailItemView: View {
             CalendarDetailNewEntryView(calendarDetailItemVm: calendarDetailItemVm)
         }
         .toolbar(.hidden, for: .tabBar)
+        .background(Color(UIColor.systemBackground))
     }
 }
 #Preview{

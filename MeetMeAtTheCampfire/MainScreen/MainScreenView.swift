@@ -14,7 +14,7 @@ struct MainScreenView: View {
     @StateObject var languageVm = LanguageScreenViewModel(languageChoice: Language(code: "af", name: "Afrikaans"), languageSource: Language(code: "de", name: "Deutsch"))
     @StateObject var chatSenderVm = ChatItemViewModel(chatDesign: ChatModel(userId: "2", userName: "Dieter", messageText: "Danke", timeStamp: Date(), isReadbyUser: [], isLiked: false, isLikedByUser: []))
     @State private var selectedTab = 0
-    @AppStorage("isDarkMode") var isDark: Bool = false
+    //@AppStorage("isDarkMode") var isDark: Bool = false
     
     init(authVm: AuthViewModel){
         _chatVm = StateObject(wrappedValue: ChatScreenViewModel(user: authVm.user!))
@@ -71,7 +71,8 @@ struct MainScreenView: View {
         .onDisappear{
             authVm.updateUser()
         }
-        .environment(\.colorScheme, isDark ? .dark : .light)
+       // .environment(\.colorScheme, isDark ? .dark : .light)
+        .background(Color(UIColor.systemBackground))
     }
 }
 

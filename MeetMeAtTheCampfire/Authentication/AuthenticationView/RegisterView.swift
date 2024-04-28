@@ -23,7 +23,10 @@ struct RegisterView: View {
                             .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
                         ZStack(alignment: .trailing){
                             TextField("Benutzernamen eingeben", text: $authVm.userName)
-                                .textFieldStyle(.roundedBorder)
+                                .font(.system(size: 17))
+                                      .padding(4)
+                                      .background(.white.opacity(0.4))
+                                      .cornerRadius(10)
                                 .textInputAutocapitalization(.never)
                                 .autocorrectionDisabled()
                                 .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
@@ -44,7 +47,10 @@ struct RegisterView: View {
                             .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
                         ZStack(alignment: .trailing){
                             TextField("Email eingeben", text: $authVm.email)
-                                .textFieldStyle(.roundedBorder)
+                                .font(.system(size: 17))
+                                      .padding(4)
+                                      .background(.white.opacity(0.4))
+                                      .cornerRadius(10)
                                 .textInputAutocapitalization(.never)
                                 .autocorrectionDisabled()
                                 .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
@@ -62,11 +68,13 @@ struct RegisterView: View {
                     VStack(alignment: .leading){
                         Text("Passwort")
                             .font(.system(size: 10))
-                            .foregroundColor(.primary)
                             .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
                         ZStack(alignment: .trailing){
                             SecureField("Passwort eingeben", text: $authVm.password)
-                                .textFieldStyle(.roundedBorder)
+                                .font(.system(size: 17))
+                                      .padding(4)
+                                      .background(.white.opacity(0.4))
+                                      .cornerRadius(10)
                                 .textInputAutocapitalization(.never)
                                 .autocorrectionDisabled()
                                 .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
@@ -84,11 +92,13 @@ struct RegisterView: View {
                     VStack(alignment: .leading){
                         Text("Passwort wiederholen")
                             .font(.system(size: 10))
-                            .foregroundColor(.primary)
                             .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
                         ZStack(alignment: .trailing){
                             SecureField("Passwort wiederholen", text: $authVm.confirmPassword)
-                                .textFieldStyle(.roundedBorder)
+                                .font(.system(size: 17))
+                                      .padding(4)
+                                      .background(.white.opacity(0.4))
+                                      .cornerRadius(10)
                                 .textInputAutocapitalization(.never)
                                 .autocorrectionDisabled()
                                 .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
@@ -139,6 +149,7 @@ struct RegisterView: View {
         .alert(isPresented: $authVm.registerFailedAlert){
             Alert(title: Text("Hoppla \(authVm.userName)"), message: Text("Deine Registrierung hat nicht geklappt"), dismissButton: .default(Text("OK")))
         }
+        .background(Color(UIColor.systemBackground))
     }
 }
 

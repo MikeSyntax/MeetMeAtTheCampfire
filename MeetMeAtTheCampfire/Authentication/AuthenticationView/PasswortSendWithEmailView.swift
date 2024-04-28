@@ -24,11 +24,18 @@ struct PasswortSendWithEmailView: View {
                     Text("Gib deine Email Adresse ein")
                         .font(.callout)
                         .bold()
-                    TextField("Email eingeben", text: $emailForPasswortSending)
-                        .textFieldStyle(.roundedBorder)
-                        .textInputAutocapitalization(.never)
-                        .autocorrectionDisabled()
-                        .padding(40)
+                    VStack(alignment: .leading){
+                        Text("Email")
+                            .font(.system(size: 10))
+                        TextField("Email eingeben", text: $emailForPasswortSending)
+                            .font(.system(size: 17))
+                            .padding(4)
+                            .background(.white.opacity(0.4))
+                            .cornerRadius(10)
+                            .textInputAutocapitalization(.never)
+                            .autocorrectionDisabled()
+                    }
+                    .padding(40)
                     Spacer()
                 }
                 .keyboardType(.emailAddress)
@@ -71,6 +78,7 @@ struct PasswortSendWithEmailView: View {
         .alert(isPresented: $authVm.showEmailNotSendAlert){
             Alert(title: Text("Hoppla!"), message: Text("Das hat leider nicht geklappt"), dismissButton: .default(Text("OK")))
         }
+        .background(Color(UIColor.systemBackground))
     }
 }
 
