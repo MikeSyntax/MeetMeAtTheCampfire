@@ -69,12 +69,12 @@ struct LanguageScreenView: View {
                             }
                         Section(header: Text("Übersetzung")
                             .foregroundStyle(.primary)){
-                                TextField("Übersetzung", text: $languageVm.translatedText, axis: .vertical)
-                                    .textInputAutocapitalization(.never)
-                                    .autocorrectionDisabled()
-                                    .lineLimit(1...5)
-                                    .textFieldStyle(.roundedBorder)
-                                    .frame(minHeight: 40)
+                                    TextField("Übersetzung", text: $languageVm.translatedText, axis: .vertical)
+                                        .textInputAutocapitalization(.never)
+                                        .autocorrectionDisabled()
+                                        .lineLimit(1...5)
+                                        .textFieldStyle(.roundedBorder)
+                                        .frame(minHeight: 40)
                             }
                     }
                 }
@@ -89,7 +89,7 @@ struct LanguageScreenView: View {
                     .ignoresSafeArea(.all))
             .navigationBarTitle("Mein Übersetzer", displayMode: .inline)
             .toolbar{
-                Button("Abbrechen"){
+                Button("Löschen"){
                     languageVm.clearTextFields()
                     UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                 }

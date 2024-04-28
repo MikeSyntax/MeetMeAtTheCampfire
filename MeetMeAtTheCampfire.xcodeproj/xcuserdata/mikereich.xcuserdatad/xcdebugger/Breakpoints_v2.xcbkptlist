@@ -14,8 +14,8 @@
             filePath = "MeetMeAtTheCampfire/CalendarLogBook/CalendarDetail/CalendarDetailItemViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "170"
-            endingLineNumber = "170"
+            startingLineNumber = "174"
+            endingLineNumber = "174"
             landmarkName = "locationManager(_:didUpdateLocations:)"
             landmarkType = "7">
             <Locations>
@@ -47,6 +47,69 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "171"
                   endingLineNumber = "171"
+                  offsetFromSymbolStart = "256">
+               </Location>
+               <Location
+                  uuid = "288C312E-6EC1-452E-80D8-DEFEA074AA7B - 4a79ace282075b4f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Campfire.CalendarDetailItemViewModel.locationManager(_: __C.CLLocationManager, didUpdateLocations: Swift.Array&lt;__C.CLLocation&gt;) -&gt; ()"
+                  moduleName = "Campfire"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mikereich/MeetMeAtTheCampfire/MeetMeAtTheCampfire/CalendarLogBook/CalendarDetail/CalendarDetailItemViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "175"
+                  endingLineNumber = "175"
+                  offsetFromSymbolStart = "256">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A00576F2-5893-4433-9AA6-ACD4339F9D4E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MeetMeAtTheCampfire/ProfileScreen/ProfileScreenViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
+            landmarkName = "locationManager(_:didUpdateLocations:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "A00576F2-5893-4433-9AA6-ACD4339F9D4E - b4376ea7e1715253"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Campfire.ProfileScreenViewModel.locationManager(_: __C.CLLocationManager, didUpdateLocations: Swift.Array&lt;__C.CLLocation&gt;) -&gt; ()"
+                  moduleName = "Campfire"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mikereich/MeetMeAtTheCampfire/MeetMeAtTheCampfire/ProfileScreen/ProfileScreenViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "84"
+                  endingLineNumber = "84"
+                  offsetFromSymbolStart = "208">
+               </Location>
+               <Location
+                  uuid = "A00576F2-5893-4433-9AA6-ACD4339F9D4E - b4376ea7e1715253"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Campfire.ProfileScreenViewModel.locationManager(_: __C.CLLocationManager, didUpdateLocations: Swift.Array&lt;__C.CLLocation&gt;) -&gt; ()"
+                  moduleName = "Campfire"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mikereich/MeetMeAtTheCampfire/MeetMeAtTheCampfire/ProfileScreen/ProfileScreenViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "84"
+                  endingLineNumber = "84"
                   offsetFromSymbolStart = "256">
                </Location>
             </Locations>

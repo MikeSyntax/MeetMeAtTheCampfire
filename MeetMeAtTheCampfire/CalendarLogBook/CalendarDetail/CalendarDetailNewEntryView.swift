@@ -121,6 +121,7 @@ struct CalendarDetailNewEntryView: View {
             }
             .toolbar{
                 Button("Abbrechen"){
+                    calendarDetailItemVm.stopLocationRequest()
                     dismiss()
                 }
             }

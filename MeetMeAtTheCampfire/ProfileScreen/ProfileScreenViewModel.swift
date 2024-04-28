@@ -70,8 +70,13 @@ class ProfileScreenViewModel: NSObject, ObservableObject, CLLocationManagerDeleg
         self.chatLikedViewModels = []
     }
     
+    func stopLocationRequest(){
+        self.locationHomebase.stopUpdatingLocation()
+    }
+    
     func requestHomebase(){
         self.locationHomebase.requestWhenInUseAuthorization()
+        self.locationHomebase.startUpdatingLocation()
     }
     
     @MainActor

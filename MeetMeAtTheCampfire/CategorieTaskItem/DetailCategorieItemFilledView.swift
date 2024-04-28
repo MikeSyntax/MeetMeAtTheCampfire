@@ -20,7 +20,6 @@ struct DetailCategorieItemFilledView: View {
                 HStack{
                     Text(detailCategorieItemVm.taskName)
                         .strikethrough(detailCategorieItemVm.taskIsDone, color: .black)
-                        .foregroundColor(.black)
                         .bold()
                     Spacer()
                     if detailCategorieItemVm.taskIsDone {

@@ -161,6 +161,10 @@ class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManager
         return dateFormatter.string(from: self.date)
     }
     
+    func stopLocationRequest(){
+        self.locationManager.stopUpdatingLocation()
+    }
+    
     func requestLocation(){
         self.locationManager.requestWhenInUseAuthorization()
         self.locationManager.startUpdatingLocation()

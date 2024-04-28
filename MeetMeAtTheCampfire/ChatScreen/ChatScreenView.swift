@@ -86,8 +86,11 @@ struct ChatScreenView: View {
                         .keyboardType(.default)
                         .submitLabel(.done)
                     ButtonTextAction(iconName: "paperplane", text: "Senden") {
-                        chatVm.createNewMessage(userName: userName, messageText: newMessage, isLiked: false, isLikedByUser: [])
-                        newMessage = ""
+                        if !newMessage.isEmpty{
+                            chatVm.createNewMessage(userName: userName, messageText: newMessage, isLiked: false, isLikedByUser: [])
+                            newMessage = ""
+                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
+                        }
                     }
                 }
                 .padding(EdgeInsets(top: 0, leading: 10, bottom: 10, trailing: 10))

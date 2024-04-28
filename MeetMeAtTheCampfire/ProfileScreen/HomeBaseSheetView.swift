@@ -14,16 +14,28 @@ struct HomeBaseSheetView: View {
     @AppStorage("homeLat") var homeBaseLatitude: Double = 49.849
     @AppStorage("homeLong") var homeBaseLongitude: Double = 8.44
     @AppStorage("isDarkMode") var isDark: Bool = false
-    
+    @Environment(\.dismiss) private var dismiss
     var body: some View {
         NavigationStack{
             VStack{
-                MapKitNHomebaseView()
+                Map() {
+                    UserAnnotation()
+                }
+                .mapControls {
+                    MapUserLocationButton()
+                }
             }
-        }
-        .navigationTitle("Wähle Dein Homebase")
-        .onAppear {
-            profileScreenVm.requestHomebase()
+            .toolbar{
+                Button("Übernehmen"){
+                    profileScreenVm.stopLocationRequest()
+                    dismiss()
+                }
+            }
+            .navigationTitle("Wähle Dein Homebase")
+            .navigationBarTitleDisplayMode(.inline)
+            .onAppear {
+                profileScreenVm.requestHomebase()
+            }
         }
         .preferredColorScheme(isDark ? .dark : .light)
     }
@@ -33,25 +45,3 @@ struct HomeBaseSheetView: View {
     HomeBaseSheetView(profileScreenVm: ProfileScreenViewModel(user: UserModel(id: "", email: "", registeredTime: Date(), userName: "Hans", timeStampLastVisitChat: Date())))
 }
 
-struct MapKitNHomebaseView: View {
-    
-    @Environment(\.dismiss) private var dismiss
-    
-    var body: some View {
-        NavigationStack{
-            Map() {
-                UserAnnotation()
-            }
-            .mapControls {
-                MapUserLocationButton()
-            }
-            .toolbar{
-                Button("Übernehmen"){
-                    dismiss()
-                }
-            }
-        }
-        .navigationTitle("Wähle Dein Homebase")
-        .navigationBarTitleDisplayMode(.inline)
-    }
-}
