@@ -77,10 +77,8 @@ struct DetailCategorieView: View {
                 dismiss()}}
         }
         .alert("Neues ToDo erstellen", isPresented: $showNewTaskAlert) {
-//            if isDark {
                 TextField("Beschreibung", text: $newTask)
                     .lineLimit(1)
-//                    .foregroundColor(.black)
                     .textInputAutocapitalization(.never)
                     .autocorrectionDisabled()
                 Button("Zurück") {
@@ -91,21 +89,6 @@ struct DetailCategorieView: View {
                     detailCategorieVm.createNewTask(taskName: newTask, categorieId: categorieVm.categorieViewModel.id)
                     newTask = ""
                 }
-//            } else {
-//                TextField("Beschreibung", text: $newTask)
-//                    .lineLimit(1)
-//                    .foregroundColor(.primary)
-//                    .textInputAutocapitalization(.never)
-//                    .autocorrectionDisabled()
-//                Button("Zurück") {
-//                    newTask = ""
-//                    showNewTaskAlert.toggle()
-//                }
-//                Button("Speichern") {
-//                    detailCategorieVm.createNewTask(taskName: newTask, categorieId: categorieVm.categorieViewModel.id)
-//                    newTask = ""
-//                }
-//            }
         }
         .onAppear{
             detailCategorieVm.readTasks(categorieId: categorieVm.categorieViewModel.id)

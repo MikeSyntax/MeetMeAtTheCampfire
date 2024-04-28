@@ -8,17 +8,14 @@
 import SwiftUI
 import Firebase
 
-
 @main
 struct MeetMeAtTheCampfireApp: App {
     
     @StateObject var authVm = AuthViewModel()
-    //@StateObject var infoButtonSettings = InfoButtonSettings()
     
     init(){
         FirebaseConfiguration.shared.setLoggerLevel(.min)
         FirebaseApp.configure()
-        //UINavigationBar.appearance().setBackgroundImage(.background, for: .defaultPrompt)
     }
     
     var body: some Scene {

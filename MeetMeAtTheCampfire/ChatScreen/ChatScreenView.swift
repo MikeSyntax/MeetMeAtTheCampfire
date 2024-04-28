@@ -70,9 +70,7 @@ struct ChatScreenView: View {
                 Divider()
                     .frame(height: 5)
                 HStack {
-                    TextField("Neue Nachricht", text: $newMessage, onCommit: {
-                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                    })
+                    TextField("Neue Nachricht", text: $newMessage)
                         .onChange(of: newMessage) { newValue, _ in
                             if newValue.count > 500 {
                                 newMessage = String(newValue.prefix(500))
@@ -85,6 +83,8 @@ struct ChatScreenView: View {
                             RoundedRectangle(cornerRadius: 10)
                                 .stroke(Color.cyan, lineWidth: 2)
                         )
+                        .keyboardType(.default)
+                        .submitLabel(.done)
                     ButtonTextAction(iconName: "paperplane", text: "Senden") {
                         chatVm.createNewMessage(userName: userName, messageText: newMessage, isLiked: false, isLikedByUser: [])
                         newMessage = ""
@@ -112,9 +112,6 @@ struct ChatScreenView: View {
             get: { chatVm.searchTerm },
             set: { chatVm.searchTerm = $0.lowercased() })
         )
-        .onTapGesture {
-            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-        }
     }
 }
 

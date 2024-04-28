@@ -74,9 +74,9 @@ class DetailCategorieViewModel: ObservableObject {
                 try? document.data(as: TaskModel.self)
             }
             
-            let sortedTodos = tasks.sorted { $0.taskName < $1.taskName }
+           // let sortedTodos = tasks.sorted { $0.taskName < $1.taskName }
             
-            let sortedTodosDone = sortedTodos.sorted { $0.taskIsDone != $1.taskIsDone}
+            let sortedTodosDone = tasks.sorted { $0.taskIsDone != $1.taskIsDone}
             
             let detailCategorieItemViewModels = sortedTodosDone.map { DetailCategorieItemViewModel(detailCategorieItemModel: $0) }
             self.detailCategorieItemViewModels = detailCategorieItemViewModels

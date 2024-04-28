@@ -54,14 +54,13 @@ struct LoginView: View {
                         if !authVm.email.isEmpty {
                             if authVm.email.count >= 2 {
                                 RightView()
-                                    .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 7))
+                                    .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 45))
                             } else {
                                 FalseView()
-                                    .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 7))
+                                    .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 45))
                             }
                         }
                     }
-                    Spacer()
                     ZStack(alignment: .trailing){
                         SecureField("Passwort eingeben", text: $authVm.password)
                             .textFieldStyle(.roundedBorder)
@@ -71,17 +70,16 @@ struct LoginView: View {
                         if !authVm.password.isEmpty {
                             if authVm.password.count >= 6 {
                                 RightView()
-                                    .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 7))
+                                    .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 45))
                             } else {
                                 FalseView()
-                                    .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 7))
+                                    .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 45))
                             }
                         }
                     }
                 }
                 .keyboardType(.emailAddress)
                 .submitLabel(.done)
-                Spacer()
                 ButtonTextAction(iconName: "paperplane.fill", text: "Login"){
                     if !authVm.password.isEmpty && authVm.password.count >= 6 {
                         authVm.login()
@@ -91,8 +89,6 @@ struct LoginView: View {
                 .alert(isPresented: $authVm.loginFailedAlert){
                     Alert(title: Text("Hoppla"), message: Text("Deine Anmeldung hat nicht geklappt"), dismissButton: .default(Text("OK")))
                 }
-                Spacer()
-                Divider()
                 Spacer()
                 HStack {
                     Text("Noch kein Konto?")
@@ -106,14 +102,12 @@ struct LoginView: View {
                     }
                     .font(.system(size: 14))
                 }
-                .padding()
                 let passwordText: String = "Passwort vergessen?"
                 Button(passwordText){
                     showPasswordWithEmail.toggle()
                 }
                 .padding()
                 .font(.system(size: 14))
-                Spacer()
                 Spacer()
                     .sheet(isPresented: $showPasswordWithEmail){
                         PasswortSendWithEmailView(showPasswordWithEmail: $showPasswordWithEmail)
@@ -137,38 +131,3 @@ struct LoginView: View {
     LoginView()
         .environmentObject(AuthViewModel())
 }
-
-//class ChatLoginVC: UIViewController {
-//    @IBOutlet weak var pinTF: UITextField!
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        setupToolbar()
-//    }
-//    func setupToolbar(){
-//        //Create a toolbar
-//        let bar = UIToolbar()
-//        //Create a done button with an action to trigger our function to dismiss the keyboard
-//        let doneBtn = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(dismissMyKeyboard))
-//        //Create a felxible space item so that we can add it around in toolbar to position our done button
-//        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-//        //Add the created button items in the toobar
-//        bar.items = [flexSpace, flexSpace, doneBtn]
-//        bar.sizeToFit()
-//        //Add the toolbar to our textfield
-//        pinTF.inputAccessoryView = bar
-//    }
-//    @objc func dismissMyKeyboard(){
-//        view.endEditing(true)
-//    }
-//}
-
-
-
-//                .toolbar {
-//                    ToolbarItemGroup(placement: .keyboard){
-//                        Spacer()
-//                        Button("Done"){
-//                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-//                        }
-//                    }
-//                }

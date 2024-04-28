@@ -113,7 +113,7 @@ struct CalendarDetailNewEntryView: View {
                             .animation(Animation.easeInOut(duration: 0.3).repeatCount(7, autoreverses: true), value: isAnimated)
                         }
                     }
-                    .offset(x: 100, y: 250)
+                    .offset(x: 100, y: 150)
                     .onAppear {
                         isAnimated = true
                     }

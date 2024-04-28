@@ -31,7 +31,7 @@ struct LanguageScreenView: View {
                         }
                         Section(header: Text("Text eingeben").foregroundStyle(.primary)){
                             ZStack(alignment: .trailing){
-                                TextField("Texteingabe für die Übersetzung", text: $languageVm.textToTranslate, axis: .vertical)
+                                TextField("Texteingabe für die Übersetzung", text: $languageVm.textToTranslate/*, axis: .vertical*/)
                                     .onChange(of: languageVm.textToTranslate) { newValue, _ in
                                         if newValue.count > 300 {
                                             languageVm.textToTranslate = String(newValue.prefix(300))
@@ -48,6 +48,8 @@ struct LanguageScreenView: View {
                                     ClearView()
                                 }
                             }
+                            .keyboardType(.default)
+                            .submitLabel(.done)
                         }
                         Section(header: Text("Es wird übersetzt von")
                             .foregroundStyle(.primary)){
@@ -88,8 +90,8 @@ struct LanguageScreenView: View {
             .navigationBarTitle("Mein Übersetzer", displayMode: .inline)
             .toolbar{
                 Button("Abbrechen"){
-                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                     languageVm.clearTextFields()
+                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                 }
             }
         }

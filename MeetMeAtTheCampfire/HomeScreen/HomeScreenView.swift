@@ -103,10 +103,8 @@ struct HomeScreenView: View {
             .navigationBarTitle("Meine Kategorien", displayMode: .inline)
         }
         .alert("Neue Kategorie", isPresented: $showNewCategorieAlert) {
-//            if isDark {
                 TextField("Name", text: $newCategorie)
                     .lineLimit(1)
-//                    .foregroundColor(.black)
                     .textInputAutocapitalization(.never)
                     .autocorrectionDisabled()
                 Button("Zurück") {
@@ -117,21 +115,6 @@ struct HomeScreenView: View {
                     homeVm.createCategorie(categorieName: newCategorie)
                     newCategorie = ""
                 }
-//            } else {
-//                TextField("Name", text: $newCategorie)
-//                    .lineLimit(1)
-//                    .foregroundColor(.primary)
-//                    .textInputAutocapitalization(.never)
-//                    .autocorrectionDisabled()
-//                Button("Zurück") {
-//                    newCategorie = ""
-//                    dismiss()
-//                }
-//                Button("Speichern") {
-//                    homeVm.createCategorie(categorieName: newCategorie)
-//                    newCategorie = ""
-//                }
-//            }
         }
         .sheet(isPresented: $showSettingsSheet) {
             SettingsScreenView()

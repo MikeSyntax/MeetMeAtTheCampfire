@@ -11,7 +11,7 @@
 		2B0BBE502BB48EFC006D93EB /* ImagePickerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0BBE4F2BB48EFC006D93EB /* ImagePickerCoordinator.swift */; };
 		2B1738A12BAD80FC0043CAF0 /* CalendarDetailNewEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1738A02BAD80FC0043CAF0 /* CalendarDetailNewEntryView.swift */; };
 		2B1738A32BAD82050043CAF0 /* MapKitNewEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1738A22BAD82050043CAF0 /* MapKitNewEntryView.swift */; };
-		2B2778B22B8F5C9B00779FB5 /* MeetMeAtTheCampfireApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2778B12B8F5C9B00779FB5 /* MeetMeAtTheCampfireApp.swift */; };
+		2B2778B22B8F5C9B00779FB5 /* MeetMeAtTheCampfire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2778B12B8F5C9B00779FB5 /* MeetMeAtTheCampfire.swift */; };
 		2B2778B62B8F5C9C00779FB5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B2778B52B8F5C9C00779FB5 /* Assets.xcassets */; };
 		2B2778C02B8FA74B00779FB5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2B2778BF2B8FA74B00779FB5 /* GoogleService-Info.plist */; };
 		2B2778C32B9069D700779FB5 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 2B2778C22B9069D700779FB5 /* FirebaseAnalytics */; };
@@ -102,8 +102,8 @@
 		2B0BBE4F2BB48EFC006D93EB /* ImagePickerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerCoordinator.swift; sourceTree = "<group>"; };
 		2B1738A02BAD80FC0043CAF0 /* CalendarDetailNewEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDetailNewEntryView.swift; sourceTree = "<group>"; };
 		2B1738A22BAD82050043CAF0 /* MapKitNewEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapKitNewEntryView.swift; sourceTree = "<group>"; };
-		2B2778AE2B8F5C9B00779FB5 /* MeetMeAtTheCampfire.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeetMeAtTheCampfire.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		2B2778B12B8F5C9B00779FB5 /* MeetMeAtTheCampfireApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetMeAtTheCampfireApp.swift; sourceTree = "<group>"; };
+		2B2778AE2B8F5C9B00779FB5 /* Campfire.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Campfire.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2B2778B12B8F5C9B00779FB5 /* MeetMeAtTheCampfire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetMeAtTheCampfire.swift; sourceTree = "<group>"; };
 		2B2778B52B8F5C9C00779FB5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2B2778BF2B8FA74B00779FB5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2B2778FC2B9079F200779FB5 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
@@ -228,7 +228,7 @@
 		2B2778AF2B8F5C9B00779FB5 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2B2778AE2B8F5C9B00779FB5 /* MeetMeAtTheCampfire.app */,
+				2B2778AE2B8F5C9B00779FB5 /* Campfire.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -236,7 +236,7 @@
 		2B2778B02B8F5C9B00779FB5 /* MeetMeAtTheCampfire */ = {
 			isa = PBXGroup;
 			children = (
-				2B2778B12B8F5C9B00779FB5 /* MeetMeAtTheCampfireApp.swift */,
+				2B2778B12B8F5C9B00779FB5 /* MeetMeAtTheCampfire.swift */,
 				2BF347D82BD1BEC1007F0AB3 /* Cat.MP4 */,
 				2BF347D72BD1BEC1007F0AB3 /* ToDo.MP4 */,
 				2B2778BF2B8FA74B00779FB5 /* GoogleService-Info.plist */,
@@ -548,7 +548,7 @@
 				2B2778F72B906C4E00779FB5 /* FirebaseStorageCombine-Community */,
 			);
 			productName = MeetMeAtTheCampfire;
-			productReference = 2B2778AE2B8F5C9B00779FB5 /* MeetMeAtTheCampfire.app */;
+			productReference = 2B2778AE2B8F5C9B00779FB5 /* Campfire.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -684,7 +684,7 @@
 				2BAB624C2B95D61B00C7839E /* HomeScreenViewModel.swift in Sources */,
 				2B5DF18B2B99B7B900FA285C /* ChatItemViewModel.swift in Sources */,
 				2B2779002B907E7B00779FB5 /* LoginView.swift in Sources */,
-				2B2778B22B8F5C9B00779FB5 /* MeetMeAtTheCampfireApp.swift in Sources */,
+				2B2778B22B8F5C9B00779FB5 /* MeetMeAtTheCampfire.swift in Sources */,
 				2BAE99662BDC1A0C002C20ED /* CalendarNewEntrySheetView.swift in Sources */,
 				2BBC15172B9B754D00305504 /* LanguageApiKey.swift in Sources */,
 				2B5561522BAB0A5A0028C6E5 /* CalendarDetailItemViewModel.swift in Sources */,
@@ -838,7 +838,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = mikeSyntax.MeetMeAtTheCampfire;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Campfire;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -871,7 +871,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = mikeSyntax.MeetMeAtTheCampfire;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Campfire;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;

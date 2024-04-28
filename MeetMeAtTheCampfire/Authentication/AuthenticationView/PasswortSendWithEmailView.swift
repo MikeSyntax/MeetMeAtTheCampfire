@@ -32,6 +32,7 @@ struct PasswortSendWithEmailView: View {
                     Spacer()
                 }
                 .keyboardType(.emailAddress)
+                .submitLabel(.done)
                 Divider()
                 VStack{
                     ButtonTextAction(iconName: "paperplane.fill", text: "Abschicken"){

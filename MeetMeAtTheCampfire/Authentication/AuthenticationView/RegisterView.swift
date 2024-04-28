@@ -15,12 +15,7 @@ struct RegisterView: View {
     var body: some View {
         NavigationStack{
             VStack {
-                Text("Bitte registriere Dich!")
-                    .font(.title)
-                    .padding(4)
-                    .italic()
-                    .bold()
-                    .foregroundStyle(.gray)
+                Spacer()
                 VStack{
                     VStack(alignment: .leading){
                         Text("Benutzername")
@@ -112,9 +107,6 @@ struct RegisterView: View {
                 .keyboardType(.emailAddress)
                 .submitLabel(.done)
                 .padding(.bottom)
-                Spacer()
-                Divider()
-                Spacer()
                 VStack{
                     ButtonTextAction(iconName: "paperplane.fill", text: "Registrieren"){
                         if (!authVm.email.isEmpty) && (!authVm.userName.isEmpty) && (authVm.password == authVm.confirmPassword) && (!authVm.password.isEmpty) && (!authVm.confirmPassword.isEmpty){
@@ -129,6 +121,8 @@ struct RegisterView: View {
                 }
                 .padding(EdgeInsets(top: 25, leading: 0, bottom: 25, trailing: 0))
             }
+            .navigationTitle("Jetzt registrieren")
+            .navigationBarTitleDisplayMode(.inline)
             .padding(40)
             .toolbar(content: {
                 Button("Zurück") {
