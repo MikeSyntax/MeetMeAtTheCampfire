@@ -17,7 +17,6 @@ struct DetailCategorieView: View {
     @State private var showNewTaskAlert: Bool = false
     @State private var newTask: String = ""
     @Environment(\.dismiss) private var dismiss
-    //@AppStorage("isDarkMode") var isDark: Bool = false
     
     var body: some View {
         VStack {
@@ -35,7 +34,6 @@ struct DetailCategorieView: View {
                 LazyVStack {
                     ForEach(detailCategorieVm.detailCategorieItemViewModels, id: \.taskName) { detailCategorieViewModel in
                         DetailCategorieItemFilledView(detailCategorieItemVm: detailCategorieViewModel)
-                            .frame(height: 40)
                             .onTapGesture {
                                 detailCategorieVm.updateTask(detailCategorieItemVm: detailCategorieItemVm, taskId: detailCategorieViewModel.detailCategorieItemModel.id)
                             }
@@ -77,18 +75,17 @@ struct DetailCategorieView: View {
                 dismiss()}}
         }
         .alert("Neues ToDo erstellen", isPresented: $showNewTaskAlert) {
-                TextField("Beschreibung", text: $newTask)
-                    .lineLimit(1)
-                    .textInputAutocapitalization(.never)
-                    .autocorrectionDisabled()
-                Button("Zurück") {
-                    newTask = ""
-                    showNewTaskAlert.toggle()
-                }
-                Button("Speichern") {
-                    detailCategorieVm.createNewTask(taskName: newTask, categorieId: categorieVm.categorieViewModel.id)
-                    newTask = ""
-                }
+            TextField("Beschreibung", text: $newTask)
+                .lineLimit(1)
+                .autocorrectionDisabled()
+            Button("Zurück") {
+                newTask = ""
+                showNewTaskAlert.toggle()
+            }
+            Button("Speichern") {
+                detailCategorieVm.createNewTask(taskName: newTask, categorieId: categorieVm.categorieViewModel.id)
+                newTask = ""
+            }
         }
         .onAppear{
             detailCategorieVm.readTasks(categorieId: categorieVm.categorieViewModel.id)
@@ -96,7 +93,6 @@ struct DetailCategorieView: View {
         .onDisappear{
             detailCategorieVm.removeListener()
         }
-        .background(Color(UIColor.systemBackground))
     }
 }
 

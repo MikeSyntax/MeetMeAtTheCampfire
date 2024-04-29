@@ -27,6 +27,8 @@ class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManager
     @Published var readImages: [String] = []
     @Published var containsLogBookEntry: Bool = false
     
+    @Published var dayIsEmpty: Bool = false
+    
     //Listener
     private var listener: ListenerRegistration? = nil
     let calendarItemModel: LogBookModel

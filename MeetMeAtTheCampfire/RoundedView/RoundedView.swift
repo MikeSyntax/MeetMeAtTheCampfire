@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CircularTextView: View {
+struct RoundedView: View {
     @State var letterWidths: [Int:Double] = [:]
     
     @State var title: String
@@ -22,7 +22,7 @@ struct CircularTextView: View {
             ForEach(lettersOffset, id: \.offset) { index, letter in // Mark 1
                 VStack {
                     Text(String(letter))
-                        .font(.system(size: 13, design: .monospaced))
+                        .font(.system(size: 16, design: .monospaced))
                         .foregroundColor(.cyan)
                         .kerning(5)
                         .background(LetterWidthSize()) // Mark 2
@@ -34,7 +34,7 @@ struct CircularTextView: View {
                 .rotationEffect(fetchAngle(at: index)) // Mark 3
             }
         }
-        .frame(width: 200, height: 200)
+        .frame(width: 190, height: 190)
         .rotationEffect(.degrees(214))
     }
     

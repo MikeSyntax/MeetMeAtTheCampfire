@@ -14,7 +14,6 @@ struct MainScreenView: View {
     @StateObject var languageVm = LanguageScreenViewModel(languageChoice: Language(code: "af", name: "Afrikaans"), languageSource: Language(code: "de", name: "Deutsch"))
     @StateObject var chatSenderVm = ChatItemViewModel(chatDesign: ChatModel(userId: "2", userName: "Dieter", messageText: "Danke", timeStamp: Date(), isReadbyUser: [], isLiked: false, isLikedByUser: []))
     @State private var selectedTab = 0
-    //@AppStorage("isDarkMode") var isDark: Bool = false
     
     init(authVm: AuthViewModel){
         _chatVm = StateObject(wrappedValue: ChatScreenViewModel(user: authVm.user!))

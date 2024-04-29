@@ -31,16 +31,12 @@ struct ChatItemView: View {
                     Text("UserId: \(chatSenderVm.userId)")
                         .font(.system(size: 8))
                 }
-                .padding(.trailing)
-                .padding(.leading)
-                .padding(.vertical, 2)
+                .padding(EdgeInsets(top: 2, leading: 5, bottom: 2, trailing: 5))
                 .frame(maxWidth: maxWidth, alignment: chatSenderVm.isCurrentUser ? .trailing : .leading)
                 Text(chatSenderVm.messageText)
                     .lineLimit(1...)
                     .font(.headline)
-                    .padding(.leading)
-                    .padding(.trailing)
-                    .padding(.vertical, 2)
+                    .padding(EdgeInsets(top: 2, leading: 5, bottom: 2, trailing: 5))
                     .frame(maxWidth: maxWidth, alignment: chatSenderVm.isCurrentUser ? .trailing : .leading)
                 Spacer()
                 HStack{

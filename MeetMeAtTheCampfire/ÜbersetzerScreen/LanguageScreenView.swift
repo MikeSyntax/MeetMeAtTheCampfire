@@ -29,7 +29,12 @@ struct LanguageScreenView: View {
                             .pickerStyle(.menu)
                             .onChange(of: selectionLanguage) { languageVm.languageChoice = selectionLanguage }
                         }
-                        Section(header: Text("Text eingeben").foregroundStyle(.primary)){
+                        
+                        VStack(alignment: .leading){
+                            Text("Email")
+                                .font(.system(size: 10))
+                                .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+                        
                             ZStack(alignment: .trailing){
                                 TextField("Texteingabe für Übersetzung", text: $languageVm.textToTranslate, axis: .vertical)
                                     .onChange(of: languageVm.textToTranslate) { newValue, _ in
@@ -37,10 +42,13 @@ struct LanguageScreenView: View {
                                             languageVm.textToTranslate = String(newValue.prefix(300))
                                         }
                                     }
-                                    .font(.system(size: 17))
-                                          .padding(4)
-                                          .background(.white.opacity(0.4))
-                                          .cornerRadius(10)
+                                    .font(.system(size: 17).bold())
+                                    .padding(3)
+                                    .background(.cyan.opacity(0.4))
+                                    .cornerRadius(6)
+                                    .textInputAutocapitalization(.never)
+                                    .autocorrectionDisabled()
+                                    .textFieldStyle(.roundedBorder)
                                     .autocorrectionDisabled()
                                     .lineLimit(1...5)
                                     .frame(minHeight: 40)
@@ -74,10 +82,13 @@ struct LanguageScreenView: View {
                         Section(header: Text("Übersetzung")
                             .foregroundStyle(.primary)){
                                     TextField("Übersetzung", text: $languageVm.translatedText, axis: .vertical)
-                                    .font(.system(size: 17))
-                                          .padding(4)
-                                          .background(.white.opacity(0.4))
-                                          .cornerRadius(10)
+                                    .font(.system(size: 17).bold())
+                                    .padding(3)
+                                    .background(.cyan.opacity(0.4))
+                                    .cornerRadius(6)
+                                    .textInputAutocapitalization(.never)
+                                    .autocorrectionDisabled()
+                                    .textFieldStyle(.roundedBorder)
                                         .autocorrectionDisabled()
                                         .lineLimit(1...5)
                                         .frame(minHeight: 40)

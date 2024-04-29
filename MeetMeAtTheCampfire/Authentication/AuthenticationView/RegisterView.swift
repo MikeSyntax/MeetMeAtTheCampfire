@@ -23,12 +23,13 @@ struct RegisterView: View {
                             .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
                         ZStack(alignment: .trailing){
                             TextField("Benutzernamen eingeben", text: $authVm.userName)
-                                .font(.system(size: 17))
-                                      .padding(4)
-                                      .background(.white.opacity(0.4))
-                                      .cornerRadius(10)
+                                .font(.system(size: 17).bold())
+                                .padding(3)
+                                .background(.cyan.opacity(0.4))
+                                .cornerRadius(6)
                                 .textInputAutocapitalization(.never)
                                 .autocorrectionDisabled()
+                                .textFieldStyle(.roundedBorder)
                                 .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
                             if !authVm.userName.isEmpty {
                                 if authVm.userName.count >= 2 {
@@ -47,12 +48,13 @@ struct RegisterView: View {
                             .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
                         ZStack(alignment: .trailing){
                             TextField("Email eingeben", text: $authVm.email)
-                                .font(.system(size: 17))
-                                      .padding(4)
-                                      .background(.white.opacity(0.4))
-                                      .cornerRadius(10)
+                                .font(.system(size: 17).bold())
+                                .padding(3)
+                                .background(.cyan.opacity(0.4))
+                                .cornerRadius(6)
                                 .textInputAutocapitalization(.never)
                                 .autocorrectionDisabled()
+                                .textFieldStyle(.roundedBorder)
                                 .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
                             if !authVm.email.isEmpty {
                                 if authVm.email.count >= 2 {
@@ -71,12 +73,13 @@ struct RegisterView: View {
                             .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
                         ZStack(alignment: .trailing){
                             SecureField("Passwort eingeben", text: $authVm.password)
-                                .font(.system(size: 17))
-                                      .padding(4)
-                                      .background(.white.opacity(0.4))
-                                      .cornerRadius(10)
+                                .font(.system(size: 17).bold())
+                                .padding(3)
+                                .background(.cyan.opacity(0.4))
+                                .cornerRadius(6)
                                 .textInputAutocapitalization(.never)
                                 .autocorrectionDisabled()
+                                .textFieldStyle(.roundedBorder)
                                 .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
                             if !authVm.password.isEmpty {
                                 if authVm.password.count >= 6 {
@@ -95,12 +98,13 @@ struct RegisterView: View {
                             .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
                         ZStack(alignment: .trailing){
                             SecureField("Passwort wiederholen", text: $authVm.confirmPassword)
-                                .font(.system(size: 17))
-                                      .padding(4)
-                                      .background(.white.opacity(0.4))
-                                      .cornerRadius(10)
+                                .font(.system(size: 17).bold())
+                                .padding(3)
+                                .background(.cyan.opacity(0.4))
+                                .cornerRadius(6)
                                 .textInputAutocapitalization(.never)
                                 .autocorrectionDisabled()
+                                .textFieldStyle(.roundedBorder)
                                 .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
                             if (!authVm.confirmPassword.isEmpty) {
                                 if  (authVm.password == authVm.confirmPassword) {

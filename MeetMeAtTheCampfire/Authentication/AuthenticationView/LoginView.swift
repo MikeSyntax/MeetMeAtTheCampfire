@@ -24,24 +24,9 @@ struct LoginView: View {
                             .frame(width: 150, height: 150)
                             .clipShape(Circle())
                             .opacity(0.8)
-                        CircularTextView(title: "   Deine Camper App -Meet me at the campfire".uppercased(), radius: 125)
+                        RoundedView(title: "   Deine Camper App -Meet me at the campfire".uppercased(), radius: 140)
                     }
                     .padding(EdgeInsets(top: 35, leading: 0, bottom: 0, trailing: 0))
-                    VStack{
-                        VStack{
-                            Text("Meet me at the campfire")
-                            Text("Der Weg ist das Ziel")
-                        }
-                        .frame(width: 210)
-                        .padding(8)
-                        .font(.headline)
-                        .italic()
-                        .bold()
-                        .foregroundStyle(.cyan)
-                       
-                        .cornerRadius(10)
-                    }
-                    .padding(EdgeInsets(top: 15, leading: 0, bottom: 15, trailing: 0))
                 }
                 .padding(.top)
                 VStack {
@@ -52,21 +37,22 @@ struct LoginView: View {
                                 .font(.system(size: 10))
                                 .padding(EdgeInsets(top: 0, leading: 60, bottom: 0, trailing: 60))
                             ZStack(alignment: .trailing){
-                            TextField("Email eingeben", text: $authVm.email)
-                                .font(.system(size: 17))
-                                      .padding(4)
-                                      .background(.white.opacity(0.4))
-                                      .cornerRadius(6)
-                                .textInputAutocapitalization(.never)
-                                .autocorrectionDisabled()
-                                .padding(EdgeInsets(top: 0, leading: 60, bottom: 10, trailing: 60))
+                                TextField("Email eingeben", text: $authVm.email)
+                                    .font(.system(size: 17).bold())
+                                    .padding(3)
+                                    .background(.cyan.opacity(0.4))
+                                    .cornerRadius(6)
+                                    .textInputAutocapitalization(.never)
+                                    .autocorrectionDisabled()
+                                    .textFieldStyle(.roundedBorder)
+                                    .padding(EdgeInsets(top: 0, leading: 60, bottom: 10, trailing: 60))
                                 if !authVm.email.isEmpty {
                                     if authVm.email.count >= 2 {
                                         RightView()
-                                            .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 45))
+                                            .padding(EdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 45))
                                     } else {
                                         FalseView()
-                                            .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 45))
+                                            .padding(EdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 45))
                                     }
                                 }
                             }
@@ -76,21 +62,22 @@ struct LoginView: View {
                                 .font(.system(size: 10))
                                 .padding(EdgeInsets(top: 0, leading: 60, bottom: 0, trailing: 60))
                             ZStack(alignment: .trailing){
-                            SecureField("Passwort eingeben", text: $authVm.password)
-                                .font(.system(size: 17))
-                                      .padding(4)
-                                      .background(.white.opacity(0.4))
-                                      .cornerRadius(6)
-                                .textInputAutocapitalization(.never)
-                                .autocorrectionDisabled()
-                                .padding(EdgeInsets(top: 0, leading: 60, bottom: 10, trailing: 60))
+                                SecureField("Passwort eingeben", text: $authVm.password)
+                                    .font(.system(size: 17).bold())
+                                    .padding(3)
+                                    .background(.cyan.opacity(0.4))
+                                    .cornerRadius(6)
+                                    .textInputAutocapitalization(.never)
+                                    .autocorrectionDisabled()
+                                    .padding(EdgeInsets(top: 0, leading: 60, bottom: 10, trailing: 60))
+                                    .textFieldStyle(.roundedBorder)
                                 if !authVm.password.isEmpty {
                                     if authVm.password.count >= 6 {
                                         RightView()
-                                            .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 45))
+                                            .padding(EdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 45))
                                     } else {
                                         FalseView()
-                                            .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 45))
+                                            .padding(EdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 45))
                                     }
                                 }
                             }
@@ -128,10 +115,10 @@ struct LoginView: View {
                     }
                     .padding()
                     .font(.system(size: 14))
-                        .sheet(isPresented: $showPasswordWithEmail){
-                            PasswortSendWithEmailView(showPasswordWithEmail: $showPasswordWithEmail)
-                                .presentationDetents([.medium])
-                        }
+                    .sheet(isPresented: $showPasswordWithEmail){
+                        PasswortSendWithEmailView(showPasswordWithEmail: $showPasswordWithEmail)
+                            .presentationDetents([.medium])
+                    }
                 }
             }
             .scrollContentBackground(.hidden)
@@ -150,3 +137,18 @@ struct LoginView: View {
     LoginView()
         .environmentObject(AuthViewModel())
 }
+
+
+//                    VStack{
+//                        VStack{
+//                            Text("Deine Camper App".uppercased())
+//                                .padding(EdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 0))
+//                            Text("Meet me at the campfire".uppercased())
+//                        }
+//                        .frame(width: 250)
+//                        .padding(8)
+//                        .font(.system(size: 15))
+//                        .foregroundStyle(.cyan)
+//                        .cornerRadius(10)
+//                    }
+//                    .padding(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))

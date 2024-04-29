@@ -5,6 +5,7 @@
 //  Created by Mike Reichenbach on 13.03.24.
 //
 
+
 import SwiftUI
 
 struct DetailCategorieItemFilledView: View {
@@ -15,11 +16,13 @@ struct DetailCategorieItemFilledView: View {
     var body: some View {
         RoundedRectangle(cornerRadius: 10)
             .fill(Color.white).opacity(0.7)
+            .frame(minHeight: 40)
             .padding(4)
             .overlay(
                 HStack{
                     Text(detailCategorieItemVm.taskName)
                         .strikethrough(detailCategorieItemVm.taskIsDone, color: .black)
+                        .foregroundColor(.black)
                         .bold()
                     Spacer()
                     if detailCategorieItemVm.taskIsDone {
@@ -31,7 +34,6 @@ struct DetailCategorieItemFilledView: View {
                 }
                     .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
             )
-            .lineLimit(1)
             .background(bgColor.randomElement())
             .shadow(radius: 10)
             .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))

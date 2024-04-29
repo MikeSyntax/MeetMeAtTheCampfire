@@ -16,9 +16,9 @@ struct ChatScreenView: View {
     @State private var matchingChatIds: [String] = []
     
     init(chatVm: ChatScreenViewModel) {
-            self.chatVm = chatVm
+        self.chatVm = chatVm
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).title = "Abbrechen"
-        }
+    }
     
     var body: some View {
         let userName = authVm.user?.userName ?? "User name unknown"
@@ -28,7 +28,7 @@ struct ChatScreenView: View {
                 Divider()
                 ScrollView {
                     ScrollViewReader { scrollView in
-                       /* Lazy*/VStack {
+                        LazyVStack {
                             ForEach(chatVm.chatSenderViewModels) { chatSenderViewModel in
                                 ChatItemView(chatSenderVm: chatSenderViewModel)
                                     .id(chatSenderViewModel.id)
@@ -115,7 +115,6 @@ struct ChatScreenView: View {
             get: { chatVm.searchTerm },
             set: { chatVm.searchTerm = $0.lowercased() })
         )
-        .background(Color(UIColor.systemBackground))
     }
 }
 

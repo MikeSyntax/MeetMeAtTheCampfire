@@ -11,6 +11,7 @@ import MapKit
 struct CalendarDetailItemView: View {
     @ObservedObject var calendarDetailItemVm: CalendarDetailItemViewModel
     @State private var showNewEntryView: Bool = false
+    @State private var isLoading: Bool = false
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
@@ -40,23 +41,28 @@ struct CalendarDetailItemView: View {
                         }
                         VStack{
                             ForEach(calendarDetailItemVm.readImages, id: \.self){ image in
-                                AsyncImage(
-                                    url: URL(string: image),
-                                    content: { image in
-                                        image
-                                            .resizable()
-                                            .scaledToFit()
-                                            .cornerRadius(10)
-                                            .shadow(radius: 10)
-                                    },
-                                    placeholder: {
-                                        Image(systemName: "photo")
-                                            .resizable()
-                                            .scaledToFit()
-                                            .cornerRadius(10)
-                                            .shadow(radius: 10)
+                                ZStack{
+                                    if !image.isEmpty {
+                                        AsyncImage(
+                                            url: URL(string: image),
+                                            content: { image in
+                                                image
+                                                    .resizable()
+                                                    .scaledToFit()
+                                                    .cornerRadius(10)
+                                                    .shadow(radius: 10)
+                                            },
+                                            placeholder: {
+                                                if isLoading {
+                                                    ProgressView()
+                                                        .progressViewStyle(CircularProgressViewStyle())
+                                                        .scaleEffect(3)
+                                                        .padding(EdgeInsets(top: 30, leading: 0, bottom: 30, trailing: 0))
+                                                }
+                                            }
+                                        )
                                     }
-                                )
+                                }
                             }
                         }
                         .frame(width: 300)
@@ -64,15 +70,37 @@ struct CalendarDetailItemView: View {
                         VStack{
                             ForEach(calendarDetailItemVm.newEntryLogs) {
                                 newEntryLog in
-                                        Text(newEntryLog.logBookText)
-                                            .font(.callout)
-                                            .italic()
-                                            .bold()
-                                            .frame(width: 300)
+                                Text(newEntryLog.logBookText)
+                                    .font(.callout)
+                                    .italic()
+                                    .bold()
+                                    .frame(width: 300)
                             }
                         }
                     }
                 }
+                if calendarDetailItemVm.newEntryLogs.isEmpty || calendarDetailItemVm.newEntryLogs.contains(where: { $0.logBookText.isEmpty && $0.formattedDate == calendarDetailItemVm.formattedDate }){
+                    ZStack{
+                        if !isLoading {
+                            Image(.empty)
+                                .resizable()
+                                .scaledToFit()
+                                .cornerRadius(10)
+                                .frame(width: 300)
+                                .opacity(0.7)
+                        }
+                        if isLoading {
+                            ProgressView()
+                                .progressViewStyle(CircularProgressViewStyle())
+                                .scaleEffect(3)
+                                .padding(EdgeInsets(top: 30, leading: 0, bottom: 30, trailing: 0))
+                        }
+                    }
+                    .onAppear{
+                        isImageLoading()
+                    }
+                }
+                    
                 Divider()
                 if calendarDetailItemVm.newEntryLogs.isEmpty || calendarDetailItemVm.newEntryLogs.contains(where: { $0.logBookText.isEmpty && $0.formattedDate == calendarDetailItemVm.formattedDate }){
                     ButtonTextAction(iconName: "plus", text: "Neuer Eintrag") {
@@ -108,7 +136,14 @@ struct CalendarDetailItemView: View {
         .toolbar(.hidden, for: .tabBar)
         .background(Color(UIColor.systemBackground))
     }
+    func isImageLoading(){
+        isLoading = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0){
+            isLoading = false
+        }
+    }
 }
+
 #Preview{
     let logbookMod: LogBookModel = LogBookModel(userId: "1", formattedDate: "", logBookText: "Hallo", latitude: 0.0, longitude: 0.0, imageUrl: "", containsLogBookEntry: false)
     
@@ -120,116 +155,18 @@ struct CalendarDetailItemView: View {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // @EnvironmentObject var infoButtonSettings: InfoButtonSettings
 
-//Alles in der HomeView
-//
-//
-//
+
 //@Environment(\.colorScheme) private var colorScheme
 //@State private var isDark: Bool
-//
-//
-//
-//
+
 //init() {
 //        _isDark = State(initialValue: UserDefaults.standard.bool(forKey: "isDarkMode"))
 //    }
-//
-//
-//
-//
+
 //.preferredColorScheme(isDark ? .dark : .light)
-//
-//
-//
-//Button("Toggle Dark Mode") {
-//    isDark.toggle()
-//    UserDefaults.standard.set(isDark, forKey: "isDarkMode")
-//}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// @EnvironmentObject var infoButtonSettings: InfoButtonSettings
-
-//Alles in der HomeView
-//
-//
-//
-//@Environment(\.colorScheme) private var colorScheme
-//@State private var isDark: Bool
-//
-//
-//
-//
-//init() {
-//        _isDark = State(initialValue: UserDefaults.standard.bool(forKey: "isDarkMode"))
-//    }
-//
-//
-//
-//
-//.preferredColorScheme(isDark ? .dark : .light)
-//
-//
-//
 //Button("Toggle Dark Mode") {
 //    isDark.toggle()
 //    UserDefaults.standard.set(isDark, forKey: "isDarkMode")

@@ -17,7 +17,6 @@ struct HomeScreenView: View {
     @State private var showSettingsSheet: Bool = false
     
     @Environment(\.dismiss) private var dismiss
-    //@AppStorage("isDarkMode") var isDark: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -41,20 +40,13 @@ struct HomeScreenView: View {
                     ZStack{
                         if homeVm.categorieViewModels.isEmpty {
                             ZStack{
-                                CircularTextView(title: "   Deine Camper App -Meet me at the campfire".uppercased(), radius: 125)
-//                                if isDark {
-//                                    Image(.logo)
-//                                        .resizable()
-//                                        .frame(width: 150, height: 150)
-//                                        .clipShape(Circle())
-//                                        .opacity(0.7)
-//                                } else {
+                                
                                     Image(.logo)
                                         .resizable()
                                         .frame(width: 150, height: 150)
                                         .clipShape(Circle())
                                         .opacity(0.7)
-//                                }
+                                RoundedView(title: "   Deine Camper App -Meet me at the campfire".uppercased(), radius: 140)
                             }
                             .offset(x: 0, y: -300)
                         }
@@ -106,7 +98,6 @@ struct HomeScreenView: View {
         .alert("Neue Kategorie", isPresented: $showNewCategorieAlert) {
                 TextField("Name", text: $newCategorie)
                     .lineLimit(1)
-                    .textInputAutocapitalization(.never)
                     .autocorrectionDisabled()
                 Button("Zurück") {
                     newCategorie = ""
