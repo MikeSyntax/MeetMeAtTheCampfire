@@ -39,12 +39,14 @@ struct LoginView: View {
                             ZStack(alignment: .trailing){
                                 TextField("Email eingeben", text: $authVm.email)
                                     .font(.system(size: 17).bold())
-                                    .padding(3)
-                                    .background(.cyan.opacity(0.4))
-                                    .cornerRadius(6)
-                                    .textInputAutocapitalization(.never)
-                                    .autocorrectionDisabled()
                                     .textFieldStyle(.roundedBorder)
+                                    .autocorrectionDisabled()
+                                    .textInputAutocapitalization(.never)
+                                    .padding(1)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 10)
+                                            .stroke(Color.cyan, lineWidth: 2)
+                                    )
                                     .padding(EdgeInsets(top: 0, leading: 60, bottom: 10, trailing: 60))
                                 if !authVm.email.isEmpty {
                                     if authVm.email.count >= 2 {
@@ -64,13 +66,15 @@ struct LoginView: View {
                             ZStack(alignment: .trailing){
                                 SecureField("Passwort eingeben", text: $authVm.password)
                                     .font(.system(size: 17).bold())
-                                    .padding(3)
-                                    .background(.cyan.opacity(0.4))
-                                    .cornerRadius(6)
-                                    .textInputAutocapitalization(.never)
-                                    .autocorrectionDisabled()
-                                    .padding(EdgeInsets(top: 0, leading: 60, bottom: 10, trailing: 60))
                                     .textFieldStyle(.roundedBorder)
+                                    .autocorrectionDisabled()
+                                    .textInputAutocapitalization(.never)
+                                    .padding(1)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 10)
+                                            .stroke(Color.cyan, lineWidth: 2)
+                                    )
+                                    .padding(EdgeInsets(top: 0, leading: 60, bottom: 10, trailing: 60))
                                 if !authVm.password.isEmpty {
                                     if authVm.password.count >= 6 {
                                         RightView()

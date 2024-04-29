@@ -17,7 +17,7 @@ struct ChatItemView: View {
         ZStack {
             RoundedRectangle(cornerRadius: 10)
                 .fill(chatSenderVm.isCurrentUser ? Color.cyan.opacity(0.6) : Color.green.opacity(0.6))
-                .frame(minWidth: 200, maxWidth: maxWidth, minHeight: 70, maxHeight: 500, alignment: chatSenderVm.isCurrentUser ? .trailing : .leading)
+                .frame(minWidth: 180, maxWidth: maxWidth, minHeight: 70, maxHeight: 500, alignment: chatSenderVm.isCurrentUser ? .trailing : .leading)
                 .shadow(radius: 10)
             VStack{
                 HStack{
@@ -35,7 +35,7 @@ struct ChatItemView: View {
                 .frame(maxWidth: maxWidth, alignment: chatSenderVm.isCurrentUser ? .trailing : .leading)
                 Text(chatSenderVm.messageText)
                     .lineLimit(1...)
-                    .font(.headline)
+                    .font(.system(size: 15))
                     .padding(EdgeInsets(top: 2, leading: 5, bottom: 2, trailing: 5))
                     .frame(maxWidth: maxWidth, alignment: chatSenderVm.isCurrentUser ? .trailing : .leading)
                 Spacer()
@@ -79,11 +79,11 @@ struct ChatItemView: View {
                 }
                 .padding(EdgeInsets(top: 2, leading: 5, bottom: 2, trailing: 5))
             }
-            .frame(minWidth: 200, maxWidth: maxWidth, minHeight: 70, maxHeight: 500, alignment: chatSenderVm.isCurrentUser ? .leading : .trailing)
+            .frame(minWidth: 180, maxWidth: maxWidth, minHeight: 70, maxHeight: 500, alignment: chatSenderVm.isCurrentUser ? .leading : .trailing)
             
             .padding(2)
         }
-        .frame(minWidth: 200, maxWidth: .infinity, minHeight: 70, maxHeight: 500, alignment: chatSenderVm.isCurrentUser ? .trailing : .leading)
+        .frame(minWidth: 180, maxWidth: .infinity, minHeight: 70, maxHeight: 500, alignment: chatSenderVm.isCurrentUser ? .trailing : .leading)
     }
 }
 

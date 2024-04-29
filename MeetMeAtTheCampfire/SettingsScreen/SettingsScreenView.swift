@@ -9,7 +9,6 @@ import SwiftUI
 
 struct SettingsScreenView: View {
     @Environment(\.dismiss) private var dismiss
-    //@AppStorage("isDarkMode") private var isDark: Bool = false
     @AppStorage("infoButton") private var infoButtonIsActive: Bool = true
     @AppStorage("entryButton") private var entryButtonIsActive: Bool = true
     
@@ -30,8 +29,8 @@ struct SettingsScreenView: View {
                     .foregroundColor(.white)
                     .font(.headline)
                     .overlay(
-                        RoundedRectangle(cornerRadius: 10) // Erstellen eines gerundeten Rechtecks als Overlay
-                            .stroke(Color.white, lineWidth: 2) // Farbe und Breite des Rahmens festlegen
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.white, lineWidth: 2)
                     )
                     .padding(EdgeInsets(top: -9, leading: 0, bottom: 20, trailing: 20))
                 }
@@ -49,8 +48,8 @@ struct SettingsScreenView: View {
                     .foregroundColor(.white)
                     .font(.headline)
                     .overlay(
-                        RoundedRectangle(cornerRadius: 10) // Erstellen eines gerundeten Rechtecks als Overlay
-                            .stroke(Color.white, lineWidth: 2) // Farbe und Breite des Rahmens festlegen
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.white, lineWidth: 2)
                     )
                     .padding(EdgeInsets(top: -9, leading: 0, bottom: 20, trailing: 20))
                 }
@@ -71,7 +70,6 @@ struct SettingsScreenView: View {
                     .opacity(0.2)
                     .ignoresSafeArea(.all))
         }
-       // .preferredColorScheme(isDark ? .dark : .light)
         .background(Color(UIColor.systemBackground))
     }
 }

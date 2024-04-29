@@ -44,6 +44,7 @@ struct CalendarInfoSheetView: View {
                 })
             }
         }
+        .background(Color(UIColor.systemBackground))
     }
 }
 

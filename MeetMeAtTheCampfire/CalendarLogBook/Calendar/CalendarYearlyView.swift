@@ -72,6 +72,7 @@ struct CalendarYearlyView: View {
             CalendarInfoSheetView(showInfoSheet: $showInfoSheet)
                 .presentationDetents([.medium])
         }
+        .background(Color(UIColor.systemBackground))
     }
 }
 

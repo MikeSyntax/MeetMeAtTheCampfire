@@ -93,6 +93,7 @@ struct DetailCategorieView: View {
         .onDisappear{
             detailCategorieVm.removeListener()
         }
+        .background(Color(UIColor.systemBackground))
     }
 }
 

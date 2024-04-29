@@ -115,6 +115,7 @@ struct ChatScreenView: View {
             get: { chatVm.searchTerm },
             set: { chatVm.searchTerm = $0.lowercased() })
         )
+        .background(Color(UIColor.systemBackground))
     }
 }
 

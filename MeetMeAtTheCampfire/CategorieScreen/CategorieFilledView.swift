@@ -16,7 +16,7 @@ struct CategorieFilledView: View {
     var body: some View {
         RoundedRectangle(cornerRadius: 10)
             .fill(bgColor.randomElement() ?? .white).opacity(0.7)
-            .frame(width: 100, height: 100)
+            .frame(width: 95, height: 95)
             .overlay(
                 VStack{
                     Text(categorieVm.categorie)

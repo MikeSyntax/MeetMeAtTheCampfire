@@ -32,8 +32,11 @@ struct CalendarDetailNewEntryView: View {
                                         .padding(EdgeInsets(top: 0, leading: 0, bottom: -6, trailing: 0))
                                     ZStack{
                                         MapKitNewEntryView()
-                                            .border(Color.cyan, width: 2)
-                                            .frame(width: 300, height: 200)
+                                            .frame(minWidth: 300,  minHeight: 200)
+                                            .overlay(
+                                                RoundedRectangle(cornerRadius: 10)
+                                                    .stroke(Color.cyan, lineWidth: 2)
+                                            )
                                         Text("Klicke auf den Pfeil")
                                             .bold()
                                             .padding(EdgeInsets(top: 0, leading: 0, bottom: 170, trailing: 50))
@@ -52,8 +55,11 @@ struct CalendarDetailNewEntryView: View {
                                                 .resizable()
                                                 .scaledToFit()
                                                 .padding(0)
-                                                .frame(minWidth: 300,  minHeight: 200)
-                                                .border(Color.cyan, width: 2)
+                                                .frame(minWidth: 300,  minHeight: 2000)
+                                                .overlay(
+                                                    RoundedRectangle(cornerRadius: 10)
+                                                        .stroke(Color.cyan, lineWidth: 2)
+                                                )
                                             Button{
                                                 showImagePicker.toggle()
                                             }label: {
@@ -72,7 +78,10 @@ struct CalendarDetailNewEntryView: View {
                                                 Text("Foto hinzufügen oder ändern")
                                             }
                                             .frame(minWidth: 300,  minHeight: 150)
-                                            .border(Color.cyan, width: 2)
+                                            .overlay(
+                                                RoundedRectangle(cornerRadius: 10)
+                                                    .stroke(Color.cyan, lineWidth: 2)
+                                            )
                                         }
                                         .padding(0)
                                     }
@@ -82,10 +91,15 @@ struct CalendarDetailNewEntryView: View {
                                         .font(.callout)
                                         .padding(EdgeInsets(top: 2, leading: 0, bottom: -6, trailing: 0))
                                     TextEditor(text: $calendarDetailItemVm.logBookText)
-                                        .fontDesign(.rounded)
-                                        .padding(2)
-                                        .frame(minWidth: 300,  minHeight: 200)
-                                        .border(Color.cyan, width: 2)
+                                        .font(.system(size: 17).bold())
+                                        .textFieldStyle(.roundedBorder)
+                                        .autocorrectionDisabled()
+                                        .padding(1)
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 10)
+                                                .stroke(Color.cyan, lineWidth: 2)
+                                        )
+                                        .frame(minWidth: 300,  minHeight: 150)
                                 }
                                 .frame(width: 300, alignment: .center)
                                 .padding(5)
@@ -151,7 +165,7 @@ struct CalendarDetailNewEntryView: View {
                 .presentationDetents([.medium])
         }
         .toolbar(.hidden, for: .tabBar)
-        .preferredColorScheme(isDark ? .dark : .light)
+        .background(Color(UIColor.systemBackground))
     }
 }
 
