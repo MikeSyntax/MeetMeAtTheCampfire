@@ -15,7 +15,7 @@ class LanguageScreenViewModel: ObservableObject {
     
     @Published var textToTranslate: String = ""
     @Published var translatedText: String = ""
-    
+    @Published var emptyField: String = ""
     
     var languageChoice: Language
     var languageSource: Language  //Vorbereitung für die Eingabe der Ausgangssprache, falls es mal nicht nicht Deutsch sein soll

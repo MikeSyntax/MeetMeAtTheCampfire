@@ -10,8 +10,8 @@ import SwiftUI
 struct ClearView: View {
     var body: some View {
         Image(systemName: "xmark.circle")
-            .font(.system(size: 20))
-            .foregroundColor(.gray)
+            .font(.system(size: 30))
+            .foregroundColor(.primary)
             .bold()
     }
 }

@@ -15,28 +15,43 @@ struct LanguageScreenView: View {
     
     var body: some View {
         NavigationStack {
-            VStack {
+            VStack{
                 Divider()
-                ZStack{
-                    Form {
-                        Section(header: Text("Wähle hier Deine Zielsprache aus").foregroundStyle(.primary)){
-                            Picker("Übersetze nach", selection: $selectionLanguage) {
-                                ForEach(languageVm.languages, id: \.code) { language in
-                                    Text(language.name)
-                                        .tag(language)
+                ScrollView {
+                    VStack(alignment: .leading){
+                        Text("Wähle eine Sprache aus".uppercased())
+                            .underline()
+                            .font(.system(size: 14, design: .monospaced))
+                        VStack(alignment: .trailing){
+                            ZStack{
+                                Text(languageVm.emptyField)
+                                    .frame(minWidth: 310, minHeight: 70)
+                                    .border(Color.white, width: 2)
+                                    .background(.white.opacity(0.7))
+                                Picker("Übersetze nach", selection: $selectionLanguage) {
+                                    ForEach(languageVm.languages, id: \.code) { language in
+                                        Text(language.name)
+                                            .tag(language)
+                                    }
                                 }
+                                .frame(minWidth: 310, minHeight: 70)
+                                .pickerStyle(.menu)
+                                .onChange(of: selectionLanguage) { languageVm.languageChoice = selectionLanguage }
                             }
-                            .pickerStyle(.menu)
-                            .onChange(of: selectionLanguage) { languageVm.languageChoice = selectionLanguage }
                         }
-                        
-                        VStack(alignment: .leading){
-                            Text("Email")
-                                .font(.system(size: 10))
-                                .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
-                        
-                            ZStack(alignment: .trailing){
-                                TextField("Texteingabe für Übersetzung", text: $languageVm.textToTranslate, axis: .vertical)
+                    }
+                    Divider()
+                    VStack(alignment: .leading){
+                        Text("Text für die Übersetzung eingeben".uppercased())
+                            .underline()
+                            .font(.system(size: 14, design: .monospaced))
+                        VStack(alignment: .trailing){
+                            ZStack{
+                                if languageVm.textToTranslate.isEmpty {
+                                    Text("Text eingeben")
+                                        .opacity(0.6)
+                                }
+                                TextEditor(text: $languageVm.textToTranslate/*, axis: .vertical*/)
                                     .onChange(of: languageVm.textToTranslate) { newValue, _ in
                                         if newValue.count > 300 {
                                             languageVm.textToTranslate = String(newValue.prefix(300))
@@ -46,55 +61,59 @@ struct LanguageScreenView: View {
                                     .padding(3)
                                     .background(.cyan.opacity(0.4))
                                     .cornerRadius(6)
-                                    .textInputAutocapitalization(.never)
-                                    .autocorrectionDisabled()
-                                    .textFieldStyle(.roundedBorder)
                                     .autocorrectionDisabled()
                                     .lineLimit(1...5)
-                                    .frame(minHeight: 40)
-                                    .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
-                                Button{
-                                    languageVm.clearTextFields()
-                                } label: {
-                                    ClearView()
-                                }
-                                .padding(EdgeInsets(top: -30, leading: 0, bottom: 0, trailing: -20))
+                                    .frame(minWidth: 310, minHeight: 150)
+                                    .border(Color.white, width: 2)
                             }
                             .keyboardType(.default)
                             .submitLabel(.done)
                         }
-                        Section(header: Text("Es wird übersetzt von")
-                            .foregroundStyle(.primary)){
-                                HStack{
-                                    Text("\(selectionSourceLanguage.name)")
-                                        .font(.system(size: 14))
-                                    Spacer()
-                                    ButtonTextAction(iconName: "network", text: "Übersetzen"){
-                                        languageVm.translateLanguage()
-                                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                                    }
-                                    Spacer()
-                                    Text("\(selectionLanguage.name)")
-                                        .font(.system(size: 14))
-                                }
-                                .frame(maxWidth: .infinity, minHeight: 70, alignment: .center)
+                    }
+                    Divider()
+                    VStack(alignment: .leading){
+                        Text("Übersetzen von".uppercased())
+                            .underline()
+                            .font(.system(size: 14, design: .monospaced))
+                        HStack{
+                            Text("\(selectionSourceLanguage.name)")
+                                .font(.system(size: 14))
+                            Spacer()
+                            ButtonTextAction(iconName: "network", text: "Übersetzen"){
+                                languageVm.translateLanguage()
+                                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                             }
-                        Section(header: Text("Übersetzung")
-                            .foregroundStyle(.primary)){
-                                    TextField("Übersetzung", text: $languageVm.translatedText, axis: .vertical)
-                                    .font(.system(size: 17).bold())
-                                    .padding(3)
-                                    .background(.cyan.opacity(0.4))
-                                    .cornerRadius(6)
-                                    .textInputAutocapitalization(.never)
-                                    .autocorrectionDisabled()
-                                    .textFieldStyle(.roundedBorder)
-                                        .autocorrectionDisabled()
-                                        .lineLimit(1...5)
-                                        .frame(minHeight: 40)
+                            Spacer()
+                            Text("\(selectionLanguage.name)")
+                                .font(.system(size: 14))
+                        }
+                        .padding(9)
+                        .frame(maxWidth: .infinity, minHeight: 70, alignment: .center)
+                        .border(Color.white, width: 2)
+                        .background(.cyan.opacity(0.4))
+                    }
+                    Divider()
+                    VStack(alignment: .leading){
+                        Text("Ausgabe der Übersetzung".uppercased())
+                            .underline()
+                            .font(.system(size: 14, design: .monospaced))
+                        ZStack{
+                            if languageVm.translatedText.isEmpty {
+                                Text("Übersetzung")
+                                    .opacity(0.6)
                             }
+                            Text(languageVm.translatedText)
+                                .font(.system(size: 17).bold())
+                                .padding(3)
+                                .frame(minWidth: 310, minHeight: 150)
+                                .border(Color.white, width: 2)
+                                .background(.cyan.opacity(0.4))
+                                
+                        }
                     }
                 }
+                .padding(EdgeInsets(top: 0, leading: 40, bottom: 0, trailing: 40))
+                Spacer()
                 Divider()
             }
             .scrollContentBackground(.hidden)
