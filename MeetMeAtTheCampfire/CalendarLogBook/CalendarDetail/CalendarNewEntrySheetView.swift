@@ -10,8 +10,7 @@ import SwiftUI
 struct CalendarNewEntrySheetView: View {
     @Binding var showToDoSheet: Bool
     @AppStorage("entryButton") private var entryButtonIsActive: Bool = true
-    @AppStorage("isDarkMode") private var isDark: Bool = false
-    
+   
     var body: some View {
         NavigationStack{
             ZStack{
@@ -44,7 +43,7 @@ struct CalendarNewEntrySheetView: View {
                 })
             }
         }
-        .preferredColorScheme(isDark ? .dark : .light)
+        .background(Color(UIColor.systemBackground))
     }
 }
 

@@ -87,16 +87,18 @@ struct CalendarDetailNewEntryView: View {
                                     Text("3. Beschreibe deine Erlebnisse")
                                         .font(.callout)
                                         .padding(EdgeInsets(top: 2, leading: 0, bottom: -6, trailing: 0))
-                                    TextEditor(text: $calendarDetailItemVm.logBookText)
+                                    TextField("", text: $calendarDetailItemVm.logBookText, axis: .vertical)
+                                        .background(Color.clear)
+                                        .multilineTextAlignment(.leading)
+                                        .lineLimit(1...10000)
                                         .font(.system(size: 17).bold())
-                                        .textFieldStyle(.roundedBorder)
                                         .autocorrectionDisabled()
-                                        .padding(1)
+                                        .padding(EdgeInsets(top: 5, leading: 6, bottom: 2, trailing: 6))
+                                        .frame(width: 300, height: 150)
                                         .overlay(
                                             RoundedRectangle(cornerRadius: 10)
                                                 .stroke(Color.cyan, lineWidth: 2)
                                         )
-                                        .frame(minWidth: 300,  minHeight: 150)
                                 }
                             }
                             .frame(width: 300, alignment: .center)
@@ -107,11 +109,14 @@ struct CalendarDetailNewEntryView: View {
                             ButtonTextAction(iconName: "square.and.arrow.down", text: "Speichern"){
                                 calendarDetailItemVm.createlogBookText(logBookText: calendarDetailItemVm.logBookText)
                                 calendarDetailItemVm.logBookText = ""
+                                calendarDetailItemVm.stopLocationRequest()
                                 dismiss()
                             }
                         }
                         
                     }
+                    .keyboardType(.default)
+                    .submitLabel(.done)
                     VStack(alignment: .trailing){
                         if entryButtonIsActive {
                             Button{

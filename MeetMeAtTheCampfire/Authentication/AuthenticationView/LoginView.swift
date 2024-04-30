@@ -87,7 +87,6 @@ struct LoginView: View {
                             }
                         }
                     }
-                    
                     .keyboardType(.emailAddress)
                     .submitLabel(.done)
                     ButtonTextAction(iconName: "paperplane.fill", text: "Login"){
