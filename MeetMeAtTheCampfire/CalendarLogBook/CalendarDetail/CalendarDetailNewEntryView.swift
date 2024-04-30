@@ -11,7 +11,6 @@ import SwiftUI
 struct CalendarDetailNewEntryView: View {
     @ObservedObject var calendarDetailItemVm: CalendarDetailItemViewModel
     @Environment(\.dismiss) private var dismiss
-    @AppStorage("isDarkMode") private var isDark: Bool = false
     @AppStorage("entryButton") private var entryButtonIsActive: Bool = true
     @State private var showImagePicker: Bool = false
     @State private var selectedImage: UIImage?
@@ -21,41 +20,38 @@ struct CalendarDetailNewEntryView: View {
     var body: some View {
         NavigationView{
             VStack{
-                Divider()
+                Spacer()
                 ZStack{
                     VStack{
-                        VStack{
-                            ScrollView{
+                        ScrollView{
+                            VStack{
+                                //Ab hier MapKit
                                 VStack{
                                     Text("1. Wähle deinen Standort")
                                         .font(.callout)
                                         .padding(EdgeInsets(top: 0, leading: 0, bottom: -6, trailing: 0))
-                                    ZStack{
-                                        MapKitNewEntryView()
-                                            .frame(minWidth: 300,  minHeight: 200)
-                                            .overlay(
-                                                RoundedRectangle(cornerRadius: 10)
-                                                    .stroke(Color.cyan, lineWidth: 2)
-                                            )
-                                        Text("Klicke auf den Pfeil")
-                                            .bold()
-                                            .padding(EdgeInsets(top: 0, leading: 0, bottom: 170, trailing: 50))
-                                    }
-                                    .padding(0)
-                                    Divider()
-                                    //Ab hier Image Picker
+                                    MapKitNewEntryView()
+                                        .frame(minWidth: 300,  minHeight: 200)
+                                        .cornerRadius(10)
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 10)
+                                                .stroke(Color.cyan, lineWidth: 2)
+                                        )
+                                        .ignoresSafeArea()
+                                        .padding(0)
+                                }
+                                Divider()
+                                //Ab hier Image Picker
+                                VStack{
                                     Text("2. Wähle ein Galeriefoto")
                                         .font(.callout)
-                                        .padding(EdgeInsets(top: 2, leading: 0, bottom: -4, trailing: 0))
-                                   
-                                    
+                                        .padding(EdgeInsets(top: 2, leading: 0, bottom: -6, trailing: 0))
                                     if calendarDetailItemVm.selectedImage != nil {
                                         VStack{
                                             Image(uiImage: calendarDetailItemVm.selectedImage!)
                                                 .resizable()
                                                 .scaledToFit()
-                                                .padding(0)
-                                                .frame(minWidth: 300,  minHeight: 2000)
+                                                .cornerRadius(10)
                                                 .overlay(
                                                     RoundedRectangle(cornerRadius: 10)
                                                         .stroke(Color.cyan, lineWidth: 2)
@@ -67,26 +63,27 @@ struct CalendarDetailNewEntryView: View {
                                                 Text("Foto ändern")
                                             }
                                         }
+                                        .frame(minWidth: 300,  minHeight: 200)
                                     } else {
                                         VStack{
-                                            
-                                            //Button für Image Picker
                                             Button{
                                                 showImagePicker.toggle()
                                             }label: {
                                                 Image(systemName: "photo.tv")
                                                 Text("Foto hinzufügen oder ändern")
                                             }
-                                            .frame(minWidth: 300,  minHeight: 150)
-                                            .overlay(
-                                                RoundedRectangle(cornerRadius: 10)
-                                                    .stroke(Color.cyan, lineWidth: 2)
-                                            )
                                         }
+                                        .frame(minWidth: 300,  minHeight: 150)
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 10)
+                                                .stroke(Color.cyan, lineWidth: 2)
+                                        )
                                         .padding(0)
                                     }
-                                    Divider()
-                                    //Ab hier Text für die Erlebnisse
+                                }
+                                Divider()
+                                //Ab hier Text für die Erlebnisse
+                                VStack{
                                     Text("3. Beschreibe deine Erlebnisse")
                                         .font(.callout)
                                         .padding(EdgeInsets(top: 2, leading: 0, bottom: -6, trailing: 0))
@@ -101,11 +98,10 @@ struct CalendarDetailNewEntryView: View {
                                         )
                                         .frame(minWidth: 300,  minHeight: 150)
                                 }
-                                .frame(width: 300, alignment: .center)
-                                .padding(5)
                             }
+                            .frame(width: 300, alignment: .center)
+                            .padding(15)
                         }
-                        Divider()
                         VStack{
                             //Button zum speichern von Bildern
                             ButtonTextAction(iconName: "square.and.arrow.down", text: "Speichern"){
@@ -114,9 +110,9 @@ struct CalendarDetailNewEntryView: View {
                                 dismiss()
                             }
                         }
-                        .padding()
+                        
                     }
-                    VStack{
+                    VStack(alignment: .trailing){
                         if entryButtonIsActive {
                             Button{
                                 showToDoSheet.toggle()
@@ -127,16 +123,10 @@ struct CalendarDetailNewEntryView: View {
                             .animation(Animation.easeInOut(duration: 0.3).repeatCount(7, autoreverses: true), value: isAnimated)
                         }
                     }
-                    .offset(x: 100, y: 150)
+                    .offset(x: 130, y: 180)
                     .onAppear {
                         isAnimated = true
                     }
-                }
-            }
-            .toolbar{
-                Button("Abbrechen"){
-                    calendarDetailItemVm.stopLocationRequest()
-                    dismiss()
                 }
             }
             .navigationBarTitle("Neuer Logbuch Eintrag")
@@ -149,6 +139,12 @@ struct CalendarDetailNewEntryView: View {
                     .edgesIgnoringSafeArea(.all)
                     .opacity(0.2)
                     .ignoresSafeArea(.all))
+            .toolbar{
+                Button("Abbrechen"){
+                    calendarDetailItemVm.stopLocationRequest()
+                    dismiss()
+                }
+            }
         }
         .onAppear {
             calendarDetailItemVm.requestLocation()

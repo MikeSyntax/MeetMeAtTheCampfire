@@ -12,10 +12,11 @@ struct CategorieFilledView: View {
     @ObservedObject var categorieVm: CategorieViewModel
     @ObservedObject var detailCategorieVm: DetailCategorieViewModel
     @State private var bgColor: [Color] = [.blue, .green, .yellow, .red, .pink, .brown, .orange, .purple, .cyan, .gray, .mint, .indigo]
+    @State private var colors: Color = .white
     
     var body: some View {
         RoundedRectangle(cornerRadius: 10)
-            .fill(bgColor.randomElement() ?? .white).opacity(0.7)
+            .fill(colors.opacity(0.7))
             .frame(width: 95, height: 95)
             .overlay(
                 VStack{
@@ -35,6 +36,12 @@ struct CategorieFilledView: View {
                     .padding(EdgeInsets(top: 4, leading: 0, bottom: 0, trailing: 0))
             )
             .shadow(radius: 10)
+            .onAppear{
+                sortedColors()
+            }
+    }
+    func sortedColors(){
+        colors = bgColor.randomElement() ?? Color.white
     }
 }
 

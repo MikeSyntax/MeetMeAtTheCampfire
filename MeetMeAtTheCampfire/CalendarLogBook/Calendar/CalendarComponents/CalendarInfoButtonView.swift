@@ -8,13 +8,11 @@
 import SwiftUI
 
 struct CalendarInfoButtonView: View {
-    //   @AppStorage("isDarkMode") var isDark: Bool = false
     
     var body: some View {
-        //        if isDark {
         RoundedRectangle(cornerRadius: 10)
             .fill(Color.white).opacity(0.8)
-            .frame(width: 95, height: 95)
+            .frame(width: 65, height: 65)
             .padding(4)
             .overlay(
                 VStack{
@@ -23,31 +21,12 @@ struct CalendarInfoButtonView: View {
                         .foregroundColor(.gray)
                         .bold()
                     Image(systemName: "info.square")
-                        .font(.largeTitle)
+                        .font(.title)
                         .bold()
                         .foregroundColor(.gray)
                 }
             )
             .shadow(radius: 10)
-        //        } else {
-        //            RoundedRectangle(cornerRadius: 10)
-        //                .fill(Color.white).opacity(1.0)
-        //                .frame(width: 100, height: 100)
-        //                .padding(4)
-        //                .overlay(
-        //                    VStack{
-        //                        Text("Info")
-        //                            .padding(2)
-        //                            .foregroundColor(.gray)
-        //                            .bold()
-        //                        Image(systemName: "info.square")
-        //                            .font(.largeTitle)
-        //                            .bold()
-        //                            .foregroundColor(.gray)
-        //                    }
-        //                )
-        //                .shadow(radius: 10)
-        //        }
     }
 }
 

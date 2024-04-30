@@ -80,7 +80,6 @@ struct ChatItemView: View {
                 .padding(EdgeInsets(top: 2, leading: 5, bottom: 2, trailing: 5))
             }
             .frame(minWidth: 180, maxWidth: maxWidth, minHeight: 70, maxHeight: 500, alignment: chatSenderVm.isCurrentUser ? .leading : .trailing)
-            
             .padding(2)
         }
         .frame(minWidth: 180, maxWidth: .infinity, minHeight: 70, maxHeight: 500, alignment: chatSenderVm.isCurrentUser ? .trailing : .leading)

@@ -37,6 +37,7 @@ struct HomeBaseSheetView: View {
             }
         }
         .background(Color(UIColor.systemBackground))
+        .ignoresSafeArea()
     }
 }
 

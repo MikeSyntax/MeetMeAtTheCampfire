@@ -17,7 +17,6 @@ struct CalendarDetailItemView: View {
     var body: some View {
         NavigationStack{
             VStack {
-                Divider()
                 VStack{
                     Text("Meine Erlebnisse vom \(calendarDetailItemVm.formattedDate)")
                         .frame(width: 300)
@@ -31,12 +30,13 @@ struct CalendarDetailItemView: View {
                                 .stroke(Color.gray, lineWidth: 2)
                         )
                 }
+                .padding(.top)
                 Spacer()
                 ScrollView {
                     VStack {
                         VStack{
                             MapKitView(calendarDetailItemVm: calendarDetailItemVm)
-                                .frame(width: 300, height: 200)
+                                .frame(width: 300,  height: 200)
                                 .cornerRadius(10)
                         }
                         VStack{
@@ -100,8 +100,6 @@ struct CalendarDetailItemView: View {
                         isImageLoading()
                     }
                 }
-                    
-                Divider()
                 if calendarDetailItemVm.newEntryLogs.isEmpty || calendarDetailItemVm.newEntryLogs.contains(where: { $0.logBookText.isEmpty && $0.formattedDate == calendarDetailItemVm.formattedDate }){
                     ButtonTextAction(iconName: "plus", text: "Neuer Eintrag") {
                         showNewEntryView.toggle()

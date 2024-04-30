@@ -41,7 +41,7 @@ struct CalendarYearlyView: View {
                         .rotationEffect(Angle(degrees: isAnimating ? -0 : 20))
                         .animation(Animation.easeInOut(duration: 0.3).repeatCount(7, autoreverses: true), value: isAnimating)
                     }
-                    .offset(x: 100, y: 150)
+                    .offset(x: 130, y: 180)
                     .onAppear {
                         isAnimating = true
                     }
@@ -61,7 +61,8 @@ struct CalendarYearlyView: View {
             .background(
                 Image("background")
                     .resizable()
-                    .scaledToFill()
+                    .aspectRatio(contentMode: .fill)
+                    .edgesIgnoringSafeArea(.all)
                     .opacity(0.2)
                     .ignoresSafeArea(.all))
         }

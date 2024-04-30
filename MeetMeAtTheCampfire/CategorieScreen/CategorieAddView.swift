@@ -22,7 +22,7 @@ struct CategorieAddView: View {
                         .foregroundColor(.gray)
                         .bold()
                     Image(systemName: "plus")
-                        .font(.largeTitle)
+                        .font(.title)
                         .bold()
                         .foregroundColor(.gray)
                 }
