@@ -52,19 +52,26 @@ struct HomeScreenView: View {
                         }
                         VStack{
                             if homeVm.categorieViewModels.isEmpty {
-                                VideoStartCategoriesView()
+                                Image(.cat)
+                                    .resizable()
+                                    .scaledToFit()
                                     .opacity(0.7)
-                                    .frame(width: 300)
+                                    .frame(width: 250)
+                                    .cornerRadius(10)
+                                    .padding(EdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 0))
                             }
                         }
                     }
                     VStack{
                         if !homeVm.categorieViewModels.isEmpty && homeVm.categorieViewModels[0].tasksInCategorie == 0  {
                             HStack(){
-                                VideoStartToDosView()
+                                Image(.todo)
+                                    .resizable()
+                                    .scaledToFit()
                                     .opacity(0.7)
-                                    .frame(width: 300)
-                                    .offset(x: 0, y: -100)
+                                    .frame(width: 250)
+                                    .cornerRadius(10)
+                                    .offset(x: 0, y: -185)
                             }
                         }
                     }

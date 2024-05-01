@@ -38,7 +38,7 @@ struct LoginView: View {
                                 .padding(EdgeInsets(top: 0, leading: 60, bottom: 0, trailing: 60))
                             ZStack(alignment: .trailing){
                                 TextField("Email eingeben", text: $authVm.email)
-                                    .font(.system(size: 17).bold())
+                                    .font(.system(size: 15).bold())
                                     .textFieldStyle(.roundedBorder)
                                     .autocorrectionDisabled()
                                     .textInputAutocapitalization(.never)
@@ -65,7 +65,7 @@ struct LoginView: View {
                                 .padding(EdgeInsets(top: 0, leading: 60, bottom: 0, trailing: 60))
                             ZStack(alignment: .trailing){
                                 SecureField("Passwort eingeben", text: $authVm.password)
-                                    .font(.system(size: 17).bold())
+                                    .font(.system(size: 15).bold())
                                     .textFieldStyle(.roundedBorder)
                                     .autocorrectionDisabled()
                                     .textInputAutocapitalization(.never)
@@ -99,7 +99,7 @@ struct LoginView: View {
                         Alert(title: Text("Hoppla"), message: Text("Deine Anmeldung hat nicht geklappt"), dismissButton: .default(Text("OK")))
                     }
                     Divider()
-                        .padding()
+                        .padding(EdgeInsets(top: 15, leading: 0, bottom: 20, trailing: 0))
                     HStack {
                         Text("Noch kein Konto?")
                             .font(.system(size: 14))
@@ -123,6 +123,7 @@ struct LoginView: View {
                             .presentationDetents([.medium])
                     }
                 }
+                .padding(EdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0))
             }
             .scrollContentBackground(.hidden)
             .background(
@@ -140,18 +141,3 @@ struct LoginView: View {
     LoginView()
         .environmentObject(AuthViewModel())
 }
-
-
-//                    VStack{
-//                        VStack{
-//                            Text("Deine Camper App".uppercased())
-//                                .padding(EdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 0))
-//                            Text("Meet me at the campfire".uppercased())
-//                        }
-//                        .frame(width: 250)
-//                        .padding(8)
-//                        .font(.system(size: 15))
-//                        .foregroundStyle(.cyan)
-//                        .cornerRadius(10)
-//                    }
-//                    .padding(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))

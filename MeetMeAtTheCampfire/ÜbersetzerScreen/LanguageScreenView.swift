@@ -13,9 +13,10 @@ struct LanguageScreenView: View {
     @State private var selectionLanguage: Language = Language(code: "af", name: "Afrikaans")
     @State private var selectionSourceLanguage: Language = Language(code: "de", name: "Deutsch")
     @State private var isLoading: Bool = false
+    @FocusState var isInputActive: Bool
+//    let obj = observed()
     
     var body: some View {
-        
         NavigationStack {
             VStack{
                 Divider()
@@ -71,14 +72,19 @@ struct LanguageScreenView: View {
                                         RoundedRectangle(cornerRadius: 10)
                                             .stroke(Color.cyan, lineWidth: 2)
                                     )
-                            }
-                            .keyboardType(.default)
-                            .submitLabel(.send)
-                            .onSubmit{
-                                if !languageVm.textToTranslate.isEmpty{
-                                    languageVm.translateLanguage()
-                                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                                }
+//                                    .submitLabel(.done)
+//                                    .onSubmit{
+//                                        isInputActive = false
+//                                    }
+                                    .focused($isInputActive)
+                                    .toolbar {
+                                        ToolbarItemGroup(placement: .keyboard) {
+                                            Spacer()
+                                            Button("Fertig") {
+                                                isInputActive = false
+                                            }
+                                        }
+                                    }
                             }
                         }
                     }
@@ -111,11 +117,11 @@ struct LanguageScreenView: View {
                         )
                     }
                     .padding(5)
-                    
                     VStack(alignment: .leading){
                         if !languageVm.textToTranslate.isEmpty {
                             ZStack{
                                 if !isLoading || !languageVm.translatedText.isEmpty {
+                                    VStack{
                                         Text("Ausgabe der Übersetzung".uppercased())
                                             .underline()
                                             .font(.system(size: 14, design: .monospaced))
@@ -134,9 +140,11 @@ struct LanguageScreenView: View {
                                                         .stroke(Color.red, lineWidth: 2)
                                                 )
                                         }
+                                    }
                                 }
                                 if isLoading && languageVm.translatedText.isEmpty {
-                                        Text("Ausgabe der Übersetzung".uppercased())
+                                    VStack{
+                                        Text("Ausgabe der ".uppercased())
                                             .underline()
                                             .font(.system(size: 14, design: .monospaced))
                                         ProgressView()
@@ -147,12 +155,14 @@ struct LanguageScreenView: View {
                                                 RoundedRectangle(cornerRadius: 10)
                                                     .stroke(Color.red, lineWidth: 2)
                                             )
+                                    }
                                 }
                             }
                             .onAppear{
                                 isTranslationIsLoading()
                             }
                         } else {
+                            VStack(alignment: .leading){
                                 Text("Ausgabe der Übersetzung".uppercased())
                                     .underline()
                                     .font(.system(size: 14, design: .monospaced))
@@ -171,10 +181,12 @@ struct LanguageScreenView: View {
                                                 .stroke(Color.red, lineWidth: 2)
                                         )
                                 }
+                            }
                         }
                     }
                     .padding(5)
                 }
+                Divider()
             }
             .scrollContentBackground(.hidden)
             .background(
@@ -208,18 +220,8 @@ struct LanguageScreenView: View {
     }
 }
 
-#Preview {
+#Preview("LanguageScreenView") {
     let languageVm = LanguageScreenViewModel(languageChoice: Language(code: "de", name: "Deutsch"), languageSource: Language(code: "af", name: "Afrikaans"))
     return LanguageScreenView(languageVm: languageVm)
 }
 
-
-
-
-
-//@State private var username = "@twostraws"
-//
-//PasteButton(payloadType: String.self) { strings in
-//    guard let first = strings.first else { return }
-//    username = first
-//}

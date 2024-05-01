@@ -17,6 +17,8 @@ struct CalendarDetailNewEntryView: View {
     @State private var showToDoSheet: Bool = false
     @State private var isAnimated: Bool = false
     
+    @FocusState var isInputActive: Bool
+    
     var body: some View {
         NavigationView{
             VStack{
@@ -90,7 +92,7 @@ struct CalendarDetailNewEntryView: View {
                                     TextField("", text: $calendarDetailItemVm.logBookText, axis: .vertical)
                                         .background(Color.clear)
                                         .multilineTextAlignment(.leading)
-                                        .lineLimit(1...10000)
+                                        .lineLimit(7...10000)
                                         .font(.system(size: 17).bold())
                                         .autocorrectionDisabled()
                                         .padding(EdgeInsets(top: 5, leading: 6, bottom: 2, trailing: 6))
@@ -99,6 +101,16 @@ struct CalendarDetailNewEntryView: View {
                                             RoundedRectangle(cornerRadius: 10)
                                                 .stroke(Color.cyan, lineWidth: 2)
                                         )
+                                        .focused($isInputActive)
+                                        .toolbar {
+                                            ToolbarItemGroup(placement: .keyboard) {
+                                                Spacer()
+                                                
+                                                Button("Fertig") {
+                                                    isInputActive = false
+                                                }
+                                            }
+                                        }
                                 }
                             }
                             .frame(width: 300, alignment: .center)
@@ -107,16 +119,16 @@ struct CalendarDetailNewEntryView: View {
                         VStack{
                             //Button zum speichern von Bildern
                             ButtonTextAction(iconName: "square.and.arrow.down", text: "Speichern"){
-                                calendarDetailItemVm.createlogBookText(logBookText: calendarDetailItemVm.logBookText)
+                                if !calendarDetailItemVm.logBookText.isEmpty{
+                                    calendarDetailItemVm.createlogBookText(logBookText: calendarDetailItemVm.logBookText)
+                                }
                                 calendarDetailItemVm.logBookText = ""
                                 calendarDetailItemVm.stopLocationRequest()
                                 dismiss()
                             }
                         }
-                        
+                        .padding(.bottom)
                     }
-                    .keyboardType(.default)
-                    .submitLabel(.done)
                     VStack(alignment: .trailing){
                         if entryButtonIsActive {
                             Button{
@@ -133,6 +145,7 @@ struct CalendarDetailNewEntryView: View {
                         isAnimated = true
                     }
                 }
+                Divider()
             }
             .navigationBarTitle("Neuer Logbuch Eintrag")
             .navigationBarTitleDisplayMode(.inline)
@@ -156,6 +169,7 @@ struct CalendarDetailNewEntryView: View {
         }
         .onDisappear{
             calendarDetailItemVm.removeListener()
+            calendarDetailItemVm.stopLocationRequest()
             isAnimated = false
         }
         .sheet(isPresented: $showImagePicker, onDismiss: nil) {

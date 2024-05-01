@@ -18,12 +18,12 @@ struct RegisterView: View {
                 Spacer()
                 VStack{
                     VStack(alignment: .leading){
-                        Text("Benutzername")
+                        Text("Benutzername mit mindestens 10 Zeichen")
                             .font(.system(size: 10))
                             .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
                         ZStack(alignment: .trailing){
                             TextField("Benutzernamen eingeben", text: $authVm.userName)
-                                .font(.system(size: 17).bold())
+                                .font(.system(size: 15).bold())
                                 .textFieldStyle(.roundedBorder)
                                 .autocorrectionDisabled()
                                 .textInputAutocapitalization(.never)
@@ -34,7 +34,7 @@ struct RegisterView: View {
                                 )
                                 .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
                             if !authVm.userName.isEmpty {
-                                if authVm.userName.count >= 2 {
+                                if authVm.userName.count >= 10 {
                                     RightView()
                                         .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 7))
                                 } else {
@@ -50,7 +50,7 @@ struct RegisterView: View {
                             .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
                         ZStack(alignment: .trailing){
                             TextField("Email eingeben", text: $authVm.email)
-                                .font(.system(size: 17).bold())
+                                .font(.system(size: 15).bold())
                                 .textFieldStyle(.roundedBorder)
                                 .autocorrectionDisabled()
                                 .textInputAutocapitalization(.never)
@@ -77,7 +77,7 @@ struct RegisterView: View {
                             .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
                         ZStack(alignment: .trailing){
                             SecureField("Passwort eingeben", text: $authVm.password)
-                                .font(.system(size: 17).bold())
+                                .font(.system(size: 15).bold())
                                 .textFieldStyle(.roundedBorder)
                                 .autocorrectionDisabled()
                                 .textInputAutocapitalization(.never)
@@ -88,7 +88,7 @@ struct RegisterView: View {
                                 )
                                 .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
                             if !authVm.password.isEmpty {
-                                if authVm.password.count >= 6 {
+                                if authVm.password.count >= 8 {
                                     RightView()
                                         .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 7))
                                 } else {
@@ -104,7 +104,7 @@ struct RegisterView: View {
                             .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
                         ZStack(alignment: .trailing){
                             SecureField("Passwort wiederholen", text: $authVm.confirmPassword)
-                                .font(.system(size: 17).bold())
+                                .font(.system(size: 15).bold())
                                 .textFieldStyle(.roundedBorder)
                                 .autocorrectionDisabled()
                                 .textInputAutocapitalization(.never)
@@ -141,7 +141,7 @@ struct RegisterView: View {
                         }))
                     }
                 }
-                .padding(EdgeInsets(top: 25, leading: 0, bottom: 25, trailing: 0))
+                .padding(EdgeInsets(top: 25, leading: 0, bottom: 10, trailing: 0))
             }
             .navigationTitle("Jetzt registrieren")
             .navigationBarTitleDisplayMode(.inline)

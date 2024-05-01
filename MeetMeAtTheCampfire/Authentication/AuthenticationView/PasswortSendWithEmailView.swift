@@ -28,7 +28,7 @@ struct PasswortSendWithEmailView: View {
                         Text("Email")
                             .font(.system(size: 10))
                         TextField("Email eingeben", text: $emailForPasswortSending)
-                            .font(.system(size: 17).bold())
+                            .font(.system(size: 15).bold())
                             .textFieldStyle(.roundedBorder)
                             .autocorrectionDisabled()
                             .textInputAutocapitalization(.never)
@@ -43,7 +43,6 @@ struct PasswortSendWithEmailView: View {
                 }
                 .keyboardType(.emailAddress)
                 .submitLabel(.done)
-                Divider()
                 VStack{
                     ButtonTextAction(iconName: "paperplane.fill", text: "Abschicken"){
                         authVm.passwordSendWithEmail(email: emailForPasswortSending) { error in
@@ -58,7 +57,7 @@ struct PasswortSendWithEmailView: View {
                         Alert(title: Text("Email versendet"), message: Text("Bitte schau in dein Postfach"), dismissButton: .default(Text("OK")))
                     }
                 }
-                .padding(.top)
+                .padding(.bottom)
             }
             .padding(20)
             .onDisappear{

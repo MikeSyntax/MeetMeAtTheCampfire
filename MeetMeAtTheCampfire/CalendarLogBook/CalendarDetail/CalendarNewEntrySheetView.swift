@@ -24,9 +24,9 @@ struct CalendarNewEntrySheetView: View {
                         Image(.noProject)
                             .resizable()
                             .scaledToFit()
-                            .opacity(0.6)
-                            .cornerRadius(5)
-                            .frame(width: 300)
+                            .opacity(0.7)
+                            .cornerRadius(10)
+                            .frame(width: 250)
                     }
                     VStack{
                         ButtonTextAction(iconName: "arrow.down.right.and.arrow.up.left", text: "Nicht mehr anzeigen"){

@@ -11,7 +11,7 @@ import MapKit
 struct CalendarDetailItemView: View {
     @ObservedObject var calendarDetailItemVm: CalendarDetailItemViewModel
     @State private var showNewEntryView: Bool = false
-    @State private var isLoading: Bool = false
+    @State private var isNewImageLoading: Bool = false
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
@@ -53,7 +53,7 @@ struct CalendarDetailItemView: View {
                                                     .shadow(radius: 10)
                                             },
                                             placeholder: {
-                                                if isLoading {
+                                                if isNewImageLoading {
                                                     ProgressView()
                                                         .progressViewStyle(CircularProgressViewStyle())
                                                         .scaleEffect(3)
@@ -62,6 +62,9 @@ struct CalendarDetailItemView: View {
                                             }
                                         )
                                     }
+                                }
+                                .onAppear{
+                                    isNewImageLoadingSlow()
                                 }
                             }
                         }
@@ -80,25 +83,12 @@ struct CalendarDetailItemView: View {
                     }
                 }
                 if calendarDetailItemVm.newEntryLogs.isEmpty || calendarDetailItemVm.newEntryLogs.contains(where: { $0.logBookText.isEmpty && $0.formattedDate == calendarDetailItemVm.formattedDate }){
-                    ZStack{
-                        if !isLoading {
                             Image(.empty)
                                 .resizable()
                                 .scaledToFit()
                                 .cornerRadius(10)
-                                .frame(width: 300)
+                                .frame(width: 250)
                                 .opacity(0.7)
-                        }
-                        if isLoading {
-                            ProgressView()
-                                .progressViewStyle(CircularProgressViewStyle())
-                                .scaleEffect(3)
-                                .padding(EdgeInsets(top: 30, leading: 0, bottom: 30, trailing: 0))
-                        }
-                    }
-                    .onAppear{
-                        isImageLoading()
-                    }
                 }
                 if calendarDetailItemVm.newEntryLogs.isEmpty || calendarDetailItemVm.newEntryLogs.contains(where: { $0.logBookText.isEmpty && $0.formattedDate == calendarDetailItemVm.formattedDate }){
                     ButtonTextAction(iconName: "plus", text: "Neuer Eintrag") {
@@ -106,6 +96,7 @@ struct CalendarDetailItemView: View {
                     }
                     .padding()
                 }
+                Divider()
             }
             .scrollContentBackground(.hidden)
             .background(
@@ -134,10 +125,10 @@ struct CalendarDetailItemView: View {
         .toolbar(.hidden, for: .tabBar)
         .background(Color(UIColor.systemBackground))
     }
-    func isImageLoading(){
-        isLoading = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0){
-            isLoading = false
+    func isNewImageLoadingSlow(){
+        isNewImageLoading = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10.0){
+            isNewImageLoading = false
         }
     }
 }
@@ -148,24 +139,3 @@ struct CalendarDetailItemView: View {
     return CalendarDetailItemView(calendarDetailItemVm: CalendarDetailItemViewModel(calendarItemModel: logbookMod, date: Date()))
 }
 
-
-
-
-
-
-// @EnvironmentObject var infoButtonSettings: InfoButtonSettings
-
-
-//@Environment(\.colorScheme) private var colorScheme
-//@State private var isDark: Bool
-
-//init() {
-//        _isDark = State(initialValue: UserDefaults.standard.bool(forKey: "isDarkMode"))
-//    }
-
-//.preferredColorScheme(isDark ? .dark : .light)
-
-//Button("Toggle Dark Mode") {
-//    isDark.toggle()
-//    UserDefaults.standard.set(isDark, forKey: "isDarkMode")
-//}
