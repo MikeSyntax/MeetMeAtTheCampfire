@@ -5,17 +5,17 @@
 //  Created by Mike Reichenbach on 22.03.24.
 //
 
-
 import SwiftUI
 
 struct CalendarDetailNewEntryView: View {
     @ObservedObject var calendarDetailItemVm: CalendarDetailItemViewModel
-    @Environment(\.dismiss) private var dismiss
+    //@Environment(\.dismiss) private var dismiss
     @AppStorage("entryButton") private var entryButtonIsActive: Bool = true
     @State private var showImagePicker: Bool = false
     @State private var selectedImage: UIImage?
     @State private var showToDoSheet: Bool = false
     @State private var isAnimated: Bool = false
+    @Binding var showNewEntryView: Bool
     
     @FocusState var isInputActive: Bool
     
@@ -124,7 +124,7 @@ struct CalendarDetailNewEntryView: View {
                                 }
                                 calendarDetailItemVm.logBookText = ""
                                 calendarDetailItemVm.stopLocationRequest()
-                                dismiss()
+                                showNewEntryView.toggle()
                             }
                         }
                         .padding(.bottom)
@@ -158,9 +158,18 @@ struct CalendarDetailNewEntryView: View {
                     .opacity(0.2)
                     .ignoresSafeArea(.all))
             .toolbar{
-                Button("Abbrechen"){
-                    calendarDetailItemVm.stopLocationRequest()
-                    dismiss()
+                ToolbarItem(placement: ToolbarItemPlacement.navigationBarLeading){
+                    Button("Zurück"){
+                        calendarDetailItemVm.stopLocationRequest()
+                        showNewEntryView.toggle()
+                    }
+                }
+                if isInputActive {
+                    ToolbarItem(placement: ToolbarItemPlacement.navigationBarTrailing){
+                        Button("Fertig"){
+                            isInputActive = false
+                        }
+                    }
                 }
             }
         }
@@ -185,5 +194,5 @@ struct CalendarDetailNewEntryView: View {
 }
 
 #Preview{
-    CalendarDetailNewEntryView(calendarDetailItemVm: CalendarDetailItemViewModel(calendarItemModel: LogBookModel(userId: "", formattedDate: "", logBookText: "", latitude: 0.0, longitude: 0.0, imageUrl: "", containsLogBookEntry: false), date: Date()))
+    CalendarDetailNewEntryView(calendarDetailItemVm: CalendarDetailItemViewModel(calendarItemModel: LogBookModel(userId: "", formattedDate: "", logBookText: "", latitude: 0.0, longitude: 0.0, imageUrl: "", containsLogBookEntry: false), date: Date()), showNewEntryView: .constant(false))
 }

@@ -10,7 +10,7 @@ import MapKit
 
 struct CalendarDetailItemView: View {
     @ObservedObject var calendarDetailItemVm: CalendarDetailItemViewModel
-    @State private var showNewEntryView: Bool = false
+    @State var showNewEntryView: Bool = false
     @State private var isNewImageLoading: Bool = false
     @Environment(\.dismiss) private var dismiss
     
@@ -108,10 +108,25 @@ struct CalendarDetailItemView: View {
                     .ignoresSafeArea(.all))
             .navigationBarTitle("Mein Logbuch", displayMode: .inline)
             .navigationBarBackButtonHidden()
-            .toolbar{ ToolbarItem(placement: ToolbarItemPlacement.navigationBarLeading){
-                Button("Zurück") {
-                    dismiss()}}
+            .toolbar{
+                ToolbarItem(placement: ToolbarItemPlacement.navigationBarLeading){
+                    Button("Zurück"){
+                        dismiss()
+                    }
+                }
+                //Button is only shown if not empty
+                if !calendarDetailItemVm.newEntryLogs.isEmpty || calendarDetailItemVm.newEntryLogs.contains(where: { !$0.logBookText.isEmpty && $0.formattedDate == calendarDetailItemVm.formattedDate }){
+                ToolbarItem(placement: ToolbarItemPlacement.navigationBarTrailing){
+                    Button("Bearbeiten"){
+                            showNewEntryView.toggle()
+                        }
+                    }
+                }
+                
             }
+        }
+        .onChange(of: showNewEntryView){
+            calendarDetailItemVm.readLogBookText(formattedDate: calendarDetailItemVm.formattedDate)
         }
         .onAppear {
             calendarDetailItemVm.readLogBookText(formattedDate: calendarDetailItemVm.formattedDate)
@@ -120,7 +135,7 @@ struct CalendarDetailItemView: View {
             calendarDetailItemVm.removeListener()
         }
         .sheet(isPresented: $showNewEntryView) {
-            CalendarDetailNewEntryView(calendarDetailItemVm: calendarDetailItemVm)
+            CalendarDetailNewEntryView(calendarDetailItemVm: calendarDetailItemVm, showNewEntryView: $showNewEntryView)
         }
         .toolbar(.hidden, for: .tabBar)
         .background(Color(UIColor.systemBackground))

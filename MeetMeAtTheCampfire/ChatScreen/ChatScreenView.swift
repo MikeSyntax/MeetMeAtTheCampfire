@@ -124,3 +124,6 @@ struct ChatScreenView: View {
     return ChatScreenView(chatVm: chatVm)
         .environmentObject(AuthViewModel())
 }
+
+
+
