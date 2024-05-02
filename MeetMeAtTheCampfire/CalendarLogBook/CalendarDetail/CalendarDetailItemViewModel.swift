@@ -235,7 +235,5 @@ class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManager
         self.listener = nil
         self.newEntryLogs = []
         self.readImages = []
-        self.logBookText = ""
-        self.imageUrl = ""
     }
 }

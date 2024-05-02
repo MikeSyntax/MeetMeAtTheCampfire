@@ -14,7 +14,9 @@ struct CalendarDetailNewEntryView: View {
     @State private var selectedImage: UIImage?
     @State private var showToDoSheet: Bool = false
     @State private var isAnimated: Bool = false
+    @State private var showSuccessfulUploadAlert = false
     @Binding var showNewEntryView: Bool
+
     
     @FocusState var isInputActive: Bool
     
@@ -50,8 +52,6 @@ struct CalendarDetailNewEntryView: View {
                                     VStack{
                                         if !calendarDetailItemVm.imageUrl.isEmpty {
                                             VStack{
-                                                
-                                                
                                                 AsyncImage(
                                                     url: URL(string: calendarDetailItemVm.imageUrl),
                                                     content: { image in
@@ -70,6 +70,7 @@ struct CalendarDetailNewEntryView: View {
                                                     }
                                                 )
                                                 Button{
+                                                    calendarDetailItemVm.imageUrl = ""
                                                     showImagePicker.toggle()
                                                 }label: {
                                                     Image(systemName: "photo.tv")
@@ -78,9 +79,6 @@ struct CalendarDetailNewEntryView: View {
                                             }
                                             .frame(minWidth: 300,  minHeight: 200)
                                         } else {
-                                            
-                                            
-                                            
                                             if calendarDetailItemVm.selectedImage != nil {
                                                 VStack{
                                                     Image(uiImage: calendarDetailItemVm.selectedImage!)
@@ -118,8 +116,6 @@ struct CalendarDetailNewEntryView: View {
                                         }
                                     }
                                 }
-                                
-                                
                                 Divider()
                                 //Ab hier Text für die Erlebnisse
                                 VStack{
@@ -160,13 +156,14 @@ struct CalendarDetailNewEntryView: View {
                                 if !calendarDetailItemVm.newEntryLogs.isEmpty || calendarDetailItemVm.newEntryLogs.contains(where: { !$0.logBookText.isEmpty && $0.formattedDate == calendarDetailItemVm.formattedDate }) {
                                     calendarDetailItemVm.deleteLogBookText(formattedDate: calendarDetailItemVm.formattedDate)
                                     calendarDetailItemVm.deleteImage(imageUrl: calendarDetailItemVm.newEntryLogs.first?.imageUrl ?? "no image found")
+                                    calendarDetailItemVm.removeListener()
+                                    //showSuccessfulUploadAlert.toggle()
                                     calendarDetailItemVm.createlogBookText(logBookText: calendarDetailItemVm.logBookText)
-                                    calendarDetailItemVm.logBookText = ""
-                                    calendarDetailItemVm.readImages = []
                                     calendarDetailItemVm.stopLocationRequest()
                                     showNewEntryView.toggle()
-                                } else 
+                                } else
                                 {
+                                    //showSuccessfulUploadAlert.toggle()
                                     calendarDetailItemVm.createlogBookText(logBookText: calendarDetailItemVm.logBookText)
                                     calendarDetailItemVm.stopLocationRequest()
                                     showNewEntryView.toggle()
@@ -222,7 +219,7 @@ struct CalendarDetailNewEntryView: View {
             calendarDetailItemVm.requestLocation()
         }
         .onDisappear{
-            //calendarDetailItemVm.removeListener()
+            calendarDetailItemVm.removeListener()
             calendarDetailItemVm.stopLocationRequest()
             isAnimated = false
         }
@@ -233,6 +230,11 @@ struct CalendarDetailNewEntryView: View {
             CalendarNewEntrySheetView(showToDoSheet: $showToDoSheet)
                 .presentationDetents([.medium])
         }
+//        .alert(isPresented:  $showSuccessfulUploadAlert){
+//            Alert(title: Text("Dein Upload war erfolgreich"), message: Text("Gedulde Dich einen Moment"), dismissButton: .default(Text("OK"), action: {
+//                showNewEntryView.toggle()
+//            }))
+//        }
         .toolbar(.hidden, for: .tabBar)
         .background(Color(UIColor.systemBackground))
     }
