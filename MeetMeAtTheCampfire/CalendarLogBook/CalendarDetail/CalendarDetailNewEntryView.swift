@@ -9,7 +9,6 @@ import SwiftUI
 
 struct CalendarDetailNewEntryView: View {
     @ObservedObject var calendarDetailItemVm: CalendarDetailItemViewModel
-    //@Environment(\.dismiss) private var dismiss
     @AppStorage("entryButton") private var entryButtonIsActive: Bool = true
     @State private var showImagePicker: Bool = false
     @State private var selectedImage: UIImage?
@@ -48,41 +47,79 @@ struct CalendarDetailNewEntryView: View {
                                     Text("2. Wähle ein Galeriefoto")
                                         .font(.callout)
                                         .padding(EdgeInsets(top: 2, leading: 0, bottom: -6, trailing: 0))
-                                    if calendarDetailItemVm.selectedImage != nil {
-                                        VStack{
-                                            Image(uiImage: calendarDetailItemVm.selectedImage!)
-                                                .resizable()
-                                                .scaledToFit()
-                                                .cornerRadius(10)
+                                    VStack{
+                                        if !calendarDetailItemVm.imageUrl.isEmpty {
+                                            VStack{
+                                                
+                                                
+                                                AsyncImage(
+                                                    url: URL(string: calendarDetailItemVm.imageUrl),
+                                                    content: { image in
+                                                        image
+                                                            .resizable()
+                                                            .scaledToFit()
+                                                            .cornerRadius(10)
+                                                            .cornerRadius(10)
+                                                            .overlay(
+                                                                RoundedRectangle(cornerRadius: 10)
+                                                                    .stroke(Color.cyan, lineWidth: 2)
+                                                            )
+                                                    },
+                                                    placeholder: {
+                                                        Image(systemName: "photo")
+                                                    }
+                                                )
+                                                Button{
+                                                    showImagePicker.toggle()
+                                                }label: {
+                                                    Image(systemName: "photo.tv")
+                                                    Text("Foto ändern")
+                                                }
+                                            }
+                                            .frame(minWidth: 300,  minHeight: 200)
+                                        } else {
+                                            
+                                            
+                                            
+                                            if calendarDetailItemVm.selectedImage != nil {
+                                                VStack{
+                                                    Image(uiImage: calendarDetailItemVm.selectedImage!)
+                                                        .resizable()
+                                                        .scaledToFit()
+                                                        .cornerRadius(10)
+                                                        .overlay(
+                                                            RoundedRectangle(cornerRadius: 10)
+                                                                .stroke(Color.cyan, lineWidth: 2)
+                                                        )
+                                                    Button{
+                                                        showImagePicker.toggle()
+                                                    }label: {
+                                                        Image(systemName: "photo.tv")
+                                                        Text("Foto ändern")
+                                                    }
+                                                }
+                                                .frame(minWidth: 300,  minHeight: 200)
+                                            } else {
+                                                VStack{
+                                                    Button{
+                                                        showImagePicker.toggle()
+                                                    }label: {
+                                                        Image(systemName: "photo.tv")
+                                                        Text("Foto hinzufügen oder ändern")
+                                                    }
+                                                }
+                                                .frame(minWidth: 300,  minHeight: 150)
                                                 .overlay(
                                                     RoundedRectangle(cornerRadius: 10)
                                                         .stroke(Color.cyan, lineWidth: 2)
                                                 )
-                                            Button{
-                                                showImagePicker.toggle()
-                                            }label: {
-                                                Image(systemName: "photo.tv")
-                                                Text("Foto ändern")
+                                                .padding(0)
                                             }
                                         }
-                                        .frame(minWidth: 300,  minHeight: 200)
-                                    } else {
-                                        VStack{
-                                            Button{
-                                                showImagePicker.toggle()
-                                            }label: {
-                                                Image(systemName: "photo.tv")
-                                                Text("Foto hinzufügen oder ändern")
-                                            }
-                                        }
-                                        .frame(minWidth: 300,  minHeight: 150)
-                                        .overlay(
-                                            RoundedRectangle(cornerRadius: 10)
-                                                .stroke(Color.cyan, lineWidth: 2)
-                                        )
-                                        .padding(0)
                                     }
                                 }
+                                
+                                
                                 Divider()
                                 //Ab hier Text für die Erlebnisse
                                 VStack{
@@ -120,11 +157,17 @@ struct CalendarDetailNewEntryView: View {
                             //Button zum speichern von Bildern
                             ButtonTextAction(iconName: "square.and.arrow.down", text: "Speichern"){
                                 if !calendarDetailItemVm.logBookText.isEmpty{
+                                    calendarDetailItemVm.deleteLogBookText(formattedDate: calendarDetailItemVm.formattedDate)
                                     calendarDetailItemVm.createlogBookText(logBookText: calendarDetailItemVm.logBookText)
+                                    calendarDetailItemVm.logBookText = ""
+                                    calendarDetailItemVm.stopLocationRequest()
+                                    showNewEntryView.toggle()
+                                } else {
+                                    calendarDetailItemVm.createlogBookText(logBookText: calendarDetailItemVm.logBookText)
+                                    calendarDetailItemVm.logBookText = ""
+                                    calendarDetailItemVm.stopLocationRequest()
+                                    showNewEntryView.toggle()
                                 }
-                                calendarDetailItemVm.logBookText = ""
-                                calendarDetailItemVm.stopLocationRequest()
-                                showNewEntryView.toggle()
                             }
                         }
                         .padding(.bottom)
@@ -160,7 +203,6 @@ struct CalendarDetailNewEntryView: View {
             .toolbar{
                 ToolbarItem(placement: ToolbarItemPlacement.navigationBarLeading){
                     Button("Zurück"){
-                        calendarDetailItemVm.stopLocationRequest()
                         showNewEntryView.toggle()
                     }
                 }
@@ -177,7 +219,8 @@ struct CalendarDetailNewEntryView: View {
             calendarDetailItemVm.requestLocation()
         }
         .onDisappear{
-            calendarDetailItemVm.removeListener()
+            calendarDetailItemVm.imageUrl = ""
+            //calendarDetailItemVm.removeListener()
             calendarDetailItemVm.stopLocationRequest()
             isAnimated = false
         }

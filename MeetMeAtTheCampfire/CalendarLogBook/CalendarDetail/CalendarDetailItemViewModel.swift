@@ -153,9 +153,58 @@ class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManager
                     if let latitude = self.newEntryLogs.first?.latitude {
                         self.latitude = latitude
                     }
+                    if let logBookText = self.newEntryLogs.first?.logBookText {
+                        self.logBookText = logBookText
+                    }
+                    if let imageUrl = self.newEntryLogs.first?.imageUrl {
+                        self.imageUrl = imageUrl
+                    }
                 }
             }
     }
+    
+    //Löschen eines Logbuch Eintrags
+    @MainActor
+    func deleteLogBookText(formattedDate: String){
+        guard let userId = FirebaseManager.shared.userId else {
+            return
+        }
+        
+        let ref = FirebaseManager.shared.firestore.collection("newLogEntry")
+        
+        ref.whereField("userId", isEqualTo: userId)
+            .whereField("formattedDate", isEqualTo: formattedDate)
+            .getDocuments() { snapshot, error in
+                if let error = error {
+                    print("error getting newLogEntry document \(error)")
+                    return
+                }
+                
+                for document in snapshot!.documents {
+                    ref.document(document.documentID).delete() { error in
+                        if let error = error {
+                            print("deleting newLogEntry for day \(formattedDate) failed \(error)")
+                        } else {
+                            print("deleting newLogEntry for day \(formattedDate) succesfull")
+                        }
+                    }
+                }
+            }
+    }
+    
+    @MainActor
+    func deleteImage(imageUrl: String){
+        let imageRef = FirebaseManager.shared.storage.reference(forURL: imageUrl)
+        
+        imageRef.delete { error in
+            if let error = error {
+                print("delete imageRef failed: \(error)")
+            } else {
+                print("delete imageRef successful")
+            }
+        }
+    }
+    
     
     func dateFormatter() -> String {
         let dateFormatter = DateFormatter()

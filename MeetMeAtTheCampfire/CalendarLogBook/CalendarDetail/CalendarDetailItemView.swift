@@ -83,16 +83,21 @@ struct CalendarDetailItemView: View {
                     }
                 }
                 if calendarDetailItemVm.newEntryLogs.isEmpty || calendarDetailItemVm.newEntryLogs.contains(where: { $0.logBookText.isEmpty && $0.formattedDate == calendarDetailItemVm.formattedDate }){
-                            Image(.empty)
-                                .resizable()
-                                .scaledToFit()
-                                .cornerRadius(10)
-                                .frame(width: 250)
-                                .opacity(0.7)
-                }
-                if calendarDetailItemVm.newEntryLogs.isEmpty || calendarDetailItemVm.newEntryLogs.contains(where: { $0.logBookText.isEmpty && $0.formattedDate == calendarDetailItemVm.formattedDate }){
+                    Image(.empty)
+                        .resizable()
+                        .scaledToFit()
+                        .cornerRadius(10)
+                        .frame(width: 250)
+                        .opacity(0.7)
                     ButtonTextAction(iconName: "plus", text: "Neuer Eintrag") {
                         showNewEntryView.toggle()
+                    }
+                } else {
+                    ButtonTextAction(iconName: "trash", text: "Eintrag löschen") {
+                        calendarDetailItemVm.deleteLogBookText(formattedDate: calendarDetailItemVm.formattedDate)
+                        calendarDetailItemVm.deleteImage(imageUrl: calendarDetailItemVm.imageUrl)
+                        calendarDetailItemVm.logBookText = ""
+                        calendarDetailItemVm.imageUrl = ""
                     }
                     .padding()
                 }
@@ -116,17 +121,14 @@ struct CalendarDetailItemView: View {
                 }
                 //Button is only shown if not empty
                 if !calendarDetailItemVm.newEntryLogs.isEmpty || calendarDetailItemVm.newEntryLogs.contains(where: { !$0.logBookText.isEmpty && $0.formattedDate == calendarDetailItemVm.formattedDate }){
-                ToolbarItem(placement: ToolbarItemPlacement.navigationBarTrailing){
-                    Button("Bearbeiten"){
+                    ToolbarItem(placement: ToolbarItemPlacement.navigationBarTrailing){
+                        Button("Bearbeiten"){
                             showNewEntryView.toggle()
                         }
                     }
                 }
                 
             }
-        }
-        .onChange(of: showNewEntryView){
-            calendarDetailItemVm.readLogBookText(formattedDate: calendarDetailItemVm.formattedDate)
         }
         .onAppear {
             calendarDetailItemVm.readLogBookText(formattedDate: calendarDetailItemVm.formattedDate)
