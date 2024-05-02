@@ -155,19 +155,22 @@ struct CalendarDetailNewEntryView: View {
                         }
                         VStack{
                             //Button zum speichern von Bildern
-                            ButtonTextAction(iconName: "square.and.arrow.down", text: "Speichern"){
-                                if !calendarDetailItemVm.logBookText.isEmpty{
+                            ButtonTextAction(iconName: "square.and.arrow.down", text: "Speichern")
+                            {
+                                if !calendarDetailItemVm.newEntryLogs.isEmpty || calendarDetailItemVm.newEntryLogs.contains(where: { !$0.logBookText.isEmpty && $0.formattedDate == calendarDetailItemVm.formattedDate }) {
                                     calendarDetailItemVm.deleteLogBookText(formattedDate: calendarDetailItemVm.formattedDate)
+                                    calendarDetailItemVm.deleteImage(imageUrl: calendarDetailItemVm.newEntryLogs.first?.imageUrl ?? "no image found")
                                     calendarDetailItemVm.createlogBookText(logBookText: calendarDetailItemVm.logBookText)
                                     calendarDetailItemVm.logBookText = ""
+                                    calendarDetailItemVm.readImages = []
                                     calendarDetailItemVm.stopLocationRequest()
                                     showNewEntryView.toggle()
-                                } else {
+                                } else 
+                                {
                                     calendarDetailItemVm.createlogBookText(logBookText: calendarDetailItemVm.logBookText)
-                                    calendarDetailItemVm.logBookText = ""
                                     calendarDetailItemVm.stopLocationRequest()
                                     showNewEntryView.toggle()
-                                }
+                               }
                             }
                         }
                         .padding(.bottom)
@@ -219,7 +222,6 @@ struct CalendarDetailNewEntryView: View {
             calendarDetailItemVm.requestLocation()
         }
         .onDisappear{
-            calendarDetailItemVm.imageUrl = ""
             //calendarDetailItemVm.removeListener()
             calendarDetailItemVm.stopLocationRequest()
             isAnimated = false

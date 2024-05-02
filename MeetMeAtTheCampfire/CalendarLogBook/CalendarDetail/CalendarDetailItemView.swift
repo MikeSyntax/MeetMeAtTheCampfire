@@ -95,9 +95,9 @@ struct CalendarDetailItemView: View {
                 } else {
                     ButtonTextAction(iconName: "trash", text: "Eintrag löschen") {
                         calendarDetailItemVm.deleteLogBookText(formattedDate: calendarDetailItemVm.formattedDate)
-                        calendarDetailItemVm.deleteImage(imageUrl: calendarDetailItemVm.imageUrl)
+                        calendarDetailItemVm.deleteImage(imageUrl: calendarDetailItemVm.newEntryLogs.first?.imageUrl ?? "no image found")
+                        calendarDetailItemVm.readImages = []
                         calendarDetailItemVm.logBookText = ""
-                        calendarDetailItemVm.imageUrl = ""
                     }
                     .padding()
                 }
@@ -141,6 +141,9 @@ struct CalendarDetailItemView: View {
         }
         .toolbar(.hidden, for: .tabBar)
         .background(Color(UIColor.systemBackground))
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.didReceiveMemoryWarningNotification, object: nil)) { notification in
+            print(notification)
+        }
     }
     func isNewImageLoadingSlow(){
         isNewImageLoading = true

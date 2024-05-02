@@ -153,11 +153,11 @@ class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManager
                     if let latitude = self.newEntryLogs.first?.latitude {
                         self.latitude = latitude
                     }
-                    if let logBookText = self.newEntryLogs.first?.logBookText {
-                        self.logBookText = logBookText
-                    }
                     if let imageUrl = self.newEntryLogs.first?.imageUrl {
                         self.imageUrl = imageUrl
+                    }
+                    if let logBookText = self.newEntryLogs.first?.logBookText {
+                        self .logBookText = logBookText
                     }
                 }
             }
@@ -185,22 +185,21 @@ class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManager
                         if let error = error {
                             print("deleting newLogEntry for day \(formattedDate) failed \(error)")
                         } else {
-                            print("deleting newLogEntry for day \(formattedDate) succesfull")
+                            print("deleting newLogEntry for day \(formattedDate) succesful")
                         }
                     }
                 }
             }
     }
     
-    @MainActor
     func deleteImage(imageUrl: String){
         let imageRef = FirebaseManager.shared.storage.reference(forURL: imageUrl)
         
         imageRef.delete { error in
             if let error = error {
-                print("delete imageRef failed: \(error)")
+                print("delete imageRef for day \(self.formattedDate) failed: \(error)")
             } else {
-                print("delete imageRef successful")
+                print("delete imageRef for day \(self.formattedDate) successful")
             }
         }
     }
@@ -236,5 +235,7 @@ class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManager
         self.listener = nil
         self.newEntryLogs = []
         self.readImages = []
+        self.logBookText = ""
+        self.imageUrl = ""
     }
 }
