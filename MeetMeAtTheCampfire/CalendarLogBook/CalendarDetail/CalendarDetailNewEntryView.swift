@@ -155,7 +155,9 @@ struct CalendarDetailNewEntryView: View {
                             {
                                 if !calendarDetailItemVm.newEntryLogs.isEmpty || calendarDetailItemVm.newEntryLogs.contains(where: { !$0.logBookText.isEmpty && $0.formattedDate == calendarDetailItemVm.formattedDate }) {
                                     calendarDetailItemVm.deleteLogBookText(formattedDate: calendarDetailItemVm.formattedDate)
-                                    calendarDetailItemVm.deleteImage(imageUrl: calendarDetailItemVm.newEntryLogs.first?.imageUrl ?? "no image found")
+                                    if !calendarDetailItemVm.imageUrl.isEmpty {
+                                        calendarDetailItemVm.deleteImage(imageUrl: calendarDetailItemVm.newEntryLogs.first?.imageUrl ?? "no image found")
+                                    }
                                     calendarDetailItemVm.removeListener()
                                     //showSuccessfulUploadAlert.toggle()
                                     calendarDetailItemVm.createlogBookText(logBookText: calendarDetailItemVm.logBookText)

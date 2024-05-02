@@ -98,7 +98,6 @@ struct LoginView: View {
                     .alert(isPresented: $authVm.loginFailedAlert){
                         Alert(title: Text("Hoppla"), message: Text("Deine Anmeldung hat nicht geklappt"), dismissButton: .default(Text("OK")))
                     }
-                    Divider()
                         .padding(EdgeInsets(top: 15, leading: 0, bottom: 20, trailing: 0))
                     HStack {
                         Text("Noch kein Konto?")
