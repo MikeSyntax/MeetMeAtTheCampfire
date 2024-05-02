@@ -82,7 +82,10 @@ struct CalendarDetailItemView: View {
                         }
                     }
                 }
-                if calendarDetailItemVm.newEntryLogs.isEmpty || calendarDetailItemVm.newEntryLogs.contains(where: { $0.logBookText.isEmpty && $0.formattedDate == calendarDetailItemVm.formattedDate }){
+                if calendarDetailItemVm.newEntryLogs.isEmpty ||
+                    calendarDetailItemVm.newEntryLogs.contains(
+                        where: { $0.logBookText.isEmpty && $0.formattedDate == calendarDetailItemVm.formattedDate }) &&
+                    calendarDetailItemVm.imageUrl.isEmpty {
                     Image(.empty)
                         .resizable()
                         .scaledToFit()
@@ -173,7 +176,7 @@ struct CalendarDetailItemView: View {
 //    @State var showNewEntryView: Bool = false
 //    @State private var isNewImageLoading: Bool = false
 //    @Environment(\.dismiss) private var dismiss
-//    
+//
 //    var body: some View {
 //        NavigationStack{
 //            VStack {
@@ -287,7 +290,7 @@ struct CalendarDetailItemView: View {
 //                        }
 //                    }
 //                }
-//                
+//
 //            }
 //        }
 //        .onAppear {
@@ -315,7 +318,7 @@ struct CalendarDetailItemView: View {
 //
 //#Preview{
 //    let logbookMod: LogBookModel = LogBookModel(userId: "1", formattedDate: "", logBookText: "Hallo", latitude: 0.0, longitude: 0.0, imageUrl: "", containsLogBookEntry: false)
-//    
+//
 //    return CalendarDetailItemView(calendarDetailItemVm: CalendarDetailItemViewModel(calendarItemModel: logbookMod, date: Date()))
 //}
 //

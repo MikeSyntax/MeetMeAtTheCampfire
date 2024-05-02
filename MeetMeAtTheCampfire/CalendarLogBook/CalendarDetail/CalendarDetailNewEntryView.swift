@@ -159,16 +159,15 @@ struct CalendarDetailNewEntryView: View {
                                         calendarDetailItemVm.deleteImage(imageUrl: calendarDetailItemVm.newEntryLogs.first?.imageUrl ?? "no image found")
                                     }
                                     calendarDetailItemVm.removeListener()
-                                    //showSuccessfulUploadAlert.toggle()
+                                    showSuccessfulUploadAlert.toggle()
                                     calendarDetailItemVm.createlogBookText(logBookText: calendarDetailItemVm.logBookText)
                                     calendarDetailItemVm.stopLocationRequest()
-                                    showNewEntryView.toggle()
-                                } else
-                                {
-                                    //showSuccessfulUploadAlert.toggle()
+//                                    showNewEntryView.toggle()
+                                } else {
+                                    showSuccessfulUploadAlert.toggle()
                                     calendarDetailItemVm.createlogBookText(logBookText: calendarDetailItemVm.logBookText)
                                     calendarDetailItemVm.stopLocationRequest()
-                                    showNewEntryView.toggle()
+//                                    showNewEntryView.toggle()
                                }
                             }
                         }
@@ -221,7 +220,7 @@ struct CalendarDetailNewEntryView: View {
             calendarDetailItemVm.requestLocation()
         }
         .onDisappear{
-            calendarDetailItemVm.removeListener()
+           // calendarDetailItemVm.removeListener()
             calendarDetailItemVm.stopLocationRequest()
             isAnimated = false
         }
@@ -232,11 +231,11 @@ struct CalendarDetailNewEntryView: View {
             CalendarNewEntrySheetView(showToDoSheet: $showToDoSheet)
                 .presentationDetents([.medium])
         }
-//        .alert(isPresented:  $showSuccessfulUploadAlert){
-//            Alert(title: Text("Dein Upload war erfolgreich"), message: Text("Gedulde Dich einen Moment"), dismissButton: .default(Text("OK"), action: {
-//                showNewEntryView.toggle()
-//            }))
-//        }
+        .alert(isPresented:  $showSuccessfulUploadAlert){
+            Alert(title: Text("Deine Daten auf den Server geladen"), message: Text("Gedulde Dich einen Moment"), dismissButton: .default(Text("OK"), action: {
+                showNewEntryView.toggle()
+            }))
+        }
         .toolbar(.hidden, for: .tabBar)
         .background(Color(UIColor.systemBackground))
     }
