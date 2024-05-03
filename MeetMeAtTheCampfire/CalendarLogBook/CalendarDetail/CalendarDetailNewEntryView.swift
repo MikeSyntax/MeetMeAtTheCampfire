@@ -151,10 +151,11 @@ struct CalendarDetailNewEntryView: View {
                         }
                         VStack{
                             //Button zum speichern von Bildern
-                            ButtonTextAction(iconName: "square.and.arrow.down", text: "Speichern")
-                            {
+                            ButtonTextAction(iconName: "square.and.arrow.down", text: "Speichern") {
+                                //Wenn Einträge nicht leer sind oder Einträge mit nicht leeren Text und das passende Datum enthalten, existieren
                                 if !calendarDetailItemVm.newEntryLogs.isEmpty || calendarDetailItemVm.newEntryLogs.contains(where: { !$0.logBookText.isEmpty && $0.formattedDate == calendarDetailItemVm.formattedDate }) {
                                     calendarDetailItemVm.deleteLogBookText(formattedDate: calendarDetailItemVm.formattedDate)
+                                    //Bilder löschen nur wenn eine Url existiert, sonst übersprinten
                                     if !calendarDetailItemVm.imageUrl.isEmpty {
                                         calendarDetailItemVm.deleteImage(imageUrl: calendarDetailItemVm.newEntryLogs.first?.imageUrl ?? "no image found")
                                     }
@@ -162,12 +163,10 @@ struct CalendarDetailNewEntryView: View {
                                     showSuccessfulUploadAlert.toggle()
                                     calendarDetailItemVm.createlogBookText(logBookText: calendarDetailItemVm.logBookText)
                                     calendarDetailItemVm.stopLocationRequest()
-//                                    showNewEntryView.toggle()
                                 } else {
                                     showSuccessfulUploadAlert.toggle()
                                     calendarDetailItemVm.createlogBookText(logBookText: calendarDetailItemVm.logBookText)
                                     calendarDetailItemVm.stopLocationRequest()
-//                                    showNewEntryView.toggle()
                                }
                             }
                         }

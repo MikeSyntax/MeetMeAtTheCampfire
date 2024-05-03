@@ -27,7 +27,7 @@ struct CalendarDetailItemView: View {
                         .padding(EdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0))
                         .overlay(
                             RoundedRectangle(cornerRadius: 10)
-                                .stroke(Color.gray, lineWidth: 2)
+                                .stroke(Color.cyan, lineWidth: 2)
                         )
                 }
                 .padding(.top)
@@ -96,7 +96,7 @@ struct CalendarDetailItemView: View {
                         showNewEntryView.toggle()
                     }
                 } else {
-                    ButtonTextAction(iconName: "trash", text: "Eintrag löschen") {
+                    Button(role: .destructive) {
                         if !calendarDetailItemVm.logBookText.isEmpty && calendarDetailItemVm.imageUrl.isEmpty {
                             calendarDetailItemVm.deleteLogBookText(formattedDate: calendarDetailItemVm.formattedDate)
                             calendarDetailItemVm.readImages = []
@@ -107,7 +107,27 @@ struct CalendarDetailItemView: View {
                             calendarDetailItemVm.readImages = []
                             calendarDetailItemVm.logBookText = ""
                         }
+                    } label: {
+                        Image(systemName: "trash")
+                        Text("Eintrag löschen")
                     }
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.white, lineWidth: 2)
+                    )
+                    .buttonStyle(.borderedProminent)
+//                    ButtonTextAction(iconName: "trash", text: "Eintrag löschen") {
+//                        if !calendarDetailItemVm.logBookText.isEmpty && calendarDetailItemVm.imageUrl.isEmpty {
+//                            calendarDetailItemVm.deleteLogBookText(formattedDate: calendarDetailItemVm.formattedDate)
+//                            calendarDetailItemVm.readImages = []
+//                            calendarDetailItemVm.logBookText = ""
+//                        } else {
+//                            calendarDetailItemVm.deleteLogBookText(formattedDate: calendarDetailItemVm.formattedDate)
+//                            calendarDetailItemVm.deleteImage(imageUrl: calendarDetailItemVm.newEntryLogs.first?.imageUrl ?? "no image found")
+//                            calendarDetailItemVm.readImages = []
+//                            calendarDetailItemVm.logBookText = ""
+//                        }
+//                    }
                     .padding()
                 }
                 Divider()

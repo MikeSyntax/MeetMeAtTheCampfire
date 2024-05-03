@@ -43,9 +43,13 @@ struct DetailCategorieView: View {
                 Button(role: .destructive) {
                     detailCategorieVm.deleteTask(categorieId: categorieVm.categorieViewModel.id)
                 } label: {
-                    Text("Erledigte ToDo´s löschen")
                     Image(systemName: "trash")
+                    Text("Erledigte ToDo´s löschen")
                 }
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10) // Erstellen eines gerundeten Rechtecks als Overlay
+                        .stroke(Color.white, lineWidth: 2) // Farbe und Breite des Rahmens festlegen
+                )
                 .buttonStyle(.borderedProminent)
                 .padding(EdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0))
             }
