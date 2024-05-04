@@ -59,7 +59,6 @@ struct CalendarDetailNewEntryView: View {
                                                             .resizable()
                                                             .scaledToFit()
                                                             .cornerRadius(10)
-                                                            .cornerRadius(10)
                                                             .overlay(
                                                                 RoundedRectangle(cornerRadius: 10)
                                                                     .stroke(Color.cyan, lineWidth: 2)
@@ -67,6 +66,11 @@ struct CalendarDetailNewEntryView: View {
                                                     },
                                                     placeholder: {
                                                         Image(systemName: "photo")
+                                                            .frame(minWidth: 300,  minHeight: 150)
+                                                            .overlay(
+                                                                RoundedRectangle(cornerRadius: 10)
+                                                                    .stroke(Color.cyan, lineWidth: 2)
+                                                            )
                                                     }
                                                 )
                                                 Button{
@@ -84,7 +88,6 @@ struct CalendarDetailNewEntryView: View {
                                                     Image(uiImage: calendarDetailItemVm.selectedImage!)
                                                         .resizable()
                                                         .scaledToFit()
-                                                        .cornerRadius(10)
                                                         .overlay(
                                                             RoundedRectangle(cornerRadius: 10)
                                                                 .stroke(Color.cyan, lineWidth: 2)
@@ -149,6 +152,7 @@ struct CalendarDetailNewEntryView: View {
                             .frame(width: 300, alignment: .center)
                             .padding(15)
                         }
+                        Divider()
                         VStack{
                             //Button zum speichern von Bildern
                             ButtonTextAction(iconName: "square.and.arrow.down", text: "Speichern") {
@@ -170,7 +174,6 @@ struct CalendarDetailNewEntryView: View {
                                }
                             }
                         }
-                        .padding(.bottom)
                     }
                     VStack(alignment: .trailing){
                         if entryButtonIsActive {

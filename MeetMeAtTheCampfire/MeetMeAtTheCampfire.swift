@@ -23,7 +23,6 @@ struct MeetMeAtTheCampfireApp: App {
             if authVm.userLoggedIn {
                 MainScreenView(authVm: authVm)
                     .environmentObject(authVm)
-                    //.environmentObject(infoButtonSettings)
             } else {
                 LoginView()
                     .environmentObject(authVm)

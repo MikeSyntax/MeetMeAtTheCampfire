@@ -39,21 +39,12 @@ struct DetailCategorieView: View {
                             }
                     }
                 }
-                //Löschen der aller Tasks in dieser Kategorie
-                Button(role: .destructive) {
+                ButtonDestructiveTextAction(iconName: "trash", text: "Erledigte ToDo´s löschen") {
                     detailCategorieVm.deleteTask(categorieId: categorieVm.categorieViewModel.id)
-                } label: {
-                    Image(systemName: "trash")
-                    Text("Erledigte ToDo´s löschen")
                 }
-                .overlay(
-                    RoundedRectangle(cornerRadius: 10) // Erstellen eines gerundeten Rechtecks als Overlay
-                        .stroke(Color.white, lineWidth: 2) // Farbe und Breite des Rahmens festlegen
-                )
-                .buttonStyle(.borderedProminent)
                 .padding(EdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0))
             }
-            Spacer()
+            Divider()
             
             //Beim Löschen der Kategorie werden auch alle Tasks gelöscht!!
             ButtonTextAction(iconName: "trash", text: "Gesamte Kategorie löschen"){
@@ -61,7 +52,6 @@ struct DetailCategorieView: View {
                 detailCategorieVm.deleteAllTask(categorieId: categorieVm.categorieViewModel.id)
                 dismiss()
             }
-            .padding(EdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 0))
             Divider()
         }
         .scrollContentBackground(.hidden)

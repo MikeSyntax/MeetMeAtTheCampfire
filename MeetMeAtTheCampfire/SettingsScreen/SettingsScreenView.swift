@@ -11,51 +11,105 @@ struct SettingsScreenView: View {
     @Environment(\.dismiss) private var dismiss
     @AppStorage("infoButton") private var infoButtonIsActive: Bool = true
     @AppStorage("entryButton") private var entryButtonIsActive: Bool = true
+    @AppStorage("colorScheme") private var colorScheme: String = "System"
+    @State var showPrivacySheet = false
     
     var body: some View {
         NavigationStack{
             VStack{
-                VStack(alignment: .leading){
-                    Text("Infobox im Kalender")
-                    Button{
-                        infoButtonIsActive.toggle()
-                    } label: {
-                        infoButtonIsActive ? Label("Info ausblenden", systemImage: "info.square") : Label("Info einblenden ", systemImage: "info.square.fill")
-                    }
-                    .frame(height: 20)
-                    .padding(8)
-                    .background(.cyan)
-                    .cornerRadius(10)
-                    .foregroundColor(.white)
-                    .font(.headline)
+                Toggle("Info Kalender einblenden ", systemImage: "info.square", isOn: $infoButtonIsActive)
+                    .padding()
+                    .frame(maxHeight: 70)
                     .overlay(
                         RoundedRectangle(cornerRadius: 10)
-                            .stroke(Color.white, lineWidth: 2)
+                            .stroke(Color.cyan, lineWidth: 2)
                     )
-                    .padding(EdgeInsets(top: -9, leading: 0, bottom: 20, trailing: 20))
+                
+                Toggle("Info Logbuch einblenden ", systemImage: "info.square", isOn: $entryButtonIsActive)
+                    .padding()
+                    .frame(maxHeight: 70)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.cyan, lineWidth: 2)
+                    )
+                
+                VStack(alignment: .leading){
+                    Text("Erscheinungsbild")
+                        .underline()
+                    Toggle("Licht aus", systemImage: "lightbulb", isOn: Binding(
+                        get: { colorScheme == "Dark" },
+                        set: { newValue in
+                            colorScheme = newValue ? "Dark" : "System"
+                        }
+                    ))
+                    Toggle("Licht an", systemImage: "lightbulb.fill", isOn: Binding(
+                        get: { colorScheme == "Light" },
+                        set: { newValue in
+                            colorScheme = newValue ? "Light" : "System"
+                        }
+                    ))
+                    Toggle("Nach System", systemImage: "apple.logo", isOn: Binding(
+                        get: { colorScheme == "System" },
+                        set: { newValue in
+                            colorScheme = newValue ? "System" : "Light"
+                        }
+                    ))
                 }
-                VStack(alignment: .leading){
-                    Text("Infobox Eintrag Logbuch")
-                    Button{
-                        entryButtonIsActive.toggle()
-                    } label: {
-                        entryButtonIsActive ? Label("Info ausblenden", systemImage: "info.square") : Label("Info einblenden ", systemImage: "info.square.fill")
+                .padding()
+                .frame(maxHeight: 170)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color.cyan, lineWidth: 2)
+                )
+                
+                HStack{
+                    Spacer()
+                    Button("Impressum"){
+                        //Todo Impressum
                     }
-                    .frame(height: 20)
-                    .padding(8)
-                    .background(.cyan)
-                    .cornerRadius(10)
-                    .foregroundColor(.white)
-                    .font(.headline)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 10)
-                            .stroke(Color.white, lineWidth: 2)
-                    )
-                    .padding(EdgeInsets(top: -9, leading: 0, bottom: 20, trailing: 20))
+                    Spacer()
+                }
+                .frame(maxHeight: 70)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color.cyan, lineWidth: 2)
+                )
+                
+                HStack{
+                    Spacer()
+                    Button("Datenschutz"){
+                        showPrivacySheet.toggle()
+                    }
+                    Spacer()
+                }
+                .frame(maxHeight: 70)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color.cyan, lineWidth: 2)
+                )
+                .sheet(isPresented: $showPrivacySheet){
+                    PrivacySheet(showPrivacySheet: $showPrivacySheet)
+                        .presentationDetents([.large])
                 }
                 Spacer()
+                Divider()
+                Spacer()
+                
+                HStack{
+                    Spacer()
+                    ButtonDestructiveTextAction(iconName: "trash", text: "Account löschen"){
+                        //Todo Account löschen
+                    }
+                    Spacer()
+                }
+                .frame(maxHeight: 70)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color.cyan, lineWidth: 2)
+                )
+                //Ende VStack
             }
-            .padding(.top, 30)
+            .padding(EdgeInsets(top: 30, leading: 20, bottom: 20, trailing: 20))
             .toolbar{
                 Button("Übernehmen"){
                     dismiss()
@@ -70,6 +124,18 @@ struct SettingsScreenView: View {
                     .opacity(0.2)
                     .ignoresSafeArea(.all))
         }
+        .onChange(of: colorScheme) { _, newColorScheme in
+            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                let window = windowScene.windows.first
+                if newColorScheme == "Dark" {
+                    window?.overrideUserInterfaceStyle = .dark
+                } else if newColorScheme == "Light" {
+                    window?.overrideUserInterfaceStyle = .light
+                } else {
+                    window?.overrideUserInterfaceStyle = .unspecified
+                }
+            }
+        }
         .background(Color(UIColor.systemBackground))
     }
 }
@@ -78,95 +144,3 @@ struct SettingsScreenView: View {
     SettingsScreenView()
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//import SwiftUI
-//
-//struct SettingsScreenView: View {
-//    @Environment(\.dismiss) private var dismiss
-//    @AppStorage("isDarkMode") var isDark: Bool = false
-//    @AppStorage("infoButton") private var infoButtonIsActive: Bool = true
-//    //--------------
-//    var body: some View {
-//        NavigationStack{
-//            ZStack{
-//                Image("background")
-//                    .resizable()
-//                    .scaledToFill()
-//                    .opacity(0.2)
-//                    .ignoresSafeArea(.all)
-//                VStack{
-//                    VStack(alignment: .leading){
-//                        Text("Hell Dunkel Modus")
-//                        Button{
-//                            isDark.toggle()
-//                        }label: {
-//                            isDark ? Label("Licht anschalten  ", systemImage: "lightbulb.fill") : Label("Licht ausschalten", systemImage: "lightbulb")
-//                        }
-//                        .padding(EdgeInsets(top: -10, leading: 0, bottom: 20, trailing: 20))
-//                        .buttonStyle(.borderedProminent)
-//                    }
-//                    VStack(alignment: .leading){
-//                        Text("Infobox im Kalender")
-//                        Button{
-//                            infoButtonIsActive.toggle()
-//                        } label: {
-//                            infoButtonIsActive ? Label("Info ausblenden", systemImage: "info.square") : Label("Info einblenden ", systemImage: "info.square.fill")
-//                        }
-//                        .padding(EdgeInsets(top: -10, leading: 0, bottom: 20, trailing: 20))
-//                        .buttonStyle(.borderedProminent)
-//                    }
-//                }
-//                Spacer()
-//            }
-//            .toolbar{
-//                Button("Übernehmen"){
-//                    dismiss()
-//                }
-//            }
-//            .navigationBarTitle("Einstellungen", displayMode: .inline)
-//            .scrollContentBackground(.hidden)
-////            .background(
-////                Image("background")
-////                    .resizable()
-////                    .scaledToFill()
-////                    .opacity(0.2)
-////                    .ignoresSafeArea(.all))
-//        }
-//        .environment(\.colorScheme, isDark ? .dark : .light)
-//    }
-//}
-//
-//#Preview {
-//    SettingsScreenView()
-//}

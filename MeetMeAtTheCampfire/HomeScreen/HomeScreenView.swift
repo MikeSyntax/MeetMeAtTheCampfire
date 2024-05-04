@@ -15,7 +15,6 @@ struct HomeScreenView: View {
     @State private var showNewCategorieAlert: Bool = false
     @State private var newCategorie: String = ""
     @State private var showSettingsSheet: Bool = false
-    
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
