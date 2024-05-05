@@ -59,6 +59,7 @@
 		2B5DF1892B99B68900FA285C /* ChatItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5DF1882B99B68900FA285C /* ChatItemView.swift */; };
 		2B5DF18B2B99B7B900FA285C /* ChatItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5DF18A2B99B7B900FA285C /* ChatItemViewModel.swift */; };
 		2B67B3DD2BE6562B002E2379 /* PrivacySheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B67B3DC2BE6562B002E2379 /* PrivacySheet.swift */; };
+		2B67B3DF2BE76A66002E2379 /* DeleteAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B67B3DE2BE76A66002E2379 /* DeleteAccountView.swift */; };
 		2B7A00682BD7EB470054AABD /* CalendarInfoButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7A00672BD7EB470054AABD /* CalendarInfoButtonView.swift */; };
 		2B7A006A2BD7EF0F0054AABD /* CalendarInfoSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7A00692BD7EF0F0054AABD /* CalendarInfoSheetView.swift */; };
 		2B998A912BE4E976003C99B4 /* ButtonDestructiveTextAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B998A902BE4E976003C99B4 /* ButtonDestructiveTextAction.swift */; };
@@ -124,6 +125,7 @@
 		2B5DF1882B99B68900FA285C /* ChatItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatItemView.swift; sourceTree = "<group>"; };
 		2B5DF18A2B99B7B900FA285C /* ChatItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatItemViewModel.swift; sourceTree = "<group>"; };
 		2B67B3DC2BE6562B002E2379 /* PrivacySheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacySheet.swift; sourceTree = "<group>"; };
+		2B67B3DE2BE76A66002E2379 /* DeleteAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountView.swift; sourceTree = "<group>"; };
 		2B7A00672BD7EB470054AABD /* CalendarInfoButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarInfoButtonView.swift; sourceTree = "<group>"; };
 		2B7A00692BD7EF0F0054AABD /* CalendarInfoSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarInfoSheetView.swift; sourceTree = "<group>"; };
 		2B998A902BE4E976003C99B4 /* ButtonDestructiveTextAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonDestructiveTextAction.swift; sourceTree = "<group>"; };
@@ -497,6 +499,7 @@
 			children = (
 				2BF4B97F2B98A24C00C1AF1A /* SettingsScreenView.swift */,
 				2B67B3DC2BE6562B002E2379 /* PrivacySheet.swift */,
+				2B67B3DE2BE76A66002E2379 /* DeleteAccountView.swift */,
 			);
 			path = SettingsScreen;
 			sourceTree = "<group>";
@@ -671,6 +674,7 @@
 				2BF4B9802B98A24C00C1AF1A /* SettingsScreenView.swift in Sources */,
 				2B5DF1852B99B46E00FA285C /* ChatModel.swift in Sources */,
 				2B43E1752BAACED400375D58 /* LogBookModel.swift in Sources */,
+				2B67B3DF2BE76A66002E2379 /* DeleteAccountView.swift in Sources */,
 				2BD8D4342B9F60C40050CB64 /* ChatScreenViewModel.swift in Sources */,
 				2BD855A82BDC5CEA001B0A09 /* ClearView.swift in Sources */,
 				2B2779052B907EBF00779FB5 /* AuthViewModel.swift in Sources */,

@@ -5,8 +5,8 @@
 //  Created by Mike Reichenbach on 01.05.24.
 //
 
-//import SwiftUI
-//
+import SwiftUI
+
 //struct ResizeableTextFieldView: View {
 //        
 //        @EnvironmentObject var obj: observed
@@ -83,6 +83,37 @@
 //
 //struct ContentView_Preview: PreviewProvider {
 //    static var previews: some View {
-//        ResizeableTextFieldView()
+//        ContentView()
+//    }
+//}
+//struct ContentView: View {
+//    
+//    @State var showBadge = false
+//    @State var count = 0
+//    
+//    func increment() {
+//        count = count + 1
+//    }
+//    
+//    
+//    var body: some View {
+//        Button(action: {
+//            showBadge.toggle() // badge(9)
+//            if showBadge { increment() }
+//        }, label: {
+//            Text("show badge")
+//        })
+//        List {
+//            if showBadge {
+//                Rectangle()
+//                    .frame(width: 180, height: 200)
+//                    .foregroundColor(.blue)
+//                    .badge(count)
+//            } else {
+//                Rectangle()
+//                    .frame(width: 180, height: 200)
+//                    .foregroundColor(.blue)
+//            }
+//        }
 //    }
 //}

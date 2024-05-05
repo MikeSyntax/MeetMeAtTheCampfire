@@ -143,7 +143,7 @@ struct ProfileScreenView: View {
 }
 
 #Preview {
-    let profileScreenVm = ProfileScreenViewModel(user: UserModel(id: "", email: "", registeredTime: Date(), userName: "Hans", timeStampLastVisitChat: Date()))
+    let profileScreenVm = ProfileScreenViewModel(user: UserModel(id: "", email: "", registeredTime: Date(), userName: "Hans", timeStampLastVisitChat: Date(), isActive: true))
     return ProfileScreenView(profileScreenVm: profileScreenVm)
         .environmentObject(AuthViewModel())
 }

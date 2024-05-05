@@ -12,104 +12,144 @@ struct SettingsScreenView: View {
     @AppStorage("infoButton") private var infoButtonIsActive: Bool = true
     @AppStorage("entryButton") private var entryButtonIsActive: Bool = true
     @AppStorage("colorScheme") private var colorScheme: String = "System"
-    @State var showPrivacySheet = false
+    @AppStorage("badgevisible") private var isBadgeVisible: Bool = true
+    @State private var showPrivacySheet: Bool = false
+    @State private var showDeleteAccountAlert: Bool = false
+    @State private var showReEnterPasswordAlert: Bool = false
+    @State private var showPasswordConfirmationSheet: Bool = false
+    @EnvironmentObject var authVm: AuthViewModel
     
     var body: some View {
         NavigationStack{
             VStack{
-                Toggle("Info Kalender einblenden ", systemImage: "info.square", isOn: $infoButtonIsActive)
-                    .padding()
-                    .frame(maxHeight: 70)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 10)
-                            .stroke(Color.cyan, lineWidth: 2)
-                    )
-                
-                Toggle("Info Logbuch einblenden ", systemImage: "info.square", isOn: $entryButtonIsActive)
-                    .padding()
-                    .frame(maxHeight: 70)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 10)
-                            .stroke(Color.cyan, lineWidth: 2)
-                    )
-                
-                VStack(alignment: .leading){
-                    Text("Erscheinungsbild")
-                        .underline()
-                    Toggle("Licht aus", systemImage: "lightbulb", isOn: Binding(
-                        get: { colorScheme == "Dark" },
-                        set: { newValue in
-                            colorScheme = newValue ? "Dark" : "System"
-                        }
-                    ))
-                    Toggle("Licht an", systemImage: "lightbulb.fill", isOn: Binding(
-                        get: { colorScheme == "Light" },
-                        set: { newValue in
-                            colorScheme = newValue ? "Light" : "System"
-                        }
-                    ))
-                    Toggle("Nach System", systemImage: "apple.logo", isOn: Binding(
-                        get: { colorScheme == "System" },
-                        set: { newValue in
-                            colorScheme = newValue ? "System" : "Light"
-                        }
-                    ))
-                }
-                .padding()
-                .frame(maxHeight: 170)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.cyan, lineWidth: 2)
-                )
-                
-                HStack{
-                    Spacer()
-                    Button("Impressum"){
-                        //Todo Impressum
-                    }
-                    Spacer()
-                }
-                .frame(maxHeight: 70)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.cyan, lineWidth: 2)
-                )
-                
-                HStack{
-                    Spacer()
-                    Button("Datenschutz"){
-                        showPrivacySheet.toggle()
-                    }
-                    Spacer()
-                }
-                .frame(maxHeight: 70)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.cyan, lineWidth: 2)
-                )
-                .sheet(isPresented: $showPrivacySheet){
-                    PrivacySheet(showPrivacySheet: $showPrivacySheet)
-                        .presentationDetents([.large])
-                }
-                Spacer()
                 Divider()
-                Spacer()
-                
-                HStack{
+                ScrollView{
                     Spacer()
-                    ButtonDestructiveTextAction(iconName: "trash", text: "Account löschen"){
-                        //Todo Account löschen
+                    VStack{
+                        Toggle("Info Kalender einblenden ", systemImage: infoButtonIsActive ? "info.square.fill" : "info.square", isOn: $infoButtonIsActive)
+                            .font(.system(size: 15))
+                            .padding()
+                            .frame(minHeight: 70)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(Color.cyan, lineWidth: 2)
+                            )
+                        
+                        Toggle("Info Logbuch einblenden ", systemImage: entryButtonIsActive ? "info.square.fill" : "info.square", isOn: $entryButtonIsActive)
+                            .font(.system(size: 15))
+                            .padding()
+                            .frame(minHeight: 70)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(Color.cyan, lineWidth: 2)
+                            )
+                        
+                        VStack(alignment: .leading){
+                            Text("Erscheinungsbild")
+                                .underline()
+                                .font(.system(size: 15))
+                            Toggle("Licht aus", systemImage: "lightbulb", isOn: Binding(
+                                get: { colorScheme == "Dark" },
+                                set: { newValue in
+                                    colorScheme = newValue ? "Dark" : "System"
+                                }
+                            ))
+                            .font(.system(size: 15))
+                            Toggle("Licht an", systemImage: "lightbulb.fill", isOn: Binding(
+                                get: { colorScheme == "Light" },
+                                set: { newValue in
+                                    colorScheme = newValue ? "Light" : "System"
+                                }
+                            ))
+                            .font(.system(size: 15))
+                            Toggle("Nach System", systemImage: "apple.logo", isOn: Binding(
+                                get: { colorScheme == "System" },
+                                set: { newValue in
+                                    colorScheme = newValue ? "System" : "Light"
+                                }
+                            ))
+                            .font(.system(size: 15))
+                        }
+                        .padding()
+                        .frame(minHeight: 170)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(Color.cyan, lineWidth: 2)
+                        )
+                        
+                        Toggle("Benachrichtigung Campfire", systemImage: isBadgeVisible ? "flame.fill" : "flame", isOn: $isBadgeVisible)
+                            .font(.system(size: 15))
+                            .padding()
+                            .frame(minHeight: 70)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(Color.cyan, lineWidth: 2)
+                            )
+                        
+                        HStack{
+                            Spacer()
+                            Button("Impressum"){
+                                //Todo Impressum
+                            }
+                            Spacer()
+                        }
+                        .frame(minHeight: 70)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(Color.cyan, lineWidth: 2)
+                        )
+                        
+                        HStack{
+                            Spacer()
+                            Button("Datenschutz"){
+                                showPrivacySheet.toggle()
+                            }
+                            Spacer()
+                        }
+                        .frame(minHeight: 70)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(Color.cyan, lineWidth: 2)
+                        )
+                        .sheet(isPresented: $showPrivacySheet){
+                            PrivacySheet(showPrivacySheet: $showPrivacySheet)
+                                .presentationDetents([.large])
+                        }
+                        Spacer()
+                        Divider()
+                        Spacer()
+                        
+                        HStack{
+                            Spacer()
+                            ButtonDestructiveTextAction(iconName: "trash", text: "Account löschen"){
+                                //Todo Account löschen
+                                showDeleteAccountAlert.toggle()
+                            }
+                            .alert(isPresented: $showDeleteAccountAlert) {
+                                Alert(
+                                    title: Text("Account wirklich löschen?"),
+                                    message: Text("Alle Daten werden unwiederbringlich gelöscht!"),
+                                    primaryButton: .cancel(Text("Zurück")),
+                                    secondaryButton: .destructive(Text("Ja, ich bin sicher")) {
+                                        showPasswordConfirmationSheet.toggle()
+                                    }
+                                )
+                            }
+                            Spacer()
+                        }
+                        .frame(minHeight: 70)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(Color.cyan, lineWidth: 2)
+                        )
                     }
+                    //Ende VStack
+                    
+                    .padding(20)
                     Spacer()
                 }
-                .frame(maxHeight: 70)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.cyan, lineWidth: 2)
-                )
-                //Ende VStack
+                Divider()
             }
-            .padding(EdgeInsets(top: 30, leading: 20, bottom: 20, trailing: 20))
             .toolbar{
                 Button("Übernehmen"){
                     dismiss()
@@ -123,7 +163,12 @@ struct SettingsScreenView: View {
                     .scaledToFill()
                     .opacity(0.2)
                     .ignoresSafeArea(.all))
+            
         }
+        .sheet(isPresented: $showPasswordConfirmationSheet, content: {
+            DeleteAccountView(showPasswordConfirmationSheet: $showPasswordConfirmationSheet)
+                .presentationDetents([.medium])
+        })
         .onChange(of: colorScheme) { _, newColorScheme in
             if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
                 let window = windowScene.windows.first
@@ -137,10 +182,11 @@ struct SettingsScreenView: View {
             }
         }
         .background(Color(UIColor.systemBackground))
+        .ignoresSafeArea(.all)
     }
 }
 
 #Preview {
     SettingsScreenView()
+        .environmentObject(AuthViewModel())
 }
-

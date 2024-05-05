@@ -43,6 +43,6 @@ struct HomeBaseSheetView: View {
 }
 
 #Preview {
-    HomeBaseSheetView(profileScreenVm: ProfileScreenViewModel(user: UserModel(id: "", email: "", registeredTime: Date(), userName: "Hans", timeStampLastVisitChat: Date())))
+    HomeBaseSheetView(profileScreenVm: ProfileScreenViewModel(user: UserModel(id: "", email: "", registeredTime: Date(), userName: "Hans", timeStampLastVisitChat: Date(), isActive: true)))
 }
 

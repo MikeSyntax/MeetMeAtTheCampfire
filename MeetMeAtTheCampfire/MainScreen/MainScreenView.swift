@@ -14,6 +14,7 @@ struct MainScreenView: View {
     @StateObject var languageVm = LanguageScreenViewModel(languageChoice: Language(code: "af", name: "Afrikaans"), languageSource: Language(code: "de", name: "Deutsch"))
     @StateObject var chatSenderVm = ChatItemViewModel(chatDesign: ChatModel(userId: "2", userName: "Dieter", messageText: "Danke", timeStamp: Date(), isReadbyUser: [], isLiked: false, isLikedByUser: []))
     @State private var selectedTab = 0
+    @AppStorage("badgevisible") private var isBadgeVisible: Bool = true
     
     init(authVm: AuthViewModel){
         _chatVm = StateObject(wrappedValue: ChatScreenViewModel(user: authVm.user!))
@@ -29,13 +30,22 @@ struct MainScreenView: View {
                     Text("Home")
                 }.tag(0)
             
-            ChatScreenView(chatVm: self.chatVm)
-                .tabItem {
-                    Image(systemName: "flame")
-                    Text("Campfire")
-                }
-                .badge(chatVm.messageCountResult)
-                .tag(1)
+            if isBadgeVisible {
+                ChatScreenView(chatVm: self.chatVm)
+                    .tabItem {
+                        Image(systemName: "flame")
+                        Text("Campfire")
+                    }
+                    .badge(chatVm.messageCountResult)
+                    .tag(1)
+            } else {
+                ChatScreenView(chatVm: self.chatVm)
+                    .tabItem {
+                        Image(systemName: "flame")
+                        Text("Campfire")
+                    }
+                    .tag(1)
+            }
             
             CalendarYearlyView()
                 .tabItem {

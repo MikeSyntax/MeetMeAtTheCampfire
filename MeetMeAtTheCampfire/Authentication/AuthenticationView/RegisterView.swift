@@ -131,7 +131,7 @@ struct RegisterView: View {
                 .padding(.bottom)
                 VStack{
                     ButtonTextAction(iconName: "paperplane.fill", text: "Registrieren"){
-                        if (!authVm.email.isEmpty) && (!authVm.userName.isEmpty) && (authVm.password == authVm.confirmPassword) && (!authVm.password.isEmpty) && (!authVm.confirmPassword.isEmpty){
+                        if (!authVm.email.isEmpty) && (!authVm.userName.isEmpty && authVm.userName.count >= 10) && (authVm.password == authVm.confirmPassword) && (!authVm.password.isEmpty) && (!authVm.confirmPassword.isEmpty){
                             authVm.register()
                         }
                     }

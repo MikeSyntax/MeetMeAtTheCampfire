@@ -14,15 +14,15 @@ struct PrivacySheet: View {
     var body: some View {
         NavigationStack{
             VStack{
+                Divider()
                 ScrollView{
+                    Spacer()
                     VStack(alignment: .leading){
-                        Spacer()
                         Text("Datenschutzerklärung".uppercased())
                             .bold()
                             .underline()
                             .font(.system(size: 15, design: .monospaced))
                             .padding(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
-                                            
                         Text("Der Schutz Ihrer persönlichen Daten ist uns ein besonderes Anliegen. Wir verarbeiten Ihre Daten ausschließlich auf Grundlage der gesetzlichen Bestimmungen (DSGVO, TKG 2003). In dieser Datenschutzinformation informieren wir Sie über die wichtigsten Aspekte der Datenverarbeitung im Rahmen unserer App. Wir nutzen Firebase Analytics, um allgemeine Nutzungsstatistiken zu sammeln und unser Angebot zu verbessern. Diese Statistiken enthalten keine personenbezogenen Daten und sind vollständig anonymisiert.")
                         Divider()
                         Text("Datenschutzerklärung für die App - Meet me at the campfire")
@@ -73,16 +73,16 @@ struct PrivacySheet: View {
                         Text("Datum der letzten Aktualisierung: 04.05.2024")
                             .bold()
                     }
-                    .padding()
-                    .frame(maxHeight: .infinity)
+                    .padding(20)
                     .overlay(
                         RoundedRectangle(cornerRadius: 10)
                             .stroke(Color.cyan, lineWidth: 2)
                     )
+                    .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
+                    Spacer()
                 }
-                Spacer()
+                Divider()
             }
-            .padding(EdgeInsets(top: 30, leading: 20, bottom: 20, trailing: 20))
             .toolbar{
                 Button("Fertig"){
                     showPrivacySheet.toggle()

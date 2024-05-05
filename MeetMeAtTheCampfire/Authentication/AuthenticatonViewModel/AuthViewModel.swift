@@ -20,6 +20,7 @@ class AuthViewModel: ObservableObject{
     @Published var showEmailSendAlert: Bool = false
     @Published var showEmailNotSendAlert: Bool = false
     @Published var loginFailedAlert: Bool = false
+    @Published var isActive: Bool = true
     
     //Erstellen eines User gemäß festgelegten UserModel
     @Published var user: UserModel?
@@ -125,7 +126,7 @@ class AuthViewModel: ObservableObject{
     
     func createUser(withId id: String, email: String, userName: String){
         //Kreire einen neuen appUser gemäß UserModel
-        let appUser = UserModel(id: id, email: email, registeredTime: Date(), userName: userName, timeStampLastVisitChat: Date.now)
+        let appUser = UserModel(id: id, email: email, registeredTime: Date(), userName: userName, timeStampLastVisitChat: Date.now, isActive: isActive)
         do{
             //Gehe in den Firestore, erstelle dort eine Col. appUser mit doc id und den Daten gemäß UserModel
             try FirebaseManager.shared.firestore.collection("appUser").document(id).setData(from: appUser)
@@ -169,4 +170,37 @@ class AuthViewModel: ObservableObject{
         }
     }
     
+    @MainActor
+    func deleteAccount(completion: @escaping () -> Void) {
+        guard let currentUserId = FirebaseManager.shared.authentication.currentUser else {
+            return
+        }
+        
+        currentUserId.delete(){ error in
+            if error == nil {
+                completion()
+            }
+        }
+    }
+    
+    @MainActor
+    func deleteUserData(completion: @escaping () -> Void) {
+        
+        guard let currentUser = FirebaseManager.shared.userId else {
+            return
+        }
+        
+        FirebaseManager.shared.firestore.collection("appUser")
+            .document(currentUser).delete(){ error in
+                if error == nil {
+                    completion()
+                }
+            }
+    }
+    func removeListener(){
+    email = ""
+    password = ""
+    confirmPassword = ""
+    userName = ""
+    }
 }
