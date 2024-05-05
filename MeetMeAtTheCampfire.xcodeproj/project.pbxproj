@@ -50,6 +50,9 @@
 		2B2CEC5E2BD4558200348DD1 /* ProfileScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2CEC5D2BD4558200348DD1 /* ProfileScreenViewModel.swift */; };
 		2B36879C2B9E039400F2E944 /* CheckmarkIsRead.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B36879B2B9E039400F2E944 /* CheckmarkIsRead.swift */; };
 		2B36879E2B9E03A700F2E944 /* CheckmarkNotRead.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B36879D2B9E03A700F2E944 /* CheckmarkNotRead.swift */; };
+		2B3E701F2BE7D6E80074ECC7 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3E701E2BE7D6E70074ECC7 /* APIKey.swift */; };
+		2B3E70212BE7D7770074ECC7 /* Email.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3E70202BE7D7770074ECC7 /* Email.swift */; };
+		2B3E70232BE7D7860074ECC7 /* Adress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3E70222BE7D7860074ECC7 /* Adress.swift */; };
 		2B43E1752BAACED400375D58 /* LogBookModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B43E1742BAACED400375D58 /* LogBookModel.swift */; };
 		2B511B302BA9D9A5004AEAD6 /* MapKitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B511B2F2BA9D9A5004AEAD6 /* MapKitView.swift */; };
 		2B5561502BAB0A480028C6E5 /* CalendarDetailItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B55614F2BAB0A480028C6E5 /* CalendarDetailItemView.swift */; };
@@ -116,6 +119,9 @@
 		2B2CEC5D2BD4558200348DD1 /* ProfileScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreenViewModel.swift; sourceTree = "<group>"; };
 		2B36879B2B9E039400F2E944 /* CheckmarkIsRead.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckmarkIsRead.swift; sourceTree = "<group>"; };
 		2B36879D2B9E03A700F2E944 /* CheckmarkNotRead.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckmarkNotRead.swift; sourceTree = "<group>"; };
+		2B3E701E2BE7D6E70074ECC7 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
+		2B3E70202BE7D7770074ECC7 /* Email.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Email.swift; sourceTree = "<group>"; };
+		2B3E70222BE7D7860074ECC7 /* Adress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Adress.swift; sourceTree = "<group>"; };
 		2B43E1742BAACED400375D58 /* LogBookModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogBookModel.swift; sourceTree = "<group>"; };
 		2B511B2F2BA9D9A5004AEAD6 /* MapKitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapKitView.swift; sourceTree = "<group>"; };
 		2B55614F2BAB0A480028C6E5 /* CalendarDetailItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDetailItemView.swift; sourceTree = "<group>"; };
@@ -240,6 +246,9 @@
 			children = (
 				2B2778BF2B8FA74B00779FB5 /* GoogleService-Info.plist */,
 				2B2778B12B8F5C9B00779FB5 /* MeetMeAtTheCampfire.swift */,
+				2B3E701E2BE7D6E70074ECC7 /* APIKey.swift */,
+				2B3E70202BE7D7770074ECC7 /* Email.swift */,
+				2B3E70222BE7D7860074ECC7 /* Adress.swift */,
 				2B2778B52B8F5C9C00779FB5 /* Assets.xcassets */,
 				2BD8D4362BA0A6480050CB64 /* Authentication */,
 				2BB2B02F2BA8395B0003CFE2 /* CalendarLogBook */,
@@ -639,6 +648,7 @@
 				2B2A3E472B90B176007E5E7F /* ButtonTextAction.swift in Sources */,
 				2B2778FD2B9079F200779FB5 /* FirebaseManager.swift in Sources */,
 				2B36879E2B9E03A700F2E944 /* CheckmarkNotRead.swift in Sources */,
+				2B3E701F2BE7D6E80074ECC7 /* APIKey.swift in Sources */,
 				2BAE99642BDA9ACF002C20ED /* PasswortSendWithEmailView.swift in Sources */,
 				2B5DF1892B99B68900FA285C /* ChatItemView.swift in Sources */,
 				2BB2B03B2BA84BA20003CFE2 /* CalendarYearlyView.swift in Sources */,
@@ -648,6 +658,8 @@
 				2B0BBE502BB48EFC006D93EB /* ImagePickerCoordinator.swift in Sources */,
 				2BAB62532B95DDC600C7839E /* CategorieFilledView.swift in Sources */,
 				2BB2B03D2BA84F1F0003CFE2 /* CalendarYearExtensions.swift in Sources */,
+				2B3E70212BE7D7770074ECC7 /* Email.swift in Sources */,
+				2B3E70232BE7D7860074ECC7 /* Adress.swift in Sources */,
 				2B0158672B9789F20026CA84 /* DetailCategorieView.swift in Sources */,
 				2B1738A12BAD80FC0043CAF0 /* CalendarDetailNewEntryView.swift in Sources */,
 				2B2779082B90810300779FB5 /* UserModel.swift in Sources */,
