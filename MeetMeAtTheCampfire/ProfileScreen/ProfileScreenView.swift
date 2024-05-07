@@ -30,7 +30,11 @@ struct ProfileScreenView: View {
                             Image(.logo)
                                 .resizable()
                                 .clipShape(Circle())
+                                //.opacity(0.6)
                                 .frame(width: 100, height: 100, alignment: .leading)
+                                .overlay(
+                                    Circle()
+                                .stroke(Color.cyan, lineWidth: 2))
                             Spacer()
                             
                             VStack(alignment: .trailing){

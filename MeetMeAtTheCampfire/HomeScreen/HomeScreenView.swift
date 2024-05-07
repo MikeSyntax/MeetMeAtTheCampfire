@@ -39,7 +39,6 @@ struct HomeScreenView: View {
                     ZStack{
                         if homeVm.categorieViewModels.isEmpty {
                             ZStack{
-                                
                                     Image(.logo)
                                         .resizable()
                                         .frame(width: 150, height: 150)
@@ -68,28 +67,14 @@ struct HomeScreenView: View {
                                     .resizable()
                                     .scaledToFit()
                                     .opacity(0.7)
-                                    .frame(width: min(geometry.size.width - 20, 250)) // Begrenze die Breite des Bildes auf 250, oder die Breite des Bildschirms - 20 (für den Seitenabstand)
+                                    .frame(width: min(geometry.size.width - 20, 250))
                                     .cornerRadius(10)
-                                    .offset(/*x: 0 */
+                                    .offset(
                                         x: min(geometry.size.width / 5 - 0, 30),
                                         y: min(geometry.size.height / 5 - 185, 0))
                             }
                         }
                     }
-
-//                    VStack{
-//                        if !homeVm.categorieViewModels.isEmpty && homeVm.categorieViewModels[0].tasksInCategorie == 0  {
-//                            HStack(){
-//                                Image(.todo)
-//                                    .resizable()
-//                                    .scaledToFit()
-//                                    .opacity(0.7)
-//                                    .frame(width: 250)
-//                                    .cornerRadius(10)
-//                                    .offset(x: 0, y: -185)
-//                            }
-//                        }
-//                    }
                 }
                 Button{
                     showNewCategorieAlert.toggle()

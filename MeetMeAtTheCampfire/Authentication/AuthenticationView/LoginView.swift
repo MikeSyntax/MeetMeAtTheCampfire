@@ -23,7 +23,7 @@ struct LoginView: View {
                             .resizable()
                             .frame(width: 150, height: 150)
                             .clipShape(Circle())
-                            .opacity(0.8)
+                            .opacity(0.7)
                         RoundedView(title: "   Deine Camper App -Meet me at the campfire".uppercased(), radius: 140)
                     }
                     .padding(EdgeInsets(top: 35, leading: 0, bottom: 0, trailing: 0))
