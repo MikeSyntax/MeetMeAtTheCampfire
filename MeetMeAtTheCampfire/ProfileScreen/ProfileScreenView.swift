@@ -31,7 +31,7 @@ struct ProfileScreenView: View {
                                 .resizable()
                                 .clipShape(Circle())
                                 //.opacity(0.6)
-                                .frame(width: 100, height: 100, alignment: .leading)
+                                .frame(width: 80, height: 80, alignment: .leading)
                                 .overlay(
                                     Circle()
                                 .stroke(Color.cyan, lineWidth: 2))

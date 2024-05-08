@@ -7,12 +7,17 @@
 
 import SwiftUI
 import MapKit
+import SwiftData
 
 struct CalendarDetailItemView: View {
+    
     @ObservedObject var calendarDetailItemVm: CalendarDetailItemViewModel
     @State var showNewEntryView: Bool = false
     @State private var isNewImageLoading: Bool = false
     @Environment(\.dismiss) private var dismiss
+    
+    @Environment(\.modelContext) private var context
+    @Query private var items: [LogBookAtivity]
     
     var body: some View {
         NavigationStack{
@@ -32,6 +37,26 @@ struct CalendarDetailItemView: View {
                 }
                 .padding(.top)
                 Spacer()
+                
+                
+                VStack{
+                    List{
+                        ForEach (items){ item in
+                            HStack{
+                                Text("Item \(String(item.isNotEmpty))")
+                            }
+                        }
+                        .onDelete{ indexes in
+                            for index in indexes {
+                                deleteItem(items[index])
+                                print("\(indexes)")
+                                print("\(index)")
+                            }
+                        }
+                    }
+                }
+                
+                
                 ScrollView {
                     VStack {
                         VStack{
@@ -98,17 +123,25 @@ struct CalendarDetailItemView: View {
                     }
                 } else {
                     Divider()
-                    ButtonDestructiveTextAction(iconName: "trash", text: "Eintrag löschen")
-                    {
+                    ButtonDestructiveTextAction(iconName: "trash", text: "Eintrag löschen"){
                         if !calendarDetailItemVm.logBookText.isEmpty && calendarDetailItemVm.imageUrl.isEmpty {
                             calendarDetailItemVm.deleteLogBookText(formattedDate: calendarDetailItemVm.formattedDate)
                             calendarDetailItemVm.readImages = []
                             calendarDetailItemVm.logBookText = ""
+                                
+                            let item = LogBookAtivity(date: calendarDetailItemVm.date, isNotEmpty: true, userId: FirebaseManager.shared.userId!)
+                            deleteItem(item)
+                          
+                            
                         } else {
                             calendarDetailItemVm.deleteLogBookText(formattedDate: calendarDetailItemVm.formattedDate)
                             calendarDetailItemVm.deleteImage(imageUrl: calendarDetailItemVm.newEntryLogs.first?.imageUrl ?? "no image found")
                             calendarDetailItemVm.readImages = []
                             calendarDetailItemVm.logBookText = ""
+                            
+                            let item = LogBookAtivity(date: calendarDetailItemVm.date, isNotEmpty: true, userId: FirebaseManager.shared.userId!)
+                            deleteItem(item)
+                          
                         }
                     }
                 }
@@ -162,10 +195,15 @@ struct CalendarDetailItemView: View {
             isNewImageLoading = false
         }
     }
+    //Item vom Persistenstore löschen
+    func deleteItem(_ item: LogBookAtivity){
+        context.delete(item)
+    }
 }
 
 #Preview{
     let logbookMod: LogBookModel = LogBookModel(userId: "1", formattedDate: "", logBookText: "Hallo", latitude: 0.0, longitude: 0.0, imageUrl: "", containsLogBookEntry: false)
     
     return CalendarDetailItemView(calendarDetailItemVm: CalendarDetailItemViewModel(calendarItemModel: logbookMod, date: Date()))
+        .modelContainer(for: LogBookAtivity.self)
 }

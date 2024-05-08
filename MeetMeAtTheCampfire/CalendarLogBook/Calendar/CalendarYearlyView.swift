@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct CalendarYearlyView: View {
     
@@ -77,10 +78,6 @@ struct CalendarYearlyView: View {
     }
 }
 
-#Preview{
-    CalendarYearlyView()
-}
-
 //MARK --------------------------------------------------------------------------------------------------------------------------------------------------
 
 private struct WeekdayHeaderView: View {
@@ -116,7 +113,7 @@ private struct CalendarMonthlyView: View {
                 }
                 ForEach(month.getAllDaysToNextMonth(), id: \.self){ day in
                     NavigationLink(destination: NavigationLazyView(destinationView(for: day))) {
-                        CalendarDailyView(day: day)
+                        CalendarDailyView(date: day)
                     }
                 }
             }
@@ -144,17 +141,26 @@ struct NavigationLazyView<Content: View>: View {
 
 private struct CalendarDailyView: View {
     
-    var day: Date
+    @Query private var items: [LogBookAtivity]
+    var date: Date
     let weekendColor = Color.gray
     
     var body: some View {
-        Text("\(day.get(.day))")
-            .foregroundStyle(day.isWeekend() ? weekendColor : .primary)
-            .background {
-                if day.isToday() {
+        Text("\(date.get(.day))")
+            .foregroundStyle(date.isWeekend() ? weekendColor : .primary)
+            .background{
+                if date.isToday(){
                     Circle()
                         .frame(width: 30, height: 30)
                         .foregroundColor(.red)
+                }
+                ForEach(items){ item in
+                    if item.date == date && item.isNotEmpty && item.userId == FirebaseManager.shared.userId {
+                        Image(systemName: "circle")
+                            .font(.system(size:35))
+                            .foregroundColor(.cyan)
+                        
+                    }
                 }
             }
     }
@@ -254,3 +260,19 @@ class CalendarUtils {
         }
 }
 
+#Preview("Tag heute") {
+    CalendarDailyView(date: Date())
+}
+
+#Preview("Wochenende") {
+    CalendarDailyView(date: Date(timeIntervalSince1970: TimeInterval(1711900977)))
+}
+
+#Preview("Monat") {
+    CalendarMonthlyView(month: Date())
+}
+
+#Preview("Jahr") {
+    CalendarYearlyView()
+        .modelContainer(for: LogBookAtivity.self)
+}

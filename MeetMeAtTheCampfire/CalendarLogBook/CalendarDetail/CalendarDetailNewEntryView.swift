@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct CalendarDetailNewEntryView: View {
     @ObservedObject var calendarDetailItemVm: CalendarDetailItemViewModel
@@ -16,7 +17,9 @@ struct CalendarDetailNewEntryView: View {
     @State private var isAnimated: Bool = false
     @State private var showSuccessfulUploadAlert = false
     @Binding var showNewEntryView: Bool
-
+    //SwiftData
+    @Environment(\.modelContext) private var context
+    @Query private var items: [LogBookAtivity]
     
     @FocusState var isInputActive: Bool
     
@@ -168,6 +171,12 @@ struct CalendarDetailNewEntryView: View {
                                     calendarDetailItemVm.createlogBookText(logBookText: calendarDetailItemVm.logBookText)
                                     calendarDetailItemVm.stopLocationRequest()
                                 } else {
+                                    
+                                    
+                                    addItem()
+                                    
+                                    
+                                    
                                     showSuccessfulUploadAlert.toggle()
                                     calendarDetailItemVm.createlogBookText(logBookText: calendarDetailItemVm.logBookText)
                                     calendarDetailItemVm.stopLocationRequest()
@@ -234,15 +243,25 @@ struct CalendarDetailNewEntryView: View {
                 .presentationDetents([.medium])
         }
         .alert(isPresented:  $showSuccessfulUploadAlert){
-            Alert(title: Text("Deine Daten auf den Server geladen"), message: Text("Gedulde Dich einen Moment"), dismissButton: .default(Text("OK"), action: {
+            Alert(title: Text("Deine Daten werden auf den Server geladen"), message: Text("gedulde Dich einen Moment"), dismissButton: .default(Text("OK"), action: {
                 showNewEntryView.toggle()
             }))
         }
         .toolbar(.hidden, for: .tabBar)
         .background(Color(UIColor.systemBackground))
     }
+    
+    func addItem(){
+        let item = LogBookAtivity(date: calendarDetailItemVm.date, isNotEmpty: true, userId: FirebaseManager.shared.userId!)
+            context.insert(item)
+    }
+    
+    
+    
+    
 }
 
 #Preview{
     CalendarDetailNewEntryView(calendarDetailItemVm: CalendarDetailItemViewModel(calendarItemModel: LogBookModel(userId: "", formattedDate: "", logBookText: "", latitude: 0.0, longitude: 0.0, imageUrl: "", containsLogBookEntry: false), date: Date()), showNewEntryView: .constant(false))
+        .modelContainer(for: LogBookAtivity.self)
 }

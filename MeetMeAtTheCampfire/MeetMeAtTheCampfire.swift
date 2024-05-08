@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Firebase
+import SwiftData
 
 @main
 struct MeetMeAtTheCampfireApp: App {
@@ -28,6 +29,7 @@ struct MeetMeAtTheCampfireApp: App {
                     .environmentObject(authVm)
             }
         }
+        .modelContainer(for: LogBookAtivity.self)
         .environment(\.locale, .init(identifier: "de"))
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct MainScreenView: View {
     let authVm: AuthViewModel
@@ -81,6 +82,7 @@ struct MainScreenView: View {
             authVm.updateUser()
         }
         .background(Color(UIColor.systemBackground))
+        .modelContainer(for: LogBookAtivity.self)
     }
 }
 

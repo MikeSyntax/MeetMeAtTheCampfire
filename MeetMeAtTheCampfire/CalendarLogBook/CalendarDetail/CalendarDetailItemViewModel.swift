@@ -118,67 +118,6 @@ class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManager
             print("Error creating newLogEntry: \(error)")
         }
     }
-
-    
-    
-    
-    
-//    func createlogBookText(logBookText: String){
-//        guard let uploadImage = selectedImage else {
-//            return
-//        }
-//        
-//        let imageData = uploadImage.jpegData(compressionQuality: 0.8)
-//        
-//        guard imageData != nil else {
-//            return
-//        }
-//        //create path for storage and firestore
-//        let fileRef = FirebaseManager.shared.storage.reference().child("/images/\(UUID().uuidString).jpg")
-//        
-//        fileRef.putData(imageData!, metadata: nil){
-//            metadata, error in
-//            
-//            if let error {
-//                print("Error loading metadata \(error)")
-//                return
-//            }
-//            
-//            if error == nil && metadata != nil {
-//                print("Image upload succesfull")
-//            }
-//            
-//            //create new data for firestore
-//            guard let userId = FirebaseManager.shared.userId else {
-//                return
-//            }
-//            
-//            fileRef.downloadURL { url, error in
-//                guard let imageUrl = url?.absoluteString else {
-//                    print("bad url request")
-//                    return
-//                }
-//                self.imageUrl = imageUrl
-//                let newText = LogBookModel(
-//                    userId: userId,
-//                    formattedDate: self.formattedDate,
-//                    logBookText: logBookText,
-//                    latitude: self.latitude,
-//                    longitude: self.longitude,
-//                    imageUrl: imageUrl,
-//                    containsLogBookEntry: true
-//                )
-//                
-//                do{
-//                    try
-//                    FirebaseManager.shared.firestore.collection("newLogEntry").addDocument(from: newText)
-//                    print("Creating newLogEntry succesfull")
-//                } catch{
-//                    print("Error creating newLogEntry: \(error)")
-//                }
-//            }
-//        }
-//    }
     
     //Read all Data from Firebase
     @MainActor
@@ -301,3 +240,71 @@ class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManager
         self.readImages = []
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+//    func createlogBookText(logBookText: String){
+//        guard let uploadImage = selectedImage else {
+//            return
+//        }
+//
+//        let imageData = uploadImage.jpegData(compressionQuality: 0.8)
+//
+//        guard imageData != nil else {
+//            return
+//        }
+//        //create path for storage and firestore
+//        let fileRef = FirebaseManager.shared.storage.reference().child("/images/\(UUID().uuidString).jpg")
+//
+//        fileRef.putData(imageData!, metadata: nil){
+//            metadata, error in
+//
+//            if let error {
+//                print("Error loading metadata \(error)")
+//                return
+//            }
+//
+//            if error == nil && metadata != nil {
+//                print("Image upload succesfull")
+//            }
+//
+//            //create new data for firestore
+//            guard let userId = FirebaseManager.shared.userId else {
+//                return
+//            }
+//
+//            fileRef.downloadURL { url, error in
+//                guard let imageUrl = url?.absoluteString else {
+//                    print("bad url request")
+//                    return
+//                }
+//                self.imageUrl = imageUrl
+//                let newText = LogBookModel(
+//                    userId: userId,
+//                    formattedDate: self.formattedDate,
+//                    logBookText: logBookText,
+//                    latitude: self.latitude,
+//                    longitude: self.longitude,
+//                    imageUrl: imageUrl,
+//                    containsLogBookEntry: true
+//                )
+//
+//                do{
+//                    try
+//                    FirebaseManager.shared.firestore.collection("newLogEntry").addDocument(from: newText)
+//                    print("Creating newLogEntry succesfull")
+//                } catch{
+//                    print("Error creating newLogEntry: \(error)")
+//                }
+//            }
+//        }
+//    }

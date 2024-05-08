@@ -46,6 +46,7 @@
 		2B2779022B907E8800779FB5 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2779012B907E8800779FB5 /* RegisterView.swift */; };
 		2B2779052B907EBF00779FB5 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2779042B907EBF00779FB5 /* AuthViewModel.swift */; };
 		2B2779082B90810300779FB5 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2779072B90810300779FB5 /* UserModel.swift */; };
+		2B28CBAE2BEC121300DCBE81 /* LogBookActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B28CBAD2BEC121300DCBE81 /* LogBookActivity.swift */; };
 		2B2A3E472B90B176007E5E7F /* ButtonTextAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2A3E462B90B176007E5E7F /* ButtonTextAction.swift */; };
 		2B2CEC5E2BD4558200348DD1 /* ProfileScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2CEC5D2BD4558200348DD1 /* ProfileScreenViewModel.swift */; };
 		2B36879C2B9E039400F2E944 /* CheckmarkIsRead.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B36879B2B9E039400F2E944 /* CheckmarkIsRead.swift */; };
@@ -115,6 +116,7 @@
 		2B2779012B907E8800779FB5 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		2B2779042B907EBF00779FB5 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		2B2779072B90810300779FB5 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		2B28CBAD2BEC121300DCBE81 /* LogBookActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogBookActivity.swift; sourceTree = "<group>"; };
 		2B2A3E462B90B176007E5E7F /* ButtonTextAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTextAction.swift; sourceTree = "<group>"; };
 		2B2CEC5D2BD4558200348DD1 /* ProfileScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreenViewModel.swift; sourceTree = "<group>"; };
 		2B36879B2B9E039400F2E944 /* CheckmarkIsRead.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckmarkIsRead.swift; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 		2B2778B02B8F5C9B00779FB5 /* MeetMeAtTheCampfire */ = {
 			isa = PBXGroup;
 			children = (
+				2B28CBAC2BEC11DE00DCBE81 /* SwiftData */,
 				2B2778BF2B8FA74B00779FB5 /* GoogleService-Info.plist */,
 				2B2778B12B8F5C9B00779FB5 /* MeetMeAtTheCampfire.swift */,
 				2B3E701E2BE7D6E70074ECC7 /* APIKey.swift */,
@@ -306,6 +309,14 @@
 				2B43E1742BAACED400375D58 /* LogBookModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		2B28CBAC2BEC11DE00DCBE81 /* SwiftData */ = {
+			isa = PBXGroup;
+			children = (
+				2B28CBAD2BEC121300DCBE81 /* LogBookActivity.swift */,
+			);
+			path = SwiftData;
 			sourceTree = "<group>";
 		};
 		2B2A3E452B90B147007E5E7F /* Buttons */ = {
@@ -684,6 +695,7 @@
 				2B2779022B907E8800779FB5 /* RegisterView.swift in Sources */,
 				2BAB624E2B95D64300C7839E /* CategorieAddView.swift in Sources */,
 				2BF4B9802B98A24C00C1AF1A /* SettingsScreenView.swift in Sources */,
+				2B28CBAE2BEC121300DCBE81 /* LogBookActivity.swift in Sources */,
 				2B5DF1852B99B46E00FA285C /* ChatModel.swift in Sources */,
 				2B43E1752BAACED400375D58 /* LogBookModel.swift in Sources */,
 				2B67B3DF2BE76A66002E2379 /* DeleteAccountView.swift in Sources */,
