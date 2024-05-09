@@ -172,8 +172,9 @@ struct CalendarDetailItemView: View {
    
     func deleteItemChoice(date: Date, items: [LogBookAtivity]) {
         let targetValue = date
+        let userId = FirebaseManager.shared.userId
         for (index, item) in items.enumerated() {
-            if item.date == targetValue {
+            if item.date == targetValue && item.userId == userId {
                 context.delete(item)
                 break
             }
@@ -187,3 +188,30 @@ struct CalendarDetailItemView: View {
     return CalendarDetailItemView(calendarDetailItemVm: CalendarDetailItemViewModel(calendarItemModel: logbookMod, date: Date()))
         .modelContainer(for: LogBookAtivity.self)
 }
+
+
+
+
+
+
+//
+////Item vom Persistenstore löschen
+//func deleteItem(_ item: LogBookAtivity){
+//    context.delete(item)
+//}
+//
+//List{
+//    ForEach (items){ item in
+//        HStack{
+//            Text("\(String(item.isNotEmpty))")
+//            Text("\(item.date)")
+//        }
+//    }
+//    .onDelete{ indexes in
+//        for index in indexes {
+//            deleteItem(items[index])
+//            print("\(indexes)")
+//            print("\(index)")
+//        }
+//    }
+//}
