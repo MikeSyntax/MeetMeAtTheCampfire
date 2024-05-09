@@ -91,6 +91,7 @@ struct CalendarDetailNewEntryView: View {
                                                     Image(uiImage: calendarDetailItemVm.selectedImage!)
                                                         .resizable()
                                                         .scaledToFit()
+                                                        .cornerRadius(10)
                                                         .overlay(
                                                             RoundedRectangle(cornerRadius: 10)
                                                                 .stroke(Color.cyan, lineWidth: 2)

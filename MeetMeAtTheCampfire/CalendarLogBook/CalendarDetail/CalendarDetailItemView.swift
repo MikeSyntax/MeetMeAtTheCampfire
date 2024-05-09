@@ -173,7 +173,7 @@ struct CalendarDetailItemView: View {
     func deleteItemChoice(date: Date, items: [LogBookAtivity]) {
         let targetValue = date
         let userId = FirebaseManager.shared.userId
-        for (index, item) in items.enumerated() {
+        for (_, item) in items.enumerated() {
             if item.date == targetValue && item.userId == userId {
                 context.delete(item)
                 break

@@ -17,6 +17,7 @@ struct ProfileScreenView: View {
     @State private var latitude: String = ""
     @State private var longitude: String = ""
     @State private var showHomeBaseMapKit: Bool = false
+    @State var showSettingsSheet: Bool = false
     
     var body: some View {
         let userName = authVm.user?.userName ?? "User unbekannt"
@@ -115,14 +116,23 @@ struct ProfileScreenView: View {
                 }
                 Divider()
             }
-            .toolbar {
-                Button {
-                    profileScreenVm.removeListener()
-                    authVm.logout()
-                    
-                } label: {
-                    Text("Ausloggen")
-                    Image(systemName: "door.left.hand.open")
+            .toolbar{
+                ToolbarItem(placement: ToolbarItemPlacement.navigationBarLeading){
+                    Button {
+                        showSettingsSheet.toggle()
+                    } label: {
+                        Image(systemName: "gearshape")
+                    }
+                }
+                ToolbarItem(placement: ToolbarItemPlacement.navigationBarTrailing){
+                    Button {
+                        profileScreenVm.removeListener()
+                        authVm.logout()
+                        
+                    } label: {
+                        Text("Ausloggen")
+                        Image(systemName: "door.left.hand.open")
+                    }
                 }
             }
             .navigationBarTitle("Mein Profil", displayMode: .inline)
@@ -136,6 +146,9 @@ struct ProfileScreenView: View {
         .sheet(isPresented: $showHomeBaseMapKit) {
             HomeBaseSheetView(profileScreenVm: profileScreenVm)
         }
+        .sheet(isPresented: $showSettingsSheet) {
+            SettingsScreenView()
+        }
         .onAppear{
             profileScreenVm.readLikedMessages()
         }
@@ -148,6 +161,6 @@ struct ProfileScreenView: View {
 
 #Preview {
     let profileScreenVm = ProfileScreenViewModel(user: UserModel(id: "", email: "", registeredTime: Date(), userName: "Hans", timeStampLastVisitChat: Date(), isActive: true))
-    return ProfileScreenView(profileScreenVm: profileScreenVm)
+    return ProfileScreenView(profileScreenVm: profileScreenVm, showSettingsSheet: false)
         .environmentObject(AuthViewModel())
 }
