@@ -246,12 +246,11 @@
 		2B2778B02B8F5C9B00779FB5 /* MeetMeAtTheCampfire */ = {
 			isa = PBXGroup;
 			children = (
-				2B28CBAC2BEC11DE00DCBE81 /* SwiftData */,
-				2B2778BF2B8FA74B00779FB5 /* GoogleService-Info.plist */,
 				2B2778B12B8F5C9B00779FB5 /* MeetMeAtTheCampfire.swift */,
+				2B2778BF2B8FA74B00779FB5 /* GoogleService-Info.plist */,
+				2B3E70222BE7D7860074ECC7 /* Adress.swift */,
 				2B3E701E2BE7D6E70074ECC7 /* APIKey.swift */,
 				2B3E70202BE7D7770074ECC7 /* Email.swift */,
-				2B3E70222BE7D7860074ECC7 /* Adress.swift */,
 				2B2778B52B8F5C9C00779FB5 /* Assets.xcassets */,
 				2BD8D4362BA0A6480050CB64 /* Authentication */,
 				2BB2B02F2BA8395B0003CFE2 /* CalendarLogBook */,
@@ -266,6 +265,7 @@
 				2B591EE52BE1AFCF004BF517 /* ResizableTextField */,
 				2BF347DB2BD1D7C3007F0AB3 /* RoundedView */,
 				2BF4B97E2B98A23000C1AF1A /* SettingsScreen */,
+				2B28CBAC2BEC11DE00DCBE81 /* SwiftData */,
 				2BBC150B2B9B669800305504 /* TranslatorScreen */,
 			);
 			path = MeetMeAtTheCampfire;

@@ -37,26 +37,6 @@ struct CalendarDetailItemView: View {
                 }
                 .padding(.top)
                 Spacer()
-                
-                
-                VStack{
-                    List{
-                        ForEach (items){ item in
-                            HStack{
-                                Text("Item \(String(item.isNotEmpty))")
-                            }
-                        }
-                        .onDelete{ indexes in
-                            for index in indexes {
-                                deleteItem(items[index])
-                                print("\(indexes)")
-                                print("\(index)")
-                            }
-                        }
-                    }
-                }
-                
-                
                 ScrollView {
                     VStack {
                         VStack{
@@ -128,20 +108,14 @@ struct CalendarDetailItemView: View {
                             calendarDetailItemVm.deleteLogBookText(formattedDate: calendarDetailItemVm.formattedDate)
                             calendarDetailItemVm.readImages = []
                             calendarDetailItemVm.logBookText = ""
-                                
-                            let item = LogBookAtivity(date: calendarDetailItemVm.date, isNotEmpty: true, userId: FirebaseManager.shared.userId!)
-                            deleteItem(item)
-                          
+                            deleteItemChoice(date: calendarDetailItemVm.date, items: items)
                             
                         } else {
                             calendarDetailItemVm.deleteLogBookText(formattedDate: calendarDetailItemVm.formattedDate)
                             calendarDetailItemVm.deleteImage(imageUrl: calendarDetailItemVm.newEntryLogs.first?.imageUrl ?? "no image found")
                             calendarDetailItemVm.readImages = []
                             calendarDetailItemVm.logBookText = ""
-                            
-                            let item = LogBookAtivity(date: calendarDetailItemVm.date, isNotEmpty: true, userId: FirebaseManager.shared.userId!)
-                            deleteItem(item)
-                          
+                            deleteItemChoice(date: calendarDetailItemVm.date, items: items)
                         }
                     }
                 }
@@ -195,9 +169,15 @@ struct CalendarDetailItemView: View {
             isNewImageLoading = false
         }
     }
-    //Item vom Persistenstore löschen
-    func deleteItem(_ item: LogBookAtivity){
-        context.delete(item)
+   
+    func deleteItemChoice(date: Date, items: [LogBookAtivity]) {
+        let targetValue = date
+        for (index, item) in items.enumerated() {
+            if item.date == targetValue {
+                context.delete(item)
+                break
+            }
+        }
     }
 }
 
