@@ -30,7 +30,6 @@ struct MainScreenView: View {
                     Image(systemName: "house")
                     Text("Home")
                 }.tag(0)
-            
             if isBadgeVisible {
                 ChatScreenView(chatVm: self.chatVm)
                     .tabItem {

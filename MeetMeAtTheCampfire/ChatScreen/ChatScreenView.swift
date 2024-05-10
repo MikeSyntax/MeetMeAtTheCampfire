@@ -120,7 +120,7 @@ struct ChatScreenView: View {
 }
 
 #Preview {
-    let chatVm = ChatScreenViewModel(user: UserModel(id: "1", email: "1", registeredTime: Date(), userName: "hallo", timeStampLastVisitChat: Date.now, isActive: true))
+    let chatVm = ChatScreenViewModel(user: UserModel(id: "1", email: "1", registeredTime: Date(), userName: "hallo", timeStampLastVisitChat: Date.now, isActive: true, imageUrl: ""))
     return ChatScreenView(chatVm: chatVm)
         .environmentObject(AuthViewModel())
 }

@@ -18,26 +18,78 @@ struct ProfileScreenView: View {
     @State private var longitude: String = ""
     @State private var showHomeBaseMapKit: Bool = false
     @State var showSettingsSheet: Bool = false
+    @State private var showImagePicker: Bool = false
+    @State private var selectedImage: UIImage?
     
     var body: some View {
         let userName = authVm.user?.userName ?? "User unbekannt"
         let userEmail = authVm.user?.email ?? "Email unbekannt"
+        let userProfileImage = authVm.user?.imageUrl ?? ""
         NavigationStack {
             VStack {
                 Divider()
                 VStack{
                     VStack{
                         HStack{
-                            Image(.logo)
-                                .resizable()
-                                .clipShape(Circle())
-                                //.opacity(0.6)
-                                .frame(width: 80, height: 80, alignment: .leading)
-                                .overlay(
-                                    Circle()
-                                .stroke(Color.cyan, lineWidth: 2))
+                            VStack(alignment: .leading){
+                                Button{
+                                    showImagePicker.toggle()
+                                } label: {
+                                    if !userProfileImage.isEmpty && selectedImage == nil{
+                                        AsyncImage(
+                                            url: URL(string: userProfileImage),
+                                            content: { image in
+                                                image
+                                                    .resizable()
+                                                    .clipShape(Circle())
+                                                    .frame(width: 80, height: 80, alignment: .center)
+                                                    .overlay(
+                                                        Circle()
+                                                            .stroke(Color.cyan, lineWidth: 2))
+                                            },
+                                            placeholder: {
+                                                Image(systemName: "photo.badge.plus")
+                                                    .frame(width: 80,  height: 80, alignment: .center)
+                                                    .font(.system(size: 40))
+                                                    .overlay(
+                                                        Circle()
+                                                            .stroke(Color.cyan, lineWidth: 2)
+                                                    )
+                                            }
+                                        )
+                                    } else
+                                        if authVm.selectedImage != nil {
+                                            Image(uiImage: authVm.selectedImage!)
+                                                .resizable()
+                                                .clipShape(Circle())
+                                                .frame(width: 80, height: 80, alignment: .center)
+                                                .overlay(
+                                                    Circle()
+                                                        .stroke(Color.cyan, lineWidth: 2))
+                                        } 
+//                                        else {
+//                                            Image(.logo)
+//                                                .resizable()
+//                                                .clipShape(Circle())
+//                                                .frame(width: 80, height: 80, alignment: .leading)
+//                                                .overlay(
+//                                                    Circle()
+//                                                        .stroke(Color.cyan, lineWidth: 2))
+//                                        }
+                                    
+                                }
+                                    Button{
+                                        authVm.profileImageToStorage()
+                                        if !userProfileImage.isEmpty {
+                                            authVm.deleteProfileImage(imageUrl: userProfileImage)
+                                        }
+                                    } label: {
+                                        Text("   Speichern")
+                                            .font(.system(size: 12))
+                                    }
+                                    .offset(x: 0, y: -4)
+                                }
                             Spacer()
-                            
                             VStack(alignment: .trailing){
                                 HStack{
                                     Image(systemName: "mappin.and.ellipse")
@@ -46,18 +98,18 @@ struct ProfileScreenView: View {
                                         showHomeBaseAlert.toggle()
                                     }
                                     .alert("Homebase ändern,\nz.B 33.975", isPresented: $showHomeBaseAlert){
-
-                                            TextField("Latitude", text: $latitude)
-                                                .lineLimit(1)
-                                                .textInputAutocapitalization(.never)
-                                                .autocorrectionDisabled()
-                                            TextField("Longitude", text: $longitude)
-                                                .lineLimit(1)
-                                                .textInputAutocapitalization(.never)
-                                                .autocorrectionDisabled()
-                                            Button("Homebase auf Karte wählen"){
-                                                showHomeBaseMapKit.toggle()
-                                            }
+                                        
+                                        TextField("Latitude", text: $latitude)
+                                            .lineLimit(1)
+                                            .textInputAutocapitalization(.never)
+                                            .autocorrectionDisabled()
+                                        TextField("Longitude", text: $longitude)
+                                            .lineLimit(1)
+                                            .textInputAutocapitalization(.never)
+                                            .autocorrectionDisabled()
+                                        Button("Homebase auf Karte wählen"){
+                                            showHomeBaseMapKit.toggle()
+                                        }
                                         Button("Zurück") {
                                             dismiss()
                                         }
@@ -128,7 +180,6 @@ struct ProfileScreenView: View {
                     Button {
                         profileScreenVm.removeListener()
                         authVm.logout()
-                        
                     } label: {
                         Text("Ausloggen")
                         Image(systemName: "door.left.hand.open")
@@ -149,6 +200,9 @@ struct ProfileScreenView: View {
         .sheet(isPresented: $showSettingsSheet) {
             SettingsScreenView()
         }
+        .sheet(isPresented: $showImagePicker, onDismiss: nil) {
+            ImagePicker(selectedImage: $authVm.selectedImage, showImagePicker: $showImagePicker)
+        }
         .onAppear{
             profileScreenVm.readLikedMessages()
         }
@@ -160,7 +214,13 @@ struct ProfileScreenView: View {
 }
 
 #Preview {
-    let profileScreenVm = ProfileScreenViewModel(user: UserModel(id: "", email: "", registeredTime: Date(), userName: "Hans", timeStampLastVisitChat: Date(), isActive: true))
+    let profileScreenVm = ProfileScreenViewModel(user: UserModel(id: "", email: "", registeredTime: Date(), userName: "Hans", timeStampLastVisitChat: Date(), isActive: true, imageUrl: ""))
     return ProfileScreenView(profileScreenVm: profileScreenVm, showSettingsSheet: false)
         .environmentObject(AuthViewModel())
 }
+
+
+
+
+
+

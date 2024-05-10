@@ -15,4 +15,5 @@ struct UserModel: Codable, Identifiable {
     let userName: String
     var timeStampLastVisitChat: Date
     var isActive: Bool
+    var imageUrl: String
 }

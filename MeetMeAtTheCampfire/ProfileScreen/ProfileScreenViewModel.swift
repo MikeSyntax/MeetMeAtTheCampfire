@@ -20,6 +20,7 @@ class ProfileScreenViewModel: NSObject, ObservableObject, CLLocationManagerDeleg
     private let locationHomebase = CLLocationManager()
     private var listener: ListenerRegistration? = nil
     
+    
     var user: UserModel
     
     init(user: UserModel){

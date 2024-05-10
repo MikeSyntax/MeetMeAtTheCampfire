@@ -41,7 +41,8 @@ struct HomeScreenView: View {
                             ZStack{
                                     Image(.logo)
                                         .resizable()
-                                        .frame(width: 150, height: 150)
+                                        .shadow(color: Color.cyan, radius: 4)
+                                        .frame(width: 140, height: 200)
                                         .clipShape(Circle())
                                         .opacity(0.7)
                                 RoundedView(title: "   Deine Camper App -Meet me at the campfire".uppercased(), radius: 140)

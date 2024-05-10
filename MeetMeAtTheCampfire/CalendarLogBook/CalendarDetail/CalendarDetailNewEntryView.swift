@@ -172,12 +172,7 @@ struct CalendarDetailNewEntryView: View {
                                     calendarDetailItemVm.createlogBookText(logBookText: calendarDetailItemVm.logBookText)
                                     calendarDetailItemVm.stopLocationRequest()
                                 } else {
-                                    
-                                    
                                     addItem()
-                                    
-                                    
-                                    
                                     showSuccessfulUploadAlert.toggle()
                                     calendarDetailItemVm.createlogBookText(logBookText: calendarDetailItemVm.logBookText)
                                     calendarDetailItemVm.stopLocationRequest()

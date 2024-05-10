@@ -7,6 +7,7 @@
 
 import Foundation
 import FirebaseAuth
+import SwiftUI
 
 class AuthViewModel: ObservableObject{
     
@@ -21,6 +22,8 @@ class AuthViewModel: ObservableObject{
     @Published var showEmailNotSendAlert: Bool = false
     @Published var loginFailedAlert: Bool = false
     @Published var isActive: Bool = true
+    @Published var imageUrl: String = ""
+    @Published var selectedImage: UIImage?
     
     //Erstellen eines User gemäß festgelegten UserModel
     @Published var user: UserModel?
@@ -69,6 +72,7 @@ class AuthViewModel: ObservableObject{
             email = ""
             password = ""
             confirmPassword = ""
+            imageUrl = ""
             print("User wurde erfolgreich abgemeldet")
         } catch {
             print("Error signing out \(error)")
@@ -126,7 +130,7 @@ class AuthViewModel: ObservableObject{
     
     func createUser(withId id: String, email: String, userName: String){
         //Kreire einen neuen appUser gemäß UserModel
-        let appUser = UserModel(id: id, email: email, registeredTime: Date(), userName: userName, timeStampLastVisitChat: Date.now, isActive: isActive)
+        let appUser = UserModel(id: id, email: email, registeredTime: Date(), userName: userName, timeStampLastVisitChat: Date.now, isActive: isActive, imageUrl: imageUrl)
         do{
             //Gehe in den Firestore, erstelle dort eine Col. appUser mit doc id und den Daten gemäß UserModel
             try FirebaseManager.shared.firestore.collection("appUser").document(id).setData(from: appUser)
@@ -197,10 +201,78 @@ class AuthViewModel: ObservableObject{
                 }
             }
     }
+    
+    func profileImageToStorage(){
+        guard let uploadProfileImage = selectedImage else {
+            return
+        }
+        
+        let imageData = uploadProfileImage.jpegData(compressionQuality: 0.6)
+        
+        guard imageData != nil else {
+            return
+        }
+        
+        let fileRef = FirebaseManager.shared.storage.reference()
+            .child("/profile/\(UUID().uuidString).jpg")
+        
+        fileRef.putData(imageData!, metadata: nil){ metadata, error in
+            if let error {
+                print("Error loading metadata profileImage \(error)")
+                return
+            }
+            
+            if error == nil && metadata != nil {
+                print("ProfileImage upload successfull")
+            }
+            
+            fileRef.downloadURL { url, error in
+                guard let imageUrl = url?.absoluteString else {
+                    print("Bad url request")
+                    return
+                }
+                self.updateProfileImageToFirestore(imageUrl: imageUrl)
+            }
+        }
+    }
+    
+    private func updateProfileImageToFirestore(imageUrl: String){
+        guard var currentUser = user else {
+            return
+        }
+        
+        guard let currentUserId = FirebaseManager.shared.userId else {
+            return
+        }
+        
+        currentUser.imageUrl = imageUrl
+        
+        do {
+            try FirebaseManager.shared.firestore.collection("appUser")
+                .document(currentUserId).setData(from: currentUser)
+            print("Updating profileImage successfull")
+        } catch {
+            print("Error updating profileImage: \(error)")
+        }
+    }
+    
+    func deleteProfileImage(imageUrl: String){
+        let profileImageRef = FirebaseManager.shared.storage.reference(forURL: imageUrl)
+        
+        profileImageRef.delete { error in
+            if let error = error {
+                print("Deleting profileImage failed \(error)")
+            } else {
+                print("Deleting profileImage successfull")
+            }
+        }
+    }
+    
     func removeListener(){
     email = ""
     password = ""
     confirmPassword = ""
     userName = ""
+    imageUrl = ""
     }
 }
