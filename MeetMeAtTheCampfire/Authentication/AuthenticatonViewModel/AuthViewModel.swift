@@ -6,8 +6,9 @@
 //
 
 import Foundation
-import FirebaseAuth
+import FirebaseFirestore
 import SwiftUI
+import FirebaseAuth
 
 class AuthViewModel: ObservableObject{
     
@@ -24,7 +25,9 @@ class AuthViewModel: ObservableObject{
     @Published var isActive: Bool = true
     @Published var imageUrl: String = ""
     @Published var selectedImage: UIImage?
-    
+    @Published var showSuccessTick: Bool = false
+    @Published var userProfileImage: String = ""
+    private var listener: ListenerRegistration? = nil
     //Erstellen eines User gemäß festgelegten UserModel
     @Published var user: UserModel?
     
@@ -53,7 +56,7 @@ class AuthViewModel: ObservableObject{
         FirebaseManager.shared.authentication.createUser(withEmail: self.email, password: self.password){
             authResult, error in
             if let user = self.workWithAuthResult(authResult: authResult, error: error){
-                self.createUser(withId: user.uid, email: self.email, userName: self.userName)
+                self.createUser(withId: user.uid, email: self.email, userName: self.userName, imageUrl: self.imageUrl)
                 if authResult?.user != nil {
                     self.registerSuccessfullAlert.toggle()
                 }
@@ -66,13 +69,8 @@ class AuthViewModel: ObservableObject{
     func logout(){
         do{
             updateUser()
+            removeListener()
             try FirebaseManager.shared.authentication.signOut()
-            self.user = nil
-            userName = ""
-            email = ""
-            password = ""
-            confirmPassword = ""
-            imageUrl = ""
             print("User wurde erfolgreich abgemeldet")
         } catch {
             print("Error signing out \(error)")
@@ -85,7 +83,7 @@ class AuthViewModel: ObservableObject{
             return
         }
         self.readAppUser(withId: currentUser.uid)
-        
+        self.updateImageUrl(withId: currentUser.uid)
     }
     
     func workWithAuthResult(authResult: AuthDataResult?, error: Error?) -> User? {
@@ -112,12 +110,10 @@ class AuthViewModel: ObservableObject{
                 print("Error reading appUser with id \(error)")
                 return
             }
-            
             guard let document else {
                 print("Document is empty \(id)")
                 return
             }
-            
             do{
                 //hier wird das UserModel decodiert und der User gelesen
                 let appUser = try document.data(as: UserModel.self)
@@ -128,7 +124,7 @@ class AuthViewModel: ObservableObject{
         }
     }
     
-    func createUser(withId id: String, email: String, userName: String){
+    func createUser(withId id: String, email: String, userName: String, imageUrl: String){
         //Kreire einen neuen appUser gemäß UserModel
         let appUser = UserModel(id: id, email: email, registeredTime: Date(), userName: userName, timeStampLastVisitChat: Date.now, isActive: isActive, imageUrl: imageUrl)
         do{
@@ -141,17 +137,13 @@ class AuthViewModel: ObservableObject{
     
     //Hier wird nur der timeStamp für den letzen ChatBesuch aktualisiert
     func updateUser(){
-        
         guard var currentUser = user else {
             return
         }
-        
         guard let currentUserId = FirebaseManager.shared.userId else {
             return
         }
-        
         currentUser.timeStampLastVisitChat = Date.now
-        
         do{
             try FirebaseManager.shared.firestore.collection("appUser").document(currentUserId).setData(from: currentUser)
             print("Update appUser succeeded")
@@ -179,7 +171,6 @@ class AuthViewModel: ObservableObject{
         guard let currentUserId = FirebaseManager.shared.authentication.currentUser else {
             return
         }
-        
         currentUserId.delete(){ error in
             if error == nil {
                 completion()
@@ -189,11 +180,9 @@ class AuthViewModel: ObservableObject{
     
     @MainActor
     func deleteUserData(completion: @escaping () -> Void) {
-        
         guard let currentUser = FirebaseManager.shared.userId else {
             return
         }
-        
         FirebaseManager.shared.firestore.collection("appUser")
             .document(currentUser).delete(){ error in
                 if error == nil {
@@ -202,36 +191,35 @@ class AuthViewModel: ObservableObject{
             }
     }
     
-    func profileImageToStorage(){
-        guard let uploadProfileImage = selectedImage else {
+    func profileImageToStorage() {
+        guard let uploadProfileImage = selectedImage,
+              let imageData = uploadProfileImage.jpegData(compressionQuality: 0.6) else {
             return
         }
         
-        let imageData = uploadProfileImage.jpegData(compressionQuality: 0.6)
+        let fileRef = FirebaseManager.shared.storage.reference().child("/profile/\(UUID().uuidString).jpg")
         
-        guard imageData != nil else {
-            return
-        }
-        
-        let fileRef = FirebaseManager.shared.storage.reference()
-            .child("/profile/\(UUID().uuidString).jpg")
-        
-        fileRef.putData(imageData!, metadata: nil){ metadata, error in
-            if let error {
-                print("Error loading metadata profileImage \(error)")
+        fileRef.putData(imageData, metadata: nil) { metadata, error in
+            guard error == nil, let _ = metadata else {
+                print("Error loading metadata profileImage \(error ?? NSError())")
                 return
             }
-            
-            if error == nil && metadata != nil {
-                print("ProfileImage upload successfull")
-            }
-            
             fileRef.downloadURL { url, error in
                 guard let imageUrl = url?.absoluteString else {
                     print("Bad url request")
                     return
                 }
                 self.updateProfileImageToFirestore(imageUrl: imageUrl)
+                // Anzeige des Erfolgshäkchens
+                withAnimation {
+                    self.showSuccessTick = true
+                }
+                // Nach 2 Sekunden die Anzeige des Erfolgshäkchens zurücksetzen
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    withAnimation {
+                        self.showSuccessTick = false
+                    }
+                }
             }
         }
     }
@@ -240,11 +228,9 @@ class AuthViewModel: ObservableObject{
         guard var currentUser = user else {
             return
         }
-        
         guard let currentUserId = FirebaseManager.shared.userId else {
             return
         }
-        
         currentUser.imageUrl = imageUrl
         
         do {
@@ -259,7 +245,7 @@ class AuthViewModel: ObservableObject{
     func deleteProfileImage(imageUrl: String){
         let profileImageRef = FirebaseManager.shared.storage.reference(forURL: imageUrl)
         
-        profileImageRef.delete { error in
+        profileImageRef.delete() { error in
             if let error = error {
                 print("Deleting profileImage failed \(error)")
             } else {
@@ -268,11 +254,36 @@ class AuthViewModel: ObservableObject{
         }
     }
     
+    func updateImageUrl(withId id: String){
+        self.listener = FirebaseManager.shared.firestore.collection("appUser").document(id).addSnapshotListener { documentSnapshot, error in
+            guard let document = documentSnapshot else {
+                print("Error fetching document: \(error?.localizedDescription ?? "Unknown error")")
+                return
+            }
+            guard let appUser = try? document.data(as: UserModel.self) else {
+                print("Document does not exist or could not be decoded")
+                return
+            }
+           // DispatchQueue.main.async {
+                self.imageUrl = appUser.imageUrl
+                self.userProfileImage = self.imageUrl
+       //     }
+        }
+    }
+    
     func removeListener(){
-    email = ""
-    password = ""
-    confirmPassword = ""
-    userName = ""
-    imageUrl = ""
+        self.user = nil
+        self.userName = ""
+        self.email = ""
+        self.password = ""
+        self.confirmPassword = ""
+        self.imageUrl = ""
+        self.listener = nil
     }
 }
+
+//////ab hier angefangena und ailmmmer aksjiejsejs
+///seislfjjsdlfsdjfjfj   sdkfj sdlf sdfkj
+///
+
+

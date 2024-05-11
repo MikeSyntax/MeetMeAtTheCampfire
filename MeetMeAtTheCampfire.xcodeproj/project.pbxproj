@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2B0158672B9789F20026CA84 /* DetailCategorieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0158662B9789F20026CA84 /* DetailCategorieView.swift */; };
 		2B0BBE502BB48EFC006D93EB /* ImagePickerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0BBE4F2BB48EFC006D93EB /* ImagePickerCoordinator.swift */; };
+		2B0E64BB2BEED21E00F16962 /* Xtest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0E64BA2BEED21E00F16962 /* Xtest.swift */; };
 		2B1738A12BAD80FC0043CAF0 /* CalendarDetailNewEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1738A02BAD80FC0043CAF0 /* CalendarDetailNewEntryView.swift */; };
 		2B1738A32BAD82050043CAF0 /* MapKitNewEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1738A22BAD82050043CAF0 /* MapKitNewEntryView.swift */; };
 		2B2778B22B8F5C9B00779FB5 /* MeetMeAtTheCampfire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2778B12B8F5C9B00779FB5 /* MeetMeAtTheCampfire.swift */; };
@@ -104,6 +105,7 @@
 /* Begin PBXFileReference section */
 		2B0158662B9789F20026CA84 /* DetailCategorieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCategorieView.swift; sourceTree = "<group>"; };
 		2B0BBE4F2BB48EFC006D93EB /* ImagePickerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerCoordinator.swift; sourceTree = "<group>"; };
+		2B0E64BA2BEED21E00F16962 /* Xtest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Xtest.swift; sourceTree = "<group>"; };
 		2B1738A02BAD80FC0043CAF0 /* CalendarDetailNewEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDetailNewEntryView.swift; sourceTree = "<group>"; };
 		2B1738A22BAD82050043CAF0 /* MapKitNewEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapKitNewEntryView.swift; sourceTree = "<group>"; };
 		2B2778AE2B8F5C9B00779FB5 /* Campfire.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Campfire.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -264,6 +266,7 @@
 				2BF4B97E2B98A23000C1AF1A /* SettingsScreen */,
 				2B28CBAC2BEC11DE00DCBE81 /* SwiftData */,
 				2BBC150B2B9B669800305504 /* TranslatorScreen */,
+				2B0E64BA2BEED21E00F16962 /* Xtest.swift */,
 			);
 			path = MeetMeAtTheCampfire;
 			sourceTree = "<group>";
@@ -704,6 +707,7 @@
 				2BAE99662BDC1A0C002C20ED /* CalendarNewEntrySheetView.swift in Sources */,
 				2BBC15172B9B754D00305504 /* LanguageApiKey.swift in Sources */,
 				2B5561522BAB0A5A0028C6E5 /* CalendarDetailItemViewModel.swift in Sources */,
+				2B0E64BB2BEED21E00F16962 /* Xtest.swift in Sources */,
 				2BCC09AE2B95C066005BFC95 /* FalseView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

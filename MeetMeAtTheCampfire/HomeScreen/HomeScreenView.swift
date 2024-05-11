@@ -22,69 +22,70 @@ struct HomeScreenView: View {
             VStack {
                 Divider()
                 VStack{
-                    ScrollView {
-                        LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 20), count: 3), spacing: 20) {
-                            ForEach(homeVm.categorieViewModels) { categorieViewModel in
-                                NavigationLink(destination: DetailCategorieView(categorieVm: categorieViewModel, homeVm: homeVm, detailCategorieVm: detailCategorieVm, detailCategorieItemVm: detailCategorieItemVm)) {
-                                    CategorieFilledView(categorieVm: categorieViewModel, detailCategorieVm: detailCategorieVm)
+                    if !homeVm.categorieViewModels.isEmpty {
+                        VStack{
+                            ScrollView {
+                                LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 20), count: 3), spacing: 20) {
+                                    ForEach(homeVm.categorieViewModels) { categorieViewModel in
+                                        NavigationLink(destination: DetailCategorieView(categorieVm: categorieViewModel, homeVm: homeVm, detailCategorieVm: detailCategorieVm, detailCategorieItemVm: detailCategorieItemVm)) {
+                                            CategorieFilledView(categorieVm: categorieViewModel, detailCategorieVm: detailCategorieVm)
+                                        }
+                                    }
                                 }
+                                .padding(.horizontal, 20)
                             }
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            .padding(.vertical, 20)
                         }
-                        .padding(.horizontal, 20)
                     }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .padding(.vertical, 20)
-                }
-                VStack{
-                    ZStack{
-                        if homeVm.categorieViewModels.isEmpty {
-                            ZStack{
+                    VStack{
+                        VStack{
+                            if homeVm.categorieViewModels.isEmpty {
+                                ZStack{
                                     Image(.logo)
                                         .resizable()
                                         .shadow(color: Color.cyan, radius: 4)
                                         .frame(width: 140, height: 200)
                                         .clipShape(Circle())
                                         .opacity(0.7)
-                                RoundedView(title: "   Deine Camper App -Meet me at the campfire".uppercased(), radius: 140)
+                                    RoundedView(title: "   Deine Camper App -Meet me at the campfire".uppercased(), radius: 140)
+                                }
+                                .padding(.top)
+                                Spacer()
+                                VStack{
+                                    Image(.cat)
+                                        .resizable()
+                                        .scaledToFill()
+                                        .opacity(0.7)
+                                        .frame(width: 250, height: 200)
+                                        .cornerRadius(10)
+                                        .padding(EdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 0))
+                                }
                             }
-                            .offset(x: 0, y: -300)
                         }
                         VStack{
-                            if homeVm.categorieViewModels.isEmpty {
-                                Image(.cat)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .opacity(0.7)
-                                    .frame(width: 250)
-                                    .cornerRadius(10)
-                                    .padding(EdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 0))
-                            }
-                        }
-                    }
-                    VStack{
-                        if !homeVm.categorieViewModels.isEmpty && homeVm.categorieViewModels[0].tasksInCategorie == 0  {
-                            GeometryReader { geometry in
+                            if !homeVm.categorieViewModels.isEmpty && homeVm.categorieViewModels[0].tasksInCategorie == 0  {
                                 Image(.todo)
                                     .resizable()
-                                    .scaledToFit()
+                                    .scaledToFill()
                                     .opacity(0.7)
-                                    .frame(width: min(geometry.size.width - 20, 250))
+                                    .frame(width: 250, height: 200)
                                     .cornerRadius(10)
                                     .offset(
-                                        x: min(geometry.size.width / 5 - 0, 30),
-                                        y: min(geometry.size.height / 5 - 185, 0))
+                                        x: 0,
+                                        y: -185)
                             }
                         }
                     }
-                }
-                Button{
-                    showNewCategorieAlert.toggle()
-                }label: {
-                    CategorieAddView()
-                }
-                .animation(Animation.smooth(duration: 0.9, extraBounce: 0.6), value: showAnimation)
-                .onAppear {
-                    showAnimation = true
+                    Button{
+                        showNewCategorieAlert.toggle()
+                    }label: {
+                        CategorieAddView()
+                    }
+                    .animation(Animation.smooth(duration: 0.9, extraBounce: 0.6), value: showAnimation)
+                    .onAppear {
+                        showAnimation = true
+                    }
                 }
                 Divider()
             }

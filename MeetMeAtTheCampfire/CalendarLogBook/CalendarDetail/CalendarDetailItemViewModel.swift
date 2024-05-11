@@ -196,7 +196,7 @@ class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManager
     func deleteImage(imageUrl: String){
         let imageRef = FirebaseManager.shared.storage.reference(forURL: imageUrl)
         
-        imageRef.delete { error in
+        imageRef.delete() { error in
             if let error = error {
                 print("delete imageRef for day \(self.formattedDate) failed: \(error)")
             } else {

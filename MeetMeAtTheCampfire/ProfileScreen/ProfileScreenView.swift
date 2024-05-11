@@ -24,71 +24,79 @@ struct ProfileScreenView: View {
     var body: some View {
         let userName = authVm.user?.userName ?? "User unbekannt"
         let userEmail = authVm.user?.email ?? "Email unbekannt"
-        let userProfileImage = authVm.user?.imageUrl ?? ""
+       // let userProfileImage = authVm.user?.imageUrl ?? ""
         NavigationStack {
             VStack {
                 Divider()
                 VStack{
                     VStack{
-                        HStack{
-                            VStack(alignment: .leading){
+                        HStack(alignment: .top){
+                            VStack(alignment: .center){
                                 Button{
                                     showImagePicker.toggle()
                                 } label: {
-                                    if !userProfileImage.isEmpty && selectedImage == nil{
-                                        AsyncImage(
-                                            url: URL(string: userProfileImage),
-                                            content: { image in
-                                                image
-                                                    .resizable()
-                                                    .clipShape(Circle())
-                                                    .frame(width: 80, height: 80, alignment: .center)
-                                                    .overlay(
-                                                        Circle()
-                                                            .stroke(Color.cyan, lineWidth: 2))
-                                            },
-                                            placeholder: {
-                                                Image(systemName: "photo.badge.plus")
-                                                    .frame(width: 80,  height: 80, alignment: .center)
-                                                    .font(.system(size: 40))
-                                                    .overlay(
-                                                        Circle()
-                                                            .stroke(Color.cyan, lineWidth: 2)
-                                                    )
-                                            }
-                                        )
-                                    } else
-                                        if authVm.selectedImage != nil {
+                                    if authVm.selectedImage != nil {
+                                        ZStack{
                                             Image(uiImage: authVm.selectedImage!)
                                                 .resizable()
                                                 .clipShape(Circle())
-                                                .frame(width: 80, height: 80, alignment: .center)
+                                                .scaledToFill()
+                                                .frame(width: 80, height: 80)
                                                 .overlay(
                                                     Circle()
                                                         .stroke(Color.cyan, lineWidth: 2))
-                                        } 
-//                                        else {
-//                                            Image(.logo)
-//                                                .resizable()
-//                                                .clipShape(Circle())
-//                                                .frame(width: 80, height: 80, alignment: .leading)
-//                                                .overlay(
-//                                                    Circle()
-//                                                        .stroke(Color.cyan, lineWidth: 2))
-//                                        }
-                                    
-                                }
-                                    Button{
-                                        authVm.profileImageToStorage()
-                                        if !userProfileImage.isEmpty {
-                                            authVm.deleteProfileImage(imageUrl: userProfileImage)
+                                            Image(systemName: "dot.circle.and.hand.point.up.left.fill")
+                                                .font(.system(size: 25))
+                                                .offset(x: 35, y: -20)
+                                            
+                                            if authVm.showSuccessTick {
+                                                Image(systemName: "checkmark.circle.fill")
+                                                    .foregroundColor(.green)
+                                                    .font(.system(size: 30))
+                                                    .transition(.scale)
+                                            }
                                         }
-                                    } label: {
-                                        Text("   Speichern")
-                                            .font(.system(size: 12))
+                                    } else {
+                                        AsyncImage(
+                                            url: URL(string: authVm.userProfileImage),
+                                            content: { image in
+                                                ZStack{
+                                                    image
+                                                        .resizable()
+                                                        .clipShape(Circle())
+                                                        .scaledToFill()
+                                                        .frame(width: 80, height: 80)
+                                                        .overlay(
+                                                            Circle()
+                                                                .stroke(Color.cyan, lineWidth: 2))
+                                                    Image(systemName: "dot.circle.and.hand.point.up.left.fill")
+                                                        .font(.system(size: 25))
+                                                        .offset(x: 35, y: -20)
+                                                }
+                                            },
+                                            placeholder: {
+                                                Image(systemName: "photo.badge.plus")
+                                                    .frame(width: 80,  height: 80)
+                                                    .font(.system(size: 40))
+                                                    .overlay(
+                                                        Circle()
+                                                            .stroke(Color.cyan, lineWidth: 2))
+                                            }
+                                        )
                                     }
-                                    .offset(x: 0, y: -4)
                                 }
+                                Button{
+                                    authVm.profileImageToStorage()
+                                    if !authVm.userProfileImage.isEmpty {
+                                        authVm.deleteProfileImage(imageUrl: authVm.userProfileImage)
+                                    }
+                                    authVm.updateImageUrl(withId: FirebaseManager.shared.userId ?? "no user found")
+                                } label: {
+                                    Text("Speichern")
+                                        .font(.system(size: 14))
+                                        .bold()
+                                }
+                            }
                             Spacer()
                             VStack(alignment: .trailing){
                                 HStack{
@@ -127,11 +135,9 @@ struct ProfileScreenView: View {
                             .padding(7)
                             .background(Color.cyan.opacity(0.3))
                             .cornerRadius(10)
-                            
-                            
                         }
-                        .frame(width: 350, alignment: .leading)
-                        
+                        .frame(width: 350)
+                        .padding(1)
                         Spacer()
                         HStack{
                             Text(userName)
@@ -179,6 +185,8 @@ struct ProfileScreenView: View {
                 ToolbarItem(placement: ToolbarItemPlacement.navigationBarTrailing){
                     Button {
                         profileScreenVm.removeListener()
+                        authVm.userProfileImage = ""
+                        authVm.removeListener()
                         authVm.logout()
                     } label: {
                         Text("Ausloggen")
@@ -205,6 +213,7 @@ struct ProfileScreenView: View {
         }
         .onAppear{
             profileScreenVm.readLikedMessages()
+            authVm.updateImageUrl(withId: authVm.user?.id ?? "no user found")
         }
         .onDisappear{
             profileScreenVm.removeListener()
@@ -220,7 +229,8 @@ struct ProfileScreenView: View {
 }
 
 
-
+////Ab hier angefangen und ///// slsd flasdfiefajfdf a        asdfksfdfjsldfj
+///dfgsdgfsdgfh
 
 
 
