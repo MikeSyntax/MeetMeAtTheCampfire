@@ -87,9 +87,11 @@ struct ProfileScreenView: View {
                                     }
                                 }
                                 Button{
-                                    authVm.profileImageToStorage()
-                                    if !authVm.imageUrl.isEmpty {
-                                        authVm.deleteProfileImage(imageUrl: authVm.imageUrl)
+                                    Task{
+                                       await authVm.profileImageToStorage()
+                                        if !authVm.imageUrl.isEmpty {
+                                        await authVm.deleteProfileImage(imageUrl: authVm.imageUrl)
+                                        }
                                     }
                                     authVm.updateImageUrl(withId: FirebaseManager.shared.userId ?? "no user found")
                                 } label: {

@@ -5,14 +5,13 @@
 //  Created by Mike Reichenbach on 29.02.24.
 //
 
-import Foundation
 import FirebaseFirestore
 import SwiftUI
 import FirebaseAuth
 
-class AuthViewModel: ObservableObject{
+@MainActor
+final class AuthViewModel: ObservableObject{
     
-    //Öffentliche Variablen, die durch Nutzung des ViewModels auf den Screens bentuzt werden können
     @Published var email: String = ""
     @Published var password: String = ""
     @Published var confirmPassword: String = ""
@@ -41,11 +40,9 @@ class AuthViewModel: ObservableObject{
         checkLogStatus()
     }
     
-    deinit{
-        removeListener()
-    }
-    
-    //Authentication in FirebaseAuth---------------------------------------------------------------------------------------------------------------------------
+    //========================================================================================================================================================
+    // Firebase Auth
+    //========================================================================================================================================================
     
     func workWithAuthResult(authResult: AuthDataResult?, error: Error?) -> User? {
         //Fehler beim Einloggen, gib nichts zurück
@@ -113,7 +110,20 @@ class AuthViewModel: ObservableObject{
         }
     }
     
-    //Create UserProfile in FirebaseFirestore---------------------------------------------------------------------------------------------------------------------------
+    func deleteAccount(completion: @escaping () -> Void) {
+        guard let currentUserId = FirebaseManager.shared.authentication.currentUser else {
+            return
+        }
+        currentUserId.delete(){ error in
+            if error == nil {
+                completion()
+            }
+        }
+    }
+    
+    //========================================================================================================================================================
+    // Firebase Firestore
+    //========================================================================================================================================================
     
     func checkLogStatus(){
         guard let currentUser = FirebaseManager.shared.authentication.currentUser else {
@@ -154,7 +164,6 @@ class AuthViewModel: ObservableObject{
         }
     }
     
-    //Hier wird nur der timeStamp für den letzen ChatBesuch aktualisiert
     func updateUser(){
         guard var currentUser = user else {
             return
@@ -169,21 +178,65 @@ class AuthViewModel: ObservableObject{
         }
     }
     
-    //Delete User Data and Account in FirebaseFirestore----------------------------------------------------------------------------------------------------------
-    
-    @MainActor
-    func deleteAccount(completion: @escaping () -> Void) {
-        guard let currentUserId = FirebaseManager.shared.authentication.currentUser else {
+    private func updateProfileImageToFirestore(imageUrl: String){
+        //User
+        guard var currentUser = user else {
             return
         }
-        currentUserId.delete(){ error in
-            if error == nil {
-                completion()
+        //User Id
+        guard let currentUserId = FirebaseManager.shared.userId else {
+            return
+        }
+        //Ausgewählte Image Url
+        currentUser.imageUrl = imageUrl
+        //Image Url in die Collection schreiben
+        do {
+            FirebaseManager.shared.firestore.collection("appUser")
+                .document(currentUserId).updateData(["imageUrl" : currentUser.imageUrl])
+            print("Updating profileImage successfull")
+        }
+        //Ab hier update der chatMessages mit dem neuen Profilbild
+        let messagesRef = FirebaseManager.shared.firestore.collection("messages")
+        //Nachrichten die die userId enthalten finden
+        let query = messagesRef.whereField("userId", isEqualTo: currentUserId)
+        //Snapshot von allen gefundenen Nachrichten mit Fehlerbehandlung
+        query.getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Error getting for profileImage in chat documents: \(error)")
+            } else {
+                // Für jede gefundene Nachricht das ProfileImage aktualisieren
+                for document in querySnapshot!.documents {
+                    // Die ID des Dokuments
+                    let documentID = document.documentID
+                    // Das Dokument mit den neuen Daten aktualisieren
+                    messagesRef.document(documentID).updateData(["profileImage": currentUser.imageUrl]) { error in
+                        if let error = error {
+                            print("Error updating profileImage in chat document: \(error)")
+                        } else {
+                            print("Document profileImage in chat successfully updated")
+                        }
+                    }
+                }
             }
         }
     }
     
-    @MainActor
+    func updateImageUrl(withId id: String){
+        self.listener = FirebaseManager.shared.firestore.collection("appUser").document(id).addSnapshotListener { documentSnapshot, error in
+            guard let document = documentSnapshot else {
+                print("Error fetching document: \(error?.localizedDescription ?? "Unknown error")")
+                return
+            }
+            guard let appUser = try? document.data(as: UserModel.self) else {
+                print("Document does not exist or could not be decoded")
+                return
+            }
+            DispatchQueue.main.async {
+                self.imageUrl = appUser.imageUrl
+            }
+        }
+    }
+    
     func deleteUserData(completion: @escaping () -> Void) {
         guard let currentUser = FirebaseManager.shared.userId else {
             return
@@ -196,9 +249,11 @@ class AuthViewModel: ObservableObject{
             }
     }
     
-    //Create ProfileImage in FirebaseFirestore-------------------------------------------------------------------------------------------------------------------
+    //========================================================================================================================================================
+    // Firebase Storage
+    //========================================================================================================================================================
     
-    func profileImageToStorage() {
+    func profileImageToStorage() async {
         guard let uploadProfileImage = selectedImage,
               let imageData = uploadProfileImage.jpegData(compressionQuality: 0.8) else {
             return
@@ -231,50 +286,7 @@ class AuthViewModel: ObservableObject{
         }
     }
     
-    private func updateProfileImageToFirestore(imageUrl: String){
-        guard var currentUser = user else {
-            return
-        }
-        guard let currentUserId = FirebaseManager.shared.userId else {
-            return
-        }
-        currentUser.imageUrl = imageUrl
-        do {
-            FirebaseManager.shared.firestore.collection("appUser")
-                .document(currentUserId).updateData(["imageUrl" : currentUser.imageUrl])
-            print("Updating profileImage successfull")
-        }
-        //Ab hier update der chatMessages mit dem neuen Profilbild
-        let messagesRef = FirebaseManager.shared.firestore.collection("messages")
-        //Nachrichten die die userId enthalten finden
-        let query = messagesRef.whereField("userId", isEqualTo: currentUserId)
-        //Snapshot von allen gefundenen Nachrichten mit Fehlerbehandlung
-        query.getDocuments { (querySnapshot, error) in
-            if let error = error {
-                print("Error getting for profileImage in chat documents: \(error)")
-            } else {
-                // Für jede gefundene Nachricht das ProfileImage aktualisieren
-                for document in querySnapshot!.documents {
-                    // Die ID des Dokuments
-                    let documentID = document.documentID
-                    // Das Dokument mit den neuen Daten aktualisieren
-                    messagesRef.document(documentID).updateData(["profileImage": currentUser.imageUrl]) { error in
-                        if let error = error {
-                            print("Error updating profileImage in chat document: \(error)")
-                        } else {
-                            print("Document profileImage in chat successfully updated")
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
-    
-    
-    
-    
-    func deleteProfileImage(imageUrl: String){
+    func deleteProfileImage(imageUrl: String) async {
         guard var currentUser = user else {
             return
         }
@@ -290,34 +302,8 @@ class AuthViewModel: ObservableObject{
         }
     }
     
-    func updateImageUrl(withId id: String){
-        self.listener = FirebaseManager.shared.firestore.collection("appUser").document(id).addSnapshotListener { documentSnapshot, error in
-            guard let document = documentSnapshot else {
-                print("Error fetching document: \(error?.localizedDescription ?? "Unknown error")")
-                return
-            }
-            guard let appUser = try? document.data(as: UserModel.self) else {
-                print("Document does not exist or could not be decoded")
-                return
-            }
-            DispatchQueue.main.async {
-                self.imageUrl = appUser.imageUrl
-            }
-        }
-    }
-    
     func removeListener(){
-        //        self.userName = ""
-        //        self.email = ""
-        //        self.password = ""
-        //        self.confirmPassword = ""
-        //        self.imageUrl = ""
         self.listener = nil
     }
 }
-
-//////ab hier angefangena und ailmmmer aksjiejsejs
-///seislfjjsdlfsdjfjfj   sdkfj sdlf sdfkj
-///
-
 

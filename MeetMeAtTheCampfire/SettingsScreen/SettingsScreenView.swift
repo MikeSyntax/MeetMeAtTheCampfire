@@ -88,9 +88,13 @@ struct SettingsScreenView: View {
                         
                         HStack{
                             Spacer()
-                            Button("Impressum"){
-                                //Todo Impressum
-                            }
+                            Button(action: {
+                                if let url = URL(string: Impressum.impressumKey) {
+                                            UIApplication.shared.open(url)
+                                        }
+                                    }) {
+                                        Text("Impressum")
+                                    }
                             Spacer()
                         }
                         .frame(minHeight: 70)
