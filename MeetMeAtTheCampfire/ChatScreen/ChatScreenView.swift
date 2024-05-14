@@ -87,7 +87,7 @@ struct ChatScreenView: View {
                         .submitLabel(.done)
                     ButtonTextAction(iconName: "paperplane", text: "Senden") {
                         if !newMessage.isEmpty{
-                            chatVm.createNewMessage(userName: userName, messageText: newMessage, isLiked: false, isLikedByUser: [])
+                            chatVm.createNewMessage(userName: userName, messageText: newMessage, isLiked: false, isLikedByUser: [], profileImage: authVm.user?.imageUrl)
                             newMessage = ""
                             UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
                         }
@@ -109,6 +109,7 @@ struct ChatScreenView: View {
             authVm.user?.timeStampLastVisitChat = Date.now
         }
         .onDisappear{
+            authVm.updateUser()
             chatVm.removeListener()
         }
         .searchable(text: Binding(

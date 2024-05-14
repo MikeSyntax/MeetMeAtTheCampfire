@@ -24,7 +24,6 @@ struct ProfileScreenView: View {
     var body: some View {
         let userName = authVm.user?.userName ?? "User unbekannt"
         let userEmail = authVm.user?.email ?? "Email unbekannt"
-       // let userProfileImage = authVm.user?.imageUrl ?? ""
         NavigationStack {
             VStack {
                 Divider()
@@ -47,18 +46,20 @@ struct ProfileScreenView: View {
                                                         .stroke(Color.cyan, lineWidth: 2))
                                             Image(systemName: "dot.circle.and.hand.point.up.left.fill")
                                                 .font(.system(size: 25))
-                                                .offset(x: 35, y: -20)
+                                                .offset(x: 45, y: -20)
                                             
                                             if authVm.showSuccessTick {
-                                                Image(systemName: "checkmark.circle.fill")
+                                                Image(systemName: "checkmark")
                                                     .foregroundColor(.green)
-                                                    .font(.system(size: 30))
+                                                    .font(.system(size: 50))
+                                                    .bold()
+                                                    .shadow(color: Color.green, radius: 10)
                                                     .transition(.scale)
                                             }
                                         }
                                     } else {
                                         AsyncImage(
-                                            url: URL(string: authVm.userProfileImage),
+                                            url: URL(string: authVm.imageUrl),
                                             content: { image in
                                                 ZStack{
                                                     image
@@ -71,7 +72,7 @@ struct ProfileScreenView: View {
                                                                 .stroke(Color.cyan, lineWidth: 2))
                                                     Image(systemName: "dot.circle.and.hand.point.up.left.fill")
                                                         .font(.system(size: 25))
-                                                        .offset(x: 35, y: -20)
+                                                        .offset(x: 45, y: -20)
                                                 }
                                             },
                                             placeholder: {
@@ -87,8 +88,8 @@ struct ProfileScreenView: View {
                                 }
                                 Button{
                                     authVm.profileImageToStorage()
-                                    if !authVm.userProfileImage.isEmpty {
-                                        authVm.deleteProfileImage(imageUrl: authVm.userProfileImage)
+                                    if !authVm.imageUrl.isEmpty {
+                                        authVm.deleteProfileImage(imageUrl: authVm.imageUrl)
                                     }
                                     authVm.updateImageUrl(withId: FirebaseManager.shared.userId ?? "no user found")
                                 } label: {
@@ -185,8 +186,6 @@ struct ProfileScreenView: View {
                 ToolbarItem(placement: ToolbarItemPlacement.navigationBarTrailing){
                     Button {
                         profileScreenVm.removeListener()
-                        authVm.userProfileImage = ""
-                        authVm.removeListener()
                         authVm.logout()
                     } label: {
                         Text("Ausloggen")
@@ -213,10 +212,15 @@ struct ProfileScreenView: View {
         }
         .onAppear{
             profileScreenVm.readLikedMessages()
+            authVm.readAppUser(withId: authVm.user?.id ?? "no user found")
             authVm.updateImageUrl(withId: authVm.user?.id ?? "no user found")
+        }
+        .onChange(of: authVm.imageUrl){
+            authVm.readAppUser(withId: authVm.user?.id ?? "no user found")
         }
         .onDisappear{
             profileScreenVm.removeListener()
+            authVm.selectedImage = nil
         }
         .background(Color(UIColor.systemBackground))
     }

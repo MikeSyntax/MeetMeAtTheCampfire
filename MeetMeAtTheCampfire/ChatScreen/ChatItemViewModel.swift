@@ -22,6 +22,7 @@ class ChatItemViewModel: ObservableObject, Identifiable, Equatable {
     @Published var userId: String = ""
     @Published var isLiked: Bool
     @Published var isLikedByUser: [String] = []
+    @Published var profileImage: String? = ""
     
     // Variable 'timeStamp', die das Datum und die Uhrzeit des Chatnachrichtenzeitstempels speichert.
     @Published var timeStamp = Date()
@@ -42,6 +43,7 @@ class ChatItemViewModel: ObservableObject, Identifiable, Equatable {
         self.isLiked = chatDesign.isLiked
         self.isLikedByUser = chatDesign.isLikedByUser
         self.isCurrentUser = isCurrentUser
+        self.profileImage = chatDesign.profileImage
         
         // Aufruf der Methode 'updateDate()', um das Datumsformat zu aktualisieren.
         updateDate()

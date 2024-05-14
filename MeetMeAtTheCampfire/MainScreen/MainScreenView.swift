@@ -13,7 +13,7 @@ struct MainScreenView: View {
     @StateObject var chatVm: ChatScreenViewModel
     @StateObject var profileScreenVm: ProfileScreenViewModel
     @StateObject var languageVm = LanguageScreenViewModel(languageChoice: Language(code: "af", name: "Afrikaans"), languageSource: Language(code: "de", name: "Deutsch"))
-    @StateObject var chatSenderVm = ChatItemViewModel(chatDesign: ChatModel(userId: "2", userName: "Dieter", messageText: "Danke", timeStamp: Date(), isReadbyUser: [], isLiked: false, isLikedByUser: []))
+    @StateObject var chatSenderVm = ChatItemViewModel(chatDesign: ChatModel(userId: "2", userName: "Dieter", messageText: "Danke", timeStamp: Date(), isReadbyUser: [], isLiked: false, isLikedByUser: [], profileImage: ""))
     @State private var selectedTab = 0
     @AppStorage("badgevisible") private var isBadgeVisible: Bool = true
     
@@ -77,9 +77,9 @@ struct MainScreenView: View {
         .onChange(of: authVm.user?.id){
             selectedTab = 0
         }
-        .onDisappear{
-            authVm.updateUser()
-        }
+//        .onDisappear{
+//            authVm.updateUser()
+//        }
         .background(Color(UIColor.systemBackground))
         .modelContainer(for: LogBookAtivity.self)
     }

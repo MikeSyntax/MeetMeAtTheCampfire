@@ -34,12 +34,12 @@ class ChatScreenViewModel: ObservableObject {
     
     //MARK Anlegen aller 4 CRUD Operationen Create Read Update und Delete ------------------------------------------------------------------
     //Neue ChatNachricht im Firestore anlegen
-    func createNewMessage(userName: String, messageText: String, isLiked: Bool, isLikedByUser: [String]){
+    func createNewMessage(userName: String, messageText: String, isLiked: Bool, isLikedByUser: [String], profileImage: String?){
         guard let userId = FirebaseManager.shared.userId else {
             return
         }
         
-        let message = ChatModel(userId: userId, userName: userName, messageText: messageText, timeStamp: Date(), isReadbyUser: [userId], isLiked: isLiked, isLikedByUser: isLikedByUser)
+        let message = ChatModel(userId: userId, userName: userName, messageText: messageText, timeStamp: Date(), isReadbyUser: [userId], isLiked: isLiked, isLikedByUser: isLikedByUser, profileImage: profileImage)
         
         do{
             try FirebaseManager.shared.firestore.collection("messages").addDocument(from: message)

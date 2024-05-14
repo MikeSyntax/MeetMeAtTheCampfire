@@ -21,10 +21,21 @@ struct ChatItemView: View {
                 .shadow(radius: 10)
             VStack{
                 HStack{
-                    Image(.logo)
-                        .resizable()
-                        .frame(width: 20, height: 20)
-                        .clipShape(Circle())
+                    
+                    AsyncImage(
+                        url: URL(string: chatSenderVm.profileImage ?? "no image found"),
+                        content: { image in
+                            image
+                                .resizable()
+                                .clipShape(Circle())
+                                .scaledToFill()
+                                .frame(width: 20, height: 20)
+                        },
+                        placeholder: {
+                            Image(systemName: "photo")
+                                .frame(width: 20,  height: 20)
+                        }
+                    )
                     Text(chatSenderVm.userName)
                         .font(.caption)
                     Spacer()
@@ -67,7 +78,7 @@ struct ChatItemView: View {
                                 .bold()
                                 .foregroundColor(.primary)
                         }
-                   }
+                    }
                     Text(chatSenderVm.dateString)
                         .font(.caption)
                         .frame(maxWidth: maxWidth, alignment: chatSenderVm.isCurrentUser ? .trailing : .leading)
@@ -87,7 +98,7 @@ struct ChatItemView: View {
 }
 
 #Preview {
-    let chat = ChatModel(userId: "1", userName: "Fettes Brot", messageText: "In diesem Beispiel wird der Text innerhalb des Rechtecks angezeigt, und die Höhe des Rechtecks passt sich automatisch an die Höhe des Textinhalts an. Die fixedSize(horizontal:vertical:)-Modifikator sorgt dafür, dass der Text nicht über die Breite des Rechtecks hinauswächst, aber vertikal kann er beliebig wachsen. Damit sollten längere Texte vollständig angezeigt werden.", timeStamp: Date(), isReadbyUser: [], isLiked: false, isLikedByUser: [])
+    let chat = ChatModel(userId: "1", userName: "Fettes Brot", messageText: "In diesem Beispiel wird der Text innerhalb des Rechtecks angezeigt, und die Höhe des Rechtecks passt sich automatisch an die Höhe des Textinhalts an. Die fixedSize(horizontal:vertical:)-Modifikator sorgt dafür, dass der Text nicht über die Breite des Rechtecks hinauswächst, aber vertikal kann er beliebig wachsen. Damit sollten längere Texte vollständig angezeigt werden.", timeStamp: Date(), isReadbyUser: [], isLiked: false, isLikedByUser: [], profileImage: "")
     let chatVm = ChatItemViewModel(chatDesign: chat)
     return ChatItemView(chatSenderVm: chatVm)
 }

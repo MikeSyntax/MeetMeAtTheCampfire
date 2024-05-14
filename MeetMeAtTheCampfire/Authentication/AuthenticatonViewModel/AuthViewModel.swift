@@ -26,18 +26,40 @@ class AuthViewModel: ObservableObject{
     @Published var imageUrl: String = ""
     @Published var selectedImage: UIImage?
     @Published var showSuccessTick: Bool = false
-    @Published var userProfileImage: String = ""
+    
     private var listener: ListenerRegistration? = nil
+    
     //Erstellen eines User gemäß festgelegten UserModel
     @Published var user: UserModel?
     
-    //Erstellen einer LoggedIn Variablen die zuerst auf false steht und nach dem einloggen entsprechend geändert wird
+    //Überprüfung erfolgt in der @Main / Erstellen einer LoggedIn Variablen die zuerst auf false steht und nach dem einloggen entsprechend geändert wird
     var userLoggedIn: Bool {
         self.user != nil
     }
     
     init(){
         checkLogStatus()
+    }
+    
+    deinit{
+        removeListener()
+    }
+    
+    //Authentication in FirebaseAuth---------------------------------------------------------------------------------------------------------------------------
+    
+    func workWithAuthResult(authResult: AuthDataResult?, error: Error?) -> User? {
+        //Fehler beim Einloggen, gib nichts zurück
+        if let error {
+            print("Error signing in: \(error)")
+            return nil
+        }
+        //Prüfe ob es ein authResult gibt, ansonsten gib nichts zurück
+        guard let authResult else {
+            print("authResult is empty")
+            return nil
+        }
+        //Wenn alles geklappt hat gib einen User zurück
+        return authResult.user
     }
     
     func login(){
@@ -71,11 +93,27 @@ class AuthViewModel: ObservableObject{
             updateUser()
             removeListener()
             try FirebaseManager.shared.authentication.signOut()
+            self.user = nil
             print("User wurde erfolgreich abgemeldet")
         } catch {
             print("Error signing out \(error)")
         }
     }
+    
+    func passwordSendWithEmail(email: String, completion: @escaping (Error?) -> Void) {
+        Auth.auth().sendPasswordReset(withEmail: email) { error in
+            if let error = error {
+                completion(error)
+                self.showEmailNotSendAlert.toggle()
+            } else {
+                // Erfolgreiches Zurücksetzen des Passworts
+                completion(nil)
+                self.showEmailSendAlert.toggle()
+            }
+        }
+    }
+    
+    //Create UserProfile in FirebaseFirestore---------------------------------------------------------------------------------------------------------------------------
     
     func checkLogStatus(){
         guard let currentUser = FirebaseManager.shared.authentication.currentUser else {
@@ -83,24 +121,15 @@ class AuthViewModel: ObservableObject{
             return
         }
         self.readAppUser(withId: currentUser.uid)
-        self.updateImageUrl(withId: currentUser.uid)
     }
     
-    func workWithAuthResult(authResult: AuthDataResult?, error: Error?) -> User? {
-        //Fehler beim Einloggen, gib nichts zurück
-        if let error {
-            print("Error signing in: \(error)")
-            return nil
+    func createUser(withId id: String, email: String, userName: String, imageUrl: String){
+        let appUser = UserModel(id: id, email: email, registeredTime: Date(), userName: userName, timeStampLastVisitChat: Date.now, isActive: isActive, imageUrl: imageUrl)
+        do{
+            try FirebaseManager.shared.firestore.collection("appUser").document(id).setData(from: appUser)
+        } catch {
+            print("Could not create new appUser: \(error)")
         }
-        //Prüfe ob es ein authResult gibt, ansonsten gib nichts zurück
-        guard let authResult else {
-            print("authResult is empty")
-            return nil
-        }
-        //Wenn alles geklappt hat gib einen User zurück
-        return authResult.user
-        
-        
     }
     
     func readAppUser(withId id: String){
@@ -118,20 +147,10 @@ class AuthViewModel: ObservableObject{
                 //hier wird das UserModel decodiert und der User gelesen
                 let appUser = try document.data(as: UserModel.self)
                 self.user = appUser
+                self.user?.imageUrl = appUser.imageUrl
             } catch {
                 print("Decoding appUser failed with error \(error)")
             }
-        }
-    }
-    
-    func createUser(withId id: String, email: String, userName: String, imageUrl: String){
-        //Kreire einen neuen appUser gemäß UserModel
-        let appUser = UserModel(id: id, email: email, registeredTime: Date(), userName: userName, timeStampLastVisitChat: Date.now, isActive: isActive, imageUrl: imageUrl)
-        do{
-            //Gehe in den Firestore, erstelle dort eine Col. appUser mit doc id und den Daten gemäß UserModel
-            try FirebaseManager.shared.firestore.collection("appUser").document(id).setData(from: appUser)
-        } catch {
-            print("Could not create new appUser: \(error)")
         }
     }
     
@@ -145,26 +164,12 @@ class AuthViewModel: ObservableObject{
         }
         currentUser.timeStampLastVisitChat = Date.now
         do{
-            try FirebaseManager.shared.firestore.collection("appUser").document(currentUserId).setData(from: currentUser)
-            print("Update appUser succeeded")
-        } catch {
-            print("Could not update appUser: \(error)")
+            FirebaseManager.shared.firestore.collection("appUser").document(currentUserId).updateData(["timeStampLastVisitChat" : currentUser.timeStampLastVisitChat])
+            print("Update timeStampLastVisitChat appUser done")
         }
     }
     
-    //Reset Password and send email with reset and get a new one
-    func passwordSendWithEmail(email: String, completion: @escaping (Error?) -> Void) {
-        Auth.auth().sendPasswordReset(withEmail: email) { error in
-            if let error = error {
-                completion(error)
-                self.showEmailNotSendAlert.toggle()
-            } else {
-                // Erfolgreiches Zurücksetzen des Passworts
-                completion(nil)
-                self.showEmailSendAlert.toggle()
-            }
-        }
-    }
+    //Delete User Data and Account in FirebaseFirestore----------------------------------------------------------------------------------------------------------
     
     @MainActor
     func deleteAccount(completion: @escaping () -> Void) {
@@ -191,9 +196,11 @@ class AuthViewModel: ObservableObject{
             }
     }
     
+    //Create ProfileImage in FirebaseFirestore-------------------------------------------------------------------------------------------------------------------
+    
     func profileImageToStorage() {
         guard let uploadProfileImage = selectedImage,
-              let imageData = uploadProfileImage.jpegData(compressionQuality: 0.6) else {
+              let imageData = uploadProfileImage.jpegData(compressionQuality: 0.8) else {
             return
         }
         
@@ -232,18 +239,47 @@ class AuthViewModel: ObservableObject{
             return
         }
         currentUser.imageUrl = imageUrl
-        
         do {
-            try FirebaseManager.shared.firestore.collection("appUser")
-                .document(currentUserId).setData(from: currentUser)
+            FirebaseManager.shared.firestore.collection("appUser")
+                .document(currentUserId).updateData(["imageUrl" : currentUser.imageUrl])
             print("Updating profileImage successfull")
-        } catch {
-            print("Error updating profileImage: \(error)")
+        }
+        //Ab hier update der chatMessages mit dem neuen Profilbild
+        let messagesRef = FirebaseManager.shared.firestore.collection("messages")
+        //Nachrichten die die userId enthalten finden
+        let query = messagesRef.whereField("userId", isEqualTo: currentUserId)
+        //Snapshot von allen gefundenen Nachrichten mit Fehlerbehandlung
+        query.getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Error getting for profileImage in chat documents: \(error)")
+            } else {
+                // Für jede gefundene Nachricht das ProfileImage aktualisieren
+                for document in querySnapshot!.documents {
+                    // Die ID des Dokuments
+                    let documentID = document.documentID
+                    // Das Dokument mit den neuen Daten aktualisieren
+                    messagesRef.document(documentID).updateData(["profileImage": currentUser.imageUrl]) { error in
+                        if let error = error {
+                            print("Error updating profileImage in chat document: \(error)")
+                        } else {
+                            print("Document profileImage in chat successfully updated")
+                        }
+                    }
+                }
+            }
         }
     }
     
+    
+    
+    
+    
     func deleteProfileImage(imageUrl: String){
-        let profileImageRef = FirebaseManager.shared.storage.reference(forURL: imageUrl)
+        guard var currentUser = user else {
+            return
+        }
+        currentUser.imageUrl = imageUrl
+        let profileImageRef = FirebaseManager.shared.storage.reference(forURL: currentUser.imageUrl)
         
         profileImageRef.delete() { error in
             if let error = error {
@@ -264,20 +300,18 @@ class AuthViewModel: ObservableObject{
                 print("Document does not exist or could not be decoded")
                 return
             }
-           // DispatchQueue.main.async {
+            DispatchQueue.main.async {
                 self.imageUrl = appUser.imageUrl
-                self.userProfileImage = self.imageUrl
-       //     }
+            }
         }
     }
     
     func removeListener(){
-        self.user = nil
-        self.userName = ""
-        self.email = ""
-        self.password = ""
-        self.confirmPassword = ""
-        self.imageUrl = ""
+        //        self.userName = ""
+        //        self.email = ""
+        //        self.password = ""
+        //        self.confirmPassword = ""
+        //        self.imageUrl = ""
         self.listener = nil
     }
 }
