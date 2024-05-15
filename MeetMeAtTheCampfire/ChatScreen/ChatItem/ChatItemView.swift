@@ -11,7 +11,7 @@ struct ChatItemView: View {
     
     @ObservedObject var chatSenderVm: ChatItemViewModel
     @State private var showRemoveUserFromChatViewAlert: Bool = false
-    private let maxWidth: CGFloat = 280.0
+    private let maxWidth: CGFloat = 300.0
     private let userId = FirebaseManager.shared.userId
     
     var body: some View {

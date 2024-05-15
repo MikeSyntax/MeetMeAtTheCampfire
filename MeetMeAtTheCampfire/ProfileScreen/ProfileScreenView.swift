@@ -20,10 +20,13 @@ struct ProfileScreenView: View {
     @State var showSettingsSheet: Bool = false
     @State private var showImagePicker: Bool = false
     @State private var selectedImage: UIImage?
+    let edgeInsets: EdgeInsets = EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10)
+
     
     var body: some View {
         let userName = authVm.user?.userName ?? "User unbekannt"
         let userEmail = authVm.user?.email ?? "Email unbekannt"
+        let edgeInsets: EdgeInsets = EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10)
         NavigationStack {
             VStack {
                 Divider()
@@ -40,7 +43,9 @@ struct ProfileScreenView: View {
                                                 .resizable()
                                                 .clipShape(Circle())
                                                 .scaledToFill()
-                                                .frame(width: 80, height: 80)
+                                                .frame(
+                                                    width: 80,
+                                                    height: 80)
                                                 .overlay(
                                                     Circle()
                                                         .stroke(Color.cyan, lineWidth: 2))
@@ -66,7 +71,9 @@ struct ProfileScreenView: View {
                                                         .resizable()
                                                         .clipShape(Circle())
                                                         .scaledToFill()
-                                                        .frame(width: 80, height: 80)
+                                                        .frame(
+                                                            width: 80,
+                                                            height: 80)
                                                         .overlay(
                                                             Circle()
                                                                 .stroke(Color.cyan, lineWidth: 2))
@@ -77,7 +84,9 @@ struct ProfileScreenView: View {
                                             },
                                             placeholder: {
                                                 Image(systemName: "photo.badge.plus")
-                                                    .frame(width: 80,  height: 80)
+                                                    .frame(
+                                                        width: 80,
+                                                        height: 80)
                                                     .font(.system(size: 40))
                                                     .overlay(
                                                         Circle()
@@ -139,26 +148,22 @@ struct ProfileScreenView: View {
                             .background(Color.cyan.opacity(0.3))
                             .cornerRadius(10)
                         }
-                        .frame(width: 350)
-                        .padding(1)
+                        .padding(edgeInsets)
                         Spacer()
                         HStack{
                             Text(userName)
                                 .bold()
                             Spacer()
                             Text(userEmail)
+                                .font(.caption)
                         }
-                        .frame(
-                            width: 300,
-                            alignment: .leading)
+                        .padding(edgeInsets)
                         Spacer()
                         HStack{
                             Text("UserId: \(FirebaseManager.shared.userId ?? "no user Id")")
                                 .font(.caption)
                         }
-                        .frame(
-                            width: 300,
-                            alignment: .leading)
+                        .padding(edgeInsets)
                     }
                 }
                 .frame(
@@ -172,17 +177,14 @@ struct ProfileScreenView: View {
                         .font(.headline)
                         .bold()
                         .italic()
-                        .frame(
-                            width: 300,
-                            alignment: .leading)
+                        .padding(edgeInsets)
                     ScrollView{
                         ForEach(profileScreenVm.chatLikedViewModels){ chatLikedViewModel in
                             ChatItemView(chatSenderVm: chatLikedViewModel)
                                 .id(chatLikedViewModel.id)
                         }
                     }
-                    //.frame(width: 300, alignment: .center)
-                    .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
+                    .padding(edgeInsets)
                 }
                 Divider()
             }
@@ -242,10 +244,6 @@ struct ProfileScreenView: View {
     return ProfileScreenView(profileScreenVm: profileScreenVm, showSettingsSheet: false)
         .environmentObject(AuthViewModel())
 }
-
-
-////Ab hier angefangen und ///// slsd flasdfiefajfdf a        asdfksfdfjsldfj
-///dfgsdgfsdgfh
 
 
 

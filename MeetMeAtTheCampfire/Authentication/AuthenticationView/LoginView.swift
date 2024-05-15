@@ -135,6 +135,9 @@ struct LoginView: View {
                     .scaledToFill()
                     .opacity(0.2)
                     .ignoresSafeArea(.all))
+            .onDisappear{
+                authVm.removeListener()
+            }
         }
         .background(Color(UIColor.systemBackground))
     }

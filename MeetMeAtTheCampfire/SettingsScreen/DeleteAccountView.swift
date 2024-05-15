@@ -84,6 +84,7 @@ struct DeleteAccountView: View {
                             authVm.deleteUserData {
                                 authVm.deleteAccount {
                                     authVm.logout()
+                                    dismiss()
                                 }
                             }
                     })

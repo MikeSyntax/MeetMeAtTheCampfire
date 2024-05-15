@@ -309,6 +309,12 @@ final class AuthViewModel: ObservableObject{
     }
     
     func removeListener(){
+        self.password = ""
+        self.confirmPassword = ""
+        self.email = ""
+        self.userName = ""
+        self.imageUrl = ""
+        self.selectedImage = nil
         self.listener = nil
     }
 }
