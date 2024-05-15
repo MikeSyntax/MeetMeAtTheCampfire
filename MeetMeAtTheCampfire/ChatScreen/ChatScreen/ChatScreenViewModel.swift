@@ -8,7 +8,8 @@
 import Foundation
 import FirebaseFirestore
 
-class ChatScreenViewModel: ObservableObject {
+@MainActor
+final class ChatScreenViewModel: ObservableObject {
     
     @Published var chatSenderViewModels: [ChatItemViewModel] = []
     //Counter für den .badge im MainScreen
@@ -20,11 +21,7 @@ class ChatScreenViewModel: ObservableObject {
     init(user: UserModel){
         self.user = user
     }
-    
-    deinit{
-        removeListener()
-    }
-    
+
     //Search in Chat
     func searchMessages(for searchTerm: String) -> [String] {
         // Durchsuche die Nachrichten nach dem Suchbegriff und gib die IDs zurück
@@ -49,13 +46,15 @@ class ChatScreenViewModel: ObservableObject {
     }
     
     //Lesen aller Nachrichten aus dem Firestore
-    func readMessages() {
+    func readMessages() async throws {
         guard let userId = FirebaseManager.shared.userId else {
             return
         }
         
         self.listener = FirebaseManager.shared.firestore.collection("messages")
-            .addSnapshotListener { querySnapshot, error in
+            .addSnapshotListener { [weak self] querySnapshot, error in
+                guard let self = self else { return }
+                
                 if let error = error {
                     print("Error reading messages: \(error)")
                     return
@@ -69,10 +68,13 @@ class ChatScreenViewModel: ObservableObject {
                 let messages = documents.compactMap { document in
                     try? document.data(as: ChatModel.self)
                 }
-                let sortedMessages = messages.sorted { $0.timeStamp < $1.timeStamp }
+                
+                let filteredMessages = messages.filter { !ChatManager.shared.excludedUserIds.contains($0.userId) }
+                
+                let sortedMessages = filteredMessages.sorted { $0.timeStamp < $1.timeStamp }
                 
                 let chatSenderViewModels = sortedMessages.map { message in
-                    let isCurrentUser = message.userId == userId // Überprüfen, ob der Absender der eingeloggte Benutzer ist
+                    let isCurrentUser = message.userId == userId
                     return ChatItemViewModel(chatDesign: message, isCurrentUser: isCurrentUser)
                 }
                 self.chatSenderViewModels = chatSenderViewModels

@@ -7,7 +7,8 @@
 
 import Foundation
 //Hier werden verschiedene Protokolle implementiert unter anderen das Equatable Protokoll (Vergleichsprotokoll)
-class ChatItemViewModel: ObservableObject, Identifiable, Equatable {
+@MainActor
+final class ChatItemViewModel: ObservableObject, Identifiable, Equatable {
     //mit dieser static Funktion wird es ermöglicht Instanzen dieser Klasse zu vergleichen in diesem Fall die id´s der ChatSenderViewModels und es wird eine true oder false zurückgegeben
     static func == (chatReceiver: ChatItemViewModel, chatSender: ChatItemViewModel) -> Bool {
         return chatReceiver.id == chatSender.id

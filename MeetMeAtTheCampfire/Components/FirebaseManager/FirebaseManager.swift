@@ -6,12 +6,11 @@
 //
 
 import Foundation
-import Firebase
 import FirebaseAuth
 import FirebaseFirestore
 import FirebaseStorage
 
-struct FirebaseManager {
+final class FirebaseManager {
     //Erstellen einer singelten static let für den Manager um überall in der App auf Firebase zuzugreifen
     static let shared = FirebaseManager()
     
