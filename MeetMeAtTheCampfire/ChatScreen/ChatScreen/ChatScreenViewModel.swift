@@ -8,7 +8,6 @@
 import Foundation
 import FirebaseFirestore
 
-@MainActor
 final class ChatScreenViewModel: ObservableObject {
     
     @Published var chatSenderViewModels: [ChatItemViewModel] = []
@@ -31,27 +30,43 @@ final class ChatScreenViewModel: ObservableObject {
     
     //MARK Anlegen aller 4 CRUD Operationen Create Read Update und Delete ------------------------------------------------------------------
     //Neue ChatNachricht im Firestore anlegen
-    func createNewMessage(userName: String, messageText: String, isLiked: Bool, isLikedByUser: [String], profileImage: String?){
+    func createNewMessage(
+        userName: String,
+        messageText: String,
+        isLiked: Bool,
+        isLikedByUser: [String],
+        profileImage: String?){
         guard let userId = FirebaseManager.shared.userId else {
             return
         }
         
-        let message = ChatModel(userId: userId, userName: userName, messageText: messageText, timeStamp: Date(), isReadbyUser: [userId], isLiked: isLiked, isLikedByUser: isLikedByUser, profileImage: profileImage)
+        let message = ChatModel(
+            userId: userId,
+            userName: userName,
+            messageText: messageText,
+            timeStamp: Date(),
+            isReadbyUser: [userId],
+            isLiked: isLiked,
+            isLikedByUser: isLikedByUser,
+            profileImage: profileImage)
         
         do{
-            try FirebaseManager.shared.firestore.collection("messages").addDocument(from: message)
+            try FirebaseManager.shared.firestore
+                .collection("messages")
+                .addDocument(from: message)
         } catch {
             print("Error creating new message: \(error)")
         }
     }
     
     //Lesen aller Nachrichten aus dem Firestore
-    func readMessages() async throws {
+    func readMessages() {
         guard let userId = FirebaseManager.shared.userId else {
             return
         }
         
-        self.listener = FirebaseManager.shared.firestore.collection("messages")
+        self.listener = FirebaseManager.shared.firestore
+            .collection("messages")
             .addSnapshotListener { [weak self] querySnapshot, error in
                 guard let self = self else { return }
                 
@@ -99,7 +114,9 @@ final class ChatScreenViewModel: ObservableObject {
         }
         let newData = ["isReadbyUser": chatSenderVm.isReadbyUser]
         
-        FirebaseManager.shared.firestore.collection("messages").document(messageId).updateData(newData) { error in
+        FirebaseManager.shared.firestore.collection("messages")
+            .document(messageId)
+            .updateData(newData) { error in
             if let error = error {
                 print("Updating isRead status failed: \(error)")
             } else {

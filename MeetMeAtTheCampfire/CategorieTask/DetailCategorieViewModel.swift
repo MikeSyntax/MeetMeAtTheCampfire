@@ -8,27 +8,28 @@
 import Foundation
 import FirebaseFirestore
 
-class DetailCategorieViewModel: ObservableObject {
+@MainActor
+final class DetailCategorieViewModel: ObservableObject {
     
     @Published var detailCategorieItemViewModels: [DetailCategorieItemViewModel] = []
     @Published var tasksInCategorieCounter: Int = 0
     @Published var checkForTaskForShowVideo: Int = 0
     private var listener: ListenerRegistration? = nil
     
-    deinit{
-        removeListener()
-    }
-    
-    @MainActor
     func createNewTask(taskName: String, categorieId: String?){
         guard let categorieId = categorieId else {
             return
         }
         
-        let task = TaskModel(categorieId: categorieId, taskName: taskName, taskIsDone: false)
+        let task = TaskModel(
+            categorieId: categorieId,
+            taskName: taskName,
+            taskIsDone: false)
         
         do{
-            try FirebaseManager.shared.firestore.collection("tasksInCategorie").addDocument(from: task)
+            try FirebaseManager.shared.firestore
+                .collection("tasksInCategorie")
+                .addDocument(from: task)
             print("creating task succeeded")
             
             tasksInCategorieCounter = detailCategorieItemViewModels.count
@@ -38,7 +39,9 @@ class DetailCategorieViewModel: ObservableObject {
                 "tasksInCategorie" : tasksInCategorieCounter
             ]
             
-            FirebaseManager.shared.firestore.collection("categories").document(categorieId).updateData(updatedCategorie) {
+            FirebaseManager.shared.firestore.collection("categories")
+                .document(categorieId)
+                .updateData(updatedCategorie) {
                 error in
                 if let error {
                     print("update categorie failed: \(error)")
@@ -52,13 +55,15 @@ class DetailCategorieViewModel: ObservableObject {
         }
     }
     
-    @MainActor
     func readTasks(categorieId: String?){
         guard let categorieId = categorieId else {
             return
         }
         
-        self.listener = FirebaseManager.shared.firestore.collection("tasksInCategorie").whereField("categorieId", isEqualTo: categorieId).addSnapshotListener{ querySnapshot, error in
+        self.listener = FirebaseManager.shared.firestore
+            .collection("tasksInCategorie")
+            .whereField("categorieId", isEqualTo: categorieId)
+            .addSnapshotListener{ querySnapshot, error in
             //Error hinzugefügt
             if let error = error {
                 print("Error reading tasks: \(error)")
@@ -87,7 +92,6 @@ class DetailCategorieViewModel: ObservableObject {
         }
     }
     
-    @MainActor
     func updateTask(detailCategorieItemVm: DetailCategorieItemViewModel, taskId: String?){
         guard let taskId = taskId else {
             return
@@ -106,7 +110,9 @@ class DetailCategorieViewModel: ObservableObject {
         task.taskIsDone.toggle()
         
         do {
-            try FirebaseManager.shared.firestore.collection("tasksInCategorie").document(taskId).setData(from: task, merge: true) {
+            try FirebaseManager.shared.firestore
+                .collection("tasksInCategorie")
+                .document(taskId).setData(from: task, merge: true) {
                 error in
                 if let error {
                     print("update task failed: \(error)")
@@ -119,7 +125,6 @@ class DetailCategorieViewModel: ObservableObject {
         }
     }
     
-    @MainActor
     func deleteTask(categorieId: String?) {
         guard let categorieId = categorieId else {
             return
@@ -164,7 +169,6 @@ class DetailCategorieViewModel: ObservableObject {
             }
     }
     
-    @MainActor
     func deleteAllTask(categorieId: String?) {
         guard let categorieId = categorieId else {
             return

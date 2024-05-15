@@ -10,7 +10,7 @@ import FirebaseFirestore
 import MapKit
 import SwiftUI
 
-class ProfileScreenViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
+final class ProfileScreenViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     @Published var chatLikedViewModels: [ChatItemViewModel] = []
     @Published var homebaseCameraPosition: MapCameraPosition = MapCameraPosition.automatic

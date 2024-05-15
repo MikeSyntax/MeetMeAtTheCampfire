@@ -14,6 +14,7 @@ struct ChatScreenView: View {
     @EnvironmentObject var authVm: AuthViewModel
     @State private var newMessage: String = ""
     @State private var matchingChatIds: [String] = []
+    @StateObject var chatManager = ChatManager.shared
     
     init(chatVm: ChatScreenViewModel) {
         self.chatVm = chatVm
@@ -48,6 +49,10 @@ struct ChatScreenView: View {
                             }
                             authVm.user?.timeStampLastVisitChat = Date.now
                         }
+                        .onChange(of: chatManager.startListExcludedUser){_ ,i in
+                            print("List of excluded users in View:\(chatManager.excludedUserIds)")
+                            chatVm.readMessages()
+                        }
                         .onChange(of: chatVm.searchTerm) { newSearchTerm, _ in
                             if !newSearchTerm.isEmpty {
                                 chatVm.readMessages()
@@ -65,8 +70,15 @@ struct ChatScreenView: View {
                         }
                     }
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
+                .frame(
+                    maxWidth: .infinity,
+                    maxHeight: .infinity)
+                .padding(
+                    EdgeInsets(
+                        top: 0,
+                        leading: 10,
+                        bottom: 0,
+                        trailing: 10))
                 Divider()
                     .frame(height: 5)
                 HStack {
@@ -93,7 +105,12 @@ struct ChatScreenView: View {
                         }
                     }
                 }
-                .padding(EdgeInsets(top: 0, leading: 10, bottom: 10, trailing: 10))
+                .padding(
+                    EdgeInsets(
+                        top: 0,
+                        leading: 10,
+                        bottom: 10,
+                        trailing: 10))
                 Divider()
             }
             .navigationBarTitle("Mein Campfire", displayMode: .inline)

@@ -33,7 +33,6 @@ struct ButtonDestructiveTextAction: View {
     }
 }
 
-
 #Preview {
     ButtonDestructiveTextAction(iconName: "plus", text: "Button"){
         print("Plus")

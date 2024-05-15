@@ -32,10 +32,17 @@ struct DetailCategorieView: View {
             })
             ScrollView{
                 LazyVStack {
-                    ButtonDestructiveTextAction(iconName: "trash", text: "Erledigte ToDo´s löschen") {
+                    ButtonDestructiveTextAction(
+                        iconName: "trash",
+                        text: "Erledigte ToDo´s löschen") {
                         detailCategorieVm.deleteTask(categorieId: categorieVm.categorieViewModel.id)
                     }
-                    .padding(EdgeInsets(top: 5, leading: 0, bottom: 5, trailing: 0))
+                    .padding(
+                        EdgeInsets(
+                            top: 5,
+                            leading: 0,
+                            bottom: 5,
+                            trailing: 0))
                     ForEach(detailCategorieVm.detailCategorieItemViewModels, id: \.taskName) { detailCategorieViewModel in
                         DetailCategorieItemFilledView(detailCategorieItemVm: detailCategorieViewModel)
                             .onTapGesture {
@@ -47,7 +54,9 @@ struct DetailCategorieView: View {
             Divider()
             
             //Beim Löschen der Kategorie werden auch alle Tasks gelöscht!!
-            ButtonTextAction(iconName: "trash", text: "Gesamte Kategorie löschen"){
+            ButtonTextAction(
+                iconName: "trash",
+                text: "Gesamte Kategorie löschen"){
                 homeVm.deleteCategorie(categorieVm: categorieVm)
                 detailCategorieVm.deleteAllTask(categorieId: categorieVm.categorieViewModel.id)
                 dismiss()

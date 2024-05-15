@@ -7,7 +7,6 @@
 
 import Foundation
 //Hier werden verschiedene Protokolle implementiert unter anderen das Equatable Protokoll (Vergleichsprotokoll)
-@MainActor
 final class ChatItemViewModel: ObservableObject, Identifiable, Equatable {
     //mit dieser static Funktion wird es ermöglicht Instanzen dieser Klasse zu vergleichen in diesem Fall die id´s der ChatSenderViewModels und es wird eine true oder false zurückgegeben
     static func == (chatReceiver: ChatItemViewModel, chatSender: ChatItemViewModel) -> Bool {
@@ -87,7 +86,9 @@ final class ChatItemViewModel: ObservableObject, Identifiable, Equatable {
                                           "isLikedByUser": chatSenderVm.isLikedByUser]
         
         // update firestore
-        FirebaseManager.shared.firestore.collection("messages").document(messageId).setData(messagesBox, merge: true) { error in
+        FirebaseManager.shared.firestore.collection("messages")
+            .document(messageId)
+            .setData(messagesBox, merge: true) { error in
             if let error = error {
                 print("update isLikedStatus failed: \(error)")
             } else {

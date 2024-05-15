@@ -9,12 +9,9 @@ import FirebaseFirestore
 import MapKit
 import SwiftUI
 
-class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
-    //Leeres Array mit LogBockModels
+final class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var newEntryLogs: [LogBookModel] = []
-    //Leeres Arry für den showInfoButton
     @Published var listForShowButton: [LogBookModel] = []
-    //alle published Variablen
     @Published var mapCameraPosition: MapCameraPosition = MapCameraPosition.automatic
     @Published var lastLocation: CLLocation?
     @Published var latitude: Double
@@ -26,8 +23,8 @@ class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManager
     @Published var selectedImage: UIImage?
     @Published var readImages: [String] = []
     @Published var containsLogBookEntry: Bool = false
+    @Published var isNewImageLoading: Bool = false
     
-    //Listener
     private var listener: ListenerRegistration? = nil
     let calendarItemModel: LogBookModel
     let date: Date
@@ -56,8 +53,6 @@ class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManager
         removeListener()
     }
     
-    ///create new data logBookText with image
-    
     func createlogBookText(logBookText: String) {
         guard let uploadImage = selectedImage else {
             createLogBookEntry(logBookText: logBookText, imageUrl: nil)
@@ -69,9 +64,10 @@ class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManager
         guard imageData != nil else {
             return
         }
-        
-        // create path for storage and firestore
-        let fileRef = FirebaseManager.shared.storage.reference().child("/images/\(UUID().uuidString).jpg")
+       
+        let fileRef = FirebaseManager.shared.storage
+            .reference()
+            .child("/images/\(UUID().uuidString).jpg")
         
         fileRef.putData(imageData!, metadata: nil) { metadata, error in
             if let error {
@@ -83,13 +79,14 @@ class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManager
                 print("Image upload succesfull")
             }
             
-            // create new data for firestore
             fileRef.downloadURL { url, error in
                 guard let imageUrl = url?.absoluteString else {
                     print("bad url request")
                     return
                 }
-                self.createLogBookEntry(logBookText: logBookText, imageUrl: imageUrl)
+                self.createLogBookEntry(
+                    logBookText: logBookText,
+                    imageUrl: imageUrl)
             }
         }
     }
@@ -110,7 +107,10 @@ class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManager
         )
         
         do {
-            try FirebaseManager.shared.firestore.collection("newLogEntry").addDocument(from: newText)
+            try FirebaseManager.shared.firestore
+                .collection("newLogEntry")
+                .addDocument(from: newText)
+            
             print("Creating newLogEntry successful")
         } catch {
             print("Error creating newLogEntry: \(error)")
@@ -124,7 +124,8 @@ class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManager
             return
         }
         //SnapshotListener
-        self.listener = FirebaseManager.shared.firestore.collection("newLogEntry")
+        self.listener = FirebaseManager.shared.firestore
+            .collection("newLogEntry")
             .whereField("userId", isEqualTo: userId)
             .whereField("formattedDate", isEqualTo: formattedDate)
             .addSnapshotListener {
@@ -194,7 +195,8 @@ class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManager
     }
     
     func deleteImage(imageUrl: String){
-        let imageRef = FirebaseManager.shared.storage.reference(forURL: imageUrl)
+        let imageRef = FirebaseManager.shared.storage
+            .reference(forURL: imageUrl)
         
         imageRef.delete() { error in
             if let error = error {
@@ -204,7 +206,6 @@ class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManager
             }
         }
     }
-    
     
     func dateFormatter() -> String {
         let dateFormatter = DateFormatter()
@@ -225,10 +226,19 @@ class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManager
     func locationManager(_ manager: CLLocationManager, didUpdateLocations location: [CLLocation]){
         if let lastLocation = location.last {
             self.lastLocation = lastLocation
-            self.mapCameraPosition = MapCameraPosition.camera(MapCamera(centerCoordinate: lastLocation.coordinate, distance: 5000))
+            self.mapCameraPosition = MapCameraPosition.camera(
+                MapCamera(
+                    centerCoordinate: lastLocation.coordinate, distance: 5000))
             self.latitude = lastLocation.coordinate.latitude
             self.longitude = lastLocation.coordinate.longitude
             print("coordinates choosen \(self.latitude) and \(self.longitude)")
+        }
+    }
+    
+    func isNewImageLoadingSlow(){
+        self.isNewImageLoading = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10.0){
+            self.isNewImageLoading = false
         }
     }
     
@@ -238,71 +248,3 @@ class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManager
         self.readImages = []
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-//    func createlogBookText(logBookText: String){
-//        guard let uploadImage = selectedImage else {
-//            return
-//        }
-//
-//        let imageData = uploadImage.jpegData(compressionQuality: 0.8)
-//
-//        guard imageData != nil else {
-//            return
-//        }
-//        //create path for storage and firestore
-//        let fileRef = FirebaseManager.shared.storage.reference().child("/images/\(UUID().uuidString).jpg")
-//
-//        fileRef.putData(imageData!, metadata: nil){
-//            metadata, error in
-//
-//            if let error {
-//                print("Error loading metadata \(error)")
-//                return
-//            }
-//
-//            if error == nil && metadata != nil {
-//                print("Image upload succesfull")
-//            }
-//
-//            //create new data for firestore
-//            guard let userId = FirebaseManager.shared.userId else {
-//                return
-//            }
-//
-//            fileRef.downloadURL { url, error in
-//                guard let imageUrl = url?.absoluteString else {
-//                    print("bad url request")
-//                    return
-//                }
-//                self.imageUrl = imageUrl
-//                let newText = LogBookModel(
-//                    userId: userId,
-//                    formattedDate: self.formattedDate,
-//                    logBookText: logBookText,
-//                    latitude: self.latitude,
-//                    longitude: self.longitude,
-//                    imageUrl: imageUrl,
-//                    containsLogBookEntry: true
-//                )
-//
-//                do{
-//                    try
-//                    FirebaseManager.shared.firestore.collection("newLogEntry").addDocument(from: newText)
-//                    print("Creating newLogEntry succesfull")
-//                } catch{
-//                    print("Error creating newLogEntry: \(error)")
-//                }
-//            }
-//        }
-//    }

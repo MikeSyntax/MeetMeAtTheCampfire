@@ -39,8 +39,13 @@ struct CalendarYearlyView: View {
                         } label: {
                             CalendarInfoButtonView()
                         }
-                        .rotationEffect(Angle(degrees: isAnimating ? -0 : 20))
-                        .animation(Animation.easeInOut(duration: 0.3).repeatCount(7, autoreverses: true), value: isAnimating)
+                        .rotationEffect(
+                            Angle(
+                                degrees: isAnimating ? -0 : 20))
+                        .animation(
+                            Animation
+                                .easeInOut(duration: 0.3)
+                                .repeatCount(7, autoreverses: true), value: isAnimating)
                     }
                     .offset(x: 130, y: 180)
                     .onAppear {
@@ -57,7 +62,8 @@ struct CalendarYearlyView: View {
                 scrollPosition = Int(Date().get(.month))
             }
             .scrollPosition(id: $scrollPosition)
-            .navigationBarTitle("Mein Logbuch \(CalendarUtils.getYearCaption(year))", displayMode: .inline)
+            .navigationBarTitle("Mein Logbuch \(CalendarUtils.getYearCaption(year))", 
+                                displayMode: .inline)
             .scrollContentBackground(.hidden)
             .background(
                 Image("background")
@@ -70,7 +76,9 @@ struct CalendarYearlyView: View {
         .onDisappear{
             isAnimating = false
         }
-        .sheet(isPresented: $showInfoSheet, onDismiss: nil) {
+        .sheet(
+            isPresented: $showInfoSheet,
+            onDismiss: nil) {
             CalendarInfoSheetView(showInfoSheet: $showInfoSheet)
                 .presentationDetents([.medium])
         }
@@ -151,7 +159,9 @@ private struct CalendarDailyView: View {
             .background{
                 if date.isToday(){
                     Circle()
-                        .frame(width: 30, height: 30)
+                        .frame(
+                            width: 30,
+                            height: 30)
                         .foregroundColor(.red)
                 }
                 ForEach(items){ item in

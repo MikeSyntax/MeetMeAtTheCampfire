@@ -23,10 +23,22 @@ struct DetailCategorieItemAddView: View {
                         .font(.system(size: 21))
                         .foregroundColor(.gray)
                 }
-                    .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
+                    .padding(
+                        EdgeInsets(
+                            top: 0,
+                            leading: 10,
+                            bottom: 0,
+                            trailing: 10))
             )
-            .frame(maxWidth: .infinity, maxHeight: 40)
-            .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
+            .frame(
+                maxWidth: .infinity,
+                maxHeight: 40)
+            .padding(
+                EdgeInsets(
+                    top: 0,
+                    leading: 20,
+                    bottom: 0,
+                    trailing: 20))
             .shadow(radius: 10)
     }
 }

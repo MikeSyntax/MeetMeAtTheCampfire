@@ -34,7 +34,7 @@ struct RegisterView: View {
                                 )
                                 .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
                             if !authVm.userName.isEmpty {
-                                if authVm.userName.count >= 10 {
+                                if authVm.isValidUsername(authVm.userName) {
                                     RightView()
                                         .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 7))
                                 } else {

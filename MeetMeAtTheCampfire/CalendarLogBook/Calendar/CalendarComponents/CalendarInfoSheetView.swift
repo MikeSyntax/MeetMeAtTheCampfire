@@ -30,7 +30,9 @@ struct CalendarInfoSheetView: View {
                             .frame(width: 250)
                     }
                     VStack{
-                        ButtonTextAction(iconName: "arrow.down.right.and.arrow.up.left", text: "Nicht mehr anzeigen"){
+                        ButtonTextAction(
+                            iconName: "arrow.down.right.and.arrow.up.left",
+                            text: "Nicht mehr anzeigen"){
                             infoButtonIsActive = false
                             showInfoSheet.toggle()
                         }

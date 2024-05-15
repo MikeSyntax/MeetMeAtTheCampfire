@@ -7,7 +7,8 @@
 
 import Foundation
 
-class CategorieViewModel: ObservableObject, Identifiable {
+@MainActor
+final class CategorieViewModel: ObservableObject, Identifiable {
     
     @Published var categorie = "Tasks"
     @Published var tasksInCategorie = 0

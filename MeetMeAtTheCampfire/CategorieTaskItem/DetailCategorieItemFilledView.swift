@@ -10,7 +10,20 @@ import SwiftUI
 
 struct DetailCategorieItemFilledView: View {
     @ObservedObject var detailCategorieItemVm: DetailCategorieItemViewModel
-    @State private var bgColor: [Color] = [.blue, .green, .yellow, .red, .pink, .brown, .orange, .purple, .cyan, .gray, .mint, .indigo]
+    @State private var bgColor: [Color] = [
+        .blue,
+            .green,
+            .yellow,
+            .red,
+            .pink,
+            .brown,
+            .orange,
+            .purple,
+            .cyan,
+            .gray,
+            .mint,
+            .indigo]
+    
     @State private var colors: Color = .white
     
     var body: some View {
@@ -36,10 +49,22 @@ struct DetailCategorieItemFilledView: View {
                             .foregroundColor(.black)
                     }
                 }
-                    .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
+                    .padding(
+                        EdgeInsets(
+                            top: 0,
+                            leading: 10,
+                            bottom: 0,
+                            trailing: 10))
             )
-            .frame(maxWidth: .infinity, maxHeight: 200)
-            .padding(EdgeInsets(top: -5, leading: 20, bottom: -5, trailing: 20))
+            .frame(
+                maxWidth: .infinity,
+                maxHeight: 200)
+            .padding(
+                EdgeInsets(
+                    top: -5,
+                    leading: 20,
+                    bottom: -5,
+                    trailing: 20))
             .shadow(radius: 10)
             .onAppear{
                 sortedColors()

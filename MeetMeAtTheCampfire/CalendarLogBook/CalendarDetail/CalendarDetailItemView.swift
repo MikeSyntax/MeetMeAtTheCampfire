@@ -13,7 +13,6 @@ struct CalendarDetailItemView: View {
     
     @ObservedObject var calendarDetailItemVm: CalendarDetailItemViewModel
     @State var showNewEntryView: Bool = false
-    @State private var isNewImageLoading: Bool = false
     @Environment(\.dismiss) private var dismiss
     
     @Environment(\.modelContext) private var context
@@ -58,7 +57,7 @@ struct CalendarDetailItemView: View {
                                                     .shadow(radius: 10)
                                             },
                                             placeholder: {
-                                                if isNewImageLoading {
+                                                if calendarDetailItemVm.isNewImageLoading {
                                                     ProgressView()
                                                         .progressViewStyle(CircularProgressViewStyle())
                                                         .scaleEffect(3)
@@ -69,7 +68,7 @@ struct CalendarDetailItemView: View {
                                     }
                                 }
                                 .onAppear{
-                                    isNewImageLoadingSlow()
+                                    calendarDetailItemVm.isNewImageLoadingSlow()
                                 }
                             }
                         }
@@ -98,7 +97,9 @@ struct CalendarDetailItemView: View {
                         .frame(width: 250)
                         .opacity(0.7)
                     Divider()
-                    ButtonTextAction(iconName: "plus", text: "Neuer Eintrag") {
+                    ButtonTextAction(
+                        iconName: "plus",
+                        text: "Neuer Eintrag") {
                         showNewEntryView.toggle()
                     }
                 } else {
@@ -155,18 +156,14 @@ struct CalendarDetailItemView: View {
             calendarDetailItemVm.removeListener()
         }
         .sheet(isPresented: $showNewEntryView) {
-            CalendarDetailNewEntryView(calendarDetailItemVm: calendarDetailItemVm, showNewEntryView: $showNewEntryView)
+            CalendarDetailNewEntryView(
+                calendarDetailItemVm: calendarDetailItemVm,
+                showNewEntryView: $showNewEntryView)
         }
         .toolbar(.hidden, for: .tabBar)
         .background(Color(UIColor.systemBackground))
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.didReceiveMemoryWarningNotification, object: nil)) { notification in
             print(notification)
-        }
-    }
-    func isNewImageLoadingSlow(){
-        isNewImageLoading = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 10.0){
-            isNewImageLoading = false
         }
     }
    
@@ -188,30 +185,3 @@ struct CalendarDetailItemView: View {
     return CalendarDetailItemView(calendarDetailItemVm: CalendarDetailItemViewModel(calendarItemModel: logbookMod, date: Date()))
         .modelContainer(for: LogBookAtivity.self)
 }
-
-
-
-
-
-
-//
-////Item vom Persistenstore löschen
-//func deleteItem(_ item: LogBookAtivity){
-//    context.delete(item)
-//}
-//
-//List{
-//    ForEach (items){ item in
-//        HStack{
-//            Text("\(String(item.isNotEmpty))")
-//            Text("\(item.date)")
-//        }
-//    }
-//    .onDelete{ indexes in
-//        for index in indexes {
-//            deleteItem(items[index])
-//            print("\(indexes)")
-//            print("\(index)")
-//        }
-//    }
-//}

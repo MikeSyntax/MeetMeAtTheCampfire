@@ -10,90 +10,154 @@ import SwiftUI
 struct ChatItemView: View {
     
     @ObservedObject var chatSenderVm: ChatItemViewModel
-    private let maxWidth: CGFloat = 300.0
+    @State private var showRemoveUserFromChatViewAlert: Bool = false
+    private let maxWidth: CGFloat = 280.0
     private let userId = FirebaseManager.shared.userId
     
     var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 10)
-                .fill(chatSenderVm.isCurrentUser ? Color.cyan.opacity(0.6) : Color.green.opacity(0.6))
-                .frame(minWidth: 180, maxWidth: maxWidth, minHeight: 70, maxHeight: 500, alignment: chatSenderVm.isCurrentUser ? .trailing : .leading)
-                .shadow(radius: 10)
-            VStack{
-                HStack{
-                    
-                    AsyncImage(
-                        url: URL(string: chatSenderVm.profileImage ?? "no image found"),
-                        content: { image in
-                            image
-                                .resizable()
-                                .clipShape(Circle())
-                                .scaledToFill()
-                                .frame(width: 20, height: 20)
-                        },
-                        placeholder: {
-                            Image(systemName: "photo")
-                                .frame(width: 20,  height: 20)
-                        }
-                    )
-                    Text(chatSenderVm.userName)
-                        .font(.caption)
+        HStack{
+            ZStack {
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(chatSenderVm.isCurrentUser ? Color.cyan.opacity(0.6) : Color.green.opacity(0.6))
+                    .frame(
+                        minWidth: 180,
+                        maxWidth: maxWidth,
+                        minHeight: 70,
+                        maxHeight: 500,
+                        alignment: chatSenderVm.isCurrentUser ? .trailing : .leading)
+                    .shadow(radius: 10)
+                VStack{
+                    HStack{
+                        AsyncImage(
+                            url: URL(string: chatSenderVm.profileImage ?? "no image found"),
+                            content: { image in
+                                image
+                                    .resizable()
+                                    .clipShape(Circle())
+                                    .scaledToFill()
+                                    .frame(width: 20, height: 20)
+                            },
+                            placeholder: {
+                                Image(systemName: "photo")
+                                    .frame(width: 20,  height: 20)
+                            }
+                        )
+                        Text(chatSenderVm.userName)
+                            .font(.caption)
+                        Spacer()
+                        Text("UserId: \(chatSenderVm.userId)")
+                            .font(.system(size: 8))
+                    }
+                    .padding(
+                        EdgeInsets(
+                            top: 2,
+                            leading: 5,
+                            bottom: 2,
+                            trailing: 5))
+                    .frame(
+                        maxWidth: maxWidth,
+                        alignment: chatSenderVm.isCurrentUser ? .trailing : .leading)
+                    Text(chatSenderVm.messageText)
+                        .lineLimit(1...)
+                        .font(.system(size: 14))
+                        .italic()
+                        .padding(
+                            EdgeInsets(
+                                top: 2,
+                                leading: 5,
+                                bottom: 2,
+                                trailing: 5))
+                        .frame(
+                            maxWidth: maxWidth,
+                            alignment: chatSenderVm.isCurrentUser ? .trailing : .leading)
                     Spacer()
-                    Text("UserId: \(chatSenderVm.userId)")
-                        .font(.system(size: 8))
-                }
-                .padding(EdgeInsets(top: 2, leading: 5, bottom: 2, trailing: 5))
-                .frame(maxWidth: maxWidth, alignment: chatSenderVm.isCurrentUser ? .trailing : .leading)
-                Text(chatSenderVm.messageText)
-                    .lineLimit(1...)
-                    .font(.system(size: 15))
-                    .padding(EdgeInsets(top: 2, leading: 5, bottom: 2, trailing: 5))
-                    .frame(maxWidth: maxWidth, alignment: chatSenderVm.isCurrentUser ? .trailing : .leading)
-                Spacer()
-                HStack{
-                    if chatSenderVm.isLiked {
-                        Button{
-                            chatSenderVm.isLiked.toggle()
-                            chatSenderVm.updateIsLikedStatus(chatSenderVm: chatSenderVm)
-                        } label: {
-                            if chatSenderVm.isLikedByUser.contains(userId ?? "no UserId"){
-                                Image(systemName: "star.fill")
-                                    .frame(alignment: chatSenderVm.isCurrentUser ? .trailing : .leading)
-                                    .bold()
-                                    .foregroundColor(.primary)
+                    HStack{
+                        if !chatSenderVm.isCurrentUser {
+                            if chatSenderVm.isLiked {
+                                Button{
+                                    chatSenderVm.isLiked.toggle()
+                                    chatSenderVm.updateIsLikedStatus(chatSenderVm: chatSenderVm)
+                                } label: {
+                                    if chatSenderVm.isLikedByUser.contains(userId ?? "no UserId"){
+                                        Image(systemName: "star.fill")
+                                            .frame(
+                                                alignment: chatSenderVm.isCurrentUser ? .trailing : .leading)
+                                            .bold()
+                                            .foregroundColor(.primary)
+                                    } else {
+                                        Image(systemName: "star")
+                                            .frame(
+                                                alignment: chatSenderVm.isCurrentUser ? .trailing : .leading)
+                                            .bold()
+                                            .foregroundColor(.primary)
+                                    }
+                                }
                             } else {
-                                Image(systemName: "star")
-                                    .frame(alignment: chatSenderVm.isCurrentUser ? .trailing : .leading)
-                                    .bold()
-                                    .foregroundColor(.primary)
+                                Button{
+                                    chatSenderVm.isLiked.toggle()
+                                    chatSenderVm.updateIsLikedStatus(chatSenderVm: chatSenderVm)
+                                } label: {
+                                    Image(systemName: "star")
+                                        .frame(
+                                            alignment: chatSenderVm.isCurrentUser ? .trailing : .leading)
+                                        .bold()
+                                        .foregroundColor(.primary)
+                                }
                             }
                         }
-                    } else {
-                        Button{
-                            chatSenderVm.isLiked.toggle()
-                            chatSenderVm.updateIsLikedStatus(chatSenderVm: chatSenderVm)
-                        } label: {
-                            Image(systemName: "star")
-                                .frame(alignment: chatSenderVm.isCurrentUser ? .trailing : .leading)
-                                .bold()
-                                .foregroundColor(.primary)
+                        Text(chatSenderVm.dateString)
+                            .font(.caption)
+                            .frame(
+                                maxWidth: maxWidth,
+                                alignment: chatSenderVm.isCurrentUser ? .trailing : .leading)
+                        if chatSenderVm.isReadbyUser.contains(chatSenderVm.userId) {
+                            CheckmarkIsRead()
+                        } else {
+                            CheckmarkNotRead()
                         }
                     }
-                    Text(chatSenderVm.dateString)
-                        .font(.caption)
-                        .frame(maxWidth: maxWidth, alignment: chatSenderVm.isCurrentUser ? .trailing : .leading)
-                    if chatSenderVm.isReadbyUser.contains(chatSenderVm.userId) {
-                        CheckmarkIsRead()
-                    } else {
-                        CheckmarkNotRead()
-                    }
+                    .padding(
+                        EdgeInsets(
+                            top: 2,
+                            leading: 5,
+                            bottom: 2,
+                            trailing: 5))
                 }
-                .padding(EdgeInsets(top: 2, leading: 5, bottom: 2, trailing: 5))
+                .frame(
+                    minWidth: 180,
+                    maxWidth: maxWidth,
+                    minHeight: 70,
+                    maxHeight: 500,
+                    alignment: chatSenderVm.isCurrentUser ? .leading : .trailing)
+                .padding(2)
             }
-            .frame(minWidth: 180, maxWidth: maxWidth, minHeight: 70, maxHeight: 500, alignment: chatSenderVm.isCurrentUser ? .leading : .trailing)
-            .padding(2)
+            .frame(
+                minWidth: 180,
+                maxWidth: .infinity,
+                minHeight: 70,
+                maxHeight: 500,
+                alignment: chatSenderVm.isCurrentUser ? .trailing : .leading)
+            
+            //User ausschließen, diese Nachrichten mit dieser Id werden nicht mehr angezeigt
+            if !chatSenderVm.isCurrentUser {
+                Button{
+                    showRemoveUserFromChatViewAlert.toggle()
+                } label: {
+                    Image(systemName: "person.crop.circle.badge.xmark")
+                }
+                .padding(.trailing)
+                .alert(isPresented: $showRemoveUserFromChatViewAlert){
+                    Alert(
+                        title: Text("Nachrichten stören"),
+                        message: Text("Nachrichten dieses User nicht mehr anzeigen!"),
+                        primaryButton: .default(Text("Abbrechen")),
+                        secondaryButton:  .destructive(Text("User entfernen!"), action: {
+                            ChatManager.shared.toogleExcludedUserId(chatSenderVm.userId)
+                        })
+                    )
+                }
+            }
         }
-        .frame(minWidth: 180, maxWidth: .infinity, minHeight: 70, maxHeight: 500, alignment: chatSenderVm.isCurrentUser ? .trailing : .leading)
     }
 }
 

@@ -97,7 +97,10 @@ struct LoginView: View {
                     }
                     .padding(EdgeInsets(top: 16, leading: 0, bottom: 8, trailing: 0))
                     .alert(isPresented: $authVm.loginFailedAlert){
-                        Alert(title: Text("Hoppla"), message: Text("Deine Anmeldung hat nicht geklappt"), dismissButton: .default(Text("OK")))
+                        Alert(
+                            title: Text("Hoppla"),
+                            message: Text("Deine Anmeldung hat nicht geklappt"),
+                            dismissButton: .default(Text("OK")))
                     }
                         .padding(EdgeInsets(top: 15, leading: 0, bottom: 20, trailing: 0))
                     HStack {
@@ -133,9 +136,6 @@ struct LoginView: View {
                     .opacity(0.2)
                     .ignoresSafeArea(.all))
         }
-//        .onDisappear{
-//            authVm.removeListener()
-//        }
         .background(Color(UIColor.systemBackground))
     }
 }

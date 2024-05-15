@@ -13,7 +13,9 @@ struct CategorieAddView: View {
         
         RoundedRectangle(cornerRadius: 10)
             .fill(Color.white).opacity(0.7)
-            .frame(width: 95, height: 95)
+            .frame(
+                width: 95,
+                height: 95)
             .padding(4)
             .overlay(
                 VStack{

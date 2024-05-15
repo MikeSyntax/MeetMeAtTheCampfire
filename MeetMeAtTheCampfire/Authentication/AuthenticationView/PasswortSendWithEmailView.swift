@@ -53,8 +53,12 @@ struct PasswortSendWithEmailView: View {
                             }
                         }
                     }
-                    .alert(isPresented: $authVm.showEmailSendAlert){
-                        Alert(title: Text("Email versendet"), message: Text("Bitte schau in dein Postfach"), dismissButton: .default(Text("OK")))
+                    .alert(
+                        isPresented: $authVm.showEmailSendAlert){
+                        Alert(
+                            title: Text("Email versendet"),
+                            message: Text("Bitte schau in dein Postfach"),
+                            dismissButton: .default(Text("OK")))
                     }
                 }
                 .padding(.bottom)
@@ -78,7 +82,10 @@ struct PasswortSendWithEmailView: View {
             .navigationBarTitleDisplayMode(.inline)
         }
         .alert(isPresented: $authVm.showEmailNotSendAlert){
-            Alert(title: Text("Hoppla!"), message: Text("Das hat leider nicht geklappt"), dismissButton: .default(Text("OK")))
+            Alert(
+                title: Text("Hoppla!"),
+                message: Text("Das hat leider nicht geklappt"),
+                dismissButton: .default(Text("OK")))
         }
         .background(Color(UIColor.systemBackground))
     }

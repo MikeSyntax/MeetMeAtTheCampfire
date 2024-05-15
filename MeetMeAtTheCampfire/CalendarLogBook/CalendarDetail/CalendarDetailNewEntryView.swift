@@ -37,7 +37,9 @@ struct CalendarDetailNewEntryView: View {
                                         .font(.callout)
                                         .padding(EdgeInsets(top: 0, leading: 0, bottom: -6, trailing: 0))
                                     MapKitNewEntryView()
-                                        .frame(minWidth: 300,  minHeight: 200)
+                                        .frame(
+                                            minWidth: 300,
+                                            minHeight: 200)
                                         .cornerRadius(10)
                                         .overlay(
                                             RoundedRectangle(cornerRadius: 10)
@@ -51,7 +53,12 @@ struct CalendarDetailNewEntryView: View {
                                 VStack{
                                     Text("2. Wähle ein Galeriefoto")
                                         .font(.callout)
-                                        .padding(EdgeInsets(top: 2, leading: 0, bottom: -6, trailing: 0))
+                                        .padding(
+                                            EdgeInsets(
+                                            top: 2,
+                                            leading: 0,
+                                            bottom: -6,
+                                            trailing: 0))
                                     VStack{
                                         if !calendarDetailItemVm.imageUrl.isEmpty {
                                             VStack{
@@ -69,7 +76,9 @@ struct CalendarDetailNewEntryView: View {
                                                     },
                                                     placeholder: {
                                                         Image(systemName: "photo")
-                                                            .frame(minWidth: 300,  minHeight: 150)
+                                                            .frame(
+                                                                minWidth: 300,
+                                                                minHeight: 150)
                                                             .overlay(
                                                                 RoundedRectangle(cornerRadius: 10)
                                                                     .stroke(Color.cyan, lineWidth: 2)
@@ -84,7 +93,9 @@ struct CalendarDetailNewEntryView: View {
                                                     Text("Foto ändern")
                                                 }
                                             }
-                                            .frame(minWidth: 300,  minHeight: 200)
+                                            .frame(
+                                                minWidth: 300,
+                                                minHeight: 200)
                                         } else {
                                             if calendarDetailItemVm.selectedImage != nil {
                                                 VStack{
@@ -103,7 +114,9 @@ struct CalendarDetailNewEntryView: View {
                                                         Text("Foto ändern")
                                                     }
                                                 }
-                                                .frame(minWidth: 300,  minHeight: 200)
+                                                .frame(
+                                                    minWidth: 300,
+                                                    minHeight: 200)
                                             } else {
                                                 VStack{
                                                     Button{
@@ -113,7 +126,9 @@ struct CalendarDetailNewEntryView: View {
                                                         Text("Foto hinzufügen oder ändern")
                                                     }
                                                 }
-                                                .frame(minWidth: 300,  minHeight: 150)
+                                                .frame(
+                                                    minWidth: 300,
+                                                    minHeight: 150)
                                                 .overlay(
                                                     RoundedRectangle(cornerRadius: 10)
                                                         .stroke(Color.cyan, lineWidth: 2)
@@ -128,15 +143,27 @@ struct CalendarDetailNewEntryView: View {
                                 VStack{
                                     Text("3. Beschreibe deine Erlebnisse")
                                         .font(.callout)
-                                        .padding(EdgeInsets(top: 2, leading: 0, bottom: -6, trailing: 0))
+                                        .padding(
+                                            EdgeInsets(
+                                                top: 2,
+                                                leading: 0,
+                                                bottom: -6,
+                                                trailing: 0))
                                     TextField("", text: $calendarDetailItemVm.logBookText, axis: .vertical)
                                         .background(Color.clear)
                                         .multilineTextAlignment(.leading)
                                         .lineLimit(7...10000)
                                         .font(.system(size: 17).bold())
                                         .autocorrectionDisabled()
-                                        .padding(EdgeInsets(top: 5, leading: 6, bottom: 2, trailing: 6))
-                                        .frame(width: 300, height: 150)
+                                        .padding(
+                                            EdgeInsets(
+                                                top: 5,
+                                                leading: 6,
+                                                bottom: 2,
+                                                trailing: 6))
+                                        .frame(
+                                            width: 300,
+                                            height: 150)
                                         .overlay(
                                             RoundedRectangle(cornerRadius: 10)
                                                 .stroke(Color.cyan, lineWidth: 2)
@@ -153,7 +180,9 @@ struct CalendarDetailNewEntryView: View {
                                         }
                                 }
                             }
-                            .frame(width: 300, alignment: .center)
+                            .frame(
+                                width: 300,
+                                alignment: .center)
                             .padding(15)
                         }
                         Divider()
@@ -188,7 +217,10 @@ struct CalendarDetailNewEntryView: View {
                                 CalendarInfoButtonView()
                             }
                             .rotationEffect(Angle(degrees: isAnimated ? -0 : 20))
-                            .animation(Animation.easeInOut(duration: 0.3).repeatCount(7, autoreverses: true), value: isAnimated)
+                            .animation(
+                                Animation
+                                    .easeInOut(duration: 0.3)
+                                    .repeatCount(7, autoreverses: true), value: isAnimated)
                         }
                     }
                     .offset(x: 130, y: 180)
@@ -227,19 +259,28 @@ struct CalendarDetailNewEntryView: View {
             calendarDetailItemVm.requestLocation()
         }
         .onDisappear{
-           // calendarDetailItemVm.removeListener()
             calendarDetailItemVm.stopLocationRequest()
             isAnimated = false
         }
-        .sheet(isPresented: $showImagePicker, onDismiss: nil) {
-            ImagePicker(selectedImage: $calendarDetailItemVm.selectedImage, showImagePicker: $showImagePicker)
+        .sheet(
+            isPresented: $showImagePicker,
+            onDismiss: nil) {
+            ImagePicker(
+                selectedImage: $calendarDetailItemVm.selectedImage,
+                showImagePicker: $showImagePicker)
         }
-        .sheet(isPresented: $showToDoSheet, onDismiss: nil) {
+        .sheet(
+            isPresented: $showToDoSheet,
+            onDismiss: nil) {
             CalendarNewEntrySheetView(showToDoSheet: $showToDoSheet)
                 .presentationDetents([.medium])
         }
-        .alert(isPresented:  $showSuccessfulUploadAlert){
-            Alert(title: Text("Deine Daten werden auf den Server geladen"), message: Text("gedulde Dich einen Moment"), dismissButton: .default(Text("OK"), action: {
+        .alert(
+            isPresented:  $showSuccessfulUploadAlert){
+            Alert(
+                title: Text("Deine Daten werden auf den Server geladen"),
+                message: Text("gedulde Dich einen Moment"),
+                dismissButton: .default(Text("OK"), action: {
                 showNewEntryView.toggle()
             }))
         }
@@ -248,13 +289,12 @@ struct CalendarDetailNewEntryView: View {
     }
     
     func addItem(){
-        let item = LogBookAtivity(date: calendarDetailItemVm.date, isNotEmpty: true, userId: FirebaseManager.shared.userId!)
+        let item = LogBookAtivity(
+            date: calendarDetailItemVm.date,
+            isNotEmpty: true,
+            userId: FirebaseManager.shared.userId!)
             context.insert(item)
     }
-    
-    
-    
-    
 }
 
 #Preview{

@@ -7,7 +7,8 @@
 
 import Foundation
 
-class DetailCategorieItemViewModel: ObservableObject {
+@MainActor
+final class DetailCategorieItemViewModel: ObservableObject {
     @Published var taskName: String = ""
     @Published var taskIsDone: Bool = false
     

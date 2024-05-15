@@ -16,14 +16,20 @@ struct MapKitView: View {
     
     var body: some View {
         Map {
-            Annotation("zuHause", coordinate: CLLocationCoordinate2D(latitude: homeBaseLatitude, longitude: homeBaseLongitude)) {
+            Annotation("zuHause", 
+                       coordinate: CLLocationCoordinate2D(
+                        latitude: homeBaseLatitude,
+                        longitude: homeBaseLongitude)) {
                 ZStack {
                     Image(systemName: "mappin.and.ellipse")
                         .foregroundColor(.red)
                         .font(.system(size: 30))
                 }
             }
-            Annotation("Hier war ich", coordinate: CLLocationCoordinate2D(latitude: calendarDetailItemVm.latitude, longitude: calendarDetailItemVm.longitude)) {
+            Annotation("Hier war ich", 
+                       coordinate: CLLocationCoordinate2D(
+                        latitude: calendarDetailItemVm.latitude,
+                        longitude: calendarDetailItemVm.longitude)) {
                 ZStack {
                     Image(systemName: "figure.wave")
                         .foregroundColor(.red)

@@ -85,6 +85,12 @@ final class AuthViewModel: ObservableObject{
         }
     }
     
+    func isValidUsername(_ username: String) -> Bool {
+        guard username.count >= 10 else { return false }
+        let trimmed = username.trimmingCharacters(in: .whitespacesAndNewlines)
+        return !trimmed.isEmpty && !trimmed.allSatisfy { $0 == "." }
+    }
+    
     func logout(){
         do{
             updateUser()

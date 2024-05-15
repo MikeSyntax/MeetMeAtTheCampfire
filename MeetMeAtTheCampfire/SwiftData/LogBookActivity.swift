@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 
 @Model
-class LogBookAtivity: Identifiable {
+final class LogBookAtivity: Identifiable {
     
     var id: String
     var date: Date

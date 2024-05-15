@@ -148,16 +148,22 @@ struct ProfileScreenView: View {
                             Spacer()
                             Text(userEmail)
                         }
-                        .frame(width: 300, alignment: .leading)
+                        .frame(
+                            width: 300,
+                            alignment: .leading)
                         Spacer()
                         HStack{
                             Text("UserId: \(FirebaseManager.shared.userId ?? "no user Id")")
                                 .font(.caption)
                         }
-                        .frame(width: 300, alignment: .leading)
+                        .frame(
+                            width: 300,
+                            alignment: .leading)
                     }
                 }
-                .frame(height: 170, alignment: .leading)
+                .frame(
+                    height: 170,
+                    alignment: .leading)
                 VStack{
                     Divider()
                         .background(.gray)
@@ -166,14 +172,17 @@ struct ProfileScreenView: View {
                         .font(.headline)
                         .bold()
                         .italic()
-                        .frame(width: 300, alignment: .leading)
+                        .frame(
+                            width: 300,
+                            alignment: .leading)
                     ScrollView{
                         ForEach(profileScreenVm.chatLikedViewModels){ chatLikedViewModel in
                             ChatItemView(chatSenderVm: chatLikedViewModel)
                                 .id(chatLikedViewModel.id)
                         }
                     }
-                    .frame(width: 300, alignment: .center)
+                    //.frame(width: 300, alignment: .center)
+                    .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
                 }
                 Divider()
             }

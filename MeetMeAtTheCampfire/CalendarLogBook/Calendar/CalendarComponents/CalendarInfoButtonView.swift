@@ -12,7 +12,9 @@ struct CalendarInfoButtonView: View {
     var body: some View {
         RoundedRectangle(cornerRadius: 10)
             .fill(Color.white).opacity(0.8)
-            .frame(width: 65, height: 65)
+            .frame(
+                width: 65,
+                height: 65)
             .padding(4)
             .overlay(
                 VStack{

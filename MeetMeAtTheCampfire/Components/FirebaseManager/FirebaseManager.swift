@@ -10,6 +10,7 @@ import FirebaseAuth
 import FirebaseFirestore
 import FirebaseStorage
 
+@MainActor
 final class FirebaseManager {
     //Erstellen einer singelten static let für den Manager um überall in der App auf Firebase zuzugreifen
     static let shared = FirebaseManager()
