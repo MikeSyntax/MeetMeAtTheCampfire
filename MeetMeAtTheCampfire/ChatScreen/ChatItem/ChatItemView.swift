@@ -5,18 +5,20 @@
 //  Created by Mike Reichenbach on 07.03.24.
 //
 
+
+
 import SwiftUI
 import SwiftData
 
 struct ChatItemView: View {
-    
+
     @ObservedObject var chatSenderVm: ChatItemViewModel
     @State private var showRemoveUserFromChatViewAlert: Bool = false
     private let maxWidth: CGFloat = 300.0
     private let userId = FirebaseManager.shared.userId
     @Environment(\.modelContext) private var context
     @Query private var blockedUsers: [BlockedUser]
-    
+
     var body: some View {
         HStack{
             ZStack {
@@ -140,7 +142,7 @@ struct ChatItemView: View {
                 minHeight: 70,
                 maxHeight: 500,
                 alignment: chatSenderVm.isCurrentUser ? .trailing : .leading)
-            
+
             //User ausschließen, diese Nachrichten mit dieser Id werden nicht mehr angezeigt
             if !chatSenderVm.isCurrentUser {
                 Button{
@@ -150,14 +152,10 @@ struct ChatItemView: View {
                 }
                 .alert(isPresented: $showRemoveUserFromChatViewAlert){
                     Alert(
-                        title: Text("User nervt"),
-                        message: Text("Nachrichten dieses User nicht mehr anzeigen!"),
+                        title: Text("\(chatSenderVm.userName) nervt!"),
+                        message: Text("Nachrichten dieses Users für mich vorrübergehend ausblenden!"),
                         primaryButton: .default(Text("Abbrechen")),
-                        secondaryButton:  .destructive(Text("User entfernen!"), action: {
-//                            ChatManager.shared.toogleExcludedUserId(chatSenderVm.userId)
-                            //SwiftData Liste
-                            addBlockedUser()
-                        })
+                        secondaryButton: .destructive(Text("User ausblenden!"), action: { addBlockedUser() })
                     )
                 }
             }

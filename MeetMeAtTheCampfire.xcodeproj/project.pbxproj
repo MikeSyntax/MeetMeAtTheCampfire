@@ -62,7 +62,7 @@
 		2B5DF1892B99B68900FA285C /* ChatItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5DF1882B99B68900FA285C /* ChatItemView.swift */; };
 		2B5DF18B2B99B7B900FA285C /* ChatItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5DF18A2B99B7B900FA285C /* ChatItemViewModel.swift */; };
 		2B67B3DD2BE6562B002E2379 /* PrivacySheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B67B3DC2BE6562B002E2379 /* PrivacySheet.swift */; };
-		2B67B3DF2BE76A66002E2379 /* DeleteAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B67B3DE2BE76A66002E2379 /* DeleteAccountView.swift */; };
+		2B67B3DF2BE76A66002E2379 /* DeleteAccountSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B67B3DE2BE76A66002E2379 /* DeleteAccountSheet.swift */; };
 		2B7A00682BD7EB470054AABD /* CalendarInfoButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7A00672BD7EB470054AABD /* CalendarInfoButtonView.swift */; };
 		2B7A006A2BD7EF0F0054AABD /* CalendarInfoSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7A00692BD7EF0F0054AABD /* CalendarInfoSheetView.swift */; };
 		2B998A912BE4E976003C99B4 /* ButtonDestructiveTextAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B998A902BE4E976003C99B4 /* ButtonDestructiveTextAction.swift */; };
@@ -95,8 +95,8 @@
 		2BD8D4342B9F60C40050CB64 /* ChatScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD8D4332B9F60C40050CB64 /* ChatScreenViewModel.swift */; };
 		2BDBCEDC2BDE61B900D452F8 /* HomeBaseSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDBCEDB2BDE61B900D452F8 /* HomeBaseSheetView.swift */; };
 		2BF1D8722BF3CF86004BC390 /* ImpressumKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF1D8712BF3CF86004BC390 /* ImpressumKey.swift */; };
-		2BF1D8752BF480D8004BC390 /* ChatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF1D8742BF480D8004BC390 /* ChatManager.swift */; };
 		2BF1D87A2BF5F80E004BC390 /* BlockedUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF1D8792BF5F80E004BC390 /* BlockedUser.swift */; };
+		2BF1D87F2BF7B1DB004BC390 /* BlockedUserSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF1D87E2BF7B1DB004BC390 /* BlockedUserSheet.swift */; };
 		2BF347DD2BD1D7E2007F0AB3 /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF347DC2BD1D7E2007F0AB3 /* RoundedView.swift */; };
 		2BF4B9772B9874BC00C1AF1A /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF4B9762B9874BC00C1AF1A /* MainScreenView.swift */; };
 		2BF4B97A2B98764300C1AF1A /* ProfileScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF4B9792B98764300C1AF1A /* ProfileScreenView.swift */; };
@@ -134,7 +134,7 @@
 		2B5DF1882B99B68900FA285C /* ChatItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatItemView.swift; sourceTree = "<group>"; };
 		2B5DF18A2B99B7B900FA285C /* ChatItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatItemViewModel.swift; sourceTree = "<group>"; };
 		2B67B3DC2BE6562B002E2379 /* PrivacySheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacySheet.swift; sourceTree = "<group>"; };
-		2B67B3DE2BE76A66002E2379 /* DeleteAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountView.swift; sourceTree = "<group>"; };
+		2B67B3DE2BE76A66002E2379 /* DeleteAccountSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountSheet.swift; sourceTree = "<group>"; };
 		2B7A00672BD7EB470054AABD /* CalendarInfoButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarInfoButtonView.swift; sourceTree = "<group>"; };
 		2B7A00692BD7EF0F0054AABD /* CalendarInfoSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarInfoSheetView.swift; sourceTree = "<group>"; };
 		2B998A902BE4E976003C99B4 /* ButtonDestructiveTextAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonDestructiveTextAction.swift; sourceTree = "<group>"; };
@@ -167,8 +167,8 @@
 		2BD8D4332B9F60C40050CB64 /* ChatScreenViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatScreenViewModel.swift; sourceTree = "<group>"; };
 		2BDBCEDB2BDE61B900D452F8 /* HomeBaseSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBaseSheetView.swift; sourceTree = "<group>"; };
 		2BF1D8712BF3CF86004BC390 /* ImpressumKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpressumKey.swift; sourceTree = "<group>"; };
-		2BF1D8742BF480D8004BC390 /* ChatManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatManager.swift; sourceTree = "<group>"; };
 		2BF1D8792BF5F80E004BC390 /* BlockedUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedUser.swift; sourceTree = "<group>"; };
+		2BF1D87E2BF7B1DB004BC390 /* BlockedUserSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedUserSheet.swift; sourceTree = "<group>"; };
 		2BF347DC2BD1D7E2007F0AB3 /* RoundedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedView.swift; sourceTree = "<group>"; };
 		2BF4B9762B9874BC00C1AF1A /* MainScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
 		2BF4B9792B98764300C1AF1A /* ProfileScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreenView.swift; sourceTree = "<group>"; };
@@ -471,14 +471,6 @@
 			path = Authentication;
 			sourceTree = "<group>";
 		};
-		2BF1D8732BF480C0004BC390 /* ChatManager */ = {
-			isa = PBXGroup;
-			children = (
-				2BF1D8742BF480D8004BC390 /* ChatManager.swift */,
-			);
-			path = ChatManager;
-			sourceTree = "<group>";
-		};
 		2BF1D8762BF48559004BC390 /* ChatScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -506,6 +498,16 @@
 				2BF1D8712BF3CF86004BC390 /* ImpressumKey.swift */,
 			);
 			path = KeyManager;
+			sourceTree = "<group>";
+		};
+		2BF1D87D2BF7B1AB004BC390 /* Sheets */ = {
+			isa = PBXGroup;
+			children = (
+				2B67B3DE2BE76A66002E2379 /* DeleteAccountSheet.swift */,
+				2B67B3DC2BE6562B002E2379 /* PrivacySheet.swift */,
+				2BF1D87E2BF7B1DB004BC390 /* BlockedUserSheet.swift */,
+			);
+			path = Sheets;
 			sourceTree = "<group>";
 		};
 		2BF347DB2BD1D7C3007F0AB3 /* RoundedView */ = {
@@ -539,7 +541,6 @@
 			children = (
 				2BF1D8772BF4857D004BC390 /* ChatItem */,
 				2BF1D8762BF48559004BC390 /* ChatScreen */,
-				2BF1D8732BF480C0004BC390 /* ChatManager */,
 			);
 			path = ChatScreen;
 			sourceTree = "<group>";
@@ -547,9 +548,8 @@
 		2BF4B97E2B98A23000C1AF1A /* SettingsScreen */ = {
 			isa = PBXGroup;
 			children = (
+				2BF1D87D2BF7B1AB004BC390 /* Sheets */,
 				2BF4B97F2B98A24C00C1AF1A /* SettingsScreenView.swift */,
-				2B67B3DC2BE6562B002E2379 /* PrivacySheet.swift */,
-				2B67B3DE2BE76A66002E2379 /* DeleteAccountView.swift */,
 			);
 			path = SettingsScreen;
 			sourceTree = "<group>";
@@ -708,6 +708,7 @@
 				2B5561502BAB0A480028C6E5 /* CalendarDetailItemView.swift in Sources */,
 				2B2CEC5E2BD4558200348DD1 /* ProfileScreenViewModel.swift in Sources */,
 				2BF4B97D2B9877D900C1AF1A /* ChatScreenView.swift in Sources */,
+				2BF1D87F2BF7B1DB004BC390 /* BlockedUserSheet.swift in Sources */,
 				2B1738A32BAD82050043CAF0 /* MapKitNewEntryView.swift in Sources */,
 				2BBC15152B9B746000305504 /* LanguageError.swift in Sources */,
 				2B7A006A2BD7EF0F0054AABD /* CalendarInfoSheetView.swift in Sources */,
@@ -724,12 +725,11 @@
 				2BBE466F2BA1E360002A11A2 /* TaskModel.swift in Sources */,
 				2B2779022B907E8800779FB5 /* RegisterView.swift in Sources */,
 				2BAB624E2B95D64300C7839E /* CategorieAddView.swift in Sources */,
-				2BF1D8752BF480D8004BC390 /* ChatManager.swift in Sources */,
 				2BF4B9802B98A24C00C1AF1A /* SettingsScreenView.swift in Sources */,
 				2B28CBAE2BEC121300DCBE81 /* LogBookActivity.swift in Sources */,
 				2B5DF1852B99B46E00FA285C /* ChatModel.swift in Sources */,
 				2B43E1752BAACED400375D58 /* LogBookModel.swift in Sources */,
-				2B67B3DF2BE76A66002E2379 /* DeleteAccountView.swift in Sources */,
+				2B67B3DF2BE76A66002E2379 /* DeleteAccountSheet.swift in Sources */,
 				2BD8D4342B9F60C40050CB64 /* ChatScreenViewModel.swift in Sources */,
 				2BD855A82BDC5CEA001B0A09 /* ClearView.swift in Sources */,
 				2B2779052B907EBF00779FB5 /* AuthViewModel.swift in Sources */,

@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import SwiftData
 
 struct ProfileScreenView: View {
     @ObservedObject var profileScreenVm: ProfileScreenViewModel
@@ -21,8 +20,6 @@ struct ProfileScreenView: View {
     @State var showSettingsSheet: Bool = false
     @State private var showImagePicker: Bool = false
     @State private var selectedImage: UIImage?
-    @Environment(\.modelContext) private var context
-    @Query private var blockedUsers: [BlockedUser]
     
     var body: some View {
         let userName = authVm.user?.userName ?? "User unbekannt"
@@ -191,35 +188,6 @@ struct ProfileScreenView: View {
                         }
                     }
                     .padding(edgeInsets)
-                    VStack{
-                        Text("Liste mit blockierten Usern")
-                            .font(.headline)
-                            .bold()
-                            .italic()
-                            .padding(edgeInsets)
-                        List{
-                            ForEach (blockedUsers){ item in
-                                HStack{
-                                    Text(item.userName)
-                                        .font(.system(size: 12))
-                                    Spacer()
-                                    Text("swipen zum Rückgängigmachen")
-                                        .font(.system(size: 10))
-                                }
-                            }
-                            .onDelete{ indexes in
-                                for index in indexes {
-                                    deleteItem(blockedUsers[index])
-                                }
-                            }
-                        }
-                        .padding(.top, -35)
-                        .frame(maxHeight: 130)
-                        .background(Color.clear)
-                        .cornerRadius(10)
-                        .scrollContentBackground(.hidden)
-                    }
-                    .padding(edgeInsets)
                 }
                 Divider()
             }
@@ -272,18 +240,12 @@ struct ProfileScreenView: View {
         }
         .background(Color(UIColor.systemBackground))
     }
-    
-    //BlockedUser delete from SwiftData
-    func deleteItem(_ blockedUser: BlockedUser){
-        context.delete(blockedUser)
-    }
 }
 
 #Preview {
     let profileScreenVm = ProfileScreenViewModel(user: UserModel(id: "", email: "", registeredTime: Date(), userName: "Hans", timeStampLastVisitChat: Date(), isActive: true, imageUrl: ""))
     return ProfileScreenView(profileScreenVm: profileScreenVm, showSettingsSheet: false)
         .environmentObject(AuthViewModel())
-        .modelContainer(for: [LogBookAtivity.self, BlockedUser.self])
 }
 
 

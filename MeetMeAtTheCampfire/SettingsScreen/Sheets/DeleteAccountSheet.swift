@@ -1,5 +1,5 @@
 //
-//  DeleteAccountView.swift
+//  DeleteAccountSheet.swift
 //  MeetMeAtTheCampfire
 //
 //  Created by Mike Reichenbach on 05.05.24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct DeleteAccountView: View {
+struct DeleteAccountSheet: View {
     
     @State private var userLoggedInForDeleting: Bool = false
     @EnvironmentObject var authVm: AuthViewModel
@@ -112,6 +112,6 @@ struct DeleteAccountView: View {
 }
 
 #Preview {
-    DeleteAccountView(showPasswordConfirmationSheet: .constant(false))
+    DeleteAccountSheet(showPasswordConfirmationSheet: .constant(false))
         .environmentObject(AuthViewModel())
 }

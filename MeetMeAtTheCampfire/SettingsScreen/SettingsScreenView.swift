@@ -17,6 +17,7 @@ struct SettingsScreenView: View {
     @State private var showDeleteAccountAlert: Bool = false
     @State private var showReEnterPasswordAlert: Bool = false
     @State private var showPasswordConfirmationSheet: Bool = false
+    @State private var showBlockedUserSheet: Bool = false
     @EnvironmentObject var authVm: AuthViewModel
     
     var body: some View {
@@ -85,7 +86,22 @@ struct SettingsScreenView: View {
                                 RoundedRectangle(cornerRadius: 10)
                                     .stroke(Color.cyan, lineWidth: 2)
                             )
-                        
+                        HStack{
+                            Spacer()
+                            Button("Meine blockierten Chat User"){
+                                showBlockedUserSheet.toggle()
+                            }
+                            Spacer()
+                        }
+                        .frame(minHeight: 70)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(Color.cyan, lineWidth: 2)
+                        )
+                        .sheet(isPresented: $showBlockedUserSheet){
+                            BlockedUserSheet(showBlockedUserSheet: $showBlockedUserSheet)
+                                .presentationDetents([.medium])
+                        }
                         HStack{
                             Spacer()
                             Button(action: {
@@ -170,7 +186,7 @@ struct SettingsScreenView: View {
             
         }
         .sheet(isPresented: $showPasswordConfirmationSheet, content: {
-            DeleteAccountView(showPasswordConfirmationSheet: $showPasswordConfirmationSheet)
+            DeleteAccountSheet(showPasswordConfirmationSheet: $showPasswordConfirmationSheet)
                 .presentationDetents([.medium])
         })
         .onChange(of: colorScheme) { _, newColorScheme in
