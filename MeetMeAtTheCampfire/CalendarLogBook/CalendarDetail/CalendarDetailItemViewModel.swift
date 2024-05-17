@@ -237,7 +237,7 @@ final class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationM
     
     func isNewImageLoadingSlow(){
         self.isNewImageLoading = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 10.0){
+        DispatchQueue.main.asyncAfter(deadline: .now() + 100.0){
             self.isNewImageLoading = false
         }
     }

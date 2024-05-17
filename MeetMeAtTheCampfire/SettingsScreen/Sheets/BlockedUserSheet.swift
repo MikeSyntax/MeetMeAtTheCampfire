@@ -20,19 +20,23 @@ struct BlockedUserSheet: View {
             VStack{
                 Divider()
                 List{
-                    ForEach (blockedUsers){ item in
-                        HStack{
-                            Text("User: \(item.userName)")
-                                .font(.system(size: 12))
-                                .bold()
-                            Spacer()
-                            Text("swipen zum Rückgängigmachen")
-                                .font(.system(size: 10))
+                    if blockedUsers.isEmpty {
+                        Text("Du hast keine User blockiert")
+                    } else {
+                        ForEach (blockedUsers){ item in
+                            HStack{
+                                Text("User: \(item.userName)")
+                                    .font(.system(size: 12))
+                                    .bold()
+                                Spacer()
+                                Text("swipen zum Rückgängigmachen")
+                                    .font(.system(size: 10))
+                            }
                         }
-                    }
-                    .onDelete{ indexes in
-                        for index in indexes {
-                            deleteItem(blockedUsers[index])
+                        .onDelete{ indexes in
+                            for index in indexes {
+                                deleteItem(blockedUsers[index])
+                            }
                         }
                     }
                 }
@@ -41,7 +45,7 @@ struct BlockedUserSheet: View {
                 .scrollContentBackground(.hidden)
             }
             .padding()
-            .navigationBarTitle("Blockierte User")
+            .navigationBarTitle("Meine blockierten User")
             .navigationBarTitleDisplayMode(.inline)
             .background(
                 Image("background")

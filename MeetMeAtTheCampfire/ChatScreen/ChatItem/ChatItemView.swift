@@ -11,14 +11,15 @@ import SwiftUI
 import SwiftData
 
 struct ChatItemView: View {
-
+    
     @ObservedObject var chatSenderVm: ChatItemViewModel
     @State private var showRemoveUserFromChatViewAlert: Bool = false
     private let maxWidth: CGFloat = 300.0
     private let userId = FirebaseManager.shared.userId
     @Environment(\.modelContext) private var context
+    @Environment(\.openURL) var openURL
     @Query private var blockedUsers: [BlockedUser]
-
+    
     var body: some View {
         HStack{
             ZStack {
@@ -40,7 +41,7 @@ struct ChatItemView: View {
                                     .resizable()
                                     .clipShape(Circle())
                                     .scaledToFill()
-                                    .frame(width: 20, height: 20)
+                                    .frame(width: 25, height: 25)
                             },
                             placeholder: {
                                 Image(systemName: "photo")
@@ -142,7 +143,7 @@ struct ChatItemView: View {
                 minHeight: 70,
                 maxHeight: 500,
                 alignment: chatSenderVm.isCurrentUser ? .trailing : .leading)
-
+            
             //User ausschließen, diese Nachrichten mit dieser Id werden nicht mehr angezeigt
             if !chatSenderVm.isCurrentUser {
                 Button{
@@ -150,17 +151,26 @@ struct ChatItemView: View {
                 } label: {
                     Image(systemName: "person.crop.circle.badge.xmark")
                 }
-                .alert(isPresented: $showRemoveUserFromChatViewAlert){
-                    Alert(
+                .actionSheet(isPresented: $showRemoveUserFromChatViewAlert){
+                    ActionSheet(
                         title: Text("\(chatSenderVm.userName) nervt!"),
-                        message: Text("Nachrichten dieses Users für mich vorrübergehend ausblenden!"),
-                        primaryButton: .default(Text("Abbrechen")),
-                        secondaryButton: .destructive(Text("User ausblenden!"), action: { addBlockedUser() })
+                        message: Text("Nachrichten dieses Users für mich vorrübergehend ausblenden oder User melden"),
+                        buttons: [
+                            .destructive(Text("User ausblenden!"), action: { addBlockedUser()}),
+                            .destructive(Text("User melden!"), action: {
+                                let email = Email.emailKey
+                                let subject = "User Id: \(chatSenderVm.userId)"
+                                let body = "User schreibt unpassende Nachrichten. Bitte um Prüfung"
+                                guard let url = URL(string: "mailto:\(email)?subject=\(subject.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? "")&body=\(body.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? "")") else { return }
+                                UIApplication.shared.open(url)}),
+                            .default(Text("Abbrechen")),
+                        ]
                     )
                 }
             }
         }
     }
+    
     //SwiftData Liste
     func addBlockedUser(){
         let blockedUser = BlockedUser(

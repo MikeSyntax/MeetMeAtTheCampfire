@@ -88,7 +88,7 @@ struct SettingsScreenView: View {
                             )
                         HStack{
                             Spacer()
-                            Button("Meine blockierten Chat User"){
+                            Button("Meine blockierten User"){
                                 showBlockedUserSheet.toggle()
                             }
                             Spacer()
