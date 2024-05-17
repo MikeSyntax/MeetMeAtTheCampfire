@@ -8,7 +8,8 @@
 import Foundation
 import FirebaseFirestore
 
-class HomeScreenViewModel: ObservableObject {
+@MainActor
+final class HomeScreenViewModel: ObservableObject {
     
     //Leere Liste an Kategorien
     @Published var categorieViewModels: [CategorieViewModel] = []
@@ -18,11 +19,7 @@ class HomeScreenViewModel: ObservableObject {
     
     //MARK Anlegen aller 4 CRUD Operationen Create Read Update und Delete ------------------------------------------------------------------
     
-    deinit{
-        removeListener()
-    }
     //Anlegen einer neuen Kategorie im Firebase Firestore
-    @MainActor
     func createCategorie(categorieName: String){
         //wenn die userId leer ist mache nichts
         guard let userId = FirebaseManager.shared.userId else {
@@ -40,7 +37,6 @@ class HomeScreenViewModel: ObservableObject {
     }
     
     //Lesen aller Kategorien aus dem Firestore
-    @MainActor
     func readCategories(){
         guard let userId = FirebaseManager.shared.userId else {
             return
@@ -70,7 +66,6 @@ class HomeScreenViewModel: ObservableObject {
     }
     
     //Änderungen an der Kategorie vornehmen, in diesem Fall Kategorie ist erledigt
-    @MainActor
     func updateCategorie(categorieVm: CategorieViewModel){
         guard let categorieId = categorieVm.categorieViewModel.id else {
             return
@@ -90,7 +85,6 @@ class HomeScreenViewModel: ObservableObject {
     }
     
     //Löschen einer Kategorie
-    @MainActor
     func deleteCategorie(categorieVm: CategorieViewModel){
         guard let categorieId = categorieVm.categorieViewModel.id else {
             return

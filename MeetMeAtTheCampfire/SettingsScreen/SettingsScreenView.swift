@@ -106,11 +106,11 @@ struct SettingsScreenView: View {
                             Spacer()
                             Button(action: {
                                 if let url = URL(string: Impressum.impressumKey) {
-                                            UIApplication.shared.open(url)
-                                        }
-                                    }) {
-                                        Text("Impressum")
-                                    }
+                                    UIApplication.shared.open(url)
+                                }
+                            }) {
+                                Text("Impressum")
+                            }
                             Spacer()
                         }
                         .frame(minHeight: 70)
@@ -138,21 +138,22 @@ struct SettingsScreenView: View {
                         Spacer()
                         Divider()
                         Spacer()
-                        
                         HStack{
                             Spacer()
                             ButtonDestructiveTextAction(iconName: "trash", text: "Account löschen"){
                                 //Todo Account löschen
                                 showDeleteAccountAlert.toggle()
                             }
-                            .alert(isPresented: $showDeleteAccountAlert) {
-                                Alert(
+                            .actionSheet(isPresented: $showDeleteAccountAlert) {
+                                ActionSheet(
                                     title: Text("Account wirklich löschen?"),
                                     message: Text("Alle Daten werden unwiederbringlich gelöscht!"),
-                                    primaryButton: .cancel(Text("Zurück")),
-                                    secondaryButton: .destructive(Text("Ja, ich bin sicher")) {
-                                        showPasswordConfirmationSheet.toggle()
-                                    }
+                                    buttons: [
+                                        .cancel(Text("Zurück")),
+                                        .destructive(Text("Ja, ich bin sicher"), action: {
+                                            showPasswordConfirmationSheet.toggle()
+                                        })
+                                    ]
                                 )
                             }
                             Spacer()

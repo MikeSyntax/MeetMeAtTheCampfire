@@ -5,8 +5,6 @@
 //  Created by Mike Reichenbach on 07.03.24.
 //
 
-
-
 import SwiftUI
 import SwiftData
 
@@ -41,7 +39,7 @@ struct ChatItemView: View {
                                     .resizable()
                                     .clipShape(Circle())
                                     .scaledToFill()
-                                    .frame(width: 25, height: 25)
+                                    .frame(width: 20, height: 20)
                             },
                             placeholder: {
                                 Image(systemName: "photo")
@@ -154,23 +152,22 @@ struct ChatItemView: View {
                 .actionSheet(isPresented: $showRemoveUserFromChatViewAlert){
                     ActionSheet(
                         title: Text("\(chatSenderVm.userName) nervt!"),
-                        message: Text("Nachrichten dieses Users für mich vorrübergehend ausblenden oder User melden"),
+                        message: Text("Für mich ausblenden oder User melden"),
                         buttons: [
-                            .destructive(Text("User ausblenden!"), action: { addBlockedUser()}),
-                            .destructive(Text("User melden!"), action: {
+                            .destructive(Text("Ausblenden"), action: { addBlockedUser()}),
+                            .destructive(Text("Melden"), action: {
                                 let email = Email.emailKey
                                 let subject = "User Id: \(chatSenderVm.userId)"
                                 let body = "User schreibt unpassende Nachrichten. Bitte um Prüfung"
                                 guard let url = URL(string: "mailto:\(email)?subject=\(subject.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? "")&body=\(body.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? "")") else { return }
                                 UIApplication.shared.open(url)}),
-                            .default(Text("Abbrechen")),
+                            .cancel(Text("Abbrechen")),
                         ]
                     )
                 }
             }
         }
     }
-    
     //SwiftData Liste
     func addBlockedUser(){
         let blockedUser = BlockedUser(

@@ -59,7 +59,9 @@ final class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationM
             return
         }
         
-        let imageData = uploadImage.jpegData(compressionQuality: 0.8)
+        let resizedImage = resizeImage(image: uploadImage, targetSize: CGSize(width: 800, height: 800))
+        
+        let imageData = resizedImage.jpegData(compressionQuality: 0.8)
         
         guard imageData != nil else {
             return
@@ -90,7 +92,39 @@ final class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationM
             }
         }
     }
-
+    
+    //Helped by ChatGPT
+    private func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
+        // 1. Hole die ursprüngliche Größe des Bildes
+        let size = image.size
+        // 2. Berechne das Verhältnis der Zielbreite zur Originalbreite
+        let widthRatio = targetSize.width / size.width
+        // 3. Berechne das Verhältnis der Zielhöhe zur Originalhöhe
+        let heightRatio = targetSize.height / size.height
+        // 4. Deklariere eine Variable, um die neue Größe zu speichern
+        var newSize: CGSize
+        // 5. Wenn das Höhenverhältnis kleiner ist als das Breitenverhältnis
+        if widthRatio > heightRatio {
+            // 6. Berechne die neue Größe, wobei die Höhe maßgeblich ist und die Breite proportional angepasst wird
+            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
+        } else {
+            // 7. Berechne die neue Größe, wobei die Breite maßgeblich ist und die Höhe proportional angepasst wird
+            newSize = CGSize(width: size.width * widthRatio, height: size.height * widthRatio)
+        }
+        // 8. Erstelle ein Rechteck mit der neuen Größe, beginnend bei (0,0)
+        let rect = CGRect(origin: .zero, size: newSize)
+        // 9. Beginne einen neuen Bildkontext mit den Optionen, um ein neues Bild zu zeichnen
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+        // 10. Zeichne das Bild in das Rechteck (dies skaliert das Bild)
+        image.draw(in: rect)
+        // 11. Hole das neu gezeichnete und skalierte Bild aus dem aktuellen Bildkontext
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        // 12. Beende den Bildkontext
+        UIGraphicsEndImageContext()
+        // 13. Gib das neu erstellte Bild zurück
+        return newImage!
+    }
+    
     private func createLogBookEntry(logBookText: String, imageUrl: String?) {
         guard let userId = FirebaseManager.shared.userId else {
             return
@@ -248,3 +282,4 @@ final class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationM
         self.readImages = []
     }
 }
+
