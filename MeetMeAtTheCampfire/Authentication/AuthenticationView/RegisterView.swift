@@ -13,6 +13,18 @@ struct RegisterView: View {
     @Binding var showRegisterSheet: Bool
     
     var body: some View {
+        
+        let edgeInsetsText: EdgeInsets = EdgeInsets(
+            top: 0,
+            leading: 20,
+            bottom: 0,
+            trailing: 20)
+        let edgeInsetsOverlay: EdgeInsets = EdgeInsets(
+            top: 0,
+            leading: 0,
+            bottom: 0,
+            trailing: 7)
+        
         NavigationStack{
             VStack {
                 Spacer()
@@ -20,7 +32,7 @@ struct RegisterView: View {
                     VStack(alignment: .leading){
                         Text("Benutzername mit mindestens 10 Zeichen")
                             .font(.system(size: 10))
-                            .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
+                            .padding(edgeInsetsText)
                         ZStack(alignment: .trailing){
                             TextField("Benutzernamen eingeben", text: $authVm.userName)
                                 .font(.system(size: 15).bold())
@@ -32,14 +44,14 @@ struct RegisterView: View {
                                     RoundedRectangle(cornerRadius: 10)
                                         .stroke(Color.cyan, lineWidth: 2)
                                 )
-                                .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
+                                .padding(edgeInsetsText)
                             if !authVm.userName.isEmpty {
                                 if authVm.isValidUsername(authVm.userName) {
                                     RightView()
-                                        .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 7))
+                                        .padding(edgeInsetsOverlay)
                                 } else {
                                     FalseView()
-                                        .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 7))
+                                        .padding(edgeInsetsOverlay)
                                 }
                             }
                         }
@@ -47,7 +59,7 @@ struct RegisterView: View {
                     VStack(alignment: .leading){
                         Text("Email")
                             .font(.system(size: 10))
-                            .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
+                            .padding(edgeInsetsText)
                         ZStack(alignment: .trailing){
                             TextField("Email eingeben", text: $authVm.email)
                                 .font(.system(size: 15).bold())
@@ -59,14 +71,14 @@ struct RegisterView: View {
                                     RoundedRectangle(cornerRadius: 10)
                                         .stroke(Color.cyan, lineWidth: 2)
                                 )
-                                .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
+                                .padding(edgeInsetsText)
                             if !authVm.email.isEmpty {
                                 if authVm.email.count >= 2 {
                                     RightView()
-                                        .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 7))
+                                        .padding(edgeInsetsOverlay)
                                 } else {
                                     FalseView()
-                                        .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 7))
+                                        .padding(edgeInsetsOverlay)
                                 }
                             }
                         }
@@ -74,7 +86,7 @@ struct RegisterView: View {
                     VStack(alignment: .leading){
                         Text("Passwort")
                             .font(.system(size: 10))
-                            .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
+                            .padding(edgeInsetsText)
                         ZStack(alignment: .trailing){
                             SecureField("Passwort eingeben", text: $authVm.password)
                                 .font(.system(size: 15).bold())
@@ -86,14 +98,14 @@ struct RegisterView: View {
                                     RoundedRectangle(cornerRadius: 10)
                                         .stroke(Color.cyan, lineWidth: 2)
                                 )
-                                .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
+                                .padding(edgeInsetsText)
                             if !authVm.password.isEmpty {
                                 if authVm.password.count >= 8 {
                                     RightView()
-                                        .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 7))
+                                        .padding(edgeInsetsOverlay)
                                 } else {
                                     FalseView()
-                                        .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 7))
+                                        .padding(edgeInsetsOverlay)
                                 }
                             }
                         }
@@ -101,7 +113,7 @@ struct RegisterView: View {
                     VStack(alignment: .leading){
                         Text("Passwort wiederholen")
                             .font(.system(size: 10))
-                            .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
+                            .padding(edgeInsetsText)
                         ZStack(alignment: .trailing){
                             SecureField("Passwort wiederholen", text: $authVm.confirmPassword)
                                 .font(.system(size: 15).bold())
@@ -113,14 +125,14 @@ struct RegisterView: View {
                                     RoundedRectangle(cornerRadius: 10)
                                         .stroke(Color.cyan, lineWidth: 2)
                                 )
-                                .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
+                                .padding(edgeInsetsText)
                             if (!authVm.confirmPassword.isEmpty) {
                                 if  (authVm.password == authVm.confirmPassword) {
                                     RightView()
-                                        .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 7))
+                                        .padding(edgeInsetsOverlay)
                                 } else {
                                     FalseView()
-                                        .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 7))
+                                        .padding(edgeInsetsOverlay)
                                 }
                             }
                         }
@@ -141,7 +153,12 @@ struct RegisterView: View {
                         }))
                     }
                 }
-                .padding(EdgeInsets(top: 25, leading: 0, bottom: 10, trailing: 0))
+                .padding(
+                    EdgeInsets(
+                        top: 25,
+                        leading: 0,
+                        bottom: 10,
+                        trailing: 0))
             }
             .navigationTitle("Jetzt registrieren")
             .navigationBarTitleDisplayMode(.inline)

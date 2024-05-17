@@ -12,17 +12,17 @@ struct DetailCategorieItemFilledView: View {
     @ObservedObject var detailCategorieItemVm: DetailCategorieItemViewModel
     @State private var bgColor: [Color] = [
         .blue,
-            .green,
-            .yellow,
-            .red,
-            .pink,
-            .brown,
-            .orange,
-            .purple,
-            .cyan,
-            .gray,
-            .mint,
-            .indigo]
+        .green,
+        .yellow,
+        .red,
+        .pink,
+        .brown,
+        .orange,
+        .purple,
+        .cyan,
+        .gray,
+        .mint,
+        .indigo]
     
     @State private var colors: Color = .white
     
@@ -35,18 +35,18 @@ struct DetailCategorieItemFilledView: View {
                 HStack{
                     Text(detailCategorieItemVm.taskName)
                         .font(.system(size: 15))
-                        .strikethrough(detailCategorieItemVm.taskIsDone, color: .black)
-                        .foregroundColor(.black)
+                        .strikethrough(detailCategorieItemVm.taskIsDone, color: .primary)
+                        .foregroundColor(.primary)
                     
                     Spacer()
                     if detailCategorieItemVm.taskIsDone {
                         Image(systemName: "checkmark.circle")
                             .font(.system(size: 21))
-                            .foregroundColor(.black)
+                            .foregroundColor(.primary)
                     } else {
                         Image(systemName: "circle")
                             .font(.system(size: 21))
-                            .foregroundColor(.black)
+                            .foregroundColor(.primary)
                     }
                 }
                     .padding(
@@ -71,10 +71,10 @@ struct DetailCategorieItemFilledView: View {
             }
     }
     func sortedColors(){
-        colors = bgColor.randomElement() ?? Color.white
+        colors = bgColor.randomElement() ?? colors
     }
 }
-    
+
 
 #Preview {
     DetailCategorieItemFilledView(detailCategorieItemVm: DetailCategorieItemViewModel(detailCategorieItemModel: TaskModel(categorieId: "1", taskName: "Camper packen", taskIsDone: false)))

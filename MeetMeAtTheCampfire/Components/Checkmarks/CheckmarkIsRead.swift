@@ -10,9 +10,9 @@ import SwiftUI
 struct CheckmarkIsRead: View {
     var body: some View {
         Image(systemName: "checkmark")
-            .font(.callout)
+            .font(.system(size: 16))
             .foregroundColor(.blue)
-            .bold()
+            .shadow(color: .white, radius: 1)
             .padding(.trailing)
     }
 }

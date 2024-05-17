@@ -84,9 +84,9 @@ final class ChatScreenViewModel: ObservableObject {
                     try? document.data(as: ChatModel.self)
                 }
                 
-                let filteredMessages = messages.filter { !ChatManager.shared.excludedUserIds.contains($0.userId) }
+               // let filteredMessages = messages.filter { !ChatManager.shared.excludedUserIds.contains($0.userId) }
                 
-                let sortedMessages = filteredMessages.sorted { $0.timeStamp < $1.timeStamp }
+                let sortedMessages = messages.sorted { $0.timeStamp < $1.timeStamp }
                 
                 let chatSenderViewModels = sortedMessages.map { message in
                     let isCurrentUser = message.userId == userId

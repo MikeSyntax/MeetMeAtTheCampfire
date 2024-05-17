@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ChatItemView: View {
     
@@ -13,6 +14,8 @@ struct ChatItemView: View {
     @State private var showRemoveUserFromChatViewAlert: Bool = false
     private let maxWidth: CGFloat = 300.0
     private let userId = FirebaseManager.shared.userId
+    @Environment(\.modelContext) private var context
+    @Query private var blockedUsers: [BlockedUser]
     
     var body: some View {
         HStack{
@@ -145,26 +148,43 @@ struct ChatItemView: View {
                 } label: {
                     Image(systemName: "person.crop.circle.badge.xmark")
                 }
-                .padding(.trailing)
                 .alert(isPresented: $showRemoveUserFromChatViewAlert){
                     Alert(
-                        title: Text("Nachrichten stören"),
+                        title: Text("User nervt"),
                         message: Text("Nachrichten dieses User nicht mehr anzeigen!"),
                         primaryButton: .default(Text("Abbrechen")),
                         secondaryButton:  .destructive(Text("User entfernen!"), action: {
-                            ChatManager.shared.toogleExcludedUserId(chatSenderVm.userId)
+//                            ChatManager.shared.toogleExcludedUserId(chatSenderVm.userId)
+                            //SwiftData Liste
+                            addBlockedUser()
                         })
                     )
                 }
             }
         }
     }
+    //SwiftData Liste
+    func addBlockedUser(){
+        let blockedUser = BlockedUser(
+            userId: chatSenderVm.userId,
+            userName: chatSenderVm.userName)
+        context.insert(blockedUser)
+    }
 }
 
 #Preview {
-    let chat = ChatModel(userId: "1", userName: "Fettes Brot", messageText: "In diesem Beispiel wird der Text innerhalb des Rechtecks angezeigt, und die Höhe des Rechtecks passt sich automatisch an die Höhe des Textinhalts an. Die fixedSize(horizontal:vertical:)-Modifikator sorgt dafür, dass der Text nicht über die Breite des Rechtecks hinauswächst, aber vertikal kann er beliebig wachsen. Damit sollten längere Texte vollständig angezeigt werden.", timeStamp: Date(), isReadbyUser: [], isLiked: false, isLikedByUser: [], profileImage: "")
+    let chat = ChatModel(
+        userId: "1",
+        userName: "Fettes Brot",
+        messageText: "In diesem Beispiel wird der Text innerhalb des Rechtecks angezeigt, und die Höhe des Rechtecks passt sich automatisch an die Höhe des Textinhalts an. Die fixedSize(horizontal:vertical:)-Modifikator sorgt dafür, dass der Text nicht über die Breite des Rechtecks hinauswächst, aber vertikal kann er beliebig wachsen. Damit sollten längere Texte vollständig angezeigt werden.",
+        timeStamp: Date(),
+        isReadbyUser: [],
+        isLiked: false,
+        isLikedByUser: [],
+        profileImage: "")
     let chatVm = ChatItemViewModel(chatDesign: chat)
     return ChatItemView(chatSenderVm: chatVm)
+        .modelContainer(for: [LogBookAtivity.self, BlockedUser.self])
 }
 
 

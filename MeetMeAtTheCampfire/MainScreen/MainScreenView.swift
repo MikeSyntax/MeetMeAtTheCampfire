@@ -77,11 +77,8 @@ struct MainScreenView: View {
         .onChange(of: authVm.user?.id){
             selectedTab = 0
         }
-//        .onDisappear{
-//            authVm.updateUser()
-//        }
         .background(Color(UIColor.systemBackground))
-        .modelContainer(for: LogBookAtivity.self)
+        .modelContainer(for: [LogBookAtivity.self, BlockedUser.self])
     }
 }
 

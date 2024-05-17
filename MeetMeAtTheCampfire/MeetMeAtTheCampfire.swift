@@ -29,7 +29,7 @@ struct MeetMeAtTheCampfireApp: App {
                     .environmentObject(authVm)
             }
         }
-        .modelContainer(for: LogBookAtivity.self)
+        .modelContainer(for: [LogBookAtivity.self, BlockedUser.self])
         .environment(\.locale, .init(identifier: "de"))
     }
 }

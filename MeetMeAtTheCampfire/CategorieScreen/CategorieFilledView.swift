@@ -39,7 +39,7 @@ struct CategorieFilledView: View {
                         .lineLimit(2)
                         .font(.system(size: 14))
                         .multilineTextAlignment(.center)
-                        .foregroundColor(.black)
+                        .foregroundColor(.primary)
                         .padding(
                             EdgeInsets(
                                 top: 0,
@@ -52,7 +52,7 @@ struct CategorieFilledView: View {
                         .font(.system(size: 14))
                         .padding(8)
                         .background(.red)
-                        .foregroundColor(.black)
+                        .foregroundColor(.primary)
                         .clipShape(Circle())
                 }
                     .padding(
