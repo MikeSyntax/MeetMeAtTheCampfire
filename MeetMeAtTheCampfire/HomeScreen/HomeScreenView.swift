@@ -27,9 +27,15 @@ struct HomeScreenView: View {
                             ScrollView {
                                 LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 20), count: 3), spacing: 20) {
                                     ForEach(homeVm.categorieViewModels) { categorieViewModel in
-                                        NavigationLink(destination: DetailCategorieView(categorieVm: categorieViewModel, homeVm: homeVm, detailCategorieVm: detailCategorieVm, detailCategorieItemVm: detailCategorieItemVm)) {
-                                            CategorieFilledView(categorieVm: categorieViewModel, detailCategorieVm: detailCategorieVm)
-                                        }
+                                        NavigationLink(destination:
+                                                        DetailCategorieView(
+                                                            categorieVm: categorieViewModel,
+                                                            homeVm: homeVm,
+                                                            detailCategorieVm: detailCategorieVm,
+                                                            detailCategorieItemVm: detailCategorieItemVm)) {
+                                                                CategorieFilledView(
+                                                                    categorieVm: categorieViewModel,
+                                                                    detailCategorieVm: detailCategorieVm)}
                                     }
                                 }
                                 .padding(.horizontal, 20)
@@ -105,17 +111,17 @@ struct HomeScreenView: View {
             .navigationBarTitle("Meine Kategorien", displayMode: .inline)
         }
         .alert("Neue Kategorie", isPresented: $showNewCategorieAlert) {
-                TextField("Name", text: $newCategorie)
-                    .lineLimit(1)
-                    .autocorrectionDisabled()
-                Button("Zurück") {
-                    newCategorie = ""
-                    dismiss()
-                }
-                Button("Speichern") {
-                    homeVm.createCategorie(categorieName: newCategorie)
-                    newCategorie = ""
-                }
+            TextField("Name", text: $newCategorie)
+                .lineLimit(1)
+                .autocorrectionDisabled()
+            Button("Zurück") {
+                newCategorie = ""
+                dismiss()
+            }
+            Button("Speichern") {
+                homeVm.createCategorie(categorieName: newCategorie)
+                newCategorie = ""
+            }
         }
         .sheet(isPresented: $showSettingsSheet) {
             SettingsScreenView()

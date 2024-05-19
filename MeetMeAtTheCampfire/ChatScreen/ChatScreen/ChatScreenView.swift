@@ -6,16 +6,14 @@
 //
 //
 import SwiftUI
-import Foundation
-import SwiftData
 
 struct ChatScreenView: View {
     
-    @ObservedObject var chatVm: ChatScreenViewModel
-    @EnvironmentObject var authVm: AuthViewModel
+    @ObservedObject private var chatVm: ChatScreenViewModel
+    @EnvironmentObject private var authVm: AuthViewModel
     @State private var newMessage: String = ""
     @State private var matchingChatIds: [String] = []
-    @Query private var blockedUsers: [BlockedUser]
+    @StateObject private var chatManager = ChatManager.shared
     
     init(chatVm: ChatScreenViewModel) {
         self.chatVm = chatVm
@@ -31,7 +29,7 @@ struct ChatScreenView: View {
                 ScrollView {
                     ScrollViewReader { scrollView in
                         LazyVStack {
-                            ForEach(getFilteredChatSenderViewModels()) { chatSenderViewModel in
+                            ForEach(chatVm.chatSenderViewModels) { chatSenderViewModel in
                                 ChatItemView(chatSenderVm: chatSenderViewModel)
                                     .id(chatSenderViewModel.id)
                                     .onAppear {
@@ -41,7 +39,8 @@ struct ChatScreenView: View {
                                     }
                             }
                         }
-                        .onChange(of: blockedUsers) {
+                        .onChange(of: chatManager.excludedUserIds) {
+                            print("Change excludedUserList \(chatManager.excludedUserIds)")
                             chatVm.readMessages()
                         }
                         .onChange(of: chatVm.chatSenderViewModels) {
@@ -108,24 +107,20 @@ struct ChatScreenView: View {
             )
         }
         .onAppear {
+            chatManager.readExcludedUserList()
             chatVm.readMessages()
             authVm.user?.timeStampLastVisitChat = Date.now
         }
         .onDisappear {
             authVm.updateUser()
             chatVm.removeListener()
+            chatManager.removeListener()
         }
         .searchable(text: Binding(
             get: { chatVm.searchTerm },
             set: { chatVm.searchTerm = $0.lowercased() }
         ))
         .background(Color(UIColor.systemBackground))
-    }
-    //Swift Date blockedUsers
-    private func getFilteredChatSenderViewModels() -> [ChatItemViewModel] {
-        let blockedUserIds = Set(blockedUsers.map { $0.userId })
-        let myfilterChatWithoutBlockedUsers = chatVm.chatSenderViewModels.filter { !blockedUserIds.contains($0.userId) }
-        return myfilterChatWithoutBlockedUsers
     }
 }
 

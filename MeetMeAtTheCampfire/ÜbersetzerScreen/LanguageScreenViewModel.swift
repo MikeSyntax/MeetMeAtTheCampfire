@@ -7,7 +7,8 @@
 
 import Foundation
 
-class LanguageScreenViewModel: ObservableObject {
+@MainActor
+final class LanguageScreenViewModel: ObservableObject {
     
     private let languageRepo: LanguageRepository
     
@@ -26,12 +27,7 @@ class LanguageScreenViewModel: ObservableObject {
         self.languageSource = languageSource
     }
     
-    deinit{
-        clearTextFields()
-    }
-    
     //Sprachen laden im Hauptthread durch MainActor und da dort keine await Funktionen laufen muss ein Task darum gebaut werden
-    @MainActor
     func loadLanguages(){
         Task{
             do{
@@ -44,7 +40,6 @@ class LanguageScreenViewModel: ObservableObject {
     }
     
     //Übersetzung laden im Hauptthread durch MainActor und da dort keine await Funktionen laufen muss ein Task darum gebaut werden
-    @MainActor
     func translateLanguage(){
         Task{
             do{

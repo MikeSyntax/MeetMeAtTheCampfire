@@ -23,23 +23,17 @@ final class ProfileScreenViewModel: NSObject, ObservableObject, CLLocationManage
     var user: UserModel
     
     init(user: UserModel){
-        
         self.user = user
         
         super.init()
         locationHomebase.delegate = self
     }
     
-    deinit{
-        removeListener()
-    }
-    
-    //Lesen aller Nachrichten aus dem Firestore
+    @MainActor
     func readLikedMessages() {
         guard let userId = FirebaseManager.shared.userId else {
             return
         }
-        
         self.listener = FirebaseManager.shared.firestore.collection("messages")
             .whereField("isLikedByUser", arrayContains: userId)
             .addSnapshotListener { querySnapshot, error in
@@ -47,17 +41,14 @@ final class ProfileScreenViewModel: NSObject, ObservableObject, CLLocationManage
                     print("Error reading likedMessages: \(error)")
                     return
                 }
-                
                 guard let documents = querySnapshot?.documents else {
                     print("Query Snapshot likedMessages is empty")
                     return
                 }
-                
                 let messages = documents.compactMap { document in
                     try? document.data(as: ChatModel.self)
                 }
                 let sortedMessages = messages.sorted { $0.timeStamp < $1.timeStamp }
-                
                 let chatLikedViewModels = sortedMessages.map { message in
                     return ChatItemViewModel(chatDesign: message)
                 }
@@ -70,10 +61,12 @@ final class ProfileScreenViewModel: NSObject, ObservableObject, CLLocationManage
         self.chatLikedViewModels = []
     }
     
+    @MainActor
     func stopLocationRequest(){
         self.locationHomebase.stopUpdatingLocation()
     }
     
+    @MainActor
     func requestHomebase(){
         self.locationHomebase.requestWhenInUseAuthorization()
         self.locationHomebase.startUpdatingLocation()

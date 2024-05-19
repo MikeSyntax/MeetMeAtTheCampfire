@@ -5,8 +5,8 @@
 //  Created by Mike Reichenbach on 07.03.24.
 //
 
+
 import SwiftUI
-import SwiftData
 
 struct ChatItemView: View {
     
@@ -14,9 +14,8 @@ struct ChatItemView: View {
     @State private var showRemoveUserFromChatViewAlert: Bool = false
     private let maxWidth: CGFloat = 300.0
     private let userId = FirebaseManager.shared.userId
-    @Environment(\.modelContext) private var context
+    @StateObject var chatManager = ChatManager.shared
     @Environment(\.openURL) var openURL
-    @Query private var blockedUsers: [BlockedUser]
     
     var body: some View {
         HStack{
@@ -154,7 +153,7 @@ struct ChatItemView: View {
                         title: Text("\(chatSenderVm.userName) nervt!"),
                         message: Text("Für mich ausblenden oder User melden"),
                         buttons: [
-                            .destructive(Text("Ausblenden"), action: { addBlockedUser()}),
+                            .destructive(Text("Ausblenden"), action: { chatManager.addExcludedUserId(chatSenderVm.userId) }),
                             .destructive(Text("Melden"), action: {
                                 let email = Email.emailKey
                                 let subject = "User Id: \(chatSenderVm.userId)"
@@ -167,13 +166,6 @@ struct ChatItemView: View {
                 }
             }
         }
-    }
-    //SwiftData Liste
-    func addBlockedUser(){
-        let blockedUser = BlockedUser(
-            userId: chatSenderVm.userId,
-            userName: chatSenderVm.userName)
-        context.insert(blockedUser)
     }
 }
 
@@ -189,7 +181,6 @@ struct ChatItemView: View {
         profileImage: "")
     let chatVm = ChatItemViewModel(chatDesign: chat)
     return ChatItemView(chatSenderVm: chatVm)
-        .modelContainer(for: [LogBookAtivity.self, BlockedUser.self])
 }
 
 

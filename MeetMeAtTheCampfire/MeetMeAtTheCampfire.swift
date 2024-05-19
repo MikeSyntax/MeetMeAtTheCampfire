@@ -12,6 +12,8 @@ import SwiftData
 @main
 struct MeetMeAtTheCampfireApp: App {
     
+    @AppStorage("colorScheme") private var colorScheme: String = "System"
+    
     @StateObject var authVm = AuthViewModel()
     
     init(){
@@ -22,7 +24,7 @@ struct MeetMeAtTheCampfireApp: App {
     var body: some Scene {
         WindowGroup {
             if authVm.userLoggedIn {
-                MainScreenView(authVm: authVm)
+                MainScreenView()
                     .environmentObject(authVm)
             } else {
                 LoginView()
@@ -30,7 +32,7 @@ struct MeetMeAtTheCampfireApp: App {
             }
         }
         .environment(\.locale, .init(identifier: "de"))
-        .modelContainer(for: [LogBookAtivity.self, BlockedUser.self])
+        .modelContainer(for: [LogBookAtivity.self])
     }
 }
 

@@ -6,32 +6,58 @@
 //
 
 import SwiftUI
-import SwiftData
 
 struct MainScreenView: View {
-    let authVm: AuthViewModel
-    @StateObject var chatVm: ChatScreenViewModel
-    @StateObject var profileScreenVm: ProfileScreenViewModel
-    @StateObject var languageVm = LanguageScreenViewModel(languageChoice: Language(code: "af", name: "Afrikaans"), languageSource: Language(code: "de", name: "Deutsch"))
-    @StateObject var chatSenderVm = ChatItemViewModel(chatDesign: ChatModel(userId: "2", userName: "Dieter", messageText: "Danke", timeStamp: Date(), isReadbyUser: [], isLiked: false, isLikedByUser: [], profileImage: ""))
+    
+    @EnvironmentObject var authVm :AuthViewModel
+    
+    @StateObject var chatVm = ChatScreenViewModel(
+        user: UserModel(id: "",
+                        email: "",
+                        registeredTime: Date(),
+                        userName: "",
+                        timeStampLastVisitChat: Date(),
+                        isActive: true,
+                        imageUrl: ""))
+    
+    @StateObject var profileScreenVm = ProfileScreenViewModel(
+        user: UserModel(id: "",
+                        email: "",
+                        registeredTime: Date(),
+                        userName: "",
+                        timeStampLastVisitChat: Date(),
+                        isActive: true,
+                        imageUrl: ""))
+    
+    @StateObject var languageVm = LanguageScreenViewModel(
+        languageChoice: Language(code: "af", name: "Afrikaans"),
+        languageSource: Language(code: "de", name: "Deutsch"))
+    
+//    @StateObject var chatSenderVm = ChatItemViewModel(
+//        chatDesign: ChatModel(userId: "2",
+//                              userName: "Dieter",
+//                              messageText: "Danke",
+//                              timeStamp: Date(),
+//                              isReadbyUser: [],
+//                              isLiked: false,
+//                              isLikedByUser: [],
+//                              profileImage: ""))
+    
     @State private var selectedTab = 0
     @AppStorage("badgevisible") private var isBadgeVisible: Bool = true
     
-    init(authVm: AuthViewModel){
-        _chatVm = StateObject(wrappedValue: ChatScreenViewModel(user: authVm.user!))
-        _profileScreenVm = StateObject(wrappedValue: ProfileScreenViewModel(user: authVm.user!))
-        self.authVm = authVm
-    }
-    
     var body: some View {
         TabView(selection: $selectedTab) {
+            
             HomeScreenView()
                 .tabItem {
                     Image(systemName: "house")
                     Text("Home")
                 }.tag(0)
+            
             if isBadgeVisible {
                 ChatScreenView(chatVm: self.chatVm)
+                    .environmentObject(authVm)
                     .tabItem {
                         Image(systemName: "flame")
                         Text("Campfire")
@@ -40,6 +66,7 @@ struct MainScreenView: View {
                     .tag(1)
             } else {
                 ChatScreenView(chatVm: self.chatVm)
+                    .environmentObject(authVm)
                     .tabItem {
                         Image(systemName: "flame")
                         Text("Campfire")
@@ -60,6 +87,7 @@ struct MainScreenView: View {
                 }.tag(3)
             
             ProfileScreenView(profileScreenVm: profileScreenVm)
+                .environmentObject(authVm)
                 .tabItem {
                     Image(systemName: "person")
                     Text("Profil")
@@ -74,11 +102,13 @@ struct MainScreenView: View {
                 authVm.user!.timeStampLastVisitChat = Date.now
             }
         }
+        .onDisappear{
+            authVm.updateUser()
+        }
         .onChange(of: authVm.user?.id){
             selectedTab = 0
         }
         .background(Color(UIColor.systemBackground))
-        .modelContainer(for: [LogBookAtivity.self, BlockedUser.self])
     }
 }
 

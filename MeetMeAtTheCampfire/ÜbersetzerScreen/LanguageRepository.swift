@@ -7,7 +7,8 @@
 
 import Foundation
 
-class LanguageRepository {
+@MainActor
+final class LanguageRepository {
     
     //Funktion um eine Zielsprache der API auszuwählen und als Array zurückzugeben
     func languages() async throws -> [Language] {

@@ -49,10 +49,7 @@ final class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationM
         formattedDate = dateFormatter()
     }
     
-    deinit{
-        removeListener()
-    }
-    
+    @MainActor
     func createlogBookText(logBookText: String) {
         guard let uploadImage = selectedImage else {
             createLogBookEntry(logBookText: logBookText, imageUrl: nil)
@@ -94,6 +91,7 @@ final class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationM
     }
     
     //Helped by ChatGPT
+    @MainActor
     private func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
         // 1. Hole die ursprüngliche Größe des Bildes
         let size = image.size

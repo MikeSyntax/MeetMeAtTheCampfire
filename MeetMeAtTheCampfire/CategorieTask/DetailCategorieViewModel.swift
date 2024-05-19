@@ -42,13 +42,13 @@ final class DetailCategorieViewModel: ObservableObject {
             FirebaseManager.shared.firestore.collection("categories")
                 .document(categorieId)
                 .updateData(updatedCategorie) {
-                error in
-                if let error {
-                    print("update categorie failed: \(error)")
-                } else {
-                    print("update categorie done")
+                    error in
+                    if let error {
+                        print("update categorie failed: \(error)")
+                    } else {
+                        print("update categorie done")
+                    }
                 }
-            }
             
         } catch {
             print("Error creating new task: \(error)")
@@ -64,32 +64,32 @@ final class DetailCategorieViewModel: ObservableObject {
             .collection("tasksInCategorie")
             .whereField("categorieId", isEqualTo: categorieId)
             .addSnapshotListener{ querySnapshot, error in
-            //Error hinzugefügt
-            if let error = error {
-                print("Error reading tasks: \(error)")
-                return
+                //Error hinzugefügt
+                if let error = error {
+                    print("Error reading tasks: \(error)")
+                    return
+                }
+                
+                guard let documents = querySnapshot?.documents else {
+                    print("Query Snapshot is empty")
+                    return
+                }
+                
+                let tasks = documents.compactMap { document in
+                    try? document.data(as: TaskModel.self)
+                }
+                
+                let sortedTodos = tasks.sorted { $0.taskName < $1.taskName }
+                
+                let sortedTodosDone = sortedTodos.sorted { !($0.taskIsDone) && $1.taskIsDone }
+                
+                let detailCategorieItemViewModels = sortedTodosDone.map { DetailCategorieItemViewModel(detailCategorieItemModel: $0) }
+                self.detailCategorieItemViewModels = detailCategorieItemViewModels
+                
+                if let checkForTaskForShowVideo = self.detailCategorieItemViewModels.first?.taskName.count {
+                    self.checkForTaskForShowVideo = checkForTaskForShowVideo
+                }
             }
-            
-            guard let documents = querySnapshot?.documents else {
-                print("Query Snapshot is empty")
-                return
-            }
-            
-            let tasks = documents.compactMap { document in
-                try? document.data(as: TaskModel.self)
-            }
-            
-            let sortedTodos = tasks.sorted { $0.taskName < $1.taskName }
-            
-            let sortedTodosDone = sortedTodos.sorted { !($0.taskIsDone) && $1.taskIsDone }
-            
-            let detailCategorieItemViewModels = sortedTodosDone.map { DetailCategorieItemViewModel(detailCategorieItemModel: $0) }
-            self.detailCategorieItemViewModels = detailCategorieItemViewModels
-            
-            if let checkForTaskForShowVideo = self.detailCategorieItemViewModels.first?.taskName.count {
-                self.checkForTaskForShowVideo = checkForTaskForShowVideo
-            }
-        }
     }
     
     func updateTask(detailCategorieItemVm: DetailCategorieItemViewModel, taskId: String?){
@@ -113,13 +113,13 @@ final class DetailCategorieViewModel: ObservableObject {
             try FirebaseManager.shared.firestore
                 .collection("tasksInCategorie")
                 .document(taskId).setData(from: task, merge: true) {
-                error in
-                if let error {
-                    print("update task failed: \(error)")
-                } else {
-                    print("update task done")
+                    error in
+                    if let error {
+                        print("update task failed: \(error)")
+                    } else {
+                        print("update task done")
+                    }
                 }
-            }
         } catch {
             print("update task failed: \(error)")
         }

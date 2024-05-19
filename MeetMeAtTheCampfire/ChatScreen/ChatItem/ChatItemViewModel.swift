@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 //Hier werden verschiedene Protokolle implementiert unter anderen das Equatable Protokoll (Vergleichsprotokoll)
 final class ChatItemViewModel: ObservableObject, Identifiable, Equatable {
     //mit dieser static Funktion wird es ermöglicht Instanzen dieser Klasse zu vergleichen in diesem Fall die id´s der ChatSenderViewModels und es wird eine true oder false zurückgegeben
@@ -13,7 +14,6 @@ final class ChatItemViewModel: ObservableObject, Identifiable, Equatable {
         return chatReceiver.id == chatSender.id
     }
     
-    // Deklaration der Variablen mit dem Attribut '@Published', das Änderungen an dieser Variablen sofort meldet.
     @Published var userName: String = ""
     @Published var messageText: String = ""
     @Published var dateString: String = ""
@@ -23,8 +23,6 @@ final class ChatItemViewModel: ObservableObject, Identifiable, Equatable {
     @Published var isLiked: Bool
     @Published var isLikedByUser: [String] = []
     @Published var profileImage: String? = ""
-    
-    // Variable 'timeStamp', die das Datum und die Uhrzeit des Chatnachrichtenzeitstempels speichert.
     @Published var timeStamp = Date()
     
     // Eine Konstante 'chatSenderVm' vom Typ 'ChatModel', die die Daten des Chatmodells enthält.
@@ -34,7 +32,6 @@ final class ChatItemViewModel: ObservableObject, Identifiable, Equatable {
     init(chatDesign: ChatModel, isCurrentUser: Bool = false) {
         // Zuweisung des übergebenen ChatModel-Objekts an die 'chatSenderVm'-Variable.
         self.chatSenderVm = chatDesign
-        // Initialisierung der Instanzvariablen mit den Werten des übergebenen ChatModel-Objekts und des optionalen Parameters.
         self.userName = chatDesign.userName
         self.timeStamp = chatDesign.timeStamp
         self.messageText = chatDesign.messageText
@@ -45,33 +42,25 @@ final class ChatItemViewModel: ObservableObject, Identifiable, Equatable {
         self.isCurrentUser = isCurrentUser
         self.profileImage = chatDesign.profileImage
         
-        // Aufruf der Methode 'updateDate()', um das Datumsformat zu aktualisieren.
         updateDate()
     }
     
-    // Methode, die das Datumsformat aktualisiert.
     func updateDate() {
-        // Erstellung eines DateFormatter-Objekts.
         let formatter = DateFormatter()
-        // Festlegung des Datumsformats für das DateFormatter-Objekt.
         formatter.dateFormat = "dd-MM-yyyy HH:mm:ss"
-        // Konvertierung des 'timeStamp' in das angegebene Datumsformat und Zuweisung an 'dateString'.
         self.dateString = formatter.string(from: timeStamp)
     }
     
-    //For like chat messages change star and true or false an enter or remove id from Array of id´s
+    @MainActor
     func updateIsLikedStatus(chatSenderVm: ChatItemViewModel) {
         guard let messageId = chatSenderVm.chatSenderVm.id else {
             return
         }
-        
         guard let userId = FirebaseManager.shared.userId else {
             return
         }
-        
         // check for user like
         let isLikedByUser = chatSenderVm.isLikedByUser.contains(userId)
-        
         // add or remove Arry
         if isLikedByUser {
             if let index = chatSenderVm.isLikedByUser.firstIndex(of: userId) {
@@ -80,15 +69,11 @@ final class ChatItemViewModel: ObservableObject, Identifiable, Equatable {
         } else {
             chatSenderVm.isLikedByUser.append(userId)
         }
-        
-        // create array
         let messagesBox: [String: Any] = ["isLiked": !chatSenderVm.isLikedByUser.isEmpty,
                                           "isLikedByUser": chatSenderVm.isLikedByUser]
-        
-        // update firestore
         FirebaseManager.shared.firestore.collection("messages")
             .document(messageId)
-            .setData(messagesBox, merge: true) { error in
+            .updateData(messagesBox) { error in
             if let error = error {
                 print("update isLikedStatus failed: \(error)")
             } else {

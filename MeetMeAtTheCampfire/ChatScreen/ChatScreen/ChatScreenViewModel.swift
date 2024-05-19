@@ -8,6 +8,7 @@
 import Foundation
 import FirebaseFirestore
 
+@MainActor
 final class ChatScreenViewModel: ObservableObject {
     
     @Published var chatSenderViewModels: [ChatItemViewModel] = []
@@ -39,7 +40,6 @@ final class ChatScreenViewModel: ObservableObject {
         guard let userId = FirebaseManager.shared.userId else {
             return
         }
-        
         let message = ChatModel(
             userId: userId,
             userName: userName,
@@ -49,7 +49,6 @@ final class ChatScreenViewModel: ObservableObject {
             isLiked: isLiked,
             isLikedByUser: isLikedByUser,
             profileImage: profileImage)
-        
         do{
             try FirebaseManager.shared.firestore
                 .collection("messages")
@@ -64,29 +63,24 @@ final class ChatScreenViewModel: ObservableObject {
         guard let userId = FirebaseManager.shared.userId else {
             return
         }
-        
         self.listener = FirebaseManager.shared.firestore
             .collection("messages")
             .addSnapshotListener { [weak self] querySnapshot, error in
                 guard let self = self else { return }
-                
                 if let error = error {
                     print("Error reading messages: \(error)")
                     return
                 }
-                
                 guard let documents = querySnapshot?.documents else {
                     print("Query Snapshot is empty")
                     return
                 }
-                
                 let messages = documents.compactMap { document in
                     try? document.data(as: ChatModel.self)
                 }
+                let filteredMessages = messages.filter { !ChatManager.shared.excludedUserIds.contains($0.userId) }
                 
-               // let filteredMessages = messages.filter { !ChatManager.shared.excludedUserIds.contains($0.userId) }
-                
-                let sortedMessages = messages.sorted { $0.timeStamp < $1.timeStamp }
+                let sortedMessages = filteredMessages.sorted { $0.timeStamp < $1.timeStamp }
                 
                 let chatSenderViewModels = sortedMessages.map { message in
                     let isCurrentUser = message.userId == userId
@@ -103,13 +97,13 @@ final class ChatScreenViewModel: ObservableObject {
         guard let messageId = chatSenderVm.chatSenderVm.id else {
             return
         }
-        
         guard let userId = user.id else {
             return
         }
         if !chatSenderVm.isReadbyUser.contains(userId){
             //zuerst zur Liste die neue Id hinzufügen
             chatSenderVm.isReadbyUser.append(userId)
+            print("ChatScreenViewModel userId: \(userId)")
             //hier dann nur die neue Liste übergeben
         }
         let newData = ["isReadbyUser": chatSenderVm.isReadbyUser]
@@ -120,7 +114,7 @@ final class ChatScreenViewModel: ObservableObject {
             if let error = error {
                 print("Updating isRead status failed: \(error)")
             } else {
-                print("isRead update done")
+                
             }
         }
     }

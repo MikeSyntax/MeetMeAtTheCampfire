@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ProfileScreenView: View {
+    
     @ObservedObject var profileScreenVm: ProfileScreenViewModel
     @EnvironmentObject var authVm: AuthViewModel
     @Environment(\.dismiss) private var dismiss

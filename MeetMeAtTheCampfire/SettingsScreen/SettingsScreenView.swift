@@ -141,7 +141,6 @@ struct SettingsScreenView: View {
                         HStack{
                             Spacer()
                             ButtonDestructiveTextAction(iconName: "trash", text: "Account löschen"){
-                                //Todo Account löschen
                                 showDeleteAccountAlert.toggle()
                             }
                             .actionSheet(isPresented: $showDeleteAccountAlert) {
@@ -164,8 +163,6 @@ struct SettingsScreenView: View {
                                 .stroke(Color.cyan, lineWidth: 2)
                         )
                     }
-                    //Ende VStack
-                    
                     .padding(20)
                     Spacer()
                 }

@@ -11,69 +11,53 @@ import FirebaseFirestore
 @MainActor
 final class HomeScreenViewModel: ObservableObject {
     
-    //Leere Liste an Kategorien
+   
     @Published var categorieViewModels: [CategorieViewModel] = []
-    
-    //der Listener muss beim Logout auch wieder auf nil gesetzt werden
     private var listener: ListenerRegistration? = nil
     
     //MARK Anlegen aller 4 CRUD Operationen Create Read Update und Delete ------------------------------------------------------------------
     
-    //Anlegen einer neuen Kategorie im Firebase Firestore
     func createCategorie(categorieName: String){
-        //wenn die userId leer ist mache nichts
         guard let userId = FirebaseManager.shared.userId else {
             return
         }
-        
         let categorie = CategorieModel(userId: userId, categorieName: categorieName, isDone: false, tasksInCategorie: 0)
-        
         do{
-            //versuche im Firestore eine neue Kategorie anzulegen
             try FirebaseManager.shared.firestore.collection("categories").addDocument(from: categorie)
         } catch {
             print("Error creating new categorie: \(error)")
         }
     }
     
-    //Lesen aller Kategorien aus dem Firestore
     func readCategories(){
         guard let userId = FirebaseManager.shared.userId else {
             return
         }
-        
         self.listener = FirebaseManager.shared.firestore.collection("categories").whereField("userId", isEqualTo: userId).addSnapshotListener {
             querySnapshot, error in
             if let error {
                 print("Error reading categories: \(error)")
                 return
             }
-            
             guard let documents = querySnapshot?.documents else {
                 print("Query Snapshot is empty")
                 return
             }
-            
             let categories = documents.compactMap { document in
                 try? document.data(as: CategorieModel.self)
             }
-            
             let sortedCategories = categories.sorted { $0.categorieName < $1.categorieName }
-            
             let categorieViewModels = sortedCategories.map { CategorieViewModel(categorieDesign: $0) }
             self.categorieViewModels = categorieViewModels }
         
     }
     
-    //Änderungen an der Kategorie vornehmen, in diesem Fall Kategorie ist erledigt
     func updateCategorie(categorieVm: CategorieViewModel){
         guard let categorieId = categorieVm.categorieViewModel.id else {
             return
         }
-        
         let updatedCategorie = [
             "isDone" : categorieVm.isDone ? false : true]
-        
         FirebaseManager.shared.firestore.collection("categories").document(categorieId).setData(updatedCategorie, merge: true) {
             error in
             if let error {
@@ -84,12 +68,10 @@ final class HomeScreenViewModel: ObservableObject {
         }
     }
     
-    //Löschen einer Kategorie
     func deleteCategorie(categorieVm: CategorieViewModel){
         guard let categorieId = categorieVm.categorieViewModel.id else {
             return
         }
-        
         FirebaseManager.shared.firestore.collection("categories").document(categorieId).delete() { error in
             if let error {
                 print("deleting categorie failed \(error)")

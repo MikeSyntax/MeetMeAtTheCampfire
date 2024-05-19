@@ -56,6 +56,7 @@
 		2B3E70232BE7D7860074ECC7 /* AdressKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3E70222BE7D7860074ECC7 /* AdressKey.swift */; };
 		2B43E1752BAACED400375D58 /* LogBookModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B43E1742BAACED400375D58 /* LogBookModel.swift */; };
 		2B511B302BA9D9A5004AEAD6 /* MapKitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B511B2F2BA9D9A5004AEAD6 /* MapKitView.swift */; };
+		2B5243162BF9F1470028E76F /* ChatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5243152BF9F1470028E76F /* ChatManager.swift */; };
 		2B5561502BAB0A480028C6E5 /* CalendarDetailItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B55614F2BAB0A480028C6E5 /* CalendarDetailItemView.swift */; };
 		2B5561522BAB0A5A0028C6E5 /* CalendarDetailItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5561512BAB0A5A0028C6E5 /* CalendarDetailItemViewModel.swift */; };
 		2B5DF1852B99B46E00FA285C /* ChatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5DF1842B99B46E00FA285C /* ChatModel.swift */; };
@@ -128,6 +129,7 @@
 		2B3E70222BE7D7860074ECC7 /* AdressKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdressKey.swift; sourceTree = "<group>"; };
 		2B43E1742BAACED400375D58 /* LogBookModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogBookModel.swift; sourceTree = "<group>"; };
 		2B511B2F2BA9D9A5004AEAD6 /* MapKitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapKitView.swift; sourceTree = "<group>"; };
+		2B5243152BF9F1470028E76F /* ChatManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatManager.swift; sourceTree = "<group>"; };
 		2B55614F2BAB0A480028C6E5 /* CalendarDetailItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDetailItemView.swift; sourceTree = "<group>"; };
 		2B5561512BAB0A5A0028C6E5 /* CalendarDetailItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDetailItemViewModel.swift; sourceTree = "<group>"; };
 		2B5DF1842B99B46E00FA285C /* ChatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatModel.swift; sourceTree = "<group>"; };
@@ -339,6 +341,14 @@
 			path = Checkmarks;
 			sourceTree = "<group>";
 		};
+		2B5243142BF9F11E0028E76F /* ChatManager */ = {
+			isa = PBXGroup;
+			children = (
+				2B5243152BF9F1470028E76F /* ChatManager.swift */,
+			);
+			path = ChatManager;
+			sourceTree = "<group>";
+		};
 		2B55614D2BAB09D60028C6E5 /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
@@ -353,8 +363,8 @@
 			children = (
 				2BF1D8812BF7BC2A004BC390 /* Sheets */,
 				2B55614F2BAB0A480028C6E5 /* CalendarDetailItemView.swift */,
-				2B5561512BAB0A5A0028C6E5 /* CalendarDetailItemViewModel.swift */,
 				2B1738A02BAD80FC0043CAF0 /* CalendarDetailNewEntryView.swift */,
+				2B5561512BAB0A5A0028C6E5 /* CalendarDetailItemViewModel.swift */,
 			);
 			path = CalendarDetail;
 			sourceTree = "<group>";
@@ -381,8 +391,8 @@
 			isa = PBXGroup;
 			children = (
 				2BAB624D2B95D64300C7839E /* CategorieAddView.swift */,
-				2BAB624F2B95D79800C7839E /* CategorieViewModel.swift */,
 				2BAB62522B95DDC600C7839E /* CategorieFilledView.swift */,
+				2BAB624F2B95D79800C7839E /* CategorieViewModel.swift */,
 			);
 			path = CategorieScreen;
 			sourceTree = "<group>";
@@ -425,8 +435,8 @@
 		2BBE466B2BA1E231002A11A2 /* CategorieTaskItem */ = {
 			isa = PBXGroup;
 			children = (
-				2BBE46672BA1E1B7002A11A2 /* DetailCategorieItemFilledView.swift */,
 				2BBE46652BA1E04F002A11A2 /* DetailCategorieItemAddView.swift */,
+				2BBE46672BA1E1B7002A11A2 /* DetailCategorieItemFilledView.swift */,
 				2BBE466C2BA1E2BF002A11A2 /* DetailCategorieItemViewModel.swift */,
 			);
 			path = CategorieTaskItem;
@@ -483,8 +493,8 @@
 		2BF1D8772BF4857D004BC390 /* ChatItem */ = {
 			isa = PBXGroup;
 			children = (
-				2B5DF18A2B99B7B900FA285C /* ChatItemViewModel.swift */,
 				2B5DF1882B99B68900FA285C /* ChatItemView.swift */,
+				2B5DF18A2B99B7B900FA285C /* ChatItemViewModel.swift */,
 			);
 			path = ChatItem;
 			sourceTree = "<group>";
@@ -555,6 +565,7 @@
 		2BF4B97B2B9877C200C1AF1A /* ChatScreen */ = {
 			isa = PBXGroup;
 			children = (
+				2B5243142BF9F11E0028E76F /* ChatManager */,
 				2BF1D8772BF4857D004BC390 /* ChatItem */,
 				2BF1D8762BF48559004BC390 /* ChatScreen */,
 			);
@@ -699,6 +710,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B5243162BF9F1470028E76F /* ChatManager.swift in Sources */,
 				2BBC151D2B9C6B3C00305504 /* LanguageScreenView.swift in Sources */,
 				2BBC151B2B9C6B2600305504 /* LanguageScreenViewModel.swift in Sources */,
 				2BF4B97A2B98764300C1AF1A /* ProfileScreenView.swift in Sources */,

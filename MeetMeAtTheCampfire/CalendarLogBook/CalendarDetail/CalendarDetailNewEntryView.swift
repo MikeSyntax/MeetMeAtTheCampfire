@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct CalendarDetailNewEntryView: View {
+    
     @ObservedObject var calendarDetailItemVm: CalendarDetailItemViewModel
     @AppStorage("entryButton") private var entryButtonIsActive: Bool = true
     @State private var showImagePicker: Bool = false
@@ -17,10 +18,8 @@ struct CalendarDetailNewEntryView: View {
     @State private var isAnimated: Bool = false
     @State private var showSuccessfulUploadAlert = false
     @Binding var showNewEntryView: Bool
-    //SwiftData
     @Environment(\.modelContext) private var context
     @Query private var items: [LogBookAtivity]
-    
     @FocusState var isInputActive: Bool
     
     var body: some View {
@@ -201,7 +200,7 @@ struct CalendarDetailNewEntryView: View {
                                     calendarDetailItemVm.createlogBookText(logBookText: calendarDetailItemVm.logBookText)
                                     calendarDetailItemVm.stopLocationRequest()
                                 } else {
-                                    addItem()
+                                    addActivity()
                                     showSuccessfulUploadAlert.toggle()
                                     calendarDetailItemVm.createlogBookText(logBookText: calendarDetailItemVm.logBookText)
                                     calendarDetailItemVm.stopLocationRequest()
@@ -288,7 +287,7 @@ struct CalendarDetailNewEntryView: View {
         .background(Color(UIColor.systemBackground))
     }
     
-    func addItem(){
+    func addActivity(){
         let item = LogBookAtivity(
             date: calendarDetailItemVm.date,
             isNotEmpty: true,
@@ -297,7 +296,7 @@ struct CalendarDetailNewEntryView: View {
     }
 }
 
-#Preview{
-    CalendarDetailNewEntryView(calendarDetailItemVm: CalendarDetailItemViewModel(calendarItemModel: LogBookModel(userId: "", formattedDate: "", logBookText: "", latitude: 0.0, longitude: 0.0, imageUrl: "", containsLogBookEntry: false), date: Date()), showNewEntryView: .constant(false))
-        .modelContainer(for: LogBookAtivity.self)
-}
+//#Preview{
+//    CalendarDetailNewEntryView(calendarDetailItemVm: CalendarDetailItemViewModel(calendarItemModel: LogBookModel(userId: "", formattedDate: "", logBookText: "", latitude: 0.0, longitude: 0.0, imageUrl: "", containsLogBookEntry: false), date: Date()), showNewEntryView: .constant(false))
+//        .modelContainer(for: [LogBookAtivity.self/*, BlockedUser.self*/])
+//}

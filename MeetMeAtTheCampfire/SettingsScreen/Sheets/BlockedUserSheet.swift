@@ -6,26 +6,24 @@
 //
 
 import SwiftUI
-import SwiftData
 
 struct BlockedUserSheet: View {
     
-    @Environment(\.modelContext) private var context
-    @Query private var blockedUsers: [BlockedUser]
+    @StateObject private var chatManager = ChatManager.shared
     @Environment (\.dismiss) private var dismiss
     @Binding var showBlockedUserSheet: Bool
     
     var body: some View {
-        NavigationStack{
-            VStack{
+        NavigationStack {
+            VStack {
                 Divider()
-                List{
-                    if blockedUsers.isEmpty {
+                List {
+                    if chatManager.excludedUserIds.isEmpty {
                         Text("Du hast keine User blockiert")
                     } else {
-                        ForEach (blockedUsers){ item in
-                            HStack{
-                                Text("User: \(item.userName)")
+                        ForEach(chatManager.excludedUserIds.indices, id: \.self) { index in
+                            VStack {
+                                Text("User: \(chatManager.excludedUserIds[index])")
                                     .font(.system(size: 12))
                                     .bold()
                                 Spacer()
@@ -33,9 +31,9 @@ struct BlockedUserSheet: View {
                                     .font(.system(size: 10))
                             }
                         }
-                        .onDelete{ indexes in
+                        .onDelete { indexes in
                             for index in indexes {
-                                deleteItem(blockedUsers[index])
+                                chatManager.removeExcludedUserId(chatManager.excludedUserIds[index])
                             }
                         }
                     }
@@ -53,22 +51,24 @@ struct BlockedUserSheet: View {
                     .scaledToFill()
                     .opacity(0.2)
                     .ignoresSafeArea(.all))
-            .toolbar{
+            .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button("Zurück"){
+                    Button("Zurück") {
                         dismiss()
                     }
                 }
             }
         }
-    }
-    //BlockedUser delete from SwiftData
-    func deleteItem(_ blockedUser: BlockedUser){
-        context.delete(blockedUser)
+        .onAppear{
+            chatManager.readExcludedUserList()
+        }
+        .onDisappear{
+            chatManager.removeListener()
+        }
     }
 }
 
+
 #Preview {
     BlockedUserSheet(showBlockedUserSheet: .constant(false))
-        .modelContainer(for: [LogBookAtivity.self, BlockedUser.self])
 }

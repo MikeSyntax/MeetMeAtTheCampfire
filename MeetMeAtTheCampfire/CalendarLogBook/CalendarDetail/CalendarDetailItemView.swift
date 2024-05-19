@@ -179,9 +179,9 @@ struct CalendarDetailItemView: View {
     }
 }
 
-#Preview{
-    let logbookMod: LogBookModel = LogBookModel(userId: "1", formattedDate: "", logBookText: "Hallo", latitude: 0.0, longitude: 0.0, imageUrl: "", containsLogBookEntry: false)
-    
-    return CalendarDetailItemView(calendarDetailItemVm: CalendarDetailItemViewModel(calendarItemModel: logbookMod, date: Date()))
-        .modelContainer(for: LogBookAtivity.self)
-}
+//#Preview{
+//    let logbookMod: LogBookModel = LogBookModel(userId: "1", formattedDate: "", logBookText: "Hallo", latitude: 0.0, longitude: 0.0, imageUrl: "", containsLogBookEntry: false)
+//    
+//    return CalendarDetailItemView(calendarDetailItemVm: CalendarDetailItemViewModel(calendarItemModel: logbookMod, date: Date()))
+//        .modelContainer(for: [LogBookAtivity.self/*, BlockedUser.self*/])
+//}
