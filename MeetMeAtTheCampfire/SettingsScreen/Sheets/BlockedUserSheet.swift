@@ -30,6 +30,7 @@ struct BlockedUserSheet: View {
                                 Text("swipen zum Rückgängigmachen")
                                     .font(.system(size: 10))
                             }
+                            .padding(EdgeInsets(top: 5, leading: 0, bottom: 5, trailing: 0))
                         }
                         .onDelete { indexes in
                             for index in indexes {

@@ -114,7 +114,7 @@ final class ChatScreenViewModel: ObservableObject {
             if let error = error {
                 print("Updating isRead status failed: \(error)")
             } else {
-                
+                print("Updating isRead done")
             }
         }
     }

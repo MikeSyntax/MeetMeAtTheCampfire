@@ -40,7 +40,6 @@ struct ChatScreenView: View {
                             }
                         }
                         .onChange(of: chatManager.excludedUserIds) {
-                            print("Change excludedUserList \(chatManager.excludedUserIds)")
                             chatVm.readMessages()
                         }
                         .onChange(of: chatVm.chatSenderViewModels) {

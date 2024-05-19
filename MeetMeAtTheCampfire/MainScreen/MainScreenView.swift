@@ -9,46 +9,38 @@ import SwiftUI
 
 struct MainScreenView: View {
     
-    @EnvironmentObject var authVm :AuthViewModel
+    let authVm: AuthViewModel
     
-    @StateObject var chatVm = ChatScreenViewModel(
-        user: UserModel(id: "",
-                        email: "",
-                        registeredTime: Date(),
-                        userName: "",
-                        timeStampLastVisitChat: Date(),
-                        isActive: true,
-                        imageUrl: ""))
-    
-    @StateObject var profileScreenVm = ProfileScreenViewModel(
-        user: UserModel(id: "",
-                        email: "",
-                        registeredTime: Date(),
-                        userName: "",
-                        timeStampLastVisitChat: Date(),
-                        isActive: true,
-                        imageUrl: ""))
+    @StateObject var chatVm: ChatScreenViewModel
+    @StateObject var profileScreenVm: ProfileScreenViewModel
     
     @StateObject var languageVm = LanguageScreenViewModel(
-        languageChoice: Language(code: "af", name: "Afrikaans"),
+        languageChoice: Language(code: "af", name: "Afrikaans"), 
         languageSource: Language(code: "de", name: "Deutsch"))
     
-//    @StateObject var chatSenderVm = ChatItemViewModel(
-//        chatDesign: ChatModel(userId: "2",
-//                              userName: "Dieter",
-//                              messageText: "Danke",
-//                              timeStamp: Date(),
-//                              isReadbyUser: [],
-//                              isLiked: false,
-//                              isLikedByUser: [],
-//                              profileImage: ""))
+    @StateObject var chatSenderVm = ChatItemViewModel(
+        chatDesign: ChatModel(
+            userId: "2",
+            userName: "Dieter",
+            messageText: "Danke",
+            timeStamp: Date(),
+            isReadbyUser: [],
+            isLiked: false,
+            isLikedByUser: [],
+            profileImage: ""))
     
     @State private var selectedTab = 0
     @AppStorage("badgevisible") private var isBadgeVisible: Bool = true
     
+    init(authVm: AuthViewModel){
+        _chatVm = StateObject(wrappedValue: ChatScreenViewModel(user: authVm.user!))
+        _profileScreenVm = StateObject(wrappedValue: ProfileScreenViewModel(user: authVm.user!))
+        self.authVm = authVm
+    }
+    
     var body: some View {
+        
         TabView(selection: $selectedTab) {
-            
             HomeScreenView()
                 .tabItem {
                     Image(systemName: "house")
@@ -57,7 +49,6 @@ struct MainScreenView: View {
             
             if isBadgeVisible {
                 ChatScreenView(chatVm: self.chatVm)
-                    .environmentObject(authVm)
                     .tabItem {
                         Image(systemName: "flame")
                         Text("Campfire")
@@ -66,7 +57,6 @@ struct MainScreenView: View {
                     .tag(1)
             } else {
                 ChatScreenView(chatVm: self.chatVm)
-                    .environmentObject(authVm)
                     .tabItem {
                         Image(systemName: "flame")
                         Text("Campfire")
@@ -87,7 +77,6 @@ struct MainScreenView: View {
                 }.tag(3)
             
             ProfileScreenView(profileScreenVm: profileScreenVm)
-                .environmentObject(authVm)
                 .tabItem {
                     Image(systemName: "person")
                     Text("Profil")
@@ -111,4 +100,3 @@ struct MainScreenView: View {
         .background(Color(UIColor.systemBackground))
     }
 }
-
