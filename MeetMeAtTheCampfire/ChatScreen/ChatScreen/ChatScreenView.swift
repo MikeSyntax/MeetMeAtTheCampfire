@@ -14,6 +14,8 @@ struct ChatScreenView: View {
     @State private var newMessage: String = ""
     @State private var matchingChatIds: [String] = []
     @StateObject private var chatManager = ChatManager.shared
+    @State private var showReactionPopover: Bool = false
+    @State private var selectedChatSenderViewModel: ChatItemViewModel? = nil
     
     init(chatVm: ChatScreenViewModel) {
         self.chatVm = chatVm
@@ -36,6 +38,10 @@ struct ChatScreenView: View {
                                         if !chatSenderViewModel.isReadbyUser.contains(currentUser) {
                                             chatVm.updateisReadStatus(chatSenderVm: chatSenderViewModel)
                                         }
+                                    }
+                                    .onLongPressGesture {
+                                        selectedChatSenderViewModel = chatSenderViewModel
+                                        showReactionPopover = true
                                     }
                             }
                         }
@@ -66,9 +72,17 @@ struct ChatScreenView: View {
                         }
                     }
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
-                Divider().frame(height: 5)
+                .frame(
+                    maxWidth: .infinity,
+                    maxHeight: .infinity)
+                .padding(
+                    EdgeInsets(
+                        top: 0,
+                        leading: 10,
+                        bottom: 0,
+                        trailing: 10))
+                Divider()
+                    .frame(height: 5)
                 HStack {
                     TextField("Neue Nachricht", text: $newMessage)
                         .onChange(of: newMessage) { newValue, _ in
@@ -93,7 +107,12 @@ struct ChatScreenView: View {
                         }
                     }
                 }
-                .padding(EdgeInsets(top: 0, leading: 10, bottom: 10, trailing: 10))
+                .padding(
+                    EdgeInsets(
+                        top: 0,
+                        leading: 10,
+                        bottom: 10,
+                        trailing: 10))
                 Divider()
             }
             .navigationBarTitle("Mein Campfire", displayMode: .inline)
@@ -120,6 +139,50 @@ struct ChatScreenView: View {
             set: { chatVm.searchTerm = $0.lowercased() }
         ))
         .background(Color(UIColor.systemBackground))
+        .popover(isPresented: $showReactionPopover) {
+            ReactionPopover(selectedChatSenderViewModel: $selectedChatSenderViewModel, chatVm: chatVm)
+                .presentationCompactAdaptation(.popover)
+                .background(Color.primary)
+        }
+    }
+}
+
+struct ReactionPopover: View {
+    @Binding var selectedChatSenderViewModel: ChatItemViewModel?
+    @ObservedObject var chatVm: ChatScreenViewModel
+    @Environment (\.dismiss) var dismiss
+    
+    var body: some View {
+        VStack {
+            HStack {
+                Button(action: {
+                    react(with: "")
+                    dismiss()
+                }) {
+                    Text("")
+                }
+                Button(action: {
+                    react(with: "👍")
+                    dismiss()
+                }) {
+                    Text("👍")
+                        .padding(20)
+                }
+                Button(action: {
+                    react(with: "")
+                    dismiss()
+                }) {
+                    Text("")
+                }
+            }
+        }
+        .padding()
+    }
+    
+    private func react(with reaction: String) {
+        guard let chatSenderViewModel = selectedChatSenderViewModel else { return }
+        chatVm.addReaction(chatSenderVm: chatSenderViewModel, reaction: reaction)
+        selectedChatSenderViewModel = nil
     }
 }
 

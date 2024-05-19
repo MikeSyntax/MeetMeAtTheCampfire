@@ -24,12 +24,13 @@ final class ChatItemViewModel: ObservableObject, Identifiable, Equatable {
     @Published var isLikedByUser: [String] = []
     @Published var profileImage: String? = ""
     @Published var timeStamp = Date()
+    @Published var reactions: [String]
     
     // Eine Konstante 'chatSenderVm' vom Typ 'ChatModel', die die Daten des Chatmodells enthält.
     let chatSenderVm: ChatModel
     
     // Initialisierungsmethode, die ein ChatModel-Objekt und optionalen Parameter 'isCurrentUser' erhält.
-    init(chatDesign: ChatModel, isCurrentUser: Bool = false) {
+    init(chatDesign: ChatModel, isCurrentUser: Bool = false, reactions: [String] = []) {
         // Zuweisung des übergebenen ChatModel-Objekts an die 'chatSenderVm'-Variable.
         self.chatSenderVm = chatDesign
         self.userName = chatDesign.userName
@@ -41,6 +42,7 @@ final class ChatItemViewModel: ObservableObject, Identifiable, Equatable {
         self.isLikedByUser = chatDesign.isLikedByUser
         self.isCurrentUser = isCurrentUser
         self.profileImage = chatDesign.profileImage
+        self.reactions = reactions
         
         updateDate()
     }
@@ -74,11 +76,11 @@ final class ChatItemViewModel: ObservableObject, Identifiable, Equatable {
         FirebaseManager.shared.firestore.collection("messages")
             .document(messageId)
             .updateData(messagesBox) { error in
-            if let error = error {
-                print("update isLikedStatus failed: \(error)")
-            } else {
-                print("update isLikedStatus done")
+                if let error = error {
+                    print("update isLikedStatus failed: \(error)")
+                } else {
+                    print("update isLikedStatus done")
+                }
             }
-        }
     }
 }

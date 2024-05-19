@@ -21,7 +21,7 @@ final class ChatScreenViewModel: ObservableObject {
     init(user: UserModel){
         self.user = user
     }
-
+    
     //Search in Chat
     func searchMessages(for searchTerm: String) -> [String] {
         // Durchsuche die Nachrichten nach dem Suchbegriff und gib die IDs zurück
@@ -37,26 +37,26 @@ final class ChatScreenViewModel: ObservableObject {
         isLiked: Bool,
         isLikedByUser: [String],
         profileImage: String?){
-        guard let userId = FirebaseManager.shared.userId else {
-            return
+            guard let userId = FirebaseManager.shared.userId else {
+                return
+            }
+            let message = ChatModel(
+                userId: userId,
+                userName: userName,
+                messageText: messageText,
+                timeStamp: Date(),
+                isReadbyUser: [userId],
+                isLiked: isLiked,
+                isLikedByUser: isLikedByUser,
+                profileImage: profileImage)
+            do{
+                try FirebaseManager.shared.firestore
+                    .collection("messages")
+                    .addDocument(from: message)
+            } catch {
+                print("Error creating new message: \(error)")
+            }
         }
-        let message = ChatModel(
-            userId: userId,
-            userName: userName,
-            messageText: messageText,
-            timeStamp: Date(),
-            isReadbyUser: [userId],
-            isLiked: isLiked,
-            isLikedByUser: isLikedByUser,
-            profileImage: profileImage)
-        do{
-            try FirebaseManager.shared.firestore
-                .collection("messages")
-                .addDocument(from: message)
-        } catch {
-            print("Error creating new message: \(error)")
-        }
-    }
     
     //Lesen aller Nachrichten aus dem Firestore
     func readMessages() {
@@ -111,11 +111,18 @@ final class ChatScreenViewModel: ObservableObject {
         FirebaseManager.shared.firestore.collection("messages")
             .document(messageId)
             .updateData(newData) { error in
-            if let error = error {
-                print("Updating isRead status failed: \(error)")
-            } else {
-                print("Updating isRead done")
+                if let error = error {
+                    print("Updating isRead status failed: \(error)")
+                } else {
+                    print("Updating isRead done")
+                }
             }
+    }
+    
+    func addReaction(chatSenderVm: ChatItemViewModel, reaction: String) {
+        if let index = chatSenderViewModels.firstIndex(where: { $0.id == chatSenderVm.id }) {
+            chatSenderViewModels[index].reactions.append(reaction)
+            // Aktualisiere das Backend oder die Datenbank entsprechend
         }
     }
     

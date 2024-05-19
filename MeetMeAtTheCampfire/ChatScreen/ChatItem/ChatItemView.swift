@@ -141,6 +141,10 @@ struct ChatItemView: View {
                 maxHeight: 500,
                 alignment: chatSenderVm.isCurrentUser ? .trailing : .leading)
             
+            if !chatSenderVm.reactions.isEmpty {
+                Text(chatSenderVm.reactions[0])
+                    .offset(x: -35,y: 40 )
+            }
             //User ausschließen, diese Nachrichten mit dieser Id werden nicht mehr angezeigt
             if !chatSenderVm.isCurrentUser {
                 Button{
