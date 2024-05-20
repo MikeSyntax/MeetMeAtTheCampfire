@@ -13,6 +13,7 @@ struct SettingsScreenView: View {
     @AppStorage("entryButton") private var entryButtonIsActive: Bool = true
     @AppStorage("colorScheme") private var colorScheme: String = "System"
     @AppStorage("badgevisible") private var isBadgeVisible: Bool = true
+    @AppStorage("notifications") var notificationsOn: Bool = true
     @State private var showPrivacySheet: Bool = false
     @State private var showDeleteAccountAlert: Bool = false
     @State private var showReEnterPasswordAlert: Bool = false
@@ -77,6 +78,18 @@ struct SettingsScreenView: View {
                             RoundedRectangle(cornerRadius: 10)
                                 .stroke(Color.cyan, lineWidth: 2)
                         )
+                        
+                        Toggle("Vibration bei Erfolg", systemImage: notificationsOn ? "iphone.gen1.radiowaves.left.and.right" : "iphone.gen1.slash", isOn: $notificationsOn)
+                            .font(.system(size: 15))
+                            .padding()
+                            .frame(minHeight: 70)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(Color.cyan, lineWidth: 2)
+                            )
+                            .onChange(of: notificationsOn) {
+                            triggerSuccessVibration()
+                        }
                         
                         Toggle("Benachrichtigung Campfire", systemImage: isBadgeVisible ? "flame.fill" : "flame", isOn: $isBadgeVisible)
                             .font(.system(size: 15))
@@ -201,6 +214,11 @@ struct SettingsScreenView: View {
         }
         .background(Color(UIColor.systemBackground))
         .ignoresSafeArea(.all)
+    }
+    func triggerSuccessVibration() {
+        let feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
+        feedbackGenerator.prepare()
+        feedbackGenerator.impactOccurred()
     }
 }
 

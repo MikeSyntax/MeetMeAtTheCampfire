@@ -12,6 +12,7 @@ struct CalendarDetailNewEntryView: View {
     
     @ObservedObject var calendarDetailItemVm: CalendarDetailItemViewModel
     @AppStorage("entryButton") private var entryButtonIsActive: Bool = true
+    @AppStorage("notifications") var notificationsOn: Bool = true
     @State private var showImagePicker: Bool = false
     @State private var selectedImage: UIImage?
     @State private var showToDoSheet: Bool = false
@@ -198,11 +199,13 @@ struct CalendarDetailNewEntryView: View {
                                     calendarDetailItemVm.removeListener()
                                     showSuccessfulUploadAlert.toggle()
                                     calendarDetailItemVm.createlogBookText(logBookText: calendarDetailItemVm.logBookText)
+                                    calendarDetailItemVm.triggerSuccessVibration()
                                     calendarDetailItemVm.stopLocationRequest()
                                 } else {
                                     addActivity()
                                     showSuccessfulUploadAlert.toggle()
                                     calendarDetailItemVm.createlogBookText(logBookText: calendarDetailItemVm.logBookText)
+                                    calendarDetailItemVm.triggerSuccessVibration()
                                     calendarDetailItemVm.stopLocationRequest()
                                }
                             }
@@ -296,7 +299,7 @@ struct CalendarDetailNewEntryView: View {
     }
 }
 
-//#Preview{
-//    CalendarDetailNewEntryView(calendarDetailItemVm: CalendarDetailItemViewModel(calendarItemModel: LogBookModel(userId: "", formattedDate: "", logBookText: "", latitude: 0.0, longitude: 0.0, imageUrl: "", containsLogBookEntry: false), date: Date()), showNewEntryView: .constant(false))
-//        .modelContainer(for: [LogBookAtivity.self/*, BlockedUser.self*/])
-//}
+#Preview{
+    CalendarDetailNewEntryView(calendarDetailItemVm: CalendarDetailItemViewModel(calendarItemModel: LogBookModel(userId: "", formattedDate: "", logBookText: "", latitude: 0.0, longitude: 0.0, imageUrl: "", containsLogBookEntry: false), date: Date()), showNewEntryView: .constant(false))
+        .modelContainer(for: [LogBookAtivity.self])
+}

@@ -274,6 +274,12 @@ final class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationM
         }
     }
     
+    func triggerSuccessVibration() {
+        let feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
+        feedbackGenerator.prepare()
+        feedbackGenerator.impactOccurred()
+    }
+    
     func removeListener(){
         self.listener = nil
         self.newEntryLogs = []
