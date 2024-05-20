@@ -78,7 +78,11 @@ final class ChatScreenViewModel: ObservableObject {
                 let messages = documents.compactMap { document in
                     try? document.data(as: ChatModel.self)
                 }
-                let filteredMessages = messages.filter { !ChatManager.shared.excludedUserIds.contains($0.userId) }
+                let registeredTime = user.registeredTime
+                
+                let messagesFromRegisterDateNotBefore = messages.filter { $0.timeStamp > registeredTime }
+                
+                let filteredMessages = messagesFromRegisterDateNotBefore.filter { !ChatManager.shared.excludedUserIds.contains($0.userId) }
                 
                 let sortedMessages = filteredMessages.sorted { $0.timeStamp < $1.timeStamp }
                 

@@ -15,6 +15,9 @@ struct DetailCategorieView: View {
     @ObservedObject var detailCategorieVm: DetailCategorieViewModel
     @ObservedObject var detailCategorieItemVm: DetailCategorieItemViewModel
     @State private var showNewTaskAlert: Bool = false
+    @State private var showDeleteAlert: Bool = false
+    @State private var showEditTaskAlert: Bool = false
+    @State private var detailEditCategorieViewModel: DetailCategorieItemViewModel? = nil
     @State private var newTask: String = ""
     @Environment(\.dismiss) private var dismiss
     
@@ -37,30 +40,68 @@ struct DetailCategorieView: View {
                             .onTapGesture {
                                 detailCategorieVm.updateTask(detailCategorieItemVm: detailCategorieItemVm, taskId: detailCategorieViewModel.detailCategorieItemModel.id)
                             }
+                            .onLongPressGesture {
+                                detailEditCategorieViewModel = detailCategorieViewModel
+                                showEditTaskAlert.toggle()
+                            }
+                    }
+                    .alert("ToDo bearbeiten", isPresented: $showEditTaskAlert, actions: {
+                        TextField("Beschreibung", text: $newTask)
+                            .lineLimit(1)
+                            .autocorrectionDisabled()
+                        Button("Speichern") {
+                            detailCategorieVm.updateTask(
+                                taskName: newTask,
+                                taskId: detailEditCategorieViewModel?.detailCategorieItemModel.id
+                            )
+                        }
+                        Button("Abbrechen", role: .cancel) {
+                            // Optionale Abbrechen-Logik
+                        }
+                    }, message: {
+                        Text("Neuen Text eingeben")
+                    })
+                    .onChange(of: showEditTaskAlert) {_, isPresented in
+                        if isPresented {
+                            newTask = detailEditCategorieViewModel?.taskName ?? "no task found"
+                        }
                     }
                 }
                 ButtonDestructiveTextAction(
                     iconName: "trash",
                     text: "Erledigte ToDo´s löschen") {
-                    detailCategorieVm.deleteTask(categorieId: categorieVm.categorieViewModel.id)
-                }
-                .padding(
-                    EdgeInsets(
-                        top: 5,
-                        leading: 0,
-                        bottom: 5,
-                        trailing: 0))
+                        detailCategorieVm.deleteTask(categorieId: categorieVm.categorieViewModel.id)
+                    }
+                    .padding(
+                        EdgeInsets(
+                            top: 5,
+                            leading: 0,
+                            bottom: 5,
+                            trailing: 0))
             }
             Divider()
-            
-            //Beim Löschen der Kategorie werden auch alle Tasks gelöscht!!
             ButtonTextAction(
                 iconName: "trash",
                 text: "Gesamte Kategorie löschen"){
-                homeVm.deleteCategorie(categorieVm: categorieVm)
-                detailCategorieVm.deleteAllTask(categorieId: categorieVm.categorieViewModel.id)
-                dismiss()
-            }
+                    showDeleteAlert.toggle()
+                }
+                .actionSheet(isPresented: $showDeleteAlert) {
+                    ActionSheet(
+                        title: Text("Gesamte Kategorie löschen"),
+                        message: Text("Alle Daten sind unwiederbringlich gelöscht"),
+                        buttons: [
+                            .destructive(Text("Erledigte ToDo´s löschen"), action: {
+                                detailCategorieVm.deleteTask(categorieId: categorieVm.categorieViewModel.id)
+                            }),
+                            .destructive(Text("Gesamte Kategorie löschen"), action: {
+                                homeVm.deleteCategorie(categorieVm: categorieVm)
+                                detailCategorieVm.deleteAllTask(categorieId: categorieVm.categorieViewModel.id)
+                                dismiss()
+                            }),
+                            .cancel(Text("Abbrechen"))
+                        ]
+                    )
+                }
             Divider()
         }
         .scrollContentBackground(.hidden)
@@ -71,7 +112,7 @@ struct DetailCategorieView: View {
                 .opacity(0.2)
                 .ignoresSafeArea(.all))
         
-        .navigationBarTitle("Kategorie ToDo´s", displayMode: .inline)
+        .navigationBarTitle("ToDo´s in der Kategorie", displayMode: .inline)
         .navigationBarBackButtonHidden()
         .toolbar{ ToolbarItem(placement: ToolbarItemPlacement.navigationBarLeading){
             Button("Zurück") {

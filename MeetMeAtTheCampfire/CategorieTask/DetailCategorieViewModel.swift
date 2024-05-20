@@ -20,12 +20,10 @@ final class DetailCategorieViewModel: ObservableObject {
         guard let categorieId = categorieId else {
             return
         }
-        
         let task = TaskModel(
             categorieId: categorieId,
             taskName: taskName,
             taskIsDone: false)
-        
         do{
             try FirebaseManager.shared.firestore
                 .collection("tasksInCategorie")
@@ -38,7 +36,6 @@ final class DetailCategorieViewModel: ObservableObject {
             let updatedCategorie = [
                 "tasksInCategorie" : tasksInCategorieCounter
             ]
-            
             FirebaseManager.shared.firestore.collection("categories")
                 .document(categorieId)
                 .updateData(updatedCategorie) {
@@ -49,9 +46,27 @@ final class DetailCategorieViewModel: ObservableObject {
                         print("update categorie done")
                     }
                 }
-            
         } catch {
             print("Error creating new task: \(error)")
+        }
+    }
+    
+    func updateTask(taskName: String, taskId: String?){
+        guard let taskId = taskId else {
+            return
+        }
+        let task = ["taskName" : taskName]
+        do{
+            FirebaseManager.shared.firestore
+                .collection("tasksInCategorie")
+                .document(taskId)
+                .updateData(task) { error in
+                    if let error = error {
+                        print("updating task succeeded")
+                    } else {
+                        print("updating task succeeded")
+                    }
+                }
         }
     }
     
