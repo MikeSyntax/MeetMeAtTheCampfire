@@ -9,13 +9,21 @@ import SwiftUI
 
 struct HomeScreenView: View {
     @StateObject private var homeVm = HomeScreenViewModel()
+    
     @StateObject private var detailCategorieVm = DetailCategorieViewModel()
-    @StateObject private var detailCategorieItemVm = DetailCategorieItemViewModel(detailCategorieItemModel: TaskModel(categorieId: "1", taskName: "1", taskIsDone: false))
+    
+    @StateObject private var detailCategorieItemVm = DetailCategorieItemViewModel(
+        detailCategorieItemModel: TaskModel(
+            categorieId: "1",
+            taskName: "1",
+            taskIsDone: false))
+    
     @State private var showAnimation: Bool = false
     @State private var showNewCategorieAlert: Bool = false
     @State private var newCategorie: String = ""
     @State private var showSettingsSheet: Bool = false
     @Environment(\.dismiss) private var dismiss
+    @AppStorage("notifications") private var notificationsOn: Bool = true
     
     var body: some View {
         NavigationStack {
@@ -120,6 +128,9 @@ struct HomeScreenView: View {
             }
             Button("Speichern") {
                 homeVm.createCategorie(categorieName: newCategorie)
+                if notificationsOn {
+                    homeVm.triggerSuccessVibration()
+                }
                 newCategorie = ""
             }
         }

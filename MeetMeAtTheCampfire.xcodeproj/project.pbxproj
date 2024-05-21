@@ -75,9 +75,10 @@
 		2BAB62552B95E04900C7839E /* CategorieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAB62542B95E04900C7839E /* CategorieModel.swift */; };
 		2BAE99642BDA9ACF002C20ED /* PasswortSendWithEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAE99632BDA9ACF002C20ED /* PasswortSendWithEmailView.swift */; };
 		2BAE99662BDC1A0C002C20ED /* CalendarNewEntrySheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAE99652BDC1A0C002C20ED /* CalendarNewEntrySheet.swift */; };
+		2BAF07352BFD0FDD00D4D43A /* ReactionPovover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAF07342BFD0FDD00D4D43A /* ReactionPovover.swift */; };
+		2BAF07392BFD175800D4D43A /* MapKitUserAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAF07382BFD175800D4D43A /* MapKitUserAnnotationView.swift */; };
 		2BB2B0332BA83A3A0003CFE2 /* CalendarExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB2B0322BA83A3A0003CFE2 /* CalendarExtensions.swift */; };
 		2BB2B03B2BA84BA20003CFE2 /* CalendarYearlyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB2B03A2BA84BA20003CFE2 /* CalendarYearlyView.swift */; };
-		2BB2B03D2BA84F1F0003CFE2 /* CalendarYearExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB2B03C2BA84F1F0003CFE2 /* CalendarYearExtensions.swift */; };
 		2BBC150F2B9B66DD00305504 /* LanguageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBC150E2B9B66DD00305504 /* LanguageRepository.swift */; };
 		2BBC15132B9B719A00305504 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBC15122B9B719A00305504 /* Language.swift */; };
 		2BBC15152B9B746000305504 /* LanguageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBC15142B9B746000305504 /* LanguageError.swift */; };
@@ -147,9 +148,10 @@
 		2BAB62542B95E04900C7839E /* CategorieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorieModel.swift; sourceTree = "<group>"; };
 		2BAE99632BDA9ACF002C20ED /* PasswortSendWithEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswortSendWithEmailView.swift; sourceTree = "<group>"; };
 		2BAE99652BDC1A0C002C20ED /* CalendarNewEntrySheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarNewEntrySheet.swift; sourceTree = "<group>"; };
+		2BAF07342BFD0FDD00D4D43A /* ReactionPovover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionPovover.swift; sourceTree = "<group>"; };
+		2BAF07382BFD175800D4D43A /* MapKitUserAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapKitUserAnnotationView.swift; sourceTree = "<group>"; };
 		2BB2B0322BA83A3A0003CFE2 /* CalendarExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarExtensions.swift; sourceTree = "<group>"; };
 		2BB2B03A2BA84BA20003CFE2 /* CalendarYearlyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarYearlyView.swift; sourceTree = "<group>"; };
-		2BB2B03C2BA84F1F0003CFE2 /* CalendarYearExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarYearExtensions.swift; sourceTree = "<group>"; };
 		2BBC150E2B9B66DD00305504 /* LanguageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageRepository.swift; sourceTree = "<group>"; };
 		2BBC15122B9B719A00305504 /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		2BBC15142B9B746000305504 /* LanguageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageError.swift; sourceTree = "<group>"; };
@@ -349,8 +351,10 @@
 		2B55614D2BAB09D60028C6E5 /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
-				2BB2B03A2BA84BA20003CFE2 /* CalendarYearlyView.swift */,
 				2BB2B0402BA864F40003CFE2 /* CalendarComponents */,
+				2BAF07372BFD162A00D4D43A /* InfoButton */,
+				2BAF07362BFD161600D4D43A /* Sheets */,
+				2BB2B03A2BA84BA20003CFE2 /* CalendarYearlyView.swift */,
 			);
 			path = Calendar;
 			sourceTree = "<group>";
@@ -371,6 +375,7 @@
 			children = (
 				2B511B2F2BA9D9A5004AEAD6 /* MapKitView.swift */,
 				2B1738A22BAD82050043CAF0 /* MapKitNewEntryView.swift */,
+				2BAF07382BFD175800D4D43A /* MapKitUserAnnotationView.swift */,
 			);
 			path = MapKit;
 			sourceTree = "<group>";
@@ -394,6 +399,30 @@
 			path = CategorieScreen;
 			sourceTree = "<group>";
 		};
+		2BAF07332BFD0FC600D4D43A /* Popover */ = {
+			isa = PBXGroup;
+			children = (
+				2BAF07342BFD0FDD00D4D43A /* ReactionPovover.swift */,
+			);
+			path = Popover;
+			sourceTree = "<group>";
+		};
+		2BAF07362BFD161600D4D43A /* Sheets */ = {
+			isa = PBXGroup;
+			children = (
+				2B7A00692BD7EF0F0054AABD /* CalendarInfoSheetView.swift */,
+			);
+			path = Sheets;
+			sourceTree = "<group>";
+		};
+		2BAF07372BFD162A00D4D43A /* InfoButton */ = {
+			isa = PBXGroup;
+			children = (
+				2B7A00672BD7EB470054AABD /* CalendarInfoButtonView.swift */,
+			);
+			path = InfoButton;
+			sourceTree = "<group>";
+		};
 		2BB2B02F2BA8395B0003CFE2 /* CalendarLogBook */ = {
 			isa = PBXGroup;
 			children = (
@@ -409,9 +438,6 @@
 			isa = PBXGroup;
 			children = (
 				2BB2B0322BA83A3A0003CFE2 /* CalendarExtensions.swift */,
-				2BB2B03C2BA84F1F0003CFE2 /* CalendarYearExtensions.swift */,
-				2B7A00672BD7EB470054AABD /* CalendarInfoButtonView.swift */,
-				2B7A00692BD7EF0F0054AABD /* CalendarInfoSheetView.swift */,
 			);
 			path = CalendarComponents;
 			sourceTree = "<group>";
@@ -459,12 +485,12 @@
 		2BD8D4352BA0A5FC0050CB64 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				2BD855A62BDC5CD7001B0A09 /* ClearView */,
-				2B2778FA2B9079CA00779FB5 /* FirebaseManager */,
-				2B2779062B9080F000779FB5 /* Models */,
 				2B2A3E452B90B147007E5E7F /* Buttons */,
 				2B36879A2B9E036C00F2E944 /* Checkmarks */,
+				2BD855A62BDC5CD7001B0A09 /* ClearView */,
 				2BCC09AA2B95C011005BFC95 /* FalseRight */,
+				2B2778FA2B9079CA00779FB5 /* FirebaseManager */,
+				2B2779062B9080F000779FB5 /* Models */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -481,6 +507,7 @@
 		2BF1D8762BF48559004BC390 /* ChatScreen */ = {
 			isa = PBXGroup;
 			children = (
+				2BAF07332BFD0FC600D4D43A /* Popover */,
 				2BF4B97C2B9877D900C1AF1A /* ChatScreenView.swift */,
 				2BD8D4332B9F60C40050CB64 /* ChatScreenViewModel.swift */,
 			);
@@ -723,10 +750,10 @@
 				2BBC150F2B9B66DD00305504 /* LanguageRepository.swift in Sources */,
 				2B0BBE502BB48EFC006D93EB /* ImagePickerCoordinator.swift in Sources */,
 				2BAB62532B95DDC600C7839E /* CategorieFilledView.swift in Sources */,
-				2BB2B03D2BA84F1F0003CFE2 /* CalendarYearExtensions.swift in Sources */,
 				2B3E70212BE7D7770074ECC7 /* EmailKey.swift in Sources */,
 				2B3E70232BE7D7860074ECC7 /* AdressKey.swift in Sources */,
 				2B0158672B9789F20026CA84 /* DetailCategorieView.swift in Sources */,
+				2BAF07392BFD175800D4D43A /* MapKitUserAnnotationView.swift in Sources */,
 				2B1738A12BAD80FC0043CAF0 /* CalendarDetailNewEntryView.swift in Sources */,
 				2B2779082B90810300779FB5 /* UserModel.swift in Sources */,
 				2BB2B0332BA83A3A0003CFE2 /* CalendarExtensions.swift in Sources */,
@@ -762,6 +789,7 @@
 				2B998A912BE4E976003C99B4 /* ButtonDestructiveTextAction.swift in Sources */,
 				2BCC09AC2B95C05B005BFC95 /* RightView.swift in Sources */,
 				2BAB62552B95E04900C7839E /* CategorieModel.swift in Sources */,
+				2BAF07352BFD0FDD00D4D43A /* ReactionPovover.swift in Sources */,
 				2BF4B9772B9874BC00C1AF1A /* MainScreenView.swift in Sources */,
 				2BAB624C2B95D61B00C7839E /* HomeScreenViewModel.swift in Sources */,
 				2BDBCEDC2BDE61B900D452F8 /* HomeBaseSheetView.swift in Sources */,

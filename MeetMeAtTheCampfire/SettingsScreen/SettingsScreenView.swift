@@ -6,10 +6,9 @@
 //
 
 import SwiftUI
-import UIKit
 
 struct SettingsScreenView: View {
-    @Environment(\.dismiss) private var dismiss
+    
     @AppStorage("infoButton") private var infoButtonIsActive: Bool = true
     @AppStorage("entryButton") private var entryButtonIsActive: Bool = true
     @AppStorage("colorScheme") private var colorScheme: String = "System"
@@ -21,6 +20,7 @@ struct SettingsScreenView: View {
     @State private var showPasswordConfirmationSheet: Bool = false
     @State private var showBlockedUserSheet: Bool = false
     @EnvironmentObject var authVm: AuthViewModel
+    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         NavigationStack{
@@ -212,11 +212,6 @@ struct SettingsScreenView: View {
         }
         .background(Color(UIColor.systemBackground))
         .ignoresSafeArea(.all)
-    }
-    func triggerSuccessVibration() {
-        let feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
-        feedbackGenerator.prepare()
-        feedbackGenerator.impactOccurred()
     }
 }
 

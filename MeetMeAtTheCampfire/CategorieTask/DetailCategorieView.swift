@@ -19,6 +19,7 @@ struct DetailCategorieView: View {
     @State private var detailEditCategorieViewModel: DetailCategorieItemViewModel? = nil
     @State private var newTask: String = ""
     @Environment(\.dismiss) private var dismiss
+    @AppStorage("notifications") private var notificationsOn: Bool = true
     
     var body: some View {
         VStack {
@@ -71,10 +72,16 @@ struct DetailCategorieView: View {
                         buttons: [
                             .destructive(Text("Erledigte ToDo´s löschen"), action: {
                                 detailCategorieVm.deleteTask(categorieId: categorieVm.categorieViewModel.id)
+                                if notificationsOn {
+                                    detailCategorieVm.triggerSuccessVibration()
+                                }
                             }),
                             .destructive(Text("Gesamte Kategorie löschen"), action: {
                                 homeVm.deleteCategorie(categorieVm: categorieVm)
                                 detailCategorieVm.deleteAllTask(categorieId: categorieVm.categorieViewModel.id)
+                                if notificationsOn {
+                                    detailCategorieVm.triggerSuccessVibration()
+                                }
                                 dismiss()
                             }),
                             .cancel(Text("Abbrechen"), action: {
@@ -109,6 +116,9 @@ struct DetailCategorieView: View {
             }
             Button("Speichern") {
                 detailCategorieVm.createNewTask(taskName: newTask, categorieId: categorieVm.categorieViewModel.id)
+                if notificationsOn {
+                    detailCategorieVm.triggerSuccessVibration()
+                }
                 newTask = ""
             }
         })
@@ -121,13 +131,14 @@ struct DetailCategorieView: View {
                     taskName: newTask,
                     taskId: detailEditCategorieViewModel?.detailCategorieItemModel.id
                 )
+                if notificationsOn {
+                    detailCategorieVm.triggerSuccessVibration()
+                }
                 newTask = ""
             }
             Button("Abbrechen", role: .cancel) {
                 newTask = ""
             }
-//        }, message: {
-//            Text("Neuen Text eingeben")
         })
         .background(Color(UIColor.systemBackground))
         .onAppear{

@@ -143,45 +143,6 @@ struct ChatScreenView: View {
     }
 }
 
-struct ReactionPopover: View {
-    @Binding var selectedChatSenderViewModel: ChatItemViewModel?
-    @ObservedObject var chatVm: ChatScreenViewModel
-    @Environment (\.dismiss) var dismiss
-    
-    var body: some View {
-        VStack {
-            HStack {
-                Button(action: {
-                    react(with: "")
-                    dismiss()
-                }) {
-                    Text("")
-                }
-                Button(action: {
-                    react(with: "👍")
-                    dismiss()
-                }) {
-                    Text("👍")
-                        .padding(20)
-                }
-                Button(action: {
-                    react(with: "")
-                    dismiss()
-                }) {
-                    Text("")
-                }
-            }
-        }
-        .padding()
-    }
-    
-    private func react(with reaction: String) {
-        guard let chatSenderViewModel = selectedChatSenderViewModel else { return }
-        chatVm.addReaction(chatSenderVm: chatSenderViewModel, reaction: reaction)
-        selectedChatSenderViewModel = nil
-    }
-}
-
 #Preview {
     let chatVm = ChatScreenViewModel(user: UserModel(id: "1", email: "1", registeredTime: Date(), userName: "hallo", timeStampLastVisitChat: Date.now, isActive: true, imageUrl: ""))
     return ChatScreenView(chatVm: chatVm)

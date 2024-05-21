@@ -7,7 +7,6 @@
 
 import SwiftUI
 import SwiftData
-import UIKit
 
 struct CalendarDetailNewEntryView: View {
     
@@ -17,6 +16,7 @@ struct CalendarDetailNewEntryView: View {
     @State private var showImagePicker: Bool = false
     @State private var selectedImage: UIImage?
     @State private var showToDoSheet: Bool = false
+    @State private var showUserChoiceAnnotation: Bool = false
     @State private var isAnimated: Bool = false
     @State private var showSuccessfulUploadAlert = false
     @Binding var showNewEntryView: Bool
@@ -34,7 +34,7 @@ struct CalendarDetailNewEntryView: View {
                             VStack{
                                 //Ab hier MapKit
                                 VStack{
-                                    Text("1. Wähle deinen Standort")
+                                    Text("1. Wähle deinen jetzigen Standort")
                                         .font(.callout)
                                         .padding(EdgeInsets(top: 0, leading: 0, bottom: -6, trailing: 0))
                                     MapKitNewEntryView()
@@ -48,6 +48,9 @@ struct CalendarDetailNewEntryView: View {
                                         )
                                         .ignoresSafeArea()
                                         .padding(0)
+//                                    Button("oder setze selber einen Pin"){
+//                                        showUserChoiceAnnotation.toggle()
+//                                    }
                                 }
                                 Divider()
                                 //Ab hier Image Picker
@@ -265,6 +268,12 @@ struct CalendarDetailNewEntryView: View {
         .onAppear {
             calendarDetailItemVm.requestLocation()
         }
+//        .sheet(
+//            isPresented: $showUserChoiceAnnotation,
+//            onDismiss: nil) {
+//            MapKitUserAnnotationView()
+//                .presentationDetents([.large])
+//        }
         .onDisappear{
             calendarDetailItemVm.stopLocationRequest()
             isAnimated = false
@@ -289,7 +298,8 @@ struct CalendarDetailNewEntryView: View {
                             message: Text("gedulde Dich einen Moment"),
                             dismissButton: .default(Text("OK"), action: {
                                 showNewEntryView.toggle()
-                            }))
+                            })
+                        )
                     }
                     .toolbar(.hidden, for: .tabBar)
                     .background(Color(UIColor.systemBackground))

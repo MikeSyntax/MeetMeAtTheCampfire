@@ -66,6 +66,7 @@ struct BlockedUserSheet: View {
         .onDisappear{
             chatManager.removeListener()
         }
+        .background(Color(UIColor.systemBackground))
     }
 }
 

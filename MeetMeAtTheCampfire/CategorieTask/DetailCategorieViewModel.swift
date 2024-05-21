@@ -7,6 +7,7 @@
 
 import Foundation
 import FirebaseFirestore
+import UIKit
 
 @MainActor
 final class DetailCategorieViewModel: ObservableObject {
@@ -207,6 +208,12 @@ final class DetailCategorieViewModel: ObservableObject {
                     }
                 }
             }
+    }
+    
+    func triggerSuccessVibration() {
+        let feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
+        feedbackGenerator.prepare()
+        feedbackGenerator.impactOccurred()
     }
     
     func removeListener() {

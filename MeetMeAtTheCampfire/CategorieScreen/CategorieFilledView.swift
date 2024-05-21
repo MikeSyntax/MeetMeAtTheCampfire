@@ -73,8 +73,8 @@ struct CategorieFilledView: View {
 }
 
 
-#Preview {
-    let categorie = CategorieModel(userId: "1", categorieName: "Preview for enter and ", isDone: false, tasksInCategorie: 6)
-    
-    return CategorieFilledView(categorieVm: CategorieViewModel(categorieDesign: categorie), detailCategorieVm: DetailCategorieViewModel())
-}
+//#Preview {
+//    let categorie = CategorieModel(userId: "1", categorieName: "Preview for enter and ", isDone: false, tasksInCategorie: 6)
+//    
+//    return CategorieFilledView(categorieVm: CategorieViewModel(categorieDesign: categorie), detailCategorieVm: DetailCategorieViewModel())
+//}

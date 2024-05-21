@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 @MainActor
 final class LanguageScreenViewModel: ObservableObject {
@@ -48,6 +49,12 @@ final class LanguageScreenViewModel: ObservableObject {
                 print("Error translating language: \(error)")
             }
         }
+    }
+    
+    func triggerSuccessVibration() {
+        let feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
+        feedbackGenerator.prepare()
+        feedbackGenerator.impactOccurred()
     }
     
     func clearTextFields(){

@@ -108,6 +108,7 @@ struct DeleteAccountSheet: View {
             }
             
         }
+        .background(Color(UIColor.systemBackground))
     }
 }
 

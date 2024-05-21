@@ -63,3 +63,9 @@ extension Date {
         Calendar.current.date(byAdding: .year, value: -1, to: self)!
     }
 }
+
+extension Calendar {
+    func startOfYear(date: Date) -> Date {
+        return self.date(from: self.dateComponents([.year, .year], from: date))!
+    }
+}

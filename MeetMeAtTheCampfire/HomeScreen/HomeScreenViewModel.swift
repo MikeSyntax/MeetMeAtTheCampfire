@@ -7,6 +7,7 @@
 
 import Foundation
 import FirebaseFirestore
+import UIKit
 
 @MainActor
 final class HomeScreenViewModel: ObservableObject {
@@ -79,6 +80,12 @@ final class HomeScreenViewModel: ObservableObject {
                 print("delete categorie succeeded")
             }
         }
+    }
+    
+    func triggerSuccessVibration() {
+        let feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
+        feedbackGenerator.prepare()
+        feedbackGenerator.impactOccurred()
     }
     
     func removeListener(){

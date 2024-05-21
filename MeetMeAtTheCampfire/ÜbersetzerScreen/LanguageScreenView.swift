@@ -6,15 +6,14 @@
 //
 
 import SwiftUI
-
 struct LanguageScreenView: View {
     
     @ObservedObject var languageVm: LanguageScreenViewModel
     @State private var selectionLanguage: Language = Language(code: "af", name: "Afrikaans")
     @State private var selectionSourceLanguage: Language = Language(code: "de", name: "Deutsch")
     @State private var isLoading: Bool = false
+    @AppStorage("notifications") private var notificationsOn: Bool = true
     @FocusState var isInputActive: Bool
-//    let obj = observed()
     
     var body: some View {
         NavigationStack {
@@ -72,10 +71,6 @@ struct LanguageScreenView: View {
                                         RoundedRectangle(cornerRadius: 10)
                                             .stroke(Color.cyan, lineWidth: 2)
                                     )
-//                                    .submitLabel(.done)
-//                                    .onSubmit{
-//                                        isInputActive = false
-//                                    }
                                     .focused($isInputActive)
                                     .toolbar {
                                         ToolbarItemGroup(placement: .keyboard) {
@@ -100,6 +95,9 @@ struct LanguageScreenView: View {
                             ButtonTextAction(iconName: "network", text: "Übersetzen"){
                                 if !languageVm.textToTranslate.isEmpty{
                                     languageVm.translateLanguage()
+                                    if notificationsOn {
+                                        languageVm.triggerSuccessVibration()
+                                    }
                                     UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                                 }
                             }
