@@ -7,12 +7,13 @@
 
 import SwiftUI
 import SwiftData
+import UIKit
 
 struct CalendarDetailNewEntryView: View {
     
     @ObservedObject var calendarDetailItemVm: CalendarDetailItemViewModel
     @AppStorage("entryButton") private var entryButtonIsActive: Bool = true
-    @AppStorage("notifications") var notificationsOn: Bool = true
+    @AppStorage("notifications") private var notificationsOn: Bool = true
     @State private var showImagePicker: Bool = false
     @State private var selectedImage: UIImage?
     @State private var showToDoSheet: Bool = false
@@ -55,10 +56,10 @@ struct CalendarDetailNewEntryView: View {
                                         .font(.callout)
                                         .padding(
                                             EdgeInsets(
-                                            top: 2,
-                                            leading: 0,
-                                            bottom: -6,
-                                            trailing: 0))
+                                                top: 2,
+                                                leading: 0,
+                                                bottom: -6,
+                                                trailing: 0))
                                     VStack{
                                         if !calendarDetailItemVm.imageUrl.isEmpty {
                                             VStack{
@@ -199,15 +200,19 @@ struct CalendarDetailNewEntryView: View {
                                     calendarDetailItemVm.removeListener()
                                     showSuccessfulUploadAlert.toggle()
                                     calendarDetailItemVm.createlogBookText(logBookText: calendarDetailItemVm.logBookText)
-                                    calendarDetailItemVm.triggerSuccessVibration()
+                                    if notificationsOn {
+                                        calendarDetailItemVm.triggerSuccessVibration()
+                                    }
                                     calendarDetailItemVm.stopLocationRequest()
                                 } else {
                                     addActivity()
                                     showSuccessfulUploadAlert.toggle()
                                     calendarDetailItemVm.createlogBookText(logBookText: calendarDetailItemVm.logBookText)
-                                    calendarDetailItemVm.triggerSuccessVibration()
+                                    if notificationsOn {
+                                        calendarDetailItemVm.triggerSuccessVibration()
+                                    }
                                     calendarDetailItemVm.stopLocationRequest()
-                               }
+                                }
                             }
                         }
                     }
@@ -267,27 +272,27 @@ struct CalendarDetailNewEntryView: View {
         .sheet(
             isPresented: $showImagePicker,
             onDismiss: nil) {
-            ImagePicker(
-                selectedImage: $calendarDetailItemVm.selectedImage,
-                showImagePicker: $showImagePicker)
-        }
-        .sheet(
-            isPresented: $showToDoSheet,
-            onDismiss: nil) {
-            CalendarNewEntrySheetView(showToDoSheet: $showToDoSheet)
-                .presentationDetents([.medium])
-        }
-        .alert(
-            isPresented:  $showSuccessfulUploadAlert){
-            Alert(
-                title: Text("Deine Daten werden auf den Server geladen"),
-                message: Text("gedulde Dich einen Moment"),
-                dismissButton: .default(Text("OK"), action: {
-                showNewEntryView.toggle()
-            }))
-        }
-        .toolbar(.hidden, for: .tabBar)
-        .background(Color(UIColor.systemBackground))
+                ImagePicker(
+                    selectedImage: $calendarDetailItemVm.selectedImage,
+                    showImagePicker: $showImagePicker)
+            }
+            .sheet(
+                isPresented: $showToDoSheet,
+                onDismiss: nil) {
+                    CalendarNewEntrySheetView(showToDoSheet: $showToDoSheet)
+                        .presentationDetents([.medium])
+                }
+                .alert(
+                    isPresented:  $showSuccessfulUploadAlert){
+                        Alert(
+                            title: Text("Deine Daten werden auf den Server geladen"),
+                            message: Text("gedulde Dich einen Moment"),
+                            dismissButton: .default(Text("OK"), action: {
+                                showNewEntryView.toggle()
+                            }))
+                    }
+                    .toolbar(.hidden, for: .tabBar)
+                    .background(Color(UIColor.systemBackground))
     }
     
     func addActivity(){
@@ -295,7 +300,7 @@ struct CalendarDetailNewEntryView: View {
             date: calendarDetailItemVm.date,
             isNotEmpty: true,
             userId: FirebaseManager.shared.userId!)
-            context.insert(item)
+        context.insert(item)
     }
 }
 

@@ -8,13 +8,14 @@
 import SwiftUI
 import MapKit
 import SwiftData
+import UIKit
 
 struct CalendarDetailItemView: View {
     
     @ObservedObject var calendarDetailItemVm: CalendarDetailItemViewModel
     @State var showNewEntryView: Bool = false
     @Environment(\.dismiss) private var dismiss
-    
+    @AppStorage("notifications") private var notificationsOn: Bool = true
     @Environment(\.modelContext) private var context
     @Query private var items: [LogBookAtivity]
     
@@ -100,8 +101,8 @@ struct CalendarDetailItemView: View {
                     ButtonTextAction(
                         iconName: "plus",
                         text: "Neuer Eintrag") {
-                        showNewEntryView.toggle()
-                    }
+                            showNewEntryView.toggle()
+                        }
                 } else {
                     Divider()
                     ButtonDestructiveTextAction(iconName: "trash", text: "Eintrag löschen"){
@@ -109,6 +110,9 @@ struct CalendarDetailItemView: View {
                             calendarDetailItemVm.deleteLogBookText(formattedDate: calendarDetailItemVm.formattedDate)
                             calendarDetailItemVm.readImages = []
                             calendarDetailItemVm.logBookText = ""
+                            if notificationsOn {
+                                calendarDetailItemVm.triggerSuccessVibration()
+                            }
                             deleteItemChoice(date: calendarDetailItemVm.date, items: items)
                             
                         } else {
@@ -116,6 +120,9 @@ struct CalendarDetailItemView: View {
                             calendarDetailItemVm.deleteImage(imageUrl: calendarDetailItemVm.newEntryLogs.first?.imageUrl ?? "no image found")
                             calendarDetailItemVm.readImages = []
                             calendarDetailItemVm.logBookText = ""
+                            if notificationsOn {
+                                calendarDetailItemVm.triggerSuccessVibration()
+                            }
                             deleteItemChoice(date: calendarDetailItemVm.date, items: items)
                         }
                     }
@@ -166,7 +173,7 @@ struct CalendarDetailItemView: View {
             print(notification)
         }
     }
-   
+    
     func deleteItemChoice(date: Date, items: [LogBookAtivity]) {
         let targetValue = date
         let userId = FirebaseManager.shared.userId
@@ -179,9 +186,9 @@ struct CalendarDetailItemView: View {
     }
 }
 
-//#Preview{
-//    let logbookMod: LogBookModel = LogBookModel(userId: "1", formattedDate: "", logBookText: "Hallo", latitude: 0.0, longitude: 0.0, imageUrl: "", containsLogBookEntry: false)
-//    
-//    return CalendarDetailItemView(calendarDetailItemVm: CalendarDetailItemViewModel(calendarItemModel: logbookMod, date: Date()))
-//        .modelContainer(for: [LogBookAtivity.self/*, BlockedUser.self*/])
-//}
+#Preview{
+    let logbookMod: LogBookModel = LogBookModel(userId: "1", formattedDate: "", logBookText: "Hallo", latitude: 0.0, longitude: 0.0, imageUrl: "", containsLogBookEntry: false)
+    
+    return CalendarDetailItemView(calendarDetailItemVm: CalendarDetailItemViewModel(calendarItemModel: logbookMod, date: Date()))
+        .modelContainer(for: [LogBookAtivity.self])
+}

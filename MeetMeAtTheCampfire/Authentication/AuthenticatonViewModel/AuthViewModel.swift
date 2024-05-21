@@ -259,7 +259,7 @@ final class AuthViewModel: ObservableObject{
     // Firebase Storage
     //========================================================================================================================================================
     
-    func profileImageToStorage() async {
+    func profileImageToStorage() {
         guard let uploadProfileImage = selectedImage else {
             return
         }
@@ -332,7 +332,7 @@ final class AuthViewModel: ObservableObject{
     }
 
     
-    func deleteProfileImage(imageUrl: String) async {
+    func deleteProfileImage(imageUrl: String) {
         guard var currentUser = user else {
             return
         }

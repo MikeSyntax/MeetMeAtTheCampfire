@@ -62,7 +62,7 @@ final class DetailCategorieViewModel: ObservableObject {
                 .document(taskId)
                 .updateData(task) { error in
                     if let error = error {
-                        print("updating task succeeded")
+                        print("updating task succeeded: \(error)")
                     } else {
                         print("updating task succeeded")
                     }

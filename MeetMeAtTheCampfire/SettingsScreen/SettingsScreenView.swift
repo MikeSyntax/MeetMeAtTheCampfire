@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct SettingsScreenView: View {
     @Environment(\.dismiss) private var dismiss
@@ -13,7 +14,7 @@ struct SettingsScreenView: View {
     @AppStorage("entryButton") private var entryButtonIsActive: Bool = true
     @AppStorage("colorScheme") private var colorScheme: String = "System"
     @AppStorage("badgevisible") private var isBadgeVisible: Bool = true
-    @AppStorage("notifications") var notificationsOn: Bool = true
+    @AppStorage("notifications") private var notificationsOn: Bool = true
     @State private var showPrivacySheet: Bool = false
     @State private var showDeleteAccountAlert: Bool = false
     @State private var showReEnterPasswordAlert: Bool = false
@@ -87,9 +88,6 @@ struct SettingsScreenView: View {
                                 RoundedRectangle(cornerRadius: 10)
                                     .stroke(Color.cyan, lineWidth: 2)
                             )
-                            .onChange(of: notificationsOn) {
-                            triggerSuccessVibration()
-                        }
                         
                         Toggle("Benachrichtigung Campfire", systemImage: isBadgeVisible ? "flame.fill" : "flame", isOn: $isBadgeVisible)
                             .font(.system(size: 15))

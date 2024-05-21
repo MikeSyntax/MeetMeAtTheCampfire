@@ -13,9 +13,9 @@ struct ProfileScreenView: View {
     @ObservedObject var profileScreenVm: ProfileScreenViewModel
     @EnvironmentObject var authVm: AuthViewModel
     @Environment(\.dismiss) private var dismiss
-    @AppStorage("notifications") var notificationsOn: Bool = true
-    @AppStorage("homeLat") var homeBaseLatitude: Double = 49.849
-    @AppStorage("homeLong") var homeBaseLongitude: Double = 8.44
+    @AppStorage("notifications") private var notificationsOn: Bool = true
+    @AppStorage("homeLat") private var homeBaseLatitude: Double = 49.849
+    @AppStorage("homeLong") private var homeBaseLongitude: Double = 8.44
     @State private var showHomeBaseAlert: Bool = false
     @State private var latitude: String = ""
     @State private var longitude: String = ""
@@ -102,16 +102,14 @@ struct ProfileScreenView: View {
                                     }
                                 }
                                 Button{
-                                    Task{
-                                        await authVm.profileImageToStorage()
-                                        if !authVm.imageUrl.isEmpty {
-                                            await authVm.deleteProfileImage(imageUrl: authVm.imageUrl)
-                                            if notificationsOn {
-                                                profileScreenVm.triggerSuccessVibration()
-                                            }
-                                        }
+                                    authVm.profileImageToStorage()
+                                    if !authVm.imageUrl.isEmpty {
+                                        authVm.deleteProfileImage(imageUrl: authVm.imageUrl)
                                     }
                                     authVm.updateImageUrl(withId: FirebaseManager.shared.userId ?? "no user found")
+                                    if notificationsOn {
+                                        profileScreenVm.triggerSuccessVibration()
+                                    }
                                 } label: {
                                     Text("Speichern")
                                         .font(.system(size: 14))

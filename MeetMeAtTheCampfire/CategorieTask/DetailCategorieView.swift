@@ -4,7 +4,6 @@
 //
 //  Created by Mike Reichenbach on 05.03.24.
 //
-
 import SwiftUI
 
 struct DetailCategorieView: View {
@@ -42,29 +41,9 @@ struct DetailCategorieView: View {
                             }
                             .onLongPressGesture {
                                 detailEditCategorieViewModel = detailCategorieViewModel
+                                newTask = detailCategorieViewModel.taskName
                                 showEditTaskAlert.toggle()
                             }
-                    }
-                    .alert("ToDo bearbeiten", isPresented: $showEditTaskAlert, actions: {
-                        TextField("Beschreibung", text: $newTask)
-                            .lineLimit(1)
-                            .autocorrectionDisabled()
-                        Button("Speichern") {
-                            detailCategorieVm.updateTask(
-                                taskName: newTask,
-                                taskId: detailEditCategorieViewModel?.detailCategorieItemModel.id
-                            )
-                        }
-                        Button("Abbrechen", role: .cancel) {
-                            // Optionale Abbrechen-Logik
-                        }
-                    }, message: {
-                        Text("Neuen Text eingeben")
-                    })
-                    .onChange(of: showEditTaskAlert) {_, isPresented in
-                        if isPresented {
-                            newTask = detailEditCategorieViewModel?.taskName ?? "no task found"
-                        }
                     }
                 }
                 ButtonDestructiveTextAction(
@@ -98,7 +77,9 @@ struct DetailCategorieView: View {
                                 detailCategorieVm.deleteAllTask(categorieId: categorieVm.categorieViewModel.id)
                                 dismiss()
                             }),
-                            .cancel(Text("Abbrechen"))
+                            .cancel(Text("Abbrechen"), action: {
+                                //Nothing happens here
+                            })
                         ]
                     )
                 }
@@ -118,7 +99,7 @@ struct DetailCategorieView: View {
             Button("Zurück") {
                 dismiss()}}
         }
-        .alert("Neues ToDo erstellen", isPresented: $showNewTaskAlert) {
+        .alert("Neues ToDo erstellen", isPresented: $showNewTaskAlert, actions: {
             TextField("Beschreibung", text: $newTask)
                 .lineLimit(1)
                 .autocorrectionDisabled()
@@ -130,14 +111,31 @@ struct DetailCategorieView: View {
                 detailCategorieVm.createNewTask(taskName: newTask, categorieId: categorieVm.categorieViewModel.id)
                 newTask = ""
             }
-        }
+        })
+        .alert("ToDo bearbeiten", isPresented: $showEditTaskAlert, actions: {
+            TextField("Beschreibung", text: $newTask)
+                .lineLimit(1)
+                .autocorrectionDisabled()
+            Button("Speichern") {
+                detailCategorieVm.updateTask(
+                    taskName: newTask,
+                    taskId: detailEditCategorieViewModel?.detailCategorieItemModel.id
+                )
+                newTask = ""
+            }
+            Button("Abbrechen", role: .cancel) {
+                newTask = ""
+            }
+//        }, message: {
+//            Text("Neuen Text eingeben")
+        })
+        .background(Color(UIColor.systemBackground))
         .onAppear{
             detailCategorieVm.readTasks(categorieId: categorieVm.categorieViewModel.id)
         }
         .onDisappear{
             detailCategorieVm.removeListener()
         }
-        .background(Color(UIColor.systemBackground))
     }
 }
 

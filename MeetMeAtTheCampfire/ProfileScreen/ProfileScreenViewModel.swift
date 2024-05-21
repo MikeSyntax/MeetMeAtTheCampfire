@@ -9,6 +9,7 @@ import Foundation
 import FirebaseFirestore
 import MapKit
 import SwiftUI
+import UIKit
 
 final class ProfileScreenViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
@@ -61,7 +62,6 @@ final class ProfileScreenViewModel: NSObject, ObservableObject, CLLocationManage
         feedbackGenerator.prepare()
         feedbackGenerator.impactOccurred()
     }
-    
     
     func removeListener(){
         self.listener = nil

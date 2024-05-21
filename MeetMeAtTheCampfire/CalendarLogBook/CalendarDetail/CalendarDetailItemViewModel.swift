@@ -8,6 +8,7 @@
 import FirebaseFirestore
 import MapKit
 import SwiftUI
+import UIKit
 
 final class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var newEntryLogs: [LogBookModel] = []

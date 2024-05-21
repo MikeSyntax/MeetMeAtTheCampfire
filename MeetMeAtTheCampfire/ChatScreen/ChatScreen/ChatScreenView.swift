@@ -11,7 +11,6 @@ struct ChatScreenView: View {
     
     @ObservedObject private var chatVm: ChatScreenViewModel
     @EnvironmentObject private var authVm: AuthViewModel
-    @AppStorage("notifications") var notificationsOn: Bool = true
     @State private var newMessage: String = ""
     @State private var matchingChatIds: [String] = []
     @StateObject private var chatManager = ChatManager.shared
@@ -40,10 +39,6 @@ struct ChatScreenView: View {
                                             chatVm.updateisReadStatus(chatSenderVm: chatSenderViewModel)
                                         }
                                     }
-//                                    .onLongPressGesture {
-//                                        selectedChatSenderViewModel = chatSenderViewModel
-//                                        showReactionPopover = true
-//                                    }
                             }
                         }
                         .onChange(of: chatManager.excludedUserIds) {
@@ -103,9 +98,6 @@ struct ChatScreenView: View {
                     ButtonTextAction(iconName: "paperplane", text: "Senden") {
                         if !newMessage.isEmpty {
                             chatVm.createNewMessage(userName: userName, messageText: newMessage, isLiked: false, isLikedByUser: [], profileImage: authVm.user?.imageUrl)
-                            if notificationsOn {
-                                chatVm.triggerSuccessVibration()
-                            }
                             newMessage = ""
                             UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
                         }
@@ -143,52 +135,52 @@ struct ChatScreenView: View {
             set: { chatVm.searchTerm = $0.lowercased() }
         ))
         .background(Color(UIColor.systemBackground))
-//        .popover(isPresented: $showReactionPopover) {
-//            ReactionPopover(selectedChatSenderViewModel: $selectedChatSenderViewModel, chatVm: chatVm)
-//                .presentationCompactAdaptation(.popover)
-//                .background(Color.primary)
-//        }
+        .popover(isPresented: $showReactionPopover) {
+            ReactionPopover(selectedChatSenderViewModel: $selectedChatSenderViewModel, chatVm: chatVm)
+                .presentationCompactAdaptation(.popover)
+                .background(Color.primary)
+        }
     }
 }
 
-//struct ReactionPopover: View {
-//    @Binding var selectedChatSenderViewModel: ChatItemViewModel?
-//    @ObservedObject var chatVm: ChatScreenViewModel
-//    @Environment (\.dismiss) var dismiss
-//    
-//    var body: some View {
-//        VStack {
-//            HStack {
-//                Button(action: {
-//                    react(with: "")
-//                    dismiss()
-//                }) {
-//                    Text("")
-//                }
-//                Button(action: {
-//                    react(with: "👍")
-//                    dismiss()
-//                }) {
-//                    Text("👍")
-//                        .padding(20)
-//                }
-//                Button(action: {
-//                    react(with: "")
-//                    dismiss()
-//                }) {
-//                    Text("")
-//                }
-//            }
-//        }
-//        .padding()
-//    }
+struct ReactionPopover: View {
+    @Binding var selectedChatSenderViewModel: ChatItemViewModel?
+    @ObservedObject var chatVm: ChatScreenViewModel
+    @Environment (\.dismiss) var dismiss
     
-//    private func react(with reaction: String) {
-//        guard let chatSenderViewModel = selectedChatSenderViewModel else { return }
-//        chatVm.addReaction(chatSenderVm: chatSenderViewModel, reaction: reaction)
-//        selectedChatSenderViewModel = nil
-//    }
-//}
+    var body: some View {
+        VStack {
+            HStack {
+                Button(action: {
+                    react(with: "")
+                    dismiss()
+                }) {
+                    Text("")
+                }
+                Button(action: {
+                    react(with: "👍")
+                    dismiss()
+                }) {
+                    Text("👍")
+                        .padding(20)
+                }
+                Button(action: {
+                    react(with: "")
+                    dismiss()
+                }) {
+                    Text("")
+                }
+            }
+        }
+        .padding()
+    }
+    
+    private func react(with reaction: String) {
+        guard let chatSenderViewModel = selectedChatSenderViewModel else { return }
+        chatVm.addReaction(chatSenderVm: chatSenderViewModel, reaction: reaction)
+        selectedChatSenderViewModel = nil
+    }
+}
 
 #Preview {
     let chatVm = ChatScreenViewModel(user: UserModel(id: "1", email: "1", registeredTime: Date(), userName: "hallo", timeStampLastVisitChat: Date.now, isActive: true, imageUrl: ""))
