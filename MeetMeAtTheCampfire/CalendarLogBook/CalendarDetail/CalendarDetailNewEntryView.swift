@@ -204,7 +204,7 @@ struct CalendarDetailNewEntryView: View {
                                     showSuccessfulUploadAlert.toggle()
                                     calendarDetailItemVm.createlogBookText(logBookText: calendarDetailItemVm.logBookText)
                                     if notificationsOn {
-                                        calendarDetailItemVm.triggerSuccessVibration()
+                                        VibrationManager.shared.triggerSuccessVibration()
                                     }
                                     calendarDetailItemVm.stopLocationRequest()
                                 } else {
@@ -212,7 +212,7 @@ struct CalendarDetailNewEntryView: View {
                                     showSuccessfulUploadAlert.toggle()
                                     calendarDetailItemVm.createlogBookText(logBookText: calendarDetailItemVm.logBookText)
                                     if notificationsOn {
-                                        calendarDetailItemVm.triggerSuccessVibration()
+                                        VibrationManager.shared.triggerSuccessVibration()
                                     }
                                     calendarDetailItemVm.stopLocationRequest()
                                 }

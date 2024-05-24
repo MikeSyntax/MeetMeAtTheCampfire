@@ -82,12 +82,6 @@ final class HomeScreenViewModel: ObservableObject {
         }
     }
     
-    func triggerSuccessVibration() {
-        let feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
-        feedbackGenerator.prepare()
-        feedbackGenerator.impactOccurred()
-    }
-    
     func removeListener(){
         self.listener = nil
         self.categorieViewModels = []

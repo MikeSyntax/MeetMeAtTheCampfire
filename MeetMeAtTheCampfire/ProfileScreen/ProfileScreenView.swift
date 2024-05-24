@@ -107,7 +107,7 @@ struct ProfileScreenView: View {
                                     }
                                     authVm.updateImageUrl(withId: FirebaseManager.shared.userId ?? "no user found")
                                     if notificationsOn {
-                                        profileScreenVm.triggerSuccessVibration()
+                                        VibrationManager.shared.triggerSuccessVibration()
                                     }
                                 } label: {
                                     Text("Speichern")

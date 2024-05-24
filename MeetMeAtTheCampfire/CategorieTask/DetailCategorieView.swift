@@ -40,7 +40,7 @@ struct DetailCategorieView: View {
                             .onTapGesture {
                                 detailCategorieVm.updateTask(detailCategorieItemVm: detailCategorieItemVm, taskId: detailCategorieViewModel.detailCategorieItemModel.id)
                             }
-                            .onLongPressGesture {
+                            .onLongPressGesture(minimumDuration: 0.2) {
                                 detailEditCategorieViewModel = detailCategorieViewModel
                                 newTask = detailCategorieViewModel.taskName
                                 showEditTaskAlert.toggle()
@@ -51,6 +51,9 @@ struct DetailCategorieView: View {
                     iconName: "trash",
                     text: "Erledigte ToDo´s löschen") {
                         detailCategorieVm.deleteTask(categorieId: categorieVm.categorieViewModel.id)
+                        if notificationsOn {
+                            VibrationManager.shared.triggerSuccessVibration()
+                        }
                     }
                     .padding(
                         EdgeInsets(
@@ -73,14 +76,14 @@ struct DetailCategorieView: View {
                             .destructive(Text("Erledigte ToDo´s löschen"), action: {
                                 detailCategorieVm.deleteTask(categorieId: categorieVm.categorieViewModel.id)
                                 if notificationsOn {
-                                    detailCategorieVm.triggerSuccessVibration()
+                                    VibrationManager.shared.triggerSuccessVibration()
                                 }
                             }),
                             .destructive(Text("Gesamte Kategorie löschen"), action: {
                                 homeVm.deleteCategorie(categorieVm: categorieVm)
                                 detailCategorieVm.deleteAllTask(categorieId: categorieVm.categorieViewModel.id)
                                 if notificationsOn {
-                                    detailCategorieVm.triggerSuccessVibration()
+                                    VibrationManager.shared.triggerSuccessVibration()
                                 }
                                 dismiss()
                             }),
@@ -117,7 +120,7 @@ struct DetailCategorieView: View {
             Button("Speichern") {
                 detailCategorieVm.createNewTask(taskName: newTask, categorieId: categorieVm.categorieViewModel.id)
                 if notificationsOn {
-                    detailCategorieVm.triggerSuccessVibration()
+                    VibrationManager.shared.triggerSuccessVibration()
                 }
                 newTask = ""
             }
@@ -132,7 +135,7 @@ struct DetailCategorieView: View {
                     taskId: detailEditCategorieViewModel?.detailCategorieItemModel.id
                 )
                 if notificationsOn {
-                    detailCategorieVm.triggerSuccessVibration()
+                    VibrationManager.shared.triggerSuccessVibration()
                 }
                 newTask = ""
             }

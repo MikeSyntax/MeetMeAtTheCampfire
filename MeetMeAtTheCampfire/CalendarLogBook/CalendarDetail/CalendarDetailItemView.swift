@@ -110,7 +110,7 @@ struct CalendarDetailItemView: View {
                             calendarDetailItemVm.readImages = []
                             calendarDetailItemVm.logBookText = ""
                             if notificationsOn {
-                                calendarDetailItemVm.triggerSuccessVibration()
+                                VibrationManager.shared.triggerSuccessVibration()
                             }
                             deleteItemChoice(date: calendarDetailItemVm.date, items: items)
                             
@@ -120,7 +120,7 @@ struct CalendarDetailItemView: View {
                             calendarDetailItemVm.readImages = []
                             calendarDetailItemVm.logBookText = ""
                             if notificationsOn {
-                                calendarDetailItemVm.triggerSuccessVibration()
+                                VibrationManager.shared.triggerSuccessVibration()
                             }
                             deleteItemChoice(date: calendarDetailItemVm.date, items: items)
                         }

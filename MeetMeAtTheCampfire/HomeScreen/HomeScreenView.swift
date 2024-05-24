@@ -129,7 +129,7 @@ struct HomeScreenView: View {
             Button("Speichern") {
                 homeVm.createCategorie(categorieName: newCategorie)
                 if notificationsOn {
-                    homeVm.triggerSuccessVibration()
+                    VibrationManager.shared.triggerSuccessVibration()
                 }
                 newCategorie = ""
             }

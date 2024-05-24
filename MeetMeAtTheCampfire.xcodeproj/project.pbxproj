@@ -66,6 +66,7 @@
 		2B67B3DF2BE76A66002E2379 /* DeleteAccountSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B67B3DE2BE76A66002E2379 /* DeleteAccountSheet.swift */; };
 		2B7A00682BD7EB470054AABD /* CalendarInfoButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7A00672BD7EB470054AABD /* CalendarInfoButtonView.swift */; };
 		2B7A006A2BD7EF0F0054AABD /* CalendarInfoSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7A00692BD7EF0F0054AABD /* CalendarInfoSheetView.swift */; };
+		2B8626372C00491800E56BDF /* VibrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8626362C00491800E56BDF /* VibrationManager.swift */; };
 		2B998A912BE4E976003C99B4 /* ButtonDestructiveTextAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B998A902BE4E976003C99B4 /* ButtonDestructiveTextAction.swift */; };
 		2BAB624A2B95D60B00C7839E /* HomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAB62492B95D60B00C7839E /* HomeScreenView.swift */; };
 		2BAB624C2B95D61B00C7839E /* HomeScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAB624B2B95D61B00C7839E /* HomeScreenViewModel.swift */; };
@@ -139,6 +140,7 @@
 		2B67B3DE2BE76A66002E2379 /* DeleteAccountSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountSheet.swift; sourceTree = "<group>"; };
 		2B7A00672BD7EB470054AABD /* CalendarInfoButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarInfoButtonView.swift; sourceTree = "<group>"; };
 		2B7A00692BD7EF0F0054AABD /* CalendarInfoSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarInfoSheetView.swift; sourceTree = "<group>"; };
+		2B8626362C00491800E56BDF /* VibrationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VibrationManager.swift; sourceTree = "<group>"; };
 		2B998A902BE4E976003C99B4 /* ButtonDestructiveTextAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonDestructiveTextAction.swift; sourceTree = "<group>"; };
 		2BAB62492B95D60B00C7839E /* HomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenView.swift; sourceTree = "<group>"; };
 		2BAB624B2B95D61B00C7839E /* HomeScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewModel.swift; sourceTree = "<group>"; };
@@ -262,9 +264,11 @@
 				2BBE466B2BA1E231002A11A2 /* CategorieTaskItem */,
 				2BF4B97B2B9877C200C1AF1A /* ChatScreen */,
 				2BD8D4352BA0A5FC0050CB64 /* Components */,
+				2B2778FA2B9079CA00779FB5 /* FirebaseManager */,
 				2BAB62482B95D5F100C7839E /* HomeScreen */,
 				2BF1D8782BF55DF9004BC390 /* KeyManager */,
 				2BF4B9752B98748E00C1AF1A /* MainScreen */,
+				2B8626352C0048EB00E56BDF /* NotificationManager */,
 				2BF4B9782B98762A00C1AF1A /* ProfileScreen */,
 				2BF347DB2BD1D7C3007F0AB3 /* RoundedView */,
 				2BF4B97E2B98A23000C1AF1A /* SettingsScreen */,
@@ -380,6 +384,31 @@
 			path = MapKit;
 			sourceTree = "<group>";
 		};
+		2B8626352C0048EB00E56BDF /* NotificationManager */ = {
+			isa = PBXGroup;
+			children = (
+				2B8626362C00491800E56BDF /* VibrationManager.swift */,
+			);
+			path = NotificationManager;
+			sourceTree = "<group>";
+		};
+		2B8626382C004D9000E56BDF /* TranslatorComponents */ = {
+			isa = PBXGroup;
+			children = (
+				2BBC15142B9B746000305504 /* LanguageError.swift */,
+				2BBC15162B9B754D00305504 /* LanguageApiKey.swift */,
+			);
+			path = TranslatorComponents;
+			sourceTree = "<group>";
+		};
+		2B8626392C004DAF00E56BDF /* TranslatorRepository */ = {
+			isa = PBXGroup;
+			children = (
+				2BBC150E2B9B66DD00305504 /* LanguageRepository.swift */,
+			);
+			path = TranslatorRepository;
+			sourceTree = "<group>";
+		};
 		2BAB62482B95D5F100C7839E /* HomeScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -445,9 +474,8 @@
 		2BBC150B2B9B669800305504 /* TranslatorScreen */ = {
 			isa = PBXGroup;
 			children = (
-				2BBC15142B9B746000305504 /* LanguageError.swift */,
-				2BBC15162B9B754D00305504 /* LanguageApiKey.swift */,
-				2BBC150E2B9B66DD00305504 /* LanguageRepository.swift */,
+				2B8626392C004DAF00E56BDF /* TranslatorRepository */,
+				2B8626382C004D9000E56BDF /* TranslatorComponents */,
 				2BBC151A2B9C6B2600305504 /* LanguageScreenViewModel.swift */,
 				2BBC151C2B9C6B3C00305504 /* LanguageScreenView.swift */,
 			);
@@ -489,7 +517,6 @@
 				2B36879A2B9E036C00F2E944 /* Checkmarks */,
 				2BD855A62BDC5CD7001B0A09 /* ClearView */,
 				2BCC09AA2B95C011005BFC95 /* FalseRight */,
-				2B2778FA2B9079CA00779FB5 /* FirebaseManager */,
 				2B2779062B9080F000779FB5 /* Models */,
 			);
 			path = Components;
@@ -760,6 +787,7 @@
 				2B5561502BAB0A480028C6E5 /* CalendarDetailItemView.swift in Sources */,
 				2B2CEC5E2BD4558200348DD1 /* ProfileScreenViewModel.swift in Sources */,
 				2BF4B97D2B9877D900C1AF1A /* ChatScreenView.swift in Sources */,
+				2B8626372C00491800E56BDF /* VibrationManager.swift in Sources */,
 				2BF1D87F2BF7B1DB004BC390 /* BlockedUserSheet.swift in Sources */,
 				2B1738A32BAD82050043CAF0 /* MapKitNewEntryView.swift in Sources */,
 				2BBC15152B9B746000305504 /* LanguageError.swift in Sources */,

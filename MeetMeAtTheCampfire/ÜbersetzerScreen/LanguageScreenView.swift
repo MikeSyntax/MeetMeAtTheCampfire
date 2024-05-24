@@ -96,7 +96,7 @@ struct LanguageScreenView: View {
                                 if !languageVm.textToTranslate.isEmpty{
                                     languageVm.translateLanguage()
                                     if notificationsOn {
-                                        languageVm.triggerSuccessVibration()
+                                        VibrationManager.shared.triggerSuccessVibration()
                                     }
                                     UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                                 }

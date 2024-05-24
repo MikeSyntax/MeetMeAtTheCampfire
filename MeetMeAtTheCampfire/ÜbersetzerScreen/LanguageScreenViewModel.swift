@@ -51,12 +51,6 @@ final class LanguageScreenViewModel: ObservableObject {
         }
     }
     
-    func triggerSuccessVibration() {
-        let feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
-        feedbackGenerator.prepare()
-        feedbackGenerator.impactOccurred()
-    }
-    
     func clearTextFields(){
         textToTranslate = ""
         translatedText = ""

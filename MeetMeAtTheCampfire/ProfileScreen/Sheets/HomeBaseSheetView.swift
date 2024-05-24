@@ -28,6 +28,7 @@ struct HomeBaseSheetView: View {
             .toolbar{
                 Button("Übernehmen"){
                     profileScreenVm.stopLocationRequest()
+                    VibrationManager.shared.triggerSuccessVibration()
                     dismiss()
                 }
             }

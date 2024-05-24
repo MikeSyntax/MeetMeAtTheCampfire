@@ -57,12 +57,6 @@ final class ProfileScreenViewModel: NSObject, ObservableObject, CLLocationManage
             }
     }
     
-    func triggerSuccessVibration() {
-        let feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
-        feedbackGenerator.prepare()
-        feedbackGenerator.impactOccurred()
-    }
-    
     func removeListener(){
         self.listener = nil
         self.chatLikedViewModels = []

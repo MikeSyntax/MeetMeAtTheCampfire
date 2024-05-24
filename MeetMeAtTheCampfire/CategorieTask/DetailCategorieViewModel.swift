@@ -210,12 +210,6 @@ final class DetailCategorieViewModel: ObservableObject {
             }
     }
     
-    func triggerSuccessVibration() {
-        let feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
-        feedbackGenerator.prepare()
-        feedbackGenerator.impactOccurred()
-    }
-    
     func removeListener() {
         self.listener = nil
         self.detailCategorieItemViewModels = []
