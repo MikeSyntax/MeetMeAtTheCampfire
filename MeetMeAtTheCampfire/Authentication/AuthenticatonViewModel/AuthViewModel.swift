@@ -116,17 +116,6 @@ final class AuthViewModel: ObservableObject{
         }
     }
     
-    func deleteAccount(completion: @escaping () -> Void) {
-        guard let currentUserId = FirebaseManager.shared.authentication.currentUser else {
-            return
-        }
-        currentUserId.delete(){ error in
-            if error == nil {
-                completion()
-            }
-        }
-    }
-    
     //========================================================================================================================================================
     // Firebase Firestore
     //========================================================================================================================================================
@@ -241,18 +230,6 @@ final class AuthViewModel: ObservableObject{
                 self.imageUrl = appUser.imageUrl
             }
         }
-    }
-    
-    func deleteUserData(completion: @escaping () -> Void) {
-        guard let currentUser = FirebaseManager.shared.userId else {
-            return
-        }
-        FirebaseManager.shared.firestore.collection("appUser")
-            .document(currentUser).delete(){ error in
-                if error == nil {
-                    completion()
-                }
-            }
     }
     
     //========================================================================================================================================================

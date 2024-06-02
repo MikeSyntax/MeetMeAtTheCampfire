@@ -14,6 +14,8 @@ struct DeleteAccountSheet: View {
     @Binding var showPasswordConfirmationSheet: Bool
     @Environment(\.dismiss) private var dismiss
     
+    private let deleteManager = AccountDeleteManager.shared
+    
     var body: some View {
         NavigationStack{
             VStack{
@@ -81,12 +83,18 @@ struct DeleteAccountSheet: View {
                 
                 if userLoggedInForDeleting {
                     ButtonDestructiveTextAction(iconName: "trash", text: "Account unwiederbringlich löschen", action: {
-                            authVm.deleteUserData {
-                                authVm.deleteAccount {
-                                    authVm.logout()
-                                    dismiss()
+                        deleteManager.deleteAllMessagesWithId {
+                            deleteManager.deleteAllCategoriesWithId {
+                                deleteManager.deleteAllNewLogEntriesWithId {
+                                    deleteManager.deleteUserData {
+                                        deleteManager.deleteAccount {
+                                            authVm.logout()
+                                            dismiss()
+                                        }
+                                    }
                                 }
                             }
+                        }
                     })
                 }
                 Spacer()
@@ -113,6 +121,6 @@ struct DeleteAccountSheet: View {
 }
 
 #Preview {
-    DeleteAccountSheet(showPasswordConfirmationSheet: .constant(false))
+    DeleteAccountSheet( showPasswordConfirmationSheet: .constant(false) )
         .environmentObject(AuthViewModel())
 }

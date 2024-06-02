@@ -64,6 +64,7 @@
 		2B5DF18B2B99B7B900FA285C /* ChatItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5DF18A2B99B7B900FA285C /* ChatItemViewModel.swift */; };
 		2B67B3DD2BE6562B002E2379 /* PrivacySheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B67B3DC2BE6562B002E2379 /* PrivacySheet.swift */; };
 		2B67B3DF2BE76A66002E2379 /* DeleteAccountSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B67B3DE2BE76A66002E2379 /* DeleteAccountSheet.swift */; };
+		2B71B34E2C0CA25B0041E5BC /* AccountDeleteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B71B34D2C0CA25B0041E5BC /* AccountDeleteManager.swift */; };
 		2B7A00682BD7EB470054AABD /* CalendarInfoButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7A00672BD7EB470054AABD /* CalendarInfoButtonView.swift */; };
 		2B7A006A2BD7EF0F0054AABD /* CalendarInfoSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7A00692BD7EF0F0054AABD /* CalendarInfoSheetView.swift */; };
 		2B8626372C00491800E56BDF /* VibrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8626362C00491800E56BDF /* VibrationManager.swift */; };
@@ -138,6 +139,7 @@
 		2B5DF18A2B99B7B900FA285C /* ChatItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatItemViewModel.swift; sourceTree = "<group>"; };
 		2B67B3DC2BE6562B002E2379 /* PrivacySheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacySheet.swift; sourceTree = "<group>"; };
 		2B67B3DE2BE76A66002E2379 /* DeleteAccountSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountSheet.swift; sourceTree = "<group>"; };
+		2B71B34D2C0CA25B0041E5BC /* AccountDeleteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDeleteManager.swift; sourceTree = "<group>"; };
 		2B7A00672BD7EB470054AABD /* CalendarInfoButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarInfoButtonView.swift; sourceTree = "<group>"; };
 		2B7A00692BD7EF0F0054AABD /* CalendarInfoSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarInfoSheetView.swift; sourceTree = "<group>"; };
 		2B8626362C00491800E56BDF /* VibrationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VibrationManager.swift; sourceTree = "<group>"; };
@@ -257,6 +259,7 @@
 				2B2778BF2B8FA74B00779FB5 /* GoogleService-Info.plist */,
 				2B2778B12B8F5C9B00779FB5 /* MeetMeAtTheCampfire.swift */,
 				2B2778B52B8F5C9C00779FB5 /* Assets.xcassets */,
+				2B71B34C2C0CA23F0041E5BC /* AccountDeleteManager */,
 				2BD8D4362BA0A6480050CB64 /* Authentication */,
 				2BB2B02F2BA8395B0003CFE2 /* CalendarLogBook */,
 				2BAB62512B95D8CC00C7839E /* CategorieScreen */,
@@ -382,6 +385,14 @@
 				2BAF07382BFD175800D4D43A /* MapKitUserAnnotationView.swift */,
 			);
 			path = MapKit;
+			sourceTree = "<group>";
+		};
+		2B71B34C2C0CA23F0041E5BC /* AccountDeleteManager */ = {
+			isa = PBXGroup;
+			children = (
+				2B71B34D2C0CA25B0041E5BC /* AccountDeleteManager.swift */,
+			);
+			path = AccountDeleteManager;
 			sourceTree = "<group>";
 		};
 		2B8626352C0048EB00E56BDF /* NotificationManager */ = {
@@ -804,6 +815,7 @@
 				2BBE466F2BA1E360002A11A2 /* TaskModel.swift in Sources */,
 				2B2779022B907E8800779FB5 /* RegisterView.swift in Sources */,
 				2BAB624E2B95D64300C7839E /* CategorieAddView.swift in Sources */,
+				2B71B34E2C0CA25B0041E5BC /* AccountDeleteManager.swift in Sources */,
 				2BF4B9802B98A24C00C1AF1A /* SettingsScreenView.swift in Sources */,
 				2B28CBAE2BEC121300DCBE81 /* LogBookActivity.swift in Sources */,
 				2B5DF1852B99B46E00FA285C /* ChatModel.swift in Sources */,
@@ -959,13 +971,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"MeetMeAtTheCampfire/Preview Content\"";
-				DEVELOPMENT_TEAM = H66T8P755P;
+				DEVELOPMENT_TEAM = ZUA2P6GFMJ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Get your location for show your local place";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -979,6 +993,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = mikeSyntax.MeetMeAtTheCampfire;
 				PRODUCT_NAME = Campfire;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -993,12 +1008,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MeetMeAtTheCampfire/Preview Content\"";
-				DEVELOPMENT_TEAM = H66T8P755P;
+				DEVELOPMENT_TEAM = ZUA2P6GFMJ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Get your location for show your local place";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1012,6 +1029,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = mikeSyntax.MeetMeAtTheCampfire;
 				PRODUCT_NAME = Campfire;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
