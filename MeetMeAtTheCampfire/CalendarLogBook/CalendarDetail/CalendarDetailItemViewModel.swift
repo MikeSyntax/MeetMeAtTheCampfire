@@ -11,6 +11,9 @@ import SwiftUI
 import UIKit
 
 final class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
+    
+//    @AppStorage("coordinateLat") var coordinateLatitude: Double = 0.0
+//    @AppStorage("coordinateLong") var coordinateLongitude: Double = 0.0
     @Published var newEntryLogs: [LogBookModel] = []
     @Published var listForShowButton: [LogBookModel] = []
     @Published var mapCameraPosition: MapCameraPosition = MapCameraPosition.automatic
@@ -257,16 +260,26 @@ final class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationM
     
     @MainActor
     func locationManager(_ manager: CLLocationManager, didUpdateLocations location: [CLLocation]){
-        if let lastLocation = location.last {
-            self.lastLocation = lastLocation
-            self.mapCameraPosition = MapCameraPosition.camera(
-                MapCamera(
-                    centerCoordinate: lastLocation.coordinate, distance: 5000))
-            self.latitude = lastLocation.coordinate.latitude
-            self.longitude = lastLocation.coordinate.longitude
-            print("coordinates choosen \(self.latitude) and \(self.longitude)")
+//        if coordinateLatitude != 0.0 && coordinateLongitude != 0.0 {
+//            self.latitude = coordinateLatitude
+//            self.longitude = coordinateLongitude
+//        } else {
+            if let lastLocation = location.last {
+                self.lastLocation = lastLocation
+                self.mapCameraPosition = MapCameraPosition.camera(
+                    MapCamera(
+                        centerCoordinate: lastLocation.coordinate, distance: 5000))
+                self.latitude = lastLocation.coordinate.latitude
+                self.longitude = lastLocation.coordinate.longitude
+                print("coordinates choosen \(self.latitude) and \(self.longitude)")
+            }
         }
-    }
+//    }
+    
+//    func resetCoordinatesInAppStorage (){
+//        coordinateLatitude = 0.0
+//        coordinateLongitude = 0.0
+//    }
     
     func isNewImageLoadingSlow(){
         self.isNewImageLoading = true

@@ -65,6 +65,7 @@
 		2B67B3DD2BE6562B002E2379 /* PrivacySheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B67B3DC2BE6562B002E2379 /* PrivacySheet.swift */; };
 		2B67B3DF2BE76A66002E2379 /* DeleteAccountSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B67B3DE2BE76A66002E2379 /* DeleteAccountSheet.swift */; };
 		2B71B34E2C0CA25B0041E5BC /* AccountDeleteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B71B34D2C0CA25B0041E5BC /* AccountDeleteManager.swift */; };
+		2B71B3502C14BFD90041E5BC /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B71B34F2C14BFD90041E5BC /* NotificationManager.swift */; };
 		2B7A00682BD7EB470054AABD /* CalendarInfoButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7A00672BD7EB470054AABD /* CalendarInfoButtonView.swift */; };
 		2B7A006A2BD7EF0F0054AABD /* CalendarInfoSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7A00692BD7EF0F0054AABD /* CalendarInfoSheetView.swift */; };
 		2B8626372C00491800E56BDF /* VibrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8626362C00491800E56BDF /* VibrationManager.swift */; };
@@ -140,6 +141,7 @@
 		2B67B3DC2BE6562B002E2379 /* PrivacySheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacySheet.swift; sourceTree = "<group>"; };
 		2B67B3DE2BE76A66002E2379 /* DeleteAccountSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountSheet.swift; sourceTree = "<group>"; };
 		2B71B34D2C0CA25B0041E5BC /* AccountDeleteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDeleteManager.swift; sourceTree = "<group>"; };
+		2B71B34F2C14BFD90041E5BC /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		2B7A00672BD7EB470054AABD /* CalendarInfoButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarInfoButtonView.swift; sourceTree = "<group>"; };
 		2B7A00692BD7EF0F0054AABD /* CalendarInfoSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarInfoSheetView.swift; sourceTree = "<group>"; };
 		2B8626362C00491800E56BDF /* VibrationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VibrationManager.swift; sourceTree = "<group>"; };
@@ -399,6 +401,7 @@
 			isa = PBXGroup;
 			children = (
 				2B8626362C00491800E56BDF /* VibrationManager.swift */,
+				2B71B34F2C14BFD90041E5BC /* NotificationManager.swift */,
 			);
 			path = NotificationManager;
 			sourceTree = "<group>";
@@ -804,6 +807,7 @@
 				2BBC15152B9B746000305504 /* LanguageError.swift in Sources */,
 				2B7A006A2BD7EF0F0054AABD /* CalendarInfoSheetView.swift in Sources */,
 				2BF347DD2BD1D7E2007F0AB3 /* RoundedView.swift in Sources */,
+				2B71B3502C14BFD90041E5BC /* NotificationManager.swift in Sources */,
 				2BAB62502B95D79800C7839E /* CategorieViewModel.swift in Sources */,
 				2BAB624A2B95D60B00C7839E /* HomeScreenView.swift in Sources */,
 				2B7A00682BD7EB470054AABD /* CalendarInfoButtonView.swift in Sources */,

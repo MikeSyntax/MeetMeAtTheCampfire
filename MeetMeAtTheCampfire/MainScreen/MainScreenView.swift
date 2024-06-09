@@ -11,6 +11,7 @@ struct MainScreenView: View {
     
     let authVm: AuthViewModel
     
+    @Environment(\.scenePhase) var scenePhase
     @StateObject var chatVm: ChatScreenViewModel
     @StateObject var profileScreenVm: ProfileScreenViewModel
     
@@ -85,14 +86,21 @@ struct MainScreenView: View {
         .onAppear{
             selectedTab = 0
             chatVm.readMessages()
+            NotificationManager.shared.allowNotifications()
         }
         .onChange(of: selectedTab){
             if selectedTab == 1 {
                 authVm.user!.timeStampLastVisitChat = Date.now
             }
         }
+        .onChange(of: scenePhase) { oldValue, newValue in
+            if newValue == .background {
+                    NotificationManager.shared.notificationContent()
+            }
+        }
         .onDisappear{
             authVm.updateUser()
+            NotificationManager.shared.notificationContent()
         }
         .onChange(of: authVm.user?.id){
             selectedTab = 0

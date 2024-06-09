@@ -5,6 +5,7 @@
 //  Created by Mike Reichenbach on 05.03.24.
 //
 import SwiftUI
+import StoreKit
 
 struct DetailCategorieView: View {
     
@@ -18,6 +19,7 @@ struct DetailCategorieView: View {
     @State private var showEditTaskAlert: Bool = false
     @State private var detailEditCategorieViewModel: DetailCategorieItemViewModel? = nil
     @State private var newTask: String = ""
+    @Environment(\.requestReview) var requestReview
     @Environment(\.dismiss) private var dismiss
     @AppStorage("notifications") private var notificationsOn: Bool = true
     
@@ -106,8 +108,13 @@ struct DetailCategorieView: View {
         .navigationBarTitle("ToDo´s in der Kategorie", displayMode: .inline)
         .navigationBarBackButtonHidden()
         .toolbar{ ToolbarItem(placement: ToolbarItemPlacement.navigationBarLeading){
-            Button("Zurück") {
-                dismiss()}}
+                Button("Zurück") {
+                    dismiss()
+                    if detailCategorieVm.detailCategorieItemViewModels.count >= 1 {
+                        requestReview()
+                    }
+                }
+            }
         }
         .alert("Neues ToDo erstellen", isPresented: $showNewTaskAlert, actions: {
             TextField("Beschreibung", text: $newTask)

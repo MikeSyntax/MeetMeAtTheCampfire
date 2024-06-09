@@ -207,6 +207,7 @@ struct CalendarDetailNewEntryView: View {
                                         VibrationManager.shared.triggerSuccessVibration()
                                     }
                                     calendarDetailItemVm.stopLocationRequest()
+//                                    calendarDetailItemVm.resetCoordinatesInAppStorage()
                                 } else {
                                     addActivity()
                                     showSuccessfulUploadAlert.toggle()
@@ -215,6 +216,7 @@ struct CalendarDetailNewEntryView: View {
                                         VibrationManager.shared.triggerSuccessVibration()
                                     }
                                     calendarDetailItemVm.stopLocationRequest()
+//                                    calendarDetailItemVm.resetCoordinatesInAppStorage()
                                 }
                             }
                         }
