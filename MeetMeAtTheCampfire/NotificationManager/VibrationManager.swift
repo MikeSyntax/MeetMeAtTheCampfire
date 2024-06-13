@@ -12,6 +12,8 @@ import SwiftUI
 final class VibrationManager {
     static let shared = VibrationManager()
     
+    private init() {}
+    
     func triggerSuccessVibration() {
         let feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
         feedbackGenerator.prepare()

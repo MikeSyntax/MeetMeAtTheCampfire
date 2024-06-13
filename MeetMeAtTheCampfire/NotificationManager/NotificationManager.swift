@@ -12,13 +12,14 @@ import UserNotifications
 final class NotificationManager {
     static let shared = NotificationManager()
     
+    private init() {}
     //Permission for sending notifications
     func allowNotifications(){
         UNUserNotificationCenter.current()
             .requestAuthorization (
                 options: [.alert, .badge, .sound]) { success, error in
                     if success {
-                        print("Accepted")
+                        print("Permission accepted")
                     } else if let error {
                         print("error: \(error.localizedDescription)")
                     }
@@ -51,7 +52,7 @@ final class NotificationManager {
         content.subtitle = randomSubtitleText
         content.sound = UNNotificationSound.default
         
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 86400, repeats: false)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
         
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
         

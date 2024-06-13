@@ -168,9 +168,6 @@ struct CalendarDetailItemView: View {
         }
         .toolbar(.hidden, for: .tabBar)
         .background(Color(UIColor.systemBackground))
-//        .onReceive(NotificationCenter.default.publisher(for: UIApplication.didReceiveMemoryWarningNotification, object: nil)) { notification in
-//            print(notification)
-//        }
     }
     
     func deleteItemChoice(date: Date, items: [LogBookAtivity]) {

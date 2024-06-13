@@ -233,9 +233,9 @@ final class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationM
         
         imageRef.delete() { error in
             if let error = error {
-                print("delete imageRef for day \(self.formattedDate) failed: \(error)")
+                print("deleting imageRef for day \(self.formattedDate) failed: \(error)")
             } else {
-                print("delete imageRef for day \(self.formattedDate) successful")
+                print("deleting imageRef for day \(self.formattedDate) successful")
             }
         }
     }
