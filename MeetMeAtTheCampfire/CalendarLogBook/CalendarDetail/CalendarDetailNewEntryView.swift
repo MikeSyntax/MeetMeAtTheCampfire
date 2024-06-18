@@ -38,7 +38,7 @@ struct CalendarDetailNewEntryView: View {
                                         .font(.callout)
                                         .padding(EdgeInsets(top: 0, leading: 0, bottom: -6, trailing: 0))
                                     MapKitNewEntryView()
-//                                    MapKitUserAnnotationView(latitude: $calendarDetailItemVm.latitude, longitude: $calendarDetailItemVm.longitude)
+                                    //                                    MapKitUserAnnotationView(latitude: $calendarDetailItemVm.latitude, longitude: $calendarDetailItemVm.longitude)
                                         .frame(
                                             minWidth: 300,
                                             minHeight: 200)
@@ -49,9 +49,9 @@ struct CalendarDetailNewEntryView: View {
                                         )
                                         .ignoresSafeArea()
                                         .padding(0)
-//                                    Button("oder setze selber einen Pin"){
-//                                        showUserChoiceAnnotation.toggle()
-//                                    }
+                                    //                                    Button("oder setze selber einen Pin"){
+                                    //                                        showUserChoiceAnnotation.toggle()
+                                    //                                    }
                                 }
                                 Divider()
                                 //Ab hier Image Picker
@@ -195,7 +195,8 @@ struct CalendarDetailNewEntryView: View {
                             //Button zum speichern von Bildern
                             ButtonTextAction(iconName: "square.and.arrow.down", text: "Speichern") {
                                 //Wenn Einträge nicht leer sind oder Einträge mit nicht leeren Text und das passende Datum enthalten, existieren
-                                if !calendarDetailItemVm.newEntryLogs.isEmpty || calendarDetailItemVm.newEntryLogs.contains(where: { !$0.logBookText.isEmpty && $0.formattedDate == calendarDetailItemVm.formattedDate }) {
+                                if !calendarDetailItemVm.newEntryLogs.isEmpty || calendarDetailItemVm.newEntryLogs.contains(
+                                    where: { !$0.logBookText.isEmpty && $0.formattedDate == calendarDetailItemVm.formattedDate }) {
                                     calendarDetailItemVm.deleteLogBookText(formattedDate: calendarDetailItemVm.formattedDate)
                                     //Bilder löschen nur wenn eine Url existiert, sonst übersprinten
                                     if !calendarDetailItemVm.imageUrl.isEmpty {
@@ -269,14 +270,15 @@ struct CalendarDetailNewEntryView: View {
         .onAppear {
             calendarDetailItemVm.requestLocation()
         }
-//        .sheet(
-//            isPresented: $showUserChoiceAnnotation,
-//            onDismiss: nil) {
-//                MapKitNewEntryView()
-//                .presentationDetents([.medium])
-//        }
+        //        .sheet(
+        //            isPresented: $showUserChoiceAnnotation,
+        //            onDismiss: nil) {
+        //                MapKitNewEntryView()
+        //                .presentationDetents([.medium])
+        //        }
         .onDisappear{
             calendarDetailItemVm.stopLocationRequest()
+            //  calendarDetailItemVm.readLogBookText(formattedDate: calendarDetailItemVm.formattedDate)
             isAnimated = false
         }
         .sheet(

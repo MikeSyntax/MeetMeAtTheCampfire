@@ -20,6 +20,7 @@ final class NotificationManager {
                 options: [.alert, .badge, .sound]) { success, error in
                     if success {
                         print("Permission accepted")
+                        self.notificationContent()
                     } else if let error {
                         print("error: \(error.localizedDescription)")
                     }
@@ -45,6 +46,11 @@ final class NotificationManager {
             "Beschreibe Deine Erlebnisse",
             "Neues im Campfire",
         ]
+        
+        let hour = 20
+        let minute = 34
+        let isDaily = true
+        
         let randomTitleText: String = titleText.randomElement() ?? "No title"
         
         let content = UNMutableNotificationContent()
@@ -52,9 +58,17 @@ final class NotificationManager {
         content.subtitle = randomSubtitleText
         content.sound = UNNotificationSound.default
         
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
+        let calendar = Calendar.current
+        var dateComponents = DateComponents(calendar: calendar, timeZone: TimeZone.current)
+        dateComponents.hour = hour
+        dateComponents.minute = minute
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: isDaily)
+//      let request = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
         
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        
+        self.removeAllPendingNotifications()
         
         UNUserNotificationCenter.current().add(request)
     }

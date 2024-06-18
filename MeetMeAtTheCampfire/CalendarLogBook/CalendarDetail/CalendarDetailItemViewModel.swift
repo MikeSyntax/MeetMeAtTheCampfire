@@ -8,7 +8,6 @@
 import FirebaseFirestore
 import MapKit
 import SwiftUI
-import UIKit
 
 final class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var newEntryLogs: [LogBookModel] = []
@@ -192,7 +191,7 @@ final class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationM
                         self.imageUrl = imageUrl
                     }
                     if let logBookText = self.newEntryLogs.first?.logBookText {
-                        self .logBookText = logBookText
+                        self.logBookText = logBookText
                     }
                 }
             }
@@ -284,8 +283,8 @@ final class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationM
 
 
 
-//
-//
+
+
 //final class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
 //  
 //    @Published var newEntryLogs: [LogBookModel] = []
@@ -559,4 +558,4 @@ final class CalendarDetailItemViewModel: NSObject, ObservableObject, CLLocationM
 //        self.readImages = []
 //    }
 //}
-//
+

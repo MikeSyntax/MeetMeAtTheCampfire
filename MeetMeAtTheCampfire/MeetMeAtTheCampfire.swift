@@ -11,7 +11,6 @@ import SwiftData
 
 @main
 struct MeetMeAtTheCampfireApp: App {
-    
     @StateObject var authVm = AuthViewModel()
     
     init(){
