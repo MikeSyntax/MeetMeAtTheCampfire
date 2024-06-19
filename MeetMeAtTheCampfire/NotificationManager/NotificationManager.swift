@@ -36,6 +36,10 @@ final class NotificationManager {
             "Füge ein neues Foto ins Logbuch ein",
             "Hast Du schon eine Kategorie Urlaub?",
             "Die Kategorie Einkaufen ist auch wichtig",
+            "Kategorie Camper erstellen",
+            "Wie ist die Planung für den Urlaub",
+            "Frage im Campfire nach schönen Plätzen",
+            "Schöne Erlebnisse müssen ins Logbuch"
         
         ]
         let randomSubtitleText: String = subtitleText.randomElement() ?? "No subtitle"
@@ -45,13 +49,14 @@ final class NotificationManager {
             "Öffne Campfire",
             "Beschreibe Deine Erlebnisse",
             "Neues im Campfire",
+            "Heute wichtig"
         ]
+        let randomTitleText: String = titleText.randomElement() ?? "No title"
         
-        let hour = 20
+        let hour: [Int] = [8,9,10,11,12,13,14,15,16,17,18,19,20]
+        let randomHour: Int = hour.randomElement() ?? 0
         let minute = 34
         let isDaily = true
-        
-        let randomTitleText: String = titleText.randomElement() ?? "No title"
         
         let content = UNMutableNotificationContent()
         content.title = randomTitleText
@@ -60,7 +65,7 @@ final class NotificationManager {
         
         let calendar = Calendar.current
         var dateComponents = DateComponents(calendar: calendar, timeZone: TimeZone.current)
-        dateComponents.hour = hour
+        dateComponents.hour = randomHour
         dateComponents.minute = minute
         
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: isDaily)
