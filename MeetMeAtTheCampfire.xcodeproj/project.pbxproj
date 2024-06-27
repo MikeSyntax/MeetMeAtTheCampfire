@@ -106,6 +106,7 @@
 		2BF4B97A2B98764300C1AF1A /* ProfileScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF4B9792B98764300C1AF1A /* ProfileScreenView.swift */; };
 		2BF4B97D2B9877D900C1AF1A /* ChatScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF4B97C2B9877D900C1AF1A /* ChatScreenView.swift */; };
 		2BF4B9802B98A24C00C1AF1A /* SettingsScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF4B97F2B98A24C00C1AF1A /* SettingsScreenView.swift */; };
+		2BF85C062C2D629C00FB5E50 /* DateEntryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF85C052C2D629C00FB5E50 /* DateEntryModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -182,6 +183,7 @@
 		2BF4B9792B98764300C1AF1A /* ProfileScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreenView.swift; sourceTree = "<group>"; };
 		2BF4B97C2B9877D900C1AF1A /* ChatScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatScreenView.swift; sourceTree = "<group>"; };
 		2BF4B97F2B98A24C00C1AF1A /* SettingsScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenView.swift; sourceTree = "<group>"; };
+		2BF85C052C2D629C00FB5E50 /* DateEntryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateEntryModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -319,6 +321,7 @@
 				2BBC15182B9C614900305504 /* Translation.swift */,
 				2BBE466E2BA1E360002A11A2 /* TaskModel.swift */,
 				2B43E1742BAACED400375D58 /* LogBookModel.swift */,
+				2BF85C052C2D629C00FB5E50 /* DateEntryModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -713,11 +716,11 @@
 			};
 			buildConfigurationList = 2B2778A92B8F5C9B00779FB5 /* Build configuration list for PBXProject "MeetMeAtTheCampfire" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
+			developmentRegion = de;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
+				de,
 			);
 			mainGroup = 2B2778A52B8F5C9B00779FB5;
 			packageReferences = (
@@ -807,6 +810,7 @@
 				2BBC15152B9B746000305504 /* LanguageError.swift in Sources */,
 				2B7A006A2BD7EF0F0054AABD /* CalendarInfoSheetView.swift in Sources */,
 				2BF347DD2BD1D7E2007F0AB3 /* RoundedView.swift in Sources */,
+				2BF85C062C2D629C00FB5E50 /* DateEntryModel.swift in Sources */,
 				2B71B3502C14BFD90041E5BC /* NotificationManager.swift in Sources */,
 				2BAB62502B95D79800C7839E /* CategorieViewModel.swift in Sources */,
 				2BAB624A2B95D60B00C7839E /* HomeScreenView.swift in Sources */,
@@ -1071,8 +1075,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 10.21.0;
+				kind = exactVersion;
+				version = 10.19.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
