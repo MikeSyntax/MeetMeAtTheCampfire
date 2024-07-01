@@ -13,10 +13,10 @@ struct CalendarDetailNewEntryView: View {
     @ObservedObject var calendarDetailItemVm: CalendarDetailItemViewModel
     @AppStorage("entryButton") private var entryButtonIsActive: Bool = true
     @AppStorage("notifications") private var notificationsOn: Bool = true
+    @AppStorage("userIsPremium") private var userIsPremium: Bool = false
     @State private var showImagePicker: Bool = false
     @State private var selectedImage: UIImage?
     @State private var showToDoSheet: Bool = false
-    @State private var showUserChoiceAnnotation: Bool = false
     @State private var isAnimated: Bool = false
     @State private var showSuccessfulUploadAlert = false
     @Binding var showNewEntryView: Bool
@@ -34,11 +34,29 @@ struct CalendarDetailNewEntryView: View {
                             VStack{
                                 //Ab hier MapKit
                                 VStack{
-                                    Text("1. Wähle deinen jetzigen Standort")
+                                    if !userIsPremium {
+                                        VStack{
+                                            Text("1. Wähle deinen Live Standort")
+                                            Text("ProVersion: Standort selbst festlegen")
+                                        }
                                         .font(.callout)
                                         .padding(EdgeInsets(top: 0, leading: 0, bottom: -6, trailing: 0))
-                                    MapKitNewEntryView()
-                                    //                                    MapKitUserAnnotationView(latitude: $calendarDetailItemVm.latitude, longitude: $calendarDetailItemVm.longitude)
+                                        MapKitNewEntryView()
+                                            .frame(
+                                                minWidth: 300,
+                                                minHeight: 200)
+                                            .cornerRadius(10)
+                                            .overlay(
+                                                RoundedRectangle(cornerRadius: 10)
+                                                    .stroke(Color.cyan, lineWidth: 2)
+                                            )
+                                            .ignoresSafeArea()
+                                            .padding(0)
+                                    } else {
+                                        Text("1. Standort wählen und länger drücken")
+                                            .font(.callout)
+                                            .padding(EdgeInsets(top: 0, leading: 0, bottom: -6, trailing: 0))
+                                        MapKitUserAnnotationView(latitude: $calendarDetailItemVm.latitude, longitude: $calendarDetailItemVm.longitude)
                                         .frame(
                                             minWidth: 300,
                                             minHeight: 200)
@@ -49,9 +67,7 @@ struct CalendarDetailNewEntryView: View {
                                         )
                                         .ignoresSafeArea()
                                         .padding(0)
-                                    //                                    Button("oder setze selber einen Pin"){
-                                    //                                        showUserChoiceAnnotation.toggle()
-                                    //                                    }
+                                    }
                                 }
                                 Divider()
                                 //Ab hier Image Picker
@@ -270,17 +286,17 @@ struct CalendarDetailNewEntryView: View {
         .onAppear {
             calendarDetailItemVm.requestLocation()
         }
-        //        .sheet(
-        //            isPresented: $showUserChoiceAnnotation,
-        //            onDismiss: nil) {
-        //                MapKitNewEntryView()
-        //                .presentationDetents([.medium])
-        //        }
         .onDisappear{
             calendarDetailItemVm.stopLocationRequest()
-            //  calendarDetailItemVm.readLogBookText(formattedDate: calendarDetailItemVm.formattedDate)
             isAnimated = false
         }
+        .gesture(
+            DragGesture().onChanged { _ in
+                if userIsPremium {
+                    calendarDetailItemVm.stopLocationRequest()
+                }
+            }
+        )
         .sheet(
             isPresented: $showImagePicker,
             onDismiss: nil) {

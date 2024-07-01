@@ -14,6 +14,7 @@ struct SettingsScreenView: View {
     @AppStorage("colorScheme") private var colorScheme: String = "System"
     @AppStorage("badgevisible") private var isBadgeVisible: Bool = true
     @AppStorage("notifications") private var notificationsOn: Bool = true
+    @AppStorage("userIsPremium") private var userIsPremium: Bool = false
     @State private var showPrivacySheet: Bool = false
     @State private var showDeleteAccountAlert: Bool = false
     @State private var showReEnterPasswordAlert: Bool = false
@@ -29,6 +30,15 @@ struct SettingsScreenView: View {
                 ScrollView{
                     Spacer()
                     VStack{
+                        Toggle("Benutzer hat die Pro Version", systemImage: userIsPremium ? "person.badge.key.fill" : "person.badge.key", isOn: $userIsPremium)
+                            .font(.system(size: 15))
+                            .padding()
+                            .frame(minHeight: 70)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(Color.cyan, lineWidth: 2)
+                            )
+                        
                         Toggle("Info Kalender einblenden ", systemImage: infoButtonIsActive ? "info.square.fill" : "info.square", isOn: $infoButtonIsActive)
                             .font(.system(size: 15))
                             .padding()

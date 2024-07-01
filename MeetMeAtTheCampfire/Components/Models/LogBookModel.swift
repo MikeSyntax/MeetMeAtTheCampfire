@@ -4,11 +4,11 @@
 //
 //  Created by Mike Reichenbach on 20.03.24.
 //
-
-import Foundation
+import SwiftUI
 import FirebaseFirestoreSwift
 
 struct LogBookModel: Codable, Identifiable, Equatable, Hashable {
+    
     @DocumentID var id: String?
     
     //Zuordnung des Eintrags

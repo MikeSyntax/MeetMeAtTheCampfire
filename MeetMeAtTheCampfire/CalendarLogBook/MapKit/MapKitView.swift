@@ -42,5 +42,5 @@ struct MapKitView: View {
 }
 
 #Preview{
-    MapKitView(calendarDetailItemVm: CalendarDetailItemViewModel(calendarItemModel: LogBookModel(userId: "1", formattedDate: "1", logBookText: "", latitude: 48.0069, longitude: 0.0, imageUrl: "", containsLogBookEntry: false), date: Date()))
+    MapKitView(calendarDetailItemVm: CalendarDetailItemViewModel(calendarItemModel: LogBookModel(userId: "1", formattedDate: "1", logBookText: "", latitude: 48.0069, longitude: 8.42, imageUrl: "", containsLogBookEntry: false), date: Date()))
 }

@@ -23,11 +23,19 @@ struct MeetMeAtTheCampfireApp: App {
         WindowGroup {
             Group {
                 if showProgressiveView {
-                    Text("Loading Campfire")
-                        .padding()
-                    ProgressView()
-                        .progressViewStyle(DefaultProgressViewStyle())
-                        .scaleEffect(3)
+                    ZStack{
+                        Image("background")
+                            .resizable()
+                            .scaledToFill()
+                            .opacity(0.2)
+                            .ignoresSafeArea(.all)
+                        Text("Loading Campfire")
+                            .foregroundColor(.primary)
+                            .padding(EdgeInsets(top: -60, leading: 0, bottom: 0, trailing: 0))
+                        ProgressView()
+                            .progressViewStyle(DefaultProgressViewStyle())
+                            .scaleEffect(3)
+                    }
                 } else {
                     if authVm.userLoggedIn {
                         MainScreenView(authVm: authVm)
@@ -41,10 +49,12 @@ struct MeetMeAtTheCampfireApp: App {
             .environment(\.locale, .init(identifier: "de"))
             .modelContainer(for: [LogBookAtivity.self])
             .onAppear{
+                authVm.checkLogStatus()
                 isStartScreenLoading()
             }
         }
     }
+    
     
     func isStartScreenLoading() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
